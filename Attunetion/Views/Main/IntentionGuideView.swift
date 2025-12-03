@@ -17,6 +17,7 @@ struct IntentionGuideView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var themeManager: AppThemeManager
+    @EnvironmentObject var backendHealth: BackendHealthManager
     
     @State private var viewModel: IntentionsViewModel
     
@@ -1434,27 +1435,29 @@ struct CompletionStepContent: View {
                         }
                     }
                     
-                    // AI option
-                    Button(action: {
-                        showingAIGenerator = true
-                        #if os(iOS)
-                        HapticFeedback.medium()
-                        #endif
-                    }) {
-                        HStack {
-                            Image(systemName: "sparkles")
-                                .font(.system(size: 16, weight: .medium))
-                            Text("Or tell us about yourself and we'll create custom intentions")
-                                .font(.system(size: 15, weight: .medium, design: .default))
+                    // AI option - only show if backend is available
+                    if backendHealth.isBackendAvailable {
+                        Button(action: {
+                            showingAIGenerator = true
+                            #if os(iOS)
+                            HapticFeedback.medium()
+                            #endif
+                        }) {
+                            HStack {
+                                Image(systemName: "sparkles")
+                                    .font(.system(size: 16, weight: .medium))
+                                Text("Or tell us about yourself and we'll create custom intentions")
+                                    .font(.system(size: 15, weight: .medium, design: .default))
+                            }
+                            .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                            .padding(.vertical, 14)
+                            .padding(.horizontal, 20)
+                            .frame(maxWidth: .infinity)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                    .fill(themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.1))
+                            )
                         }
-                        .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
-                        .padding(.vertical, 14)
-                        .padding(.horizontal, 20)
-                        .frame(maxWidth: .infinity)
-                        .background(
-                            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                .fill(themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.1))
-                        )
                     }
                 }
             }

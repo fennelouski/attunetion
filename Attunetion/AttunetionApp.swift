@@ -11,7 +11,10 @@ import UserNotifications
 
 @main
 struct AttunetionApp: App {
-    @State private var showOnboarding = !OnboardingManager.shared.hasCompletedOnboarding
+    // On macOS, skip onboarding - users can use the help button instead
+    // Initialize to true (safe default) - will be set correctly in onAppear
+    // This avoids accessing @MainActor OnboardingManager during property initialization
+    @State private var showOnboarding = true
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -59,6 +62,7 @@ struct AttunetionApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(AppThemeManager(modelContext: sharedModelContainer.mainContext))
+                .environmentObject(BackendHealthManager.shared)
                 #if os(watchOS) || os(macOS)
                 .sheet(isPresented: $showOnboarding) {
                     OnboardingContainerView {
@@ -73,10 +77,25 @@ struct AttunetionApp: App {
                 }
                 #endif
                 .onAppear {
+                    #if os(macOS)
+                    // On macOS, automatically mark onboarding as completed
+                    // Users can access help via the "How to create good intentions" button
+                    if !OnboardingManager.shared.hasCompletedOnboarding {
+                        OnboardingManager.shared.setModelContext(sharedModelContainer.mainContext)
+                        OnboardingManager.shared.completeOnboarding()
+                    }
+                    showOnboarding = false
+                    #else
                     showOnboarding = !OnboardingManager.shared.hasCompletedOnboarding
+                    #endif
                     
                     // Set model context on notification handler once app is ready
                     NotificationHandler.shared.setModelContext(sharedModelContainer.mainContext)
+                    
+                    // Check backend health on app launch
+                    Task { @MainActor in
+                        await BackendHealthManager.shared.checkBackendHealth()
+                    }
                     
                     // Reschedule notifications based on saved preferences
                     Task { @MainActor in

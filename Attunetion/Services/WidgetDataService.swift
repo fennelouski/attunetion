@@ -77,6 +77,7 @@ class WidgetDataService {
     private let appGroupIdentifier = "group.com.nathanfennel.Attunetion"
     private let intentionDataKey = "currentIntentionData"
     private let themeDataKey = "currentThemeData"
+    private let frequencyKey = "defaultIntentionFrequency"
     
     private init() {}
     
@@ -103,6 +104,16 @@ class WidgetDataService {
             userDefaults.removeObject(forKey: themeDataKey)
         }
         
+        userDefaults.synchronize()
+    }
+    
+    /// Update widget with intention frequency preference
+    func updateIntentionFrequency(_ frequency: String) {
+        guard let userDefaults = UserDefaults(suiteName: appGroupIdentifier) else {
+            print("Failed to access App Group UserDefaults")
+            return
+        }
+        userDefaults.set(frequency, forKey: frequencyKey)
         userDefaults.synchronize()
     }
     

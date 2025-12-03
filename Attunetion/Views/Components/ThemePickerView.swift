@@ -10,6 +10,7 @@ import SwiftData
 
 struct ThemePickerView: View {
     @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var backendHealth: BackendHealthManager
     @Binding var selectedTheme: IntentionTheme?
     @State private var isGeneratingAITheme = false
     let intentionText: String
@@ -56,37 +57,39 @@ struct ThemePickerView: View {
                 }
             }
             
-            // AI Generate button
-            Button(action: {
-                #if os(iOS)
-                HapticFeedback.light()
-                #endif
-                Task {
-                    isGeneratingAITheme = true
-                    await onAIGenerate()
-                    isGeneratingAITheme = false
-                }
-            }) {
-                HStack {
-                    if isGeneratingAITheme {
-                        ProgressView()
-                            .scaleEffect(0.8)
-                            .tint(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
-                    } else {
-                        Image(systemName: "sparkles")
+            // AI Generate button - only show if backend is available
+            if backendHealth.isBackendAvailable {
+                Button(action: {
+                    #if os(iOS)
+                    HapticFeedback.light()
+                    #endif
+                    Task {
+                        isGeneratingAITheme = true
+                        await onAIGenerate()
+                        isGeneratingAITheme = false
                     }
-                    Text("Generate AI Theme")
-                        .font(.system(size: 15, weight: .medium, design: .default))
+                }) {
+                    HStack {
+                        if isGeneratingAITheme {
+                            ProgressView()
+                                .scaleEffect(0.8)
+                                .tint(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                        } else {
+                            Image(systemName: "sparkles")
+                        }
+                        Text("Generate AI Theme")
+                            .font(.system(size: 15, weight: .medium, design: .default))
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .fill(themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.15))
+                    )
+                    .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 12)
-                .background(
-                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .fill(themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.15))
-                )
-                .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                .disabled(isGeneratingAITheme)
             }
-            .disabled(isGeneratingAITheme)
         }
         .onAppear {
             loadPresetThemes()
@@ -179,5 +182,6 @@ struct ThemeCard: View {
     }
     .padding()
     .modelContainer(container)
+    .environmentObject(BackendHealthManager.shared)
 }
 

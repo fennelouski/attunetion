@@ -160,6 +160,19 @@ struct IntentionsListView: View {
         #endif
     }
     
+    // Guide button styling for macOS
+    #if os(macOS)
+    private var guideFontSize: CGFloat { 16 }
+    private var guideVerticalPadding: CGFloat { 14 }
+    private var guideHorizontalPadding: CGFloat { 16 }
+    private var guideTopPadding: CGFloat { 12 }
+    #else
+    private var guideFontSize: CGFloat { 15 }
+    private var guideVerticalPadding: CGFloat { 12 }
+    private var guideHorizontalPadding: CGFloat { 0 }
+    private var guideTopPadding: CGFloat { 4 }
+    #endif
+    
     /// Check if search button should be shown (requires at least 3 intentions)
     private var shouldShowSearchButton: Bool {
         guard let viewModel = viewModel else { return false }
@@ -236,24 +249,33 @@ struct IntentionsListView: View {
                                     .padding(.horizontal, horizontalPadding)
                                     .padding(.top, 8)
                                     
-                                    // Guide button
+                                    // Guide button - more prominent on macOS
                                     Button(action: {
                                         #if os(iOS)
                                         HapticFeedback.light()
                                         #endif
                                         showingGuide = true
                                     }) {
-                                        HStack(spacing: 6) {
+                                        HStack(spacing: 8) {
                                             Image(systemName: "questionmark.circle")
-                                                .font(.system(size: 15, weight: .medium))
+                                                .font(.system(size: guideFontSize, weight: .medium))
                                             Text("How to create good intentions")
-                                                .font(.system(size: 15, weight: .medium, design: .default))
+                                                .font(.system(size: guideFontSize, weight: .medium, design: .default))
                                         }
                                         .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
-                                        .padding(.vertical, 12)
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.vertical, guideVerticalPadding)
+                                        .padding(.horizontal, guideHorizontalPadding)
+                                        #if os(macOS)
+                                        .background {
+                                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                                .fill(themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.1))
+                                        }
+                                        #endif
                                     }
+                                    .buttonStyle(.plain)
                                     .padding(.horizontal, horizontalPadding)
-                                    .padding(.top, 4)
+                                    .padding(.top, guideTopPadding)
                                 }
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                             } else {

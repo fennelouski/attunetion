@@ -94,6 +94,8 @@ struct OnboardingContainerView: View {
             #if os(iOS) || os(watchOS)
             .tabViewStyle(.page(indexDisplayMode: .never))
             #elseif os(macOS)
+            // macOS: Use automatic style but disable swipe gestures
+            // Navigation is handled via the page indicator clicks
             .tabViewStyle(.automatic)
             #else
             .tabViewStyle(.page)
@@ -101,15 +103,24 @@ struct OnboardingContainerView: View {
             .animation(.easeInOut(duration: 0.3), value: currentPage)
             
             // Page indicator overlay - positioned at bottom center
+            // macOS uses a different, more desktop-appropriate indicator
             VStack {
                 Spacer()
                 HStack {
                     Spacer()
+                    #if os(macOS)
+                    MacOSPageIndicator(
+                        currentPage: adjustedCurrentPage,
+                        pageCount: shouldShowCrossPlatformPage ? 6 : 5,
+                        themeManager: themeManager
+                    )
+                    #else
                     OnboardingPageIndicator(
                         currentPage: adjustedCurrentPage,
                         pageCount: shouldShowCrossPlatformPage ? 6 : 5,
                         themeManager: themeManager
                     )
+                    #endif
                     Spacer()
                 }
                 .padding(.bottom, 32)

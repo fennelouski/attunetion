@@ -92,7 +92,7 @@ enum NotificationFrequency: Int, Codable, CaseIterable {
 }
 
 /// Time range for blackout periods
-struct BlackoutTime: Codable {
+nonisolated struct BlackoutTime: Codable {
     var startHour: Int  // 0-23
     var startMinute: Int  // 0-59
     var endHour: Int  // 0-23

@@ -23,7 +23,11 @@ class APIClient {
     }
     
     private var apiKey: String? {
-        // Check for API key in UserDefaults (for testing)
+        // Check Info.plist first (for production)
+        if let key = Bundle.main.object(forInfoDictionaryKey: "APISecretKey") as? String, !key.isEmpty {
+            return key
+        }
+        // Check UserDefaults (for testing/override)
         if let key = UserDefaults.standard.string(forKey: "APISecretKey"), !key.isEmpty {
             return key
         }

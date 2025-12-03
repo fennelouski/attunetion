@@ -22,17 +22,49 @@ struct OnboardingPageIndicator: View {
     }
     
     var body: some View {
-        HStack(spacing: 10) {
+        HStack(spacing: 12) {
             ForEach(0..<pageCount, id: \.self) { index in
-                Circle()
+                Capsule()
                     .fill(
                         index == currentPage
                             ? themeManager.accentColor(for: colorScheme).toSwiftUIColor()
-                            : themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.3)
+                            : themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.25)
                     )
-                    .frame(width: index == currentPage ? 10 : 8, height: index == currentPage ? 10 : 8)
-                    .animation(.spring(response: 0.3, dampingFraction: 0.7), value: currentPage)
+                    .frame(
+                        width: index == currentPage ? 28 : 8,
+                        height: 8
+                    )
+                    .animation(
+                        .spring(response: 0.4, dampingFraction: 0.7),
+                        value: currentPage
+                    )
+                    .overlay {
+                        // Subtle glow for active indicator
+                        if index == currentPage {
+                            Capsule()
+                                .fill(
+                                    themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.3)
+                                )
+                                .frame(width: 28, height: 8)
+                                .blur(radius: 4)
+                        }
+                    }
             }
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+        .background {
+            // Subtle background for better visibility
+            Capsule()
+                .fill(
+                    colorScheme == .dark
+                        ? Color.white.opacity(0.05)
+                        : Color.black.opacity(0.03)
+                )
+                .background {
+                    Capsule()
+                        .fill(.ultraThinMaterial)
+                }
         }
     }
 }
