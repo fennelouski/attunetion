@@ -1,13 +1,38 @@
 import { HealthResponse } from "../types";
 
-export default async function handler(): Promise<Response> {
+export default async function handler(request: Request): Promise<Response> {
+  // Handle CORS preflight
+  if (request.method === "OPTIONS") {
+    return new Response(null, {
+      status: 204,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+    });
+  }
+
+  if (request.method !== "GET") {
+    return new Response("Method not allowed", { 
+      status: 405,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
+  }
+
   const response: HealthResponse = {
     status: "ok",
     timestamp: new Date().toISOString(),
     version: "1.0.0",
   };
 
-  return Response.json(response);
+  return Response.json(response, {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
 }
 
 
