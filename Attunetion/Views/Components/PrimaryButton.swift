@@ -12,10 +12,10 @@ struct PrimaryButton: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var themeManager: AppThemeManager
     
-    let title: String
+    let title: LocalizedStringKey
     let action: () -> Void
     
-    init(_ title: String, themeManager: AppThemeManager, action: @escaping () -> Void) {
+    init(_ title: LocalizedStringKey, themeManager: AppThemeManager, action: @escaping () -> Void) {
         self.title = title
         self.themeManager = themeManager
         self.action = action
@@ -110,10 +110,10 @@ struct SecondaryButton: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var themeManager: AppThemeManager
     
-    let title: String
+    let title: LocalizedStringKey
     let action: () -> Void
     
-    init(_ title: String, themeManager: AppThemeManager, action: @escaping () -> Void) {
+    init(_ title: LocalizedStringKey, themeManager: AppThemeManager, action: @escaping () -> Void) {
         self.title = title
         self.themeManager = themeManager
         self.action = action
@@ -141,10 +141,10 @@ struct TextButton: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var themeManager: AppThemeManager
     
-    let title: String
+    let title: LocalizedStringKey
     let action: () -> Void
     
-    init(_ title: String, themeManager: AppThemeManager, action: @escaping () -> Void) {
+    init(_ title: LocalizedStringKey, themeManager: AppThemeManager, action: @escaping () -> Void) {
         self.title = title
         self.themeManager = themeManager
         self.action = action

@@ -16,14 +16,14 @@
 			containerPortal = 80A64A0B2EDF5F0600C98A14 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 80A64A122EDF5F0600C98A14;
-			remoteInfo = "Attunetion";
+			remoteInfo = Attunetion;
 		};
 		80A64A2F2EDF5F0700C98A14 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 80A64A0B2EDF5F0600C98A14 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 80A64A122EDF5F0600C98A14;
-			remoteInfo = "Attunetion";
+			remoteInfo = Attunetion;
 		};
 		80A64A512EDF5F0700C98A14 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -49,9 +49,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		80A64A132EDF5F0600C98A14 /* Attunetion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Attunetion.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		80A64A242EDF5F0700C98A14 /* AttunetionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AttunetionTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		80A64A2E2EDF5F0700C98A14 /* AttunetionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AttunetionUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		80A64A132EDF5F0600C98A14 /* Attunetion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Attunetion.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		80A64A242EDF5F0700C98A14 /* AttunetionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AttunetionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		80A64A2E2EDF5F0700C98A14 /* AttunetionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AttunetionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		80A64A422EDF5F0700C98A14 /* IntentionWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IntentionWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -78,17 +78,17 @@
 			exceptions = (
 				80A64A362EDF5F0700C98A14 /* Exceptions for "Attunetion" folder in "Attunetion" target */,
 			);
-			path = "Attunetion";
+			path = Attunetion;
 			sourceTree = "<group>";
 		};
 		80A64A272EDF5F0700C98A14 /* AttunetionTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "AttunetionTests";
+			path = AttunetionTests;
 			sourceTree = "<group>";
 		};
 		80A64A312EDF5F0700C98A14 /* AttunetionUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "AttunetionUITests";
+			path = AttunetionUITests;
 			sourceTree = "<group>";
 		};
 		80A64A432EDF5F0700C98A14 /* IntentionWidget */ = {
@@ -175,10 +175,10 @@
 			fileSystemSynchronizedGroups = (
 				80A64A152EDF5F0600C98A14 /* Attunetion */,
 			);
-			name = "Attunetion";
+			name = Attunetion;
 			packageProductDependencies = (
 			);
-			productName = "Attunetion";
+			productName = Attunetion;
 			productReference = 80A64A132EDF5F0600C98A14 /* Attunetion.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -198,10 +198,10 @@
 			fileSystemSynchronizedGroups = (
 				80A64A272EDF5F0700C98A14 /* AttunetionTests */,
 			);
-			name = "AttunetionTests";
+			name = AttunetionTests;
 			packageProductDependencies = (
 			);
-			productName = "AttunetionTests";
+			productName = AttunetionTests;
 			productReference = 80A64A242EDF5F0700C98A14 /* AttunetionTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -221,10 +221,10 @@
 			fileSystemSynchronizedGroups = (
 				80A64A312EDF5F0700C98A14 /* AttunetionUITests */,
 			);
-			name = "AttunetionUITests";
+			name = AttunetionUITests;
 			packageProductDependencies = (
 			);
-			productName = "AttunetionUITests";
+			productName = AttunetionUITests;
 			productReference = 80A64A2E2EDF5F0700C98A14 /* AttunetionUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
@@ -282,6 +282,20 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
+				nl,
+				de,
+				fr,
+				it,
+				"pt-BR",
+				sv,
+				ru,
+				ja,
+				"zh-Hans",
+				ko,
+				th,
+				tl,
+				fil,
 			);
 			mainGroup = 80A64A0A2EDF5F0600C98A14;
 			minimizedProjectReferenceProxies = 1;
@@ -392,7 +406,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "Attunetion/Info.plist";
+				INFOPLIST_FILE = Attunetion/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -438,7 +452,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "Attunetion/Info.plist";
+				INFOPLIST_FILE = Attunetion/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -659,7 +673,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_TARGET_NAME = "Attunetion";
+				TEST_TARGET_NAME = Attunetion;
 				XROS_DEPLOYMENT_TARGET = 1.0;
 			};
 			name = Debug;
@@ -684,7 +698,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_TARGET_NAME = "Attunetion";
+				TEST_TARGET_NAME = Attunetion;
 				XROS_DEPLOYMENT_TARGET = 1.0;
 			};
 			name = Release;

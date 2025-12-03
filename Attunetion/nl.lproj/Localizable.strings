@@ -1,0 +1,316 @@
+/* 
+  Localizable.strings
+  Attunetion
+
+  Created by Nathan Fennel on 12/2/25.
+*/
+
+/* General */
+"Attunetion" = "Attunetion";
+"Back" = "Terug";
+"Continue" = "Doorgaan";
+"Done" = "Gereed";
+"Close" = "Sluiten";
+"Cancel" = "Annuleren";
+"Delete" = "Verwijderen";
+"Sort" = "Sorteren";
+"Search" = "Zoeken";
+"Settings" = "Instellingen";
+"Help" = "Hulp";
+"Permissions" = "Toestemmingen";
+"About" = "Over";
+
+/* IntentionsListView */
+"Set your first intention" = "Stel je eerste intentie in";
+"Create a daily, weekly, or monthly intention to get started" = "Maak een dagelijkse, wekelijkse of maandelijkse intentie om te beginnen";
+"Create Intention" = "Intentie maken";
+"How to create good intentions" = "Hoe goede intenties te creëren";
+"Current" = "Huidig";
+"AI" = "AI";
+"All Intentions" = "Alle intenties";
+"Need help? Learn how to create great intentions" = "Hulp nodig? Leer hoe je geweldige intenties creëert";
+
+/* SettingsView */
+"App Theme" = "App-thema";
+"Default Intention Theme" = "Standaard intentiethema";
+"None" = "Geen";
+"Default Font" = "Standaard lettertype";
+"System Default" = "Systeemstandaard";
+"Appearance" = "Uiterlijk";
+"Intention Frequency" = "Intentiefrequentie";
+"How often you want to set intentions" = "Hoe vaak je intenties wilt instellen";
+"Intentions" = "Intenties";
+"Choose how often you'd like to set new intentions. This helps personalize your widget's placeholder text." = "Kies hoe vaak je nieuwe intenties wilt instellen. Dit helpt de plaatshoudertekst van je widget te personaliseren.";
+"Reminders" = "Herinneringen";
+"Notifications" = "Meldingen";
+"Configure how often and what types of reminders you receive." = "Configureer hoe vaak en welke soorten herinneringen je ontvangt.";
+"Suggested Intentions" = "Voorgestelde intenties";
+"Get personalized suggestions for your intentions" = "Ontvang gepersonaliseerde suggesties voor je intenties";
+"Suggestions" = "Suggesties";
+"Privacy Policy" = "Privacybeleid";
+"End User License Agreement" = "Licentieovereenkomst voor eindgebruikers";
+"Terms of Service" = "Servicevoorwaarden";
+"Delete All Data" = "Alle gegevens verwijderen";
+"Export Data" = "Gegevens exporteren";
+"Show Onboarding" = "Introductie tonen";
+"Learn how to use the app and get inspiration" = "Leer hoe je de app gebruikt en krijg inspiratie";
+"Walk through the onboarding flow again to learn about features and get ideas for how to use the app." = "Doorloop de introductie opnieuw om functies te leren kennen en ideeën op te doen voor het gebruik van de app.";
+"Enable Notifications" = "Meldingen inschakelen";
+"Enable notifications to receive reminders about setting your intentions." = "Schakel meldingen in om herinneringen te ontvangen over het instellen van je intenties.";
+"Enabled" = "Ingeschakeld";
+"Disabled" = "Uitgeschakeld";
+"Not Set" = "Niet ingesteld";
+"Unknown" = "Onbekend";
+"You'll receive reminders based on your settings" = "Je ontvangt herinneringen op basis van je instellingen";
+"Notifications are disabled in Settings" = "Meldingen zijn uitgeschakeld in Instellingen";
+"Enable notifications to get reminders" = "Schakel meldingen in om herinneringen te krijgen";
+"Notification status unknown" = "Meldingsstatus onbekend";
+"This will permanently delete all your intentions, themes, preferences, and profile information. This action cannot be undone. Your data is stored locally and synced via iCloud, so it will be removed from all your devices." = "Dit zal al je intenties, thema's, voorkeuren en profielinformatie permanent verwijderen. Deze actie kan niet ongedaan worden gemaakt. Je gegevens worden lokaal opgeslagen en gesynchroniseerd via iCloud, dus ze worden van al je apparaten verwijderd.";
+"Open Settings" = "Instellingen openen";
+"Maybe Later" = "Misschien later";
+"To receive reminders, please enable notifications in your device settings." = "Schakel meldingen in je apparaatinstellingen in om herinneringen te ontvangen.";
+
+/* IntentionGuideView */
+"What Makes a Good Intention?" = "Wat maakt een goede intentie?";
+"Intentions are personal commitments that guide your actions. They work best when they're:\n\n  • Specific and actionable\n  • Positive and meaningful to you\n  • Realistic for the timeframe\n  • Focused on what you can control" = "Intenties zijn persoonlijke verplichtingen die je acties sturen. Ze werken het beste als ze:\n\n  • Specifiek en uitvoerbaar zijn\n  • Positief en betekenisvol voor jou zijn\n  • Realistisch voor het tijdsbestek zijn\n  • Gericht op wat je kunt beheersen";
+"Set Your Monthly Intention" = "Stel je maandelijkse intentie in";
+"Think big picture. What do you want to focus on this month? This is your overarching theme that guides your weekly and daily intentions." = "Denk aan het grote geheel. Waar wil je je deze maand op richten? Dit is je overkoepelende thema dat je wekelijkse en dagelijkse intenties stuurt.";
+"e.g., Build healthier habits" = "bijv. Gezondere gewoonten opbouwen";
+"Set Your Weekly Intention" = "Stel je wekelijkse intentie in";
+"Break down your monthly goal into weekly actions. What specific step will you take this week?" = "Deel je maandelijkse doel op in wekelijkse acties. Welke specifieke stap ga je deze week zetten?";
+"e.g., Exercise 3 times this week" = "bijv. 3 keer sporten deze week";
+"Set Your Daily Intention" = "Stel je dagelijkse intentie in";
+"Make it concrete and achievable today. What one thing will you do today to move toward your goals?" = "Maak het vandaag concreet en haalbaar. Wat is één ding dat je vandaag gaat doen om dichter bij je doelen te komen?";
+"e.g., Go for a 20-minute walk" = "bijv. Een wandeling van 20 minuten maken";
+"You're All Set!" = "Je bent helemaal klaar!";
+"You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones." = "Je hebt je eerste intenties gemaakt! Ze verschijnen op je startscherm en helpen je gefocust te blijven. Je kunt er altijd meer toevoegen of bestaande bewerken.";
+"Good Example" = "Goed voorbeeld";
+"Too Vague" = "Te vaag";
+"Enter your intention..." = "Voer je intentie in...";
+"Get Started" = "Aan de slag";
+"Create Intentions" = "Intenties maken";
+"Getting Started" = "Aan de slag";
+
+/* Intention Scopes */
+"Day" = "Dag";
+"Week" = "Week";
+"Month" = "Maand";
+"Daily" = "Dagelijks";
+"Weekly" = "Wekelijks";
+"Monthly" = "Maandelijks";
+
+/* Examples */
+"Practice gratitude by writing 3 things I'm thankful for each day" = "Dankbaarheid oefenen door elke dag 3 dingen op te schrijven waarvoor ik dankbaar ben";
+"Exercise for 30 minutes, 3 times this week" = "30 minuten sporten, 3 keer deze week";
+"Read for 20 minutes before bed each night" = "Elke avond 20 minuten lezen voor het slapengaan";
+"Call or text one friend or family member daily" = "Dagelijks een vriend of familielid bellen of sms'en";
+"Spend 10 minutes each morning planning my day" = "Elke ochtend 10 minuten besteden aan het plannen van mijn dag";
+"Complete one important task before checking email" = "Eén belangrijke taak voltooien voordat ik e-mail controleer";
+"Take a 15-minute walk outside during lunch break" = "Een wandeling van 15 minuten buiten maken tijdens de lunchpauze";
+"Write in my journal for 5 minutes each evening" = "Elke avond 5 minuten in mijn dagboek schrijven";
+"Do one act of kindness for someone else today" = "Vandaag een vriendelijke daad voor iemand anders doen";
+"Spend quality time with my partner without phones" = "Quality time doorbrengen met mijn partner zonder telefoons";
+"Learn something new for 15 minutes each day" = "Elke dag 15 minuten iets nieuws leren";
+"Practice deep breathing for 5 minutes when stressed" = "5 minuten diep ademhalen bij stress";
+
+"Be happy" = "Gelukkig zijn";
+"Work harder" = "Harder werken";
+"Be better" = "Beter zijn";
+"Do more" = "Meer doen";
+"Change everything" = "Alles veranderen";
+"Fix my life" = "Mijn leven repareren";
+"Stop being lazy" = "Stoppen met lui zijn";
+"Be perfect" = "Perfect zijn";
+"Never make mistakes" = "Nooit fouten maken";
+"Always be positive" = "Altijd positief zijn";
+"Have no stress" = "Geen stress hebben";
+"Be successful" = "Succesvol zijn";
+
+/* Sort Order */
+"Newest First" = "Nieuwste eerst";
+"Oldest First" = "Oudste eerst";
+"By Scope" = "Op bereik";
+
+/* Themes */
+"Calm and peaceful" = "Kalm en vredig";
+"Warm and cozy" = "Warm en gezellig";
+"Cool and refreshing" = "Koel en verfrissend";
+"Custom theme" = "Aangepast thema";
+
+/* Notification Types */
+"Remind me to add an intention" = "Herinner me eraan een intentie toe te voegen";
+"Show me my current intention" = "Toon me mijn huidige intentie";
+"Send encouragement" = "Stuur aanmoediging";
+"Time-based reminders" = "Tijdgebaseerde herinneringen";
+"Get reminded when it's time to set a new intention" = "Herinnerd worden wanneer het tijd is om een nieuwe intentie in te stellen";
+"See your current intention throughout the day" = "Zie je huidige intentie gedurende de dag";
+"Receive uplifting messages to stay motivated" = "Ontvang opbeurende berichten om gemotiveerd te blijven";
+"Reminders at specific times you choose" = "Herinneringen op specifieke tijden die je kiest";
+
+/* Notification Frequency */
+"Once a month" = "Eens per maand";
+"Twice a month" = "Twee keer per maand";
+"Once a week" = "Eens per week";
+"Twice a week" = "Twee keer per week";
+"Every other day" = "Om de dag";
+"Once a day" = "Eens per dag";
+"Twice a day" = "Twee keer per dag";
+"Just a gentle monthly reminder" = "Gewoon een zachte maandelijkse herinnering";
+"A couple reminders each month" = "Een paar herinneringen elke maand";
+"Weekly check-ins" = "Wekelijkse check-ins";
+"A few times each week" = "Een paar keer per week";
+"Regular reminders" = "Regelmatige herinneringen";
+"Daily reminders" = "Dagelijkse herinneringen";
+"Morning and evening reminders" = "Ochtend- en avondherinneringen";
+
+/* Intention Frequency */
+"Daily" = "Dagelijks";
+"Weekly" = "Wekelijks";
+"Monthly" = "Maandelijks";
+"Set a new intention each day" = "Stel elke dag een nieuwe intentie in";
+"Set a new intention each week" = "Stel elke week een nieuwe intentie in";
+"Set a new intention each month" = "Stel elke maand een nieuwe intentie in";
+"Set your intention for today" = "Stel je intentie voor vandaag in";
+"Set your intention for this week" = "Stel je intentie voor deze week in";
+"Set your intention for this month" = "Stel je intentie voor deze maand in";
+
+/* Suggestions */
+"Build healthier habits" = "Gezondere gewoonten opbouwen";
+"Focus on personal growth" = "Focussen op persoonlijke groei";
+"Strengthen relationships" = "Relaties versterken";
+"Advance in my career" = "Vooruitgang boeken in mijn carrière";
+"Practice mindfulness daily" = "Dagelijks mindfulness beoefenen";
+"Develop a new skill" = "Een nieuwe vaardigheid ontwikkelen";
+"Improve work-life balance" = "Balans tussen werk en privé verbeteren";
+"Save money for a goal" = "Geld sparen voor een doel";
+"Read more books" = "Meer boeken lezen";
+"Spend quality time with family" = "Quality time doorbrengen met familie";
+"Start a new hobby" = "Een nieuwe hobby beginnen";
+"Reduce stress and anxiety" = "Stress en angst verminderen";
+"Eat more nutritious meals" = "Voedzamere maaltijden eten";
+"Get better sleep" = "Beter slapen";
+"Learn something new" = "Iets nieuws leren";
+"Volunteer or give back" = "Vrijwilligerswerk doen of iets teruggeven";
+"Travel to new places" = "Naar nieuwe plaatsen reizen";
+"Build better routines" = "Betere routines opbouwen";
+"Focus on mental health" = "Focussen op geestelijke gezondheid";
+"Achieve a fitness goal" = "Een fitnessdoel bereiken";
+"Improve communication" = "Communicatie verbeteren";
+"Declutter and organize" = "Opruimen en organiseren";
+"Practice self-care" = "Zelfzorg beoefenen";
+"Set financial goals" = "Financiële doelen stellen";
+"Build confidence" = "Zelfvertrouwen opbouwen";
+"Learn to cook" = "Leren koken";
+"Spend time in nature" = "Tijd doorbrengen in de natuur";
+"Reduce screen time" = "Schermtijd verminderen";
+"Practice patience" = "Geduld oefenen";
+"Be more present" = "Meer aanwezig zijn";
+"Express gratitude daily" = "Dagelijks dankbaarheid uiten";
+"Take more breaks" = "Meer pauzes nemen";
+"Learn a language" = "Een taal leren";
+"Start journaling" = "Beginnen met een dagboek";
+"Build better habits" = "Betere gewoonten opbouwen";
+"Focus on creativity" = "Focussen op creativiteit";
+"Improve posture" = "Houding verbeteren";
+"Drink more water" = "Meer water drinken";
+"Practice deep breathing" = "Diep ademhalen oefenen";
+"Set boundaries" = "Grenzen stellen";
+"Be kinder to myself" = "Vriendelijker voor mezelf zijn";
+"Focus on what matters" = "Focussen op wat belangrijk is";
+"Reduce procrastination" = "Uitstelgedrag verminderen";
+"Build resilience" = "Veerkracht opbouwen";
+"Practice forgiveness" = "Vergeving oefenen";
+"Be more organized" = "Meer georganiseerd zijn";
+"Focus on solutions" = "Focussen op oplossingen";
+"Celebrate small wins" = "Kleine overwinningen vieren";
+"Learn from mistakes" = "Leren van fouten";
+"Be more intentional" = "Meer intentioneel zijn";
+
+"Make time for regular exercise" = "Tijd maken voor regelmatige lichaamsbeweging";
+"Connect with friends and loved ones" = "Verbinden met vrienden en geliefden";
+"Focus on completing important tasks" = "Focussen op het voltooien van belangrijke taken";
+"Dedicate time to learning" = "Tijd wijden aan leren";
+"Practice gratitude regularly" = "Regelmatig dankbaarheid oefenen";
+"Cook nourishing meals" = "Voedzame maaltijden koken";
+"Make reading a priority" = "Lezen een prioriteit maken";
+"Take daily walks" = "Dagelijkse wandelingen maken";
+"Reach out to family" = "Contact opnemen met familie";
+"Practice acts of kindness" = "Daden van vriendelijkheid oefenen";
+"Make meditation part of my routine" = "Meditatie onderdeel van mijn routine maken";
+"Write in my journal" = "In mijn dagboek schrijven";
+"Try new recipes" = "Nieuwe recepten proberen";
+"Spend time outdoors" = "Tijd buiten doorbrengen";
+"Complete work projects thoughtfully" = "Werkprojecten bedachtzaam voltooien";
+"Engage with my hobbies" = "Bezig zijn met mijn hobby's";
+"Prioritize restful sleep" = "Rustgevende slaap prioriteren";
+"Be mindful of social media use" = "Bewust zijn van gebruik van sociale media";
+"Express creativity" = "Creativiteit uiten";
+"Spend quality time with my partner" = "Quality time doorbrengen met mijn partner";
+"Declutter and organize my space" = "Mijn ruimte opruimen en organiseren";
+"Plan nourishing meals" = "Voedzame maaltijden plannen";
+"Move my body regularly" = "Mijn lichaam regelmatig bewegen";
+"Read for enjoyment" = "Lezen voor plezier";
+"Take regular breaks" = "Regelmatige pauzes nemen";
+"Practice mindfulness" = "Mindfulness beoefenen";
+"Do things that bring me joy" = "Dingen doen die me vreugde brengen";
+"Focus on meaningful goals" = "Focussen op zinvolle doelen";
+"Prioritize self-care" = "Zelfzorg prioriteren";
+"Connect with the natural world" = "Verbinden met de natuurlijke wereld";
+"Show kindness to others" = "Vriendelijkheid tonen aan anderen";
+"Be fully present in conversations" = "Volledig aanwezig zijn in gesprekken";
+"Capture meaningful moments" = "Zinvolle momenten vastleggen";
+"Cultivate gratitude" = "Dankbaarheid cultiveren";
+"Stay active" = "Actief blijven";
+"Carve out time for myself" = "Tijd voor mezelf vrijmaken";
+"Help others" = "Anderen helpen";
+"Develop new skills" = "Nieuwe vaardigheden ontwikkelen";
+"Manage stress mindfully" = "Stress bewust beheersen";
+"Be compassionate with myself" = "Compassievol zijn met mezelf";
+"Focus on progress over perfection" = "Focussen op vooruitgang boven perfectie";
+"Celebrate small achievements" = "Kleine prestaties vieren";
+"Reflect and learn from experiences" = "Reflecteren en leren van ervaringen";
+"Use my time intentionally" = "Mijn tijd intentioneel gebruiken";
+"Find balance in my life" = "Balans vinden in mijn leven";
+
+"Go for a 20-minute walk" = "Een wandeling van 20 minuten maken";
+"Call a family member" = "Een familielid bellen";
+"Read for 15 minutes" = "15 minuten lezen";
+"Take 5 minutes to meditate" = "5 minuten nemen om te mediteren";
+"Write 3 things I'm grateful for" = "3 dingen opschrijven waarvoor ik dankbaar ben";
+"Drink 8 glasses of water" = "8 glazen water drinken";
+"Eat 2 servings of vegetables" = "2 porties groenten eten";
+"Take 3 deep breaths when stressed" = "3 keer diep ademhalen bij stress";
+"Spend 10 minutes outside" = "10 minuten buiten doorbrengen";
+"Do one thing I've been putting off" = "Eén ding doen dat ik heb uitgesteld";
+"Practice a hobby for 30 minutes" = "Een hobby 30 minuten beoefenen";
+"Connect with a friend" = "Verbinden met een vriend";
+"Do something creative" = "Iets creatiefs doen";
+"Exercise for 20 minutes" = "20 minuten sporten";
+"Get 8 hours of sleep" = "8 uur slapen";
+"Limit phone use to essentials" = "Telefoongebruik beperken tot essentiële zaken";
+"Cook a healthy meal" = "Een gezonde maaltijd koken";
+"Be present in the moment" = "Aanwezig zijn in het moment";
+"Express gratitude" = "Dankbaarheid uiten";
+"Take breaks when needed" = "Pauzes nemen wanneer nodig";
+"Do something fun" = "Iets leuks doen";
+"Be kind to myself" = "Vriendelijk voor mezelf zijn";
+"Focus on one goal" = "Focussen op één doel";
+"Complete one important task" = "Eén belangrijke taak voltooien";
+"Do something active" = "Iets actiefs doen";
+"Spend quality time with someone" = "Quality time doorbrengen met iemand";
+"Practice a skill" = "Een vaardigheid oefenen";
+"Reduce stress" = "Stress verminderen";
+"Be intentional" = "Intentioneel zijn";
+"Celebrate a small win" = "Een kleine overwinning vieren";
+"Learn from today" = "Leren van vandaag";
+"Practice balance" = "Balans oefenen";
+"Do something I enjoy" = "Iets doen wat ik leuk vind";
+"Be present" = "Aanwezig zijn";
+"Practice gratitude" = "Dankbaarheid oefenen";
+"Take care of myself" = "Voor mezelf zorgen";
+"Focus on progress" = "Focussen op vooruitgang";
+"Be patient" = "Geduldig zijn";
+"Practice kindness" = "Vriendelijkheid oefenen";
+"Be mindful" = "Bewust zijn";
+"Do my best" = "Mijn best doen";
+"Be present today" = "Vandaag aanwezig zijn";

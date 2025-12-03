@@ -17,9 +17,11 @@ final class UserProfile {
     var lastGeneratedWeekStart: Date? // Start date of last generated week
     var totalGenerations: Int // Total number of generations requested
     var totalFeedbackGiven: Int // Total number of feedback submissions
+    var hasAcceptedTerms: Bool // Whether user has accepted ToS and EULA for suggestion features
+    var termsAcceptedDate: Date? // Date when terms were accepted
     var createdAt: Date
     var updatedAt: Date
-    
+
     init(
         id: UUID = UUID(),
         userInfo: String = "",
@@ -27,6 +29,8 @@ final class UserProfile {
         lastGeneratedWeekStart: Date? = nil,
         totalGenerations: Int = 0,
         totalFeedbackGiven: Int = 0,
+        hasAcceptedTerms: Bool = false,
+        termsAcceptedDate: Date? = nil,
         createdAt: Date = Date(),
         updatedAt: Date = Date()
     ) {
@@ -36,6 +40,8 @@ final class UserProfile {
         self.lastGeneratedWeekStart = lastGeneratedWeekStart
         self.totalGenerations = totalGenerations
         self.totalFeedbackGiven = totalFeedbackGiven
+        self.hasAcceptedTerms = hasAcceptedTerms
+        self.termsAcceptedDate = termsAcceptedDate
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }

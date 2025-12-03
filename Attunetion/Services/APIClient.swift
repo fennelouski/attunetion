@@ -18,9 +18,8 @@ class APIClient {
         if let customURL = UserDefaults.standard.string(forKey: "APIBaseURL"), !customURL.isEmpty {
             return customURL
         }
-        // Default to production URL (update when deployed)
-        // For now, use empty string to disable API calls until backend is deployed
-        return "" // Set to your Vercel URL: "https://your-project.vercel.app"
+        // Production URL
+        return "https://attunetion.vercel.app"
     }
     
     private var apiKey: String? {
@@ -42,7 +41,7 @@ class APIClient {
     }
     
     // MARK: - API Errors
-    
+
     enum APIError: LocalizedError {
         case invalidURL
         case noBaseURL
@@ -51,7 +50,8 @@ class APIClient {
         case httpError(statusCode: Int, message: String)
         case decodingError(Error)
         case rateLimitExceeded(retryAfter: TimeInterval?)
-        
+        case termsNotAccepted
+
         var errorDescription: String? {
             switch self {
             case .invalidURL:
@@ -71,8 +71,20 @@ class APIClient {
                     return "Rate limit exceeded. Please try again in \(Int(retryAfter)) seconds."
                 }
                 return "Rate limit exceeded. Please try again later."
+            case .termsNotAccepted:
+                return "You must accept the Terms of Service and Privacy Policy before using suggestion features. Please visit Settings > Suggested Intentions to review and accept."
             }
         }
+    }
+
+    // MARK: - Consent Checking
+
+    /// Check if user has accepted terms for using AI features
+    /// This should be called before making any AI API requests
+    func checkTermsAcceptance(modelContext: Any) throws {
+        // Import SwiftData here would cause circular dependencies
+        // So we expect the caller to check consent before calling AI endpoints
+        // This is a safety check that can be implemented at the call site
     }
     
     // MARK: - Request Helpers

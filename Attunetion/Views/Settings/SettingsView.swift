@@ -569,7 +569,7 @@ struct AppThemePickerView: View {
                                 )
                                 
                                 VStack(alignment: .leading, spacing: 4) {
-                                    Text(theme.name)
+                                    Text(LocalizedStringKey(theme.name))
                                         .font(.system(size: 16, weight: .medium, design: .default))
                                         .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                                     
@@ -611,13 +611,13 @@ struct AppThemePickerView: View {
     private func themeDescription(for theme: AppTheme) -> String {
         switch theme.name {
         case "Serenity":
-            return "Calm and peaceful"
+            return String(localized: "Calm and peaceful")
         case "Sunset":
-            return "Warm and cozy"
+            return String(localized: "Warm and cozy")
         case "Ocean":
-            return "Cool and refreshing"
+            return String(localized: "Cool and refreshing")
         default:
-            return "Custom theme"
+            return String(localized: "Custom theme")
         }
     }
 }

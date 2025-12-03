@@ -292,7 +292,7 @@ struct IntentionsListView: View {
                                                     #if os(watchOS)
                                                     Picker("Sort", selection: $sortOrder) {
                                                         ForEach(SortOrder.allCases, id: \.self) { order in
-                                                            Text(order.rawValue).tag(order)
+                                                            Text(order.localizedName).tag(order)
                                                         }
                                                     }
                                                     .onChange(of: sortOrder) { oldValue, newValue in
@@ -306,7 +306,7 @@ struct IntentionsListView: View {
                                                                 viewModel.sortOrder = order
                                                             }) {
                                                                 HStack {
-                                                                    Text(order.rawValue)
+                                                                    Text(order.localizedName)
                                                                     if sortOrder == order {
                                                                         Image(systemName: "checkmark")
                                                                     }

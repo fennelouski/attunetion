@@ -1,0 +1,316 @@
+/* 
+  Localizable.strings
+  Attunetion
+
+  Created by Nathan Fennel on 12/2/25.
+*/
+
+/* General */
+"Attunetion" = "Attunetion";
+"Back" = "返回";
+"Continue" = "继续";
+"Done" = "完成";
+"Close" = "关闭";
+"Cancel" = "取消";
+"Delete" = "删除";
+"Sort" = "排序";
+"Search" = "搜索";
+"Settings" = "设置";
+"Help" = "帮助";
+"Permissions" = "权限";
+"About" = "关于";
+
+/* IntentionsListView */
+"Set your first intention" = "设定你的第一个意图";
+"Create a daily, weekly, or monthly intention to get started" = "创建一个每日、每周或每月的意图以开始";
+"Create Intention" = "创建意图";
+"How to create good intentions" = "如何创建好的意图";
+"Current" = "当前";
+"AI" = "AI";
+"All Intentions" = "所有意图";
+"Need help? Learn how to create great intentions" = "需要帮助？了解如何创建伟大的意图";
+
+/* SettingsView */
+"App Theme" = "应用主题";
+"Default Intention Theme" = "默认意图主题";
+"None" = "无";
+"Default Font" = "默认字体";
+"System Default" = "系统默认";
+"Appearance" = "外观";
+"Intention Frequency" = "意图频率";
+"How often you want to set intentions" = "你想多久设定一次意图";
+"Intentions" = "意图";
+"Choose how often you'd like to set new intentions. This helps personalize your widget's placeholder text." = "选择你想多久设定一次新意图。这有助于个性化你的小组件占位符文本。";
+"Reminders" = "提醒";
+"Notifications" = "通知";
+"Configure how often and what types of reminders you receive." = "配置你接收提醒的频率和类型。";
+"Suggested Intentions" = "建议的意图";
+"Get personalized suggestions for your intentions" = "获取针对你意图的个性化建议";
+"Suggestions" = "建议";
+"Privacy Policy" = "隐私政策";
+"End User License Agreement" = "最终用户许可协议";
+"Terms of Service" = "服务条款";
+"Delete All Data" = "删除所有数据";
+"Export Data" = "导出数据";
+"Show Onboarding" = "显示引导页";
+"Learn how to use the app and get inspiration" = "了解如何使用应用并获取灵感";
+"Walk through the onboarding flow again to learn about features and get ideas for how to use the app." = "再次浏览引导流程，了解功能并获取如何使用应用的想法。";
+"Enable Notifications" = "启用通知";
+"Enable notifications to receive reminders about setting your intentions." = "启用通知以接收关于设定意图的提醒。";
+"Enabled" = "已启用";
+"Disabled" = "已禁用";
+"Not Set" = "未设置";
+"Unknown" = "未知";
+"You'll receive reminders based on your settings" = "你将根据你的设置收到提醒";
+"Notifications are disabled in Settings" = "通知在设置中已禁用";
+"Enable notifications to get reminders" = "启用通知以获取提醒";
+"Notification status unknown" = "通知状态未知";
+"This will permanently delete all your intentions, themes, preferences, and profile information. This action cannot be undone. Your data is stored locally and synced via iCloud, so it will be removed from all your devices." = "这将永久删除你所有的意图、主题、偏好设置和个人资料信息。此操作无法撤销。你的数据存储在本地并通过 iCloud 同步，因此它将从你所有的设备中移除。";
+"Open Settings" = "打开设置";
+"Maybe Later" = "也许以后";
+"To receive reminders, please enable notifications in your device settings." = "要接收提醒，请在你的设备设置中启用通知。";
+
+/* IntentionGuideView */
+"What Makes a Good Intention?" = "什么是一个好的意图？";
+"Intentions are personal commitments that guide your actions. They work best when they're:\n\n  • Specific and actionable\n  • Positive and meaningful to you\n  • Realistic for the timeframe\n  • Focused on what you can control" = "意图是指导你行动的个人承诺。当它们符合以下条件时效果最好：\n\n  • 具体且可执行\n  • 积极且对你有意义\n  • 在时间范围内现实可行\n  • 专注于你能控制的事情";
+"Set Your Monthly Intention" = "设定你的每月意图";
+"Think big picture. What do you want to focus on this month? This is your overarching theme that guides your weekly and daily intentions." = "从大局考虑。这个月你想专注于什么？这是指导你每周和每日意图的总体主题。";
+"e.g., Build healthier habits" = "例如：建立更健康的习惯";
+"Set Your Weekly Intention" = "设定你的每周意图";
+"Break down your monthly goal into weekly actions. What specific step will you take this week?" = "将你的月度目标分解为每周行动。这周你将采取什么具体步骤？";
+"e.g., Exercise 3 times this week" = "例如：这周锻炼3次";
+"Set Your Daily Intention" = "设定你的每日意图";
+"Make it concrete and achievable today. What one thing will you do today to move toward your goals?" = "让它在今天具体且可实现。为了朝着你的目标迈进，你今天会做哪一件事？";
+"e.g., Go for a 20-minute walk" = "例如：去散步20分钟";
+"You're All Set!" = "一切就绪！";
+"You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones." = "你已经创建了你的第一个意图！它们将出现在你的主屏幕上，帮助你保持专注。你可以随时添加更多或编辑现有的。";
+"Good Example" = "好例子";
+"Too Vague" = "太模糊";
+"Enter your intention..." = "输入你的意图...";
+"Get Started" = "开始";
+"Create Intentions" = "创建意图";
+"Getting Started" = "新手入门";
+
+/* Intention Scopes */
+"Day" = "天";
+"Week" = "周";
+"Month" = "月";
+"Daily" = "每日";
+"Weekly" = "每周";
+"Monthly" = "每月";
+
+/* Examples */
+"Practice gratitude by writing 3 things I'm thankful for each day" = "每天写下3件我感激的事情来练习感恩";
+"Exercise for 30 minutes, 3 times this week" = "这周锻炼3次，每次30分钟";
+"Read for 20 minutes before bed each night" = "每晚睡前阅读20分钟";
+"Call or text one friend or family member daily" = "每天给一个朋友或家人打电话或发短信";
+"Spend 10 minutes each morning planning my day" = "每天早上花10分钟计划我的一天";
+"Complete one important task before checking email" = "在查看邮件前完成一项重要任务";
+"Take a 15-minute walk outside during lunch break" = "午休时间在外面散步15分钟";
+"Write in my journal for 5 minutes each evening" = "每晚写5分钟日记";
+"Do one act of kindness for someone else today" = "今天为别人做一件善事";
+"Spend quality time with my partner without phones" = "不带手机与伴侣共度美好时光";
+"Learn something new for 15 minutes each day" = "每天花15分钟学习新东西";
+"Practice deep breathing for 5 minutes when stressed" = "压力大时练习深呼吸5分钟";
+
+"Be happy" = "快乐";
+"Work harder" = "更努力工作";
+"Be better" = "变得更好";
+"Do more" = "做得更多";
+"Change everything" = "改变一切";
+"Fix my life" = "修复我的生活";
+"Stop being lazy" = "停止懒惰";
+"Be perfect" = "完美";
+"Never make mistakes" = "从不犯错";
+"Always be positive" = "总是积极";
+"Have no stress" = "没有压力";
+"Be successful" = "成功";
+
+/* Sort Order */
+"Newest First" = "最新的在前";
+"Oldest First" = "最旧的在前";
+"By Scope" = "按范围";
+
+/* Themes */
+"Calm and peaceful" = "平静安宁";
+"Warm and cozy" = "温暖舒适";
+"Cool and refreshing" = "清凉清爽";
+"Custom theme" = "自定义主题";
+
+/* Notification Types */
+"Remind me to add an intention" = "提醒我添加意图";
+"Show me my current intention" = "显示我当前的意图";
+"Send encouragement" = "发送鼓励";
+"Time-based reminders" = "基于时间的提醒";
+"Get reminded when it's time to set a new intention" = "在该设定新意图时获得提醒";
+"See your current intention throughout the day" = "全天查看你当前的意图";
+"Receive uplifting messages to stay motivated" = "接收令人振奋的消息以保持动力";
+"Reminders at specific times you choose" = "在你选择的特定时间提醒";
+
+/* Notification Frequency */
+"Once a month" = "每月一次";
+"Twice a month" = "每月两次";
+"Once a week" = "每周一次";
+"Twice a week" = "每周两次";
+"Every other day" = "每隔一天";
+"Once a day" = "每天一次";
+"Twice a day" = "每天两次";
+"Just a gentle monthly reminder" = "只是一个温和的每月提醒";
+"A couple reminders each month" = "每个月几次提醒";
+"Weekly check-ins" = "每周检查";
+"A few times each week" = "每周几次";
+"Regular reminders" = "定期提醒";
+"Daily reminders" = "每日提醒";
+"Morning and evening reminders" = "早晚提醒";
+
+/* Intention Frequency */
+"Daily" = "每日";
+"Weekly" = "每周";
+"Monthly" = "每月";
+"Set a new intention each day" = "每天设定一个新意图";
+"Set a new intention each week" = "每周设定一个新意图";
+"Set a new intention each month" = "每月设定一个新意图";
+"Set your intention for today" = "设定你今天的意图";
+"Set your intention for this week" = "设定你这周的意图";
+"Set your intention for this month" = "设定你这个月的意图";
+
+/* Suggestions */
+"Build healthier habits" = "建立更健康的习惯";
+"Focus on personal growth" = "专注于个人成长";
+"Strengthen relationships" = "加强人际关系";
+"Advance in my career" = "在职业生涯中进步";
+"Practice mindfulness daily" = "每天练习正念";
+"Develop a new skill" = "开发一项新技能";
+"Improve work-life balance" = "改善工作与生活的平衡";
+"Save money for a goal" = "为一个目标存钱";
+"Read more books" = "读更多书";
+"Spend quality time with family" = "与家人共度美好时光";
+"Start a new hobby" = "开始一个新爱好";
+"Reduce stress and anxiety" = "减少压力和焦虑";
+"Eat more nutritious meals" = "吃更有营养的饭菜";
+"Get better sleep" = "获得更好的睡眠";
+"Learn something new" = "学习新东西";
+"Volunteer or give back" = "志愿者或回馈社会";
+"Travel to new places" = "去新地方旅行";
+"Build better routines" = "建立更好的常规";
+"Focus on mental health" = "专注于心理健康";
+"Achieve a fitness goal" = "实现健身目标";
+"Improve communication" = "改善沟通";
+"Declutter and organize" = "清理和整理";
+"Practice self-care" = "练习自我照顾";
+"Set financial goals" = "设定财务目标";
+"Build confidence" = "建立自信";
+"Learn to cook" = "学做饭";
+"Spend time in nature" = "在大自然中度过时光";
+"Reduce screen time" = "减少屏幕时间";
+"Practice patience" = "练习耐心";
+"Be more present" = "更加活在当下";
+"Express gratitude daily" = "每天表达感激";
+"Take more breaks" = "多休息";
+"Learn a language" = "学习一门语言";
+"Start journaling" = "开始写日记";
+"Build better habits" = "建立更好的习惯";
+"Focus on creativity" = "专注于创造力";
+"Improve posture" = "改善姿势";
+"Drink more water" = "多喝水";
+"Practice deep breathing" = "练习深呼吸";
+"Set boundaries" = "设定界限";
+"Be kinder to myself" = "对自己更友善";
+"Focus on what matters" = "专注于重要的事情";
+"Reduce procrastination" = "减少拖延";
+"Build resilience" = "建立韧性";
+"Practice forgiveness" = "练习宽恕";
+"Be more organized" = "更有条理";
+"Focus on solutions" = "专注于解决方案";
+"Celebrate small wins" = "庆祝小胜利";
+"Learn from mistakes" = "从错误中学习";
+"Be more intentional" = "更加有意图";
+
+"Make time for regular exercise" = "腾出时间进行定期锻炼";
+"Connect with friends and loved ones" = "与朋友和亲人联系";
+"Focus on completing important tasks" = "专注于完成重要任务";
+"Dedicate time to learning" = "投入时间学习";
+"Practice gratitude regularly" = "定期练习感恩";
+"Cook nourishing meals" = "烹饪营养餐";
+"Make reading a priority" = "把阅读作为优先事项";
+"Take daily walks" = "每天散步";
+"Reach out to family" = "联系家人";
+"Practice acts of kindness" = "练习善举";
+"Make meditation part of my routine" = "把冥想作为我日常的一部分";
+"Write in my journal" = "写日记";
+"Try new recipes" = "尝试新食谱";
+"Spend time outdoors" = "在户外度过时光";
+"Complete work projects thoughtfully" = "深思熟虑地完成工作项目";
+"Engage with my hobbies" = "从事我的爱好";
+"Prioritize restful sleep" = "优先考虑充足的睡眠";
+"Be mindful of social media use" = "注意社交媒体的使用";
+"Express creativity" = "表达创造力";
+"Spend quality time with my partner" = "与伴侣共度美好时光";
+"Declutter and organize my space" = "清理和整理我的空间";
+"Plan nourishing meals" = "计划营养餐";
+"Move my body regularly" = "定期活动身体";
+"Read for enjoyment" = "为了乐趣而阅读";
+"Take regular breaks" = "定期休息";
+"Practice mindfulness" = "练习正念";
+"Do things that bring me joy" = "做让我快乐的事情";
+"Focus on meaningful goals" = "专注于有意义的目标";
+"Prioritize self-care" = "优先考虑自我照顾";
+"Connect with the natural world" = "与自然界联系";
+"Show kindness to others" = "对他人表示友善";
+"Be fully present in conversations" = "在对话中全神贯注";
+"Capture meaningful moments" = "捕捉有意义的时刻";
+"Cultivate gratitude" = "培养感激之情";
+"Stay active" = "保持活跃";
+"Carve out time for myself" = "为自己腾出时间";
+"Help others" = "帮助他人";
+"Develop new skills" = "开发新技能";
+"Manage stress mindfully" = "正念地管理压力";
+"Be compassionate with myself" = "对自己有同情心";
+"Focus on progress over perfection" = "专注于进步而不是完美";
+"Celebrate small achievements" = "庆祝小成就";
+"Reflect and learn from experiences" = "反思并从经验中学习";
+"Use my time intentionally" = "有意图地使用我的时间";
+"Find balance in my life" = "在生活中找到平衡";
+
+"Go for a 20-minute walk" = "去散步20分钟";
+"Call a family member" = "给家人打电话";
+"Read for 15 minutes" = "阅读15分钟";
+"Take 5 minutes to meditate" = "花5分钟冥想";
+"Write 3 things I'm grateful for" = "写下3件我感激的事情";
+"Drink 8 glasses of water" = "喝8杯水";
+"Eat 2 servings of vegetables" = "吃2份蔬菜";
+"Take 3 deep breaths when stressed" = "压力大时深呼吸3次";
+"Spend 10 minutes outside" = "在外面待10分钟";
+"Do one thing I've been putting off" = "做一件我一直推迟的事情";
+"Practice a hobby for 30 minutes" = "练习爱好30分钟";
+"Connect with a friend" = "联系朋友";
+"Do something creative" = "做一些有创意的事情";
+"Exercise for 20 minutes" = "锻炼20分钟";
+"Get 8 hours of sleep" = "睡8小时";
+"Limit phone use to essentials" = "将手机使用限制在必要范围内";
+"Cook a healthy meal" = "做一顿健康的饭";
+"Be present in the moment" = "活在当下";
+"Express gratitude" = "表达感激";
+"Take breaks when needed" = "需要时休息";
+"Do something fun" = "做点有趣的事";
+"Be kind to myself" = "对自己好一点";
+"Focus on one goal" = "专注于一个目标";
+"Complete one important task" = "完成一项重要任务";
+"Do something active" = "做点积极的事";
+"Spend quality time with someone" = "与某人共度美好时光";
+"Practice a skill" = "练习一项技能";
+"Reduce stress" = "减轻压力";
+"Be intentional" = "有意图";
+"Celebrate a small win" = "庆祝小胜利";
+"Learn from today" = "从今天学习";
+"Practice balance" = "练习平衡";
+"Do something I enjoy" = "做我喜欢的事";
+"Be present" = "出席";
+"Practice gratitude" = "练习感恩";
+"Take care of myself" = "照顾好自己";
+"Focus on progress" = "专注于进步";
+"Be patient" = "耐心点";
+"Practice kindness" = "练习友善";
+"Be mindful" = "留心";
+"Do my best" = "尽我所能";
+"Be present today" = "今天活在当下";

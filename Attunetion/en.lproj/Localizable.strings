@@ -1,0 +1,319 @@
+/* 
+  Localizable.strings
+  Attunetion
+
+  Created by Nathan Fennel on 12/2/25.
+*/
+
+/* General */
+"Attunetion" = "Attunetion";
+"Back" = "Back";
+"Continue" = "Continue";
+"Done" = "Done";
+"Close" = "Close";
+"Cancel" = "Cancel";
+"Delete" = "Delete";
+"Sort" = "Sort";
+"Search" = "Search";
+"Settings" = "Settings";
+"Help" = "Help";
+"Permissions" = "Permissions";
+"About" = "About";
+
+/* IntentionsListView */
+"Set your first intention" = "Set your first intention";
+"Create a daily, weekly, or monthly intention to get started" = "Create a daily, weekly, or monthly intention to get started";
+"Create Intention" = "Create Intention";
+"How to create good intentions" = "How to create good intentions";
+"Current" = "Current";
+"AI" = "AI";
+"All Intentions" = "All Intentions";
+"Need help? Learn how to create great intentions" = "Need help? Learn how to create great intentions";
+
+/* SettingsView */
+"App Theme" = "App Theme";
+"Default Intention Theme" = "Default Intention Theme";
+"None" = "None";
+"Default Font" = "Default Font";
+"System Default" = "System Default";
+"Appearance" = "Appearance";
+"Intention Frequency" = "Intention Frequency";
+"How often you want to set intentions" = "How often you want to set intentions";
+"Intentions" = "Intentions";
+"Choose how often you'd like to set new intentions. This helps personalize your widget's placeholder text." = "Choose how often you'd like to set new intentions. This helps personalize your widget's placeholder text.";
+"Reminders" = "Reminders";
+"Notifications" = "Notifications";
+"Configure how often and what types of reminders you receive." = "Configure how often and what types of reminders you receive.";
+"Suggested Intentions" = "Suggested Intentions";
+"Get personalized suggestions for your intentions" = "Get personalized suggestions for your intentions";
+"Suggestions" = "Suggestions";
+"Privacy Policy" = "Privacy Policy";
+"End User License Agreement" = "End User License Agreement";
+"Terms of Service" = "Terms of Service";
+"Delete All Data" = "Delete All Data";
+"Export Data" = "Export Data";
+"Show Onboarding" = "Show Onboarding";
+"Learn how to use the app and get inspiration" = "Learn how to use the app and get inspiration";
+"Walk through the onboarding flow again to learn about features and get ideas for how to use the app." = "Walk through the onboarding flow again to learn about features and get ideas for how to use the app.";
+"Enable Notifications" = "Enable Notifications";
+"Enable notifications to receive reminders about setting your intentions." = "Enable notifications to receive reminders about setting your intentions.";
+"Enabled" = "Enabled";
+"Disabled" = "Disabled";
+"Not Set" = "Not Set";
+"Unknown" = "Unknown";
+"You'll receive reminders based on your settings" = "You'll receive reminders based on your settings";
+"Notifications are disabled in Settings" = "Notifications are disabled in Settings";
+"Enable notifications to get reminders" = "Enable notifications to get reminders";
+"Notification status unknown" = "Notification status unknown";
+"This will permanently delete all your intentions, themes, preferences, and profile information. This action cannot be undone. Your data is stored locally and synced via iCloud, so it will be removed from all your devices." = "This will permanently delete all your intentions, themes, preferences, and profile information. This action cannot be undone. Your data is stored locally and synced via iCloud, so it will be removed from all your devices.";
+"Open Settings" = "Open Settings";
+"Maybe Later" = "Maybe Later";
+"To receive reminders, please enable notifications in your device settings." = "To receive reminders, please enable notifications in your device settings.";
+
+/* IntentionGuideView */
+"What Makes a Good Intention?" = "What Makes a Good Intention?";
+"Intentions are personal commitments that guide your actions. They work best when they're:\n\n  • Specific and actionable\n  • Positive and meaningful to you\n  • Realistic for the timeframe\n  • Focused on what you can control" = "Intentions are personal commitments that guide your actions. They work best when they're:\n\n  • Specific and actionable\n  • Positive and meaningful to you\n  • Realistic for the timeframe\n  • Focused on what you can control";
+"Set Your Monthly Intention" = "Set Your Monthly Intention";
+"Think big picture. What do you want to focus on this month? This is your overarching theme that guides your weekly and daily intentions." = "Think big picture. What do you want to focus on this month? This is your overarching theme that guides your weekly and daily intentions.";
+"e.g., Build healthier habits" = "e.g., Build healthier habits";
+"Set Your Weekly Intention" = "Set Your Weekly Intention";
+"Break down your monthly goal into weekly actions. What specific step will you take this week?" = "Break down your monthly goal into weekly actions. What specific step will you take this week.";
+"e.g., Exercise 3 times this week" = "e.g., Exercise 3 times this week";
+"Set Your Daily Intention" = "Set Your Daily Intention";
+"Make it concrete and achievable today. What one thing will you do today to move toward your goals?" = "Make it concrete and achievable today. What one thing will you do today to move toward your goals?";
+"e.g., Go for a 20-minute walk" = "e.g., Go for a 20-minute walk";
+"You're All Set!" = "You're All Set!";
+"You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones." = "You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones.";
+"Good Example" = "Good Example";
+"Too Vague" = "Too Vague";
+"Enter your intention..." = "Enter your intention...";
+"Get Started" = "Get Started";
+"Create Intentions" = "Create Intentions";
+"Getting Started" = "Getting Started";
+
+/* Intention Scopes */
+"Day" = "Day";
+"Week" = "Week";
+"Month" = "Month";
+"Daily" = "Daily";
+"Weekly" = "Weekly";
+"Monthly" = "Monthly";
+
+/* Examples */
+"Practice gratitude by reflecting on what I'm thankful for" = "Practice gratitude by reflecting on what I'm thankful for";
+"Move my body regularly throughout the week" = "Move my body regularly throughout the week";
+"End my day with reading" = "End my day with reading";
+"Connect with friends and family daily" = "Connect with friends and family daily";
+"Start each morning with intention" = "Start each morning with intention";
+"Focus on what matters most before distractions" = "Focus on what matters most before distractions";
+"Connect with nature during breaks" = "Connect with nature during breaks";
+"Create space for reflection each evening" = "Create space for reflection each evening";
+"Show kindness to others" = "Show kindness to others";
+"Be fully present with my partner" = "Be fully present with my partner";
+"Stay open to learning and new ideas" = "Stay open to learning and new ideas";
+"Return to my breath when I feel stressed" = "Return to my breath when I feel stressed";
+
+"Be happy" = "Be happy";
+"Work harder" = "Work harder";
+"Be better" = "Be better";
+"Do more" = "Do more";
+"Change everything" = "Change everything";
+"Fix my life" = "Fix my life";
+"Stop being lazy" = "Stop being lazy";
+"Be perfect" = "Be perfect";
+"Never make mistakes" = "Never make mistakes";
+"Always be positive" = "Always be positive";
+"Have no stress" = "Have no stress";
+"Be successful" = "Be successful";
+
+/* Sort Order */
+"Newest First" = "Newest First";
+"Oldest First" = "Oldest First";
+"By Scope" = "By Scope";
+
+/* Themes */
+"Serenity" = "Serenity";
+"Sunset" = "Sunset";
+"Ocean" = "Ocean";
+"Calm and peaceful" = "Calm and peaceful";
+"Warm and cozy" = "Warm and cozy";
+"Cool and refreshing" = "Cool and refreshing";
+"Custom theme" = "Custom theme";
+
+/* Notification Types */
+"Remind me to add an intention" = "Remind me to add an intention";
+"Show me my current intention" = "Show me my current intention";
+"Send encouragement" = "Send encouragement";
+"Time-based reminders" = "Time-based reminders";
+"Get reminded when it's time to set a new intention" = "Get reminded when it's time to set a new intention";
+"See your current intention throughout the day" = "See your current intention throughout the day";
+"Receive uplifting messages to stay motivated" = "Receive uplifting messages to stay motivated";
+"Reminders at specific times you choose" = "Reminders at specific times you choose";
+
+/* Notification Frequency */
+"Once a month" = "Once a month";
+"Twice a month" = "Twice a month";
+"Once a week" = "Once a week";
+"Twice a week" = "Twice a week";
+"Every other day" = "Every other day";
+"Once a day" = "Once a day";
+"Twice a day" = "Twice a day";
+"Just a gentle monthly reminder" = "Just a gentle monthly reminder";
+"A couple reminders each month" = "A couple reminders each month";
+"Weekly check-ins" = "Weekly check-ins";
+"A few times each week" = "A few times each week";
+"Regular reminders" = "Regular reminders";
+"Daily reminders" = "Daily reminders";
+"Morning and evening reminders" = "Morning and evening reminders";
+
+/* Intention Frequency */
+"Daily" = "Daily";
+"Weekly" = "Weekly";
+"Monthly" = "Monthly";
+"Set a new intention each day" = "Set a new intention each day";
+"Set a new intention each week" = "Set a new intention each week";
+"Set a new intention each month" = "Set a new intention each month";
+"Set your intention for today" = "Set your intention for today";
+"Set your intention for this week" = "Set your intention for this week";
+"Set your intention for this month" = "Set your intention for this month";
+
+/* Suggestions */
+"Build healthier habits" = "Build healthier habits";
+"Focus on personal growth" = "Focus on personal growth";
+"Strengthen relationships" = "Strengthen relationships";
+"Show up fully in my career" = "Show up fully in my career";
+"Practice mindfulness daily" = "Practice mindfulness daily";
+"Stay open to learning" = "Stay open to learning";
+"Create work-life balance" = "Create work-life balance";
+"Be mindful with my finances" = "Be mindful with my finances";
+"Engage with books regularly" = "Engage with books regularly";
+"Spend quality time with family" = "Spend quality time with family";
+"Explore new interests" = "Explore new interests";
+"Manage stress with care" = "Manage stress with care";
+"Nourish my body well" = "Nourish my body well";
+"Prioritize restful sleep" = "Prioritize restful sleep";
+"Stay curious and open" = "Stay curious and open";
+"Give back to others" = "Give back to others";
+"Explore new places" = "Explore new places";
+"Create meaningful routines" = "Create meaningful routines";
+"Focus on mental health" = "Focus on mental health";
+"Show up for my body" = "Show up for my body";
+"Communicate with intention" = "Communicate with intention";
+"Create order in my space" = "Create order in my space";
+"Practice self-care" = "Practice self-care";
+"Be intentional with money" = "Be intentional with money";
+"Build confidence" = "Build confidence";
+"Explore cooking" = "Explore cooking";
+"Spend time in nature" = "Spend time in nature";
+"Be mindful of screen time" = "Be mindful of screen time";
+"Practice patience" = "Practice patience";
+"Be more present" = "Be more present";
+"Express gratitude daily" = "Express gratitude daily";
+"Take breaks when needed" = "Take breaks when needed";
+"Engage with language learning" = "Engage with language learning";
+"Create space for reflection" = "Create space for reflection";
+"Build better habits" = "Build better habits";
+"Focus on creativity" = "Focus on creativity";
+"Be mindful of my body" = "Be mindful of my body";
+"Stay hydrated" = "Stay hydrated";
+"Practice deep breathing" = "Practice deep breathing";
+"Set boundaries" = "Set boundaries";
+"Be kinder to myself" = "Be kinder to myself";
+"Focus on what matters" = "Focus on what matters";
+"Show up despite resistance" = "Show up despite resistance";
+"Build resilience" = "Build resilience";
+"Practice forgiveness" = "Practice forgiveness";
+"Create order intentionally" = "Create order intentionally";
+"Focus on solutions" = "Focus on solutions";
+"Celebrate small wins" = "Celebrate small wins";
+"Learn from mistakes" = "Learn from mistakes";
+"Be more intentional" = "Be more intentional";
+
+"Prioritize movement" = "Prioritize movement";
+"Connect with friends and loved ones" = "Connect with friends and loved ones";
+"Work with focus and purpose" = "Work with focus and purpose";
+"Stay open to learning" = "Stay open to learning";
+"Practice gratitude regularly" = "Practice gratitude regularly";
+"Cook nourishing meals" = "Cook nourishing meals";
+"Create space for reading" = "Create space for reading";
+"Move mindfully each day" = "Move mindfully each day";
+"Reach out to family" = "Reach out to family";
+"Practice acts of kindness" = "Practice acts of kindness";
+"Make meditation part of my routine" = "Make meditation part of my routine";
+"Create space for reflection" = "Create space for reflection";
+"Try new recipes" = "Try new recipes";
+"Spend time outdoors" = "Spend time outdoors";
+"Show up fully for my work" = "Show up fully for my work";
+"Engage with my hobbies" = "Engage with my hobbies";
+"Prioritize restful sleep" = "Prioritize restful sleep";
+"Be mindful of social media use" = "Be mindful of social media use";
+"Express creativity" = "Express creativity";
+"Spend quality time with my partner" = "Spend quality time with my partner";
+"Create order in my space" = "Create order in my space";
+"Plan nourishing meals" = "Plan nourishing meals";
+"Move my body regularly" = "Move my body regularly";
+"Read for enjoyment" = "Read for enjoyment";
+"Take regular breaks" = "Take regular breaks";
+"Practice mindfulness" = "Practice mindfulness";
+"Do things that bring me joy" = "Do things that bring me joy";
+"Focus on what matters most" = "Focus on what matters most";
+"Prioritize self-care" = "Prioritize self-care";
+"Connect with the natural world" = "Connect with the natural world";
+"Show kindness to others" = "Show kindness to others";
+"Be fully present in conversations" = "Be fully present in conversations";
+"Capture meaningful moments" = "Capture meaningful moments";
+"Cultivate gratitude" = "Cultivate gratitude";
+"Stay active" = "Stay active";
+"Carve out time for myself" = "Carve out time for myself";
+"Help others" = "Help others";
+"Stay open to new skills" = "Stay open to new skills";
+"Manage stress mindfully" = "Manage stress mindfully";
+"Be compassionate with myself" = "Be compassionate with myself";
+"Focus on progress over perfection" = "Focus on progress over perfection";
+"Celebrate small achievements" = "Celebrate small achievements";
+"Reflect and learn from experiences" = "Reflect and learn from experiences";
+"Use my time intentionally" = "Use my time intentionally";
+"Find balance in my life" = "Find balance in my life";
+
+"Move my body mindfully" = "Move my body mindfully";
+"Connect with a family member" = "Connect with a family member";
+"Create space for reading" = "Create space for reading";
+"Take time to meditate" = "Take time to meditate";
+"Reflect on what I'm grateful for" = "Reflect on what I'm grateful for";
+"Stay hydrated" = "Stay hydrated";
+"Nourish my body well" = "Nourish my body well";
+"Return to my breath when stressed" = "Return to my breath when stressed";
+"Spend time outside" = "Spend time outside";
+"Show up despite resistance" = "Show up despite resistance";
+"Engage with a hobby" = "Engage with a hobby";
+"Connect with a friend" = "Connect with a friend";
+"Express creativity" = "Express creativity";
+"Prioritize movement" = "Prioritize movement";
+"Create conditions for restful sleep" = "Create conditions for restful sleep";
+"Be mindful of phone use" = "Be mindful of phone use";
+"Cook a nourishing meal" = "Cook a nourishing meal";
+"Be present in the moment" = "Be present in the moment";
+"Express gratitude" = "Express gratitude";
+"Take breaks when needed" = "Take breaks when needed";
+"Do something fun" = "Do something fun";
+"Be kind to myself" = "Be kind to myself";
+"Focus on what matters most" = "Focus on what matters most";
+"Work with intention" = "Work with intention";
+"Move my body" = "Move my body";
+"Spend quality time with someone" = "Spend quality time with someone";
+"Engage with learning" = "Engage with learning";
+"Manage stress with care" = "Manage stress with care";
+"Be intentional" = "Be intentional";
+"Celebrate a small win" = "Celebrate a small win";
+"Learn from today" = "Learn from today";
+"Practice balance" = "Practice balance";
+"Do something I enjoy" = "Do something I enjoy";
+"Be present" = "Be present";
+"Practice gratitude" = "Practice gratitude";
+"Take care of myself" = "Take care of myself";
+"Focus on progress" = "Focus on progress";
+"Be patient" = "Be patient";
+"Practice kindness" = "Practice kindness";
+"Be mindful" = "Be mindful";
+"Do my best" = "Do my best";
+"Be present today" = "Be present today";

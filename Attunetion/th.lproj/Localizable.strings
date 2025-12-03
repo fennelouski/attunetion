@@ -1,0 +1,316 @@
+/* 
+  Localizable.strings
+  Attunetion
+
+  Created by Nathan Fennel on 12/2/25.
+*/
+
+/* General */
+"Attunetion" = "Attunetion";
+"Back" = "ย้อนกลับ";
+"Continue" = "ดำเนินการต่อ";
+"Done" = "เสร็จสิ้น";
+"Close" = "ปิด";
+"Cancel" = "ยกเลิก";
+"Delete" = "ลบ";
+"Sort" = "เรียงลำดับ";
+"Search" = "ค้นหา";
+"Settings" = "การตั้งค่า";
+"Help" = "ช่วยเหลือ";
+"Permissions" = "การอนุญาต";
+"About" = "เกี่ยวกับ";
+
+/* IntentionsListView */
+"Set your first intention" = "ตั้งเจตนาแรกของคุณ";
+"Create a daily, weekly, or monthly intention to get started" = "สร้างเจตนารายวัน รายสัปดาห์ หรือรายเดือนเพื่อเริ่มต้น";
+"Create Intention" = "สร้างเจตนา";
+"How to create good intentions" = "วิธีสร้างเจตนาที่ดี";
+"Current" = "ปัจจุบัน";
+"AI" = "AI";
+"All Intentions" = "เจตนาทั้งหมด";
+"Need help? Learn how to create great intentions" = "ต้องการความช่วยเหลือ? เรียนรู้วิธีสร้างเจตนาที่ยอดเยี่ยม";
+
+/* SettingsView */
+"App Theme" = "ธีมแอป";
+"Default Intention Theme" = "ธีมเจตนาเริ่มต้น";
+"None" = "ไม่มี";
+"Default Font" = "แบบอักษรเริ่มต้น";
+"System Default" = "ค่าเริ่มต้นของระบบ";
+"Appearance" = "รูปลักษณ์";
+"Intention Frequency" = "ความถี่ของเจตนา";
+"How often you want to set intentions" = "คุณต้องการตั้งเจตนาบ่อยแค่ไหน";
+"Intentions" = "เจตนา";
+"Choose how often you'd like to set new intentions. This helps personalize your widget's placeholder text." = "เลือกความถี่ที่คุณต้องการตั้งเจตนาใหม่ สิ่งนี้ช่วยปรับแต่งข้อความตัวยึดตำแหน่งของวิดเจ็ตของคุณ";
+"Reminders" = "การแจ้งเตือน";
+"Notifications" = "การแจ้งเตือน";
+"Configure how often and what types of reminders you receive." = "กำหนดค่าความถี่และประเภทของการแจ้งเตือนที่คุณได้รับ";
+"Suggested Intentions" = "เจตนาที่แนะนำ";
+"Get personalized suggestions for your intentions" = "รับคำแนะนำส่วนบุคคลสำหรับเจตนาของคุณ";
+"Suggestions" = "คำแนะนำ";
+"Privacy Policy" = "นโยบายความเป็นส่วนตัว";
+"End User License Agreement" = "ข้อตกลงใบอนุญาตผู้ใช้ปลายทาง";
+"Terms of Service" = "เงื่อนไขการให้บริการ";
+"Delete All Data" = "ลบข้อมูลทั้งหมด";
+"Export Data" = "ส่งออกข้อมูล";
+"Show Onboarding" = "แสดงการแนะนำ";
+"Learn how to use the app and get inspiration" = "เรียนรู้วิธีใช้แอปและรับแรงบันดาลใจ";
+"Walk through the onboarding flow again to learn about features and get ideas for how to use the app." = "ดูขั้นตอนการแนะนำอีกครั้งเพื่อเรียนรู้เกี่ยวกับคุณสมบัติและรับแนวคิดในการใช้แอป";
+"Enable Notifications" = "เปิดใช้งานการแจ้งเตือน";
+"Enable notifications to receive reminders about setting your intentions." = "เปิดใช้งานการแจ้งเตือนเพื่อรับการแจ้งเตือนเกี่ยวกับการตั้งเจตนาของคุณ";
+"Enabled" = "เปิดใช้งาน";
+"Disabled" = "ปิดใช้งาน";
+"Not Set" = "ไม่ได้ตั้งค่า";
+"Unknown" = "ไม่ทราบ";
+"You'll receive reminders based on your settings" = "คุณจะได้รับการแจ้งเตือนตามการตั้งค่าของคุณ";
+"Notifications are disabled in Settings" = "การแจ้งเตือนถูกปิดใช้งานในการตั้งค่า";
+"Enable notifications to get reminders" = "เปิดใช้งานการแจ้งเตือนเพื่อรับการแจ้งเตือน";
+"Notification status unknown" = "ไม่ทราบสถานะการแจ้งเตือน";
+"This will permanently delete all your intentions, themes, preferences, and profile information. This action cannot be undone. Your data is stored locally and synced via iCloud, so it will be removed from all your devices." = "สิ่งนี้จะลบเจตนา ธีม การตั้งค่า และข้อมูลโปรไฟล์ทั้งหมดของคุณอย่างถาวร การดำเนินการนี้ไม่สามารถยกเลิกได้ ข้อมูลของคุณถูกเก็บไว้ในเครื่องและซิงค์ผ่าน iCloud ดังนั้นข้อมูลจะถูกลบออกจากอุปกรณ์ทั้งหมดของคุณ";
+"Open Settings" = "เปิดการตั้งค่า";
+"Maybe Later" = "ไว้ทีหลัง";
+"To receive reminders, please enable notifications in your device settings." = "เพื่อรับการแจ้งเตือน โปรดเปิดใช้งานการแจ้งเตือนในการตั้งค่าอุปกรณ์ของคุณ";
+
+/* IntentionGuideView */
+"What Makes a Good Intention?" = "อะไรทำให้เจตนาดี?";
+"Intentions are personal commitments that guide your actions. They work best when they're:\n\n  • Specific and actionable\n  • Positive and meaningful to you\n  • Realistic for the timeframe\n  • Focused on what you can control" = "เจตนาคือข้อผูกมัดส่วนบุคคลที่ชี้นำการกระทำของคุณ จะทำงานได้ดีที่สุดเมื่อ:\n\n  • เฉพาะเจาะจงและปฏิบัติได้จริง\n  • เป็นบวกและมีความหมายต่อคุณ\n  • สมจริงสำหรับกรอบเวลา\n  • มุ่งเน้นไปที่สิ่งที่คุณควบคุมได้";
+"Set Your Monthly Intention" = "ตั้งเจตนาประจำเดือนของคุณ";
+"Think big picture. What do you want to focus on this month? This is your overarching theme that guides your weekly and daily intentions." = "คิดภาพรวม เดือนนี้คุณต้องการโฟกัสที่อะไร? นี่คือธีมหลักที่ชี้นำเจตนารายสัปดาห์และรายวันของคุณ";
+"e.g., Build healthier habits" = "เช่น สร้างนิสัยที่ดีต่อสุขภาพมากขึ้น";
+"Set Your Weekly Intention" = "ตั้งเจตนาประจำสัปดาห์ของคุณ";
+"Break down your monthly goal into weekly actions. What specific step will you take this week?" = "แบ่งเป้าหมายรายเดือนของคุณออกเป็นการกระทำรายสัปดาห์ สัปดาห์นี้คุณจะทำขั้นตอนใดโดยเฉพาะ?";
+"e.g., Exercise 3 times this week" = "เช่น ออกกำลังกาย 3 ครั้งในสัปดาห์นี้";
+"Set Your Daily Intention" = "ตั้งเจตนาประจำวันของคุณ";
+"Make it concrete and achievable today. What one thing will you do today to move toward your goals?" = "ทำให้เป็นรูปธรรมและบรรลุได้ในวันนี้ วันนี้คุณจะทำอะไรหนึ่งอย่างเพื่อก้าวไปสู่เป้าหมายของคุณ?";
+"e.g., Go for a 20-minute walk" = "เช่น ไปเดินเล่น 20 นาที";
+"You're All Set!" = "เรียบร้อยแล้ว!";
+"You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones." = "คุณสร้างเจตนาแรกของคุณแล้ว! เจตนาจะปรากฏบนหน้าจอหลักและช่วยให้คุณจดจ่อ คุณสามารถเพิ่มหรือแก้ไขเจตนาที่มีอยู่ได้เสมอ";
+"Good Example" = "ตัวอย่างที่ดี";
+"Too Vague" = "คลุมเครือเกินไป";
+"Enter your intention..." = "ป้อนเจตนาของคุณ...";
+"Get Started" = "เริ่มต้น";
+"Create Intentions" = "สร้างเจตนา";
+"Getting Started" = "การเริ่มต้น";
+
+/* Intention Scopes */
+"Day" = "วัน";
+"Week" = "สัปดาห์";
+"Month" = "เดือน";
+"Daily" = "รายวัน";
+"Weekly" = "รายสัปดาห์";
+"Monthly" = "รายเดือน";
+
+/* Examples */
+"Practice gratitude by writing 3 things I'm thankful for each day" = "ฝึกความกตัญญูโดยเขียน 3 สิ่งที่ฉันรู้สึกขอบคุณในแต่ละวัน";
+"Exercise for 30 minutes, 3 times this week" = "ออกกำลังกาย 30 นาที 3 ครั้งในสัปดาห์นี้";
+"Read for 20 minutes before bed each night" = "อ่านหนังสือ 20 นาทีก่อนนอนทุกคืน";
+"Call or text one friend or family member daily" = "โทรหรือส่งข้อความหาเพื่อนหรือสมาชิกในครอบครัวหนึ่งคนทุกวัน";
+"Spend 10 minutes each morning planning my day" = "ใช้เวลา 10 นาทีทุกเช้าวางแผนวันของฉัน";
+"Complete one important task before checking email" = "ทำงานสำคัญหนึ่งอย่างให้เสร็จก่อนเช็คอีเมล";
+"Take a 15-minute walk outside during lunch break" = "เดินเล่นข้างนอก 15 นาทีช่วงพักกลางวัน";
+"Write in my journal for 5 minutes each evening" = "เขียนบันทึกประจำวัน 5 นาทีทุกเย็น";
+"Do one act of kindness for someone else today" = "ทำความดีหนึ่งอย่างเพื่อคนอื่นในวันนี้";
+"Spend quality time with my partner without phones" = "ใช้เวลาคุณภาพกับคู่รักโดยไม่มีโทรศัพท์";
+"Learn something new for 15 minutes each day" = "เรียนรู้สิ่งใหม่ 15 นาทีในแต่ละวัน";
+"Practice deep breathing for 5 minutes when stressed" = "ฝึกหายใจเข้าลึกๆ 5 นาทีเมื่อเครียด";
+
+"Be happy" = "มีความสุข";
+"Work harder" = "ทำงานหนักขึ้น";
+"Be better" = "ดีขึ้น";
+"Do more" = "ทำมากขึ้น";
+"Change everything" = "เปลี่ยนทุกอย่าง";
+"Fix my life" = "แก้ไขชีวิตของฉัน";
+"Stop being lazy" = "เลิกขี้เกียจ";
+"Be perfect" = "สมบูรณ์แบบ";
+"Never make mistakes" = "ไม่เคยทำผิดพลาด";
+"Always be positive" = "คิดบวกเสมอ";
+"Have no stress" = "ไม่มีความเครียด";
+"Be successful" = "ประสบความสำเร็จ";
+
+/* Sort Order */
+"Newest First" = "ใหม่ที่สุดก่อน";
+"Oldest First" = "เก่าที่สุดก่อน";
+"By Scope" = "ตามขอบเขต";
+
+/* Themes */
+"Calm and peaceful" = "สงบและสันติ";
+"Warm and cozy" = "อบอุ่นและสบาย";
+"Cool and refreshing" = "เย็นและสดชื่น";
+"Custom theme" = "ธีมกำหนดเอง";
+
+/* Notification Types */
+"Remind me to add an intention" = "เตือนฉันให้เพิ่มเจตนา";
+"Show me my current intention" = "แสดงเจตนาปัจจุบันของฉัน";
+"Send encouragement" = "ส่งกำลังใจ";
+"Time-based reminders" = "การแจ้งเตือนตามเวลา";
+"Get reminded when it's time to set a new intention" = "รับการแจ้งเตือนเมื่อถึงเวลาตั้งเจตนาใหม่";
+"See your current intention throughout the day" = "ดูเจตนาปัจจุบันของคุณตลอดทั้งวัน";
+"Receive uplifting messages to stay motivated" = "รับข้อความที่ให้กำลังใจเพื่อรักษาแรงจูงใจ";
+"Reminders at specific times you choose" = "การแจ้งเตือนในเวลาเฉพาะที่คุณเลือก";
+
+/* Notification Frequency */
+"Once a month" = "เดือนละครั้ง";
+"Twice a month" = "เดือนละสองครั้ง";
+"Once a week" = "สัปดาห์ละครั้ง";
+"Twice a week" = "สัปดาห์ละสองครั้ง";
+"Every other day" = "วันเว้นวัน";
+"Once a day" = "วันละครั้ง";
+"Twice a day" = "วันละสองครั้ง";
+"Just a gentle monthly reminder" = "แค่การเตือนความจำรายเดือนเบาๆ";
+"A couple reminders each month" = "การแจ้งเตือนสองสามครั้งในแต่ละเดือน";
+"Weekly check-ins" = "เช็คอินรายสัปดาห์";
+"A few times each week" = "สองสามครั้งในแต่ละสัปดาห์";
+"Regular reminders" = "การแจ้งเตือนเป็นประจำ";
+"Daily reminders" = "การแจ้งเตือนรายวัน";
+"Morning and evening reminders" = "การแจ้งเตือนตอนเช้าและตอนเย็น";
+
+/* Intention Frequency */
+"Daily" = "รายวัน";
+"Weekly" = "รายสัปดาห์";
+"Monthly" = "รายเดือน";
+"Set a new intention each day" = "ตั้งเจตนาใหม่ในแต่ละวัน";
+"Set a new intention each week" = "ตั้งเจตนาใหม่ในแต่ละสัปดาห์";
+"Set a new intention each month" = "ตั้งเจตนาใหม่ในแต่ละเดือน";
+"Set your intention for today" = "ตั้งเจตนาของคุณสำหรับวันนี้";
+"Set your intention for this week" = "ตั้งเจตนาของคุณสำหรับสัปดาห์นี้";
+"Set your intention for this month" = "ตั้งเจตนาของคุณสำหรับเดือนนี้";
+
+/* Suggestions */
+"Build healthier habits" = "สร้างนิสัยที่ดีต่อสุขภาพมากขึ้น";
+"Focus on personal growth" = "มุ่งเน้นการเติบโตส่วนบุคคล";
+"Strengthen relationships" = "กระชับความสัมพันธ์";
+"Advance in my career" = "ก้าวหน้าในอาชีพการงาน";
+"Practice mindfulness daily" = "ฝึกสติทุกวัน";
+"Develop a new skill" = "พัฒนาทักษะใหม่";
+"Improve work-life balance" = "ปรับปรุงสมดุลชีวิตและการทำงาน";
+"Save money for a goal" = "เก็บเงินเพื่อเป้าหมาย";
+"Read more books" = "อ่านหนังสือมากขึ้น";
+"Spend quality time with family" = "ใช้เวลาคุณภาพกับครอบครัว";
+"Start a new hobby" = "เริ่มงานอดิเรกใหม่";
+"Reduce stress and anxiety" = "ลดความเครียดและความวิตกกังวล";
+"Eat more nutritious meals" = "ทานอาหารที่มีคุณค่าทางโภชนาการมากขึ้น";
+"Get better sleep" = "นอนหลับให้ดีขึ้น";
+"Learn something new" = "เรียนรู้สิ่งใหม่";
+"Volunteer or give back" = "เป็นอาสาสมัครหรือตอบแทนสังคม";
+"Travel to new places" = "ท่องเที่ยวไปยังสถานที่ใหม่ๆ";
+"Build better routines" = "สร้างกิจวัตรที่ดีขึ้น";
+"Focus on mental health" = "มุ่งเน้นสุขภาพจิต";
+"Achieve a fitness goal" = "บรรลุเป้าหมายการออกกำลังกาย";
+"Improve communication" = "ปรับปรุงการสื่อสาร";
+"Declutter and organize" = "จัดระเบียบและทำความสะอาด";
+"Practice self-care" = "ฝึกการดูแลตัวเอง";
+"Set financial goals" = "ตั้งเป้าหมายทางการเงิน";
+"Build confidence" = "สร้างความมั่นใจ";
+"Learn to cook" = "เรียนทำอาหาร";
+"Spend time in nature" = "ใช้เวลาในธรรมชาติ";
+"Reduce screen time" = "ลดเวลาหน้าจอ";
+"Practice patience" = "ฝึกความอดทน";
+"Be more present" = "อยู่กับปัจจุบันมากขึ้น";
+"Express gratitude daily" = "แสดงความกตัญญูทุกวัน";
+"Take more breaks" = "พักผ่อนให้มากขึ้น";
+"Learn a language" = "เรียนภาษา";
+"Start journaling" = "เริ่มเขียนบันทึก";
+"Build better habits" = "สร้างนิสัยที่ดีขึ้น";
+"Focus on creativity" = "มุ่งเน้นความคิดสร้างสรรค์";
+"Improve posture" = "ปรับปรุงบุคลิกภาพ";
+"Drink more water" = "ดื่มน้ำให้มากขึ้น";
+"Practice deep breathing" = "ฝึกหายใจลึกๆ";
+"Set boundaries" = "กำหนดขอบเขต";
+"Be kinder to myself" = "ใจดีกับตัวเองมากขึ้น";
+"Focus on what matters" = "มุ่งเน้นสิ่งที่สำคัญ";
+"Reduce procrastination" = "ลดการผลัดวันประกันพรุ่ง";
+"Build resilience" = "สร้างความยืดหยุ่น";
+"Practice forgiveness" = "ฝึกการให้อภัย";
+"Be more organized" = "เป็นระเบียบมากขึ้น";
+"Focus on solutions" = "มุ่งเน้นที่ทางออก";
+"Celebrate small wins" = "ฉลองชัยชนะเล็กๆ";
+"Learn from mistakes" = "เรียนรู้จากความผิดพลาด";
+"Be more intentional" = "มีความตั้งใจมากขึ้น";
+
+"Make time for regular exercise" = "หาเวลาออกกำลังกายสม่ำเสมอ";
+"Connect with friends and loved ones" = "ติดต่อกับเพื่อนและคนที่รัก";
+"Focus on completing important tasks" = "มุ่งเน้นทำงานสำคัญให้เสร็จ";
+"Dedicate time to learning" = "อุทิศเวลาให้กับการเรียนรู้";
+"Practice gratitude regularly" = "ฝึกความกตัญญูเป็นประจำ";
+"Cook nourishing meals" = "ทำอาหารที่มีคุณค่าทางโภชนาการ";
+"Make reading a priority" = "ให้ความสำคัญกับการอ่าน";
+"Take daily walks" = "เดินเล่นทุกวัน";
+"Reach out to family" = "ติดต่อครอบครัว";
+"Practice acts of kindness" = "ฝึกทำความดี";
+"Make meditation part of my routine" = "ทำให้การทำสมาธิเป็นส่วนหนึ่งของกิจวัตร";
+"Write in my journal" = "เขียนในบันทึกประจำวัน";
+"Try new recipes" = "ลองสูตรอาหารใหม่";
+"Spend time outdoors" = "ใช้เวลาข้างนอก";
+"Complete work projects thoughtfully" = "ทำโปรเจกต์งานให้เสร็จอย่างรอบคอบ";
+"Engage with my hobbies" = "ทำกิจกรรมงานอดิเรก";
+"Prioritize restful sleep" = "ให้ความสำคัญกับการนอนหลับพักผ่อน";
+"Be mindful of social media use" = "ระวังการใช้โซเชียลมีเดีย";
+"Express creativity" = "แสดงความคิดสร้างสรรค์";
+"Spend quality time with my partner" = "ใช้เวลาคุณภาพกับคู่รัก";
+"Declutter and organize my space" = "จัดระเบียบพื้นที่ของฉัน";
+"Plan nourishing meals" = "วางแผนมื้ออาหารที่มีประโยชน์";
+"Move my body regularly" = "ขยับร่างกายสม่ำเสมอ";
+"Read for enjoyment" = "อ่านเพื่อความเพลิดเพลิน";
+"Take regular breaks" = "พักผ่อนเป็นประจำ";
+"Practice mindfulness" = "ฝึกสติ";
+"Do things that bring me joy" = "ทำสิ่งที่ทำให้ฉันมีความสุข";
+"Focus on meaningful goals" = "มุ่งเน้นเป้าหมายที่มีความหมาย";
+"Prioritize self-care" = "ให้ความสำคัญกับการดูแลตัวเอง";
+"Connect with the natural world" = "เชื่อมต่อกับโลกธรรมชาติ";
+"Show kindness to others" = "แสดงความเมตตาต่อผู้อื่น";
+"Be fully present in conversations" = "อยู่กับปัจจุบันในการสนทนา";
+"Capture meaningful moments" = "เก็บภาพช่วงเวลาที่มีความหมาย";
+"Cultivate gratitude" = "ปลูกฝังความกตัญญู";
+"Stay active" = "กระตือรือร้นอยู่เสมอ";
+"Carve out time for myself" = "หาเวลาให้ตัวเอง";
+"Help others" = "ช่วยเหลือผู้อื่น";
+"Develop new skills" = "พัฒนาทักษะใหม่";
+"Manage stress mindfully" = "จัดการความเครียดอย่างมีสติ";
+"Be compassionate with myself" = "มีความเห็นอกเห็นใจตัวเอง";
+"Focus on progress over perfection" = "มุ่งเน้นความก้าวหน้ามากกว่าความสมบูรณ์แบบ";
+"Celebrate small achievements" = "ฉลองความสำเร็จเล็กๆ";
+"Reflect and learn from experiences" = "สะท้อนและเรียนรู้จากประสบการณ์";
+"Use my time intentionally" = "ใช้เวลาอย่างตั้งใจ";
+"Find balance in my life" = "หาความสมดุลในชีวิต";
+
+"Go for a 20-minute walk" = "ไปเดินเล่น 20 นาที";
+"Call a family member" = "โทรหาคนในครอบครัว";
+"Read for 15 minutes" = "อ่านหนังสือ 15 นาที";
+"Take 5 minutes to meditate" = "ใช้เวลา 5 นาทีทำสมาธิ";
+"Write 3 things I'm grateful for" = "เขียน 3 สิ่งที่ฉันรู้สึกขอบคุณ";
+"Drink 8 glasses of water" = "ดื่มน้ำ 8 แก้ว";
+"Eat 2 servings of vegetables" = "กินผัก 2 ทัพพี";
+"Take 3 deep breaths when stressed" = "หายใจลึกๆ 3 ครั้งเมื่อเครียด";
+"Spend 10 minutes outside" = "ใช้เวลา 10 นาทีข้างนอก";
+"Do one thing I've been putting off" = "ทำสิ่งหนึ่งที่ฉันผลัดวันประกันพรุ่ง";
+"Practice a hobby for 30 minutes" = "ฝึกงานอดิเรก 30 นาที";
+"Connect with a friend" = "ติดต่อเพื่อน";
+"Do something creative" = "ทำอะไรที่สร้างสรรค์";
+"Exercise for 20 minutes" = "ออกกำลังกาย 20 นาที";
+"Get 8 hours of sleep" = "นอนหลับ 8 ชั่วโมง";
+"Limit phone use to essentials" = "จำกัดการใช้โทรศัพท์เท่าที่จำเป็น";
+"Cook a healthy meal" = "ทำอาหารเพื่อสุขภาพ";
+"Be present in the moment" = "อยู่กับปัจจุบัน";
+"Express gratitude" = "แสดงความขอบคุณ";
+"Take breaks when needed" = "พักผ่อนเมื่อจำเป็น";
+"Do something fun" = "ทำอะไรสนุกๆ";
+"Be kind to myself" = "ใจดีกับตัวเอง";
+"Focus on one goal" = "โฟกัสที่เป้าหมายเดียว";
+"Complete one important task" = "ทำงานสำคัญหนึ่งอย่างให้เสร็จ";
+"Do something active" = "ทำกิจกรรมที่เคลื่อนไหว";
+"Spend quality time with someone" = "ใช้เวลาคุณภาพกับใครสักคน";
+"Practice a skill" = "ฝึกทักษะ";
+"Reduce stress" = "ลดความเครียด";
+"Be intentional" = "ตั้งใจ";
+"Celebrate a small win" = "ฉลองชัยชนะเล็กๆ";
+"Learn from today" = "เรียนรู้จากวันนี้";
+"Practice balance" = "ฝึกความสมดุล";
+"Do something I enjoy" = "ทำสิ่งที่ฉันชอบ";
+"Be present" = "อยู่ตรงนี้";
+"Practice gratitude" = "ฝึกขอบคุณ";
+"Take care of myself" = "ดูแลตัวเอง";
+"Focus on progress" = "โฟกัสที่ความก้าวหน้า";
+"Be patient" = "อดทน";
+"Practice kindness" = "ฝึกความเมตตา";
+"Be mindful" = "มีสติ";
+"Do my best" = "ทำดีที่สุด";
+"Be present today" = "อยู่กับปัจจุบันในวันนี้";

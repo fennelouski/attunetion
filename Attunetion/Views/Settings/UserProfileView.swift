@@ -21,6 +21,7 @@ struct UserProfileView: View {
     @State private var errorMessage: String = ""
     @State private var showSuccess: Bool = false
     @State private var inputMode: InputMode = .freeform
+    @State private var showConsentDialog: Bool = false
     
     // Structured input fields
     @State private var goals: String = ""
@@ -77,7 +78,17 @@ struct UserProfileView: View {
                     }
                     
                     Section {
-                        Toggle(isOn: $autoGenerateEnabled) {
+                        Toggle(isOn: Binding(
+                            get: { autoGenerateEnabled },
+                            set: { newValue in
+                                if newValue && !profile.hasAcceptedTerms {
+                                    // Show consent dialog
+                                    showConsentDialog = true
+                                } else {
+                                    autoGenerateEnabled = newValue
+                                }
+                            }
+                        )) {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("Auto-Suggest Intentions")
                                     .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
@@ -87,6 +98,16 @@ struct UserProfileView: View {
                             }
                         }
                         .tint(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+
+                        if !profile.hasAcceptedTerms {
+                            HStack {
+                                Image(systemName: "info.circle")
+                                    .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                                Text("Requires accepting Terms of Service")
+                                    .font(.caption)
+                                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                            }
+                        }
                     } header: {
                         ThemedSectionHeader(
                             text: "Auto-Suggestions",
@@ -95,12 +116,12 @@ struct UserProfileView: View {
                     } footer: {
                         if autoGenerateEnabled {
                             ThemedSectionFooter(
-                                text: "Suggestions will be created weekly. You can always edit or delete them.",
+                                text: "Suggestions will be created weekly. You can always edit or delete them. Your data may be shared with third-party services to generate suggestions.",
                                 themeManager: themeManager
                             )
                         } else {
                             ThemedSectionFooter(
-                                text: "Enable this to receive automatic suggestions for your intentions each week.",
+                                text: "Enable this to receive automatic suggestions for your intentions each week. You'll need to agree to our Terms of Service first.",
                                 themeManager: themeManager
                             )
                         }
@@ -142,6 +163,21 @@ struct UserProfileView: View {
                 }
             } message: {
                 Text("Your profile has been saved successfully.")
+            }
+            .sheet(isPresented: $showConsentDialog) {
+                LegalConsentView(
+                    onAccept: {
+                        // User accepted terms
+                        profile.hasAcceptedTerms = true
+                        profile.termsAcceptedDate = Date()
+                        try? userProfileRepository.update(profile)
+                        autoGenerateEnabled = true
+                    },
+                    onDecline: {
+                        // User declined - keep toggle off
+                        autoGenerateEnabled = false
+                    }
+                )
             }
         }
     }

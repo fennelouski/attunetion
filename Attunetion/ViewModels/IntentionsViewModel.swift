@@ -17,6 +17,17 @@ enum SortOrder: String, CaseIterable {
     case newestFirst = "Newest First"
     case oldestFirst = "Oldest First"
     case byScope = "By Scope"
+    
+    var localizedName: String {
+        switch self {
+        case .newestFirst:
+            return String(localized: "Newest First")
+        case .oldestFirst:
+            return String(localized: "Oldest First")
+        case .byScope:
+            return String(localized: "By Scope")
+        }
+    }
 }
 
 @Observable

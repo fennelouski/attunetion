@@ -1,0 +1,316 @@
+/* 
+  Localizable.strings
+  Attunetion
+
+  Created by Nathan Fennel on 12/2/25.
+*/
+
+/* General */
+"Attunetion" = "Attunetion";
+"Back" = "戻る";
+"Continue" = "続ける";
+"Done" = "完了";
+"Close" = "閉じる";
+"Cancel" = "キャンセル";
+"Delete" = "削除";
+"Sort" = "並べ替え";
+"Search" = "検索";
+"Settings" = "設定";
+"Help" = "ヘルプ";
+"Permissions" = "権限";
+"About" = "アプリについて";
+
+/* IntentionsListView */
+"Set your first intention" = "最初の意図を設定しましょう";
+"Create a daily, weekly, or monthly intention to get started" = "始めるには、毎日、毎週、または毎月の意図を作成してください";
+"Create Intention" = "意図を作成";
+"How to create good intentions" = "良い意図の作り方";
+"Current" = "現在";
+"AI" = "AI";
+"All Intentions" = "すべての意図";
+"Need help? Learn how to create great intentions" = "ヘルプが必要ですか？素晴らしい意図の作り方を学びましょう";
+
+/* SettingsView */
+"App Theme" = "アプリのテーマ";
+"Default Intention Theme" = "デフォルトの意図テーマ";
+"None" = "なし";
+"Default Font" = "デフォルトフォント";
+"System Default" = "システムデフォルト";
+"Appearance" = "外観";
+"Intention Frequency" = "意図の頻度";
+"How often you want to set intentions" = "意図を設定する頻度";
+"Intentions" = "意図";
+"Choose how often you'd like to set new intentions. This helps personalize your widget's placeholder text." = "新しい意図を設定する頻度を選択してください。これはウィジェットのプレースホルダーテキストをパーソナライズするのに役立ちます。";
+"Reminders" = "リマインダー";
+"Notifications" = "通知";
+"Configure how often and what types of reminders you receive." = "受け取るリマインダーの頻度と種類を設定します。";
+"Suggested Intentions" = "おすすめの意図";
+"Get personalized suggestions for your intentions" = "意図に関するパーソナライズされた提案を取得します";
+"Suggestions" = "提案";
+"Privacy Policy" = "プライバシーポリシー";
+"End User License Agreement" = "エンドユーザー使用許諾契約";
+"Terms of Service" = "利用規約";
+"Delete All Data" = "すべてのデータを削除";
+"Export Data" = "データをエクスポート";
+"Show Onboarding" = "オンボーディングを表示";
+"Learn how to use the app and get inspiration" = "アプリの使い方を学び、インスピレーションを得ましょう";
+"Walk through the onboarding flow again to learn about features and get ideas for how to use the app." = "オンボーディングフローをもう一度確認して、機能について学び、アプリの使い方のアイデアを得ましょう。";
+"Enable Notifications" = "通知を有効にする";
+"Enable notifications to receive reminders about setting your intentions." = "通知を有効にして、意図の設定に関するリマインダーを受け取ります。";
+"Enabled" = "有効";
+"Disabled" = "無効";
+"Not Set" = "未設定";
+"Unknown" = "不明";
+"You'll receive reminders based on your settings" = "設定に基づいてリマインダーが届きます";
+"Notifications are disabled in Settings" = "設定で通知が無効になっています";
+"Enable notifications to get reminders" = "通知を有効にしてリマインダーを受け取る";
+"Notification status unknown" = "通知ステータス不明";
+"This will permanently delete all your intentions, themes, preferences, and profile information. This action cannot be undone. Your data is stored locally and synced via iCloud, so it will be removed from all your devices." = "これにより、すべての意図、テーマ、設定、プロフィール情報が完全に削除されます。この操作は取り消せません。データはローカルに保存され、iCloud経由で同期されるため、すべてのデバイスから削除されます。";
+"Open Settings" = "設定を開く";
+"Maybe Later" = "後で";
+"To receive reminders, please enable notifications in your device settings." = "リマインダーを受け取るには、デバイスの設定で通知を有効にしてください。";
+
+/* IntentionGuideView */
+"What Makes a Good Intention?" = "良い意図とは？";
+"Intentions are personal commitments that guide your actions. They work best when they're:\n\n  • Specific and actionable\n  • Positive and meaningful to you\n  • Realistic for the timeframe\n  • Focused on what you can control" = "意図は、あなたの行動を導く個人的なコミットメントです。次のような場合に最も効果的です：\n\n  • 具体的で実行可能\n  • ポジティブであなたにとって意味がある\n  • 期間に対して現実的\n  • コントロールできることに焦点を当てている";
+"Set Your Monthly Intention" = "今月の意図を設定";
+"Think big picture. What do you want to focus on this month? This is your overarching theme that guides your weekly and daily intentions." = "全体像を考えてください。今月は何に集中したいですか？これは、毎週および毎日の意図を導く包括的なテーマです。";
+"e.g., Build healthier habits" = "例：より健康的な習慣を築く";
+"Set Your Weekly Intention" = "今週の意図を設定";
+"Break down your monthly goal into weekly actions. What specific step will you take this week?" = "月間目標を週間アクションに分解します。今週は具体的にどのようなステップを踏みますか？";
+"e.g., Exercise 3 times this week" = "例：今週は3回運動する";
+"Set Your Daily Intention" = "今日の意図を設定";
+"Make it concrete and achievable today. What one thing will you do today to move toward your goals?" = "今日、具体的で達成可能なものにしましょう。目標に向かって進むために、今日何を行いますか？";
+"e.g., Go for a 20-minute walk" = "例：20分間散歩に行く";
+"You're All Set!" = "準備完了！";
+"You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones." = "最初の意図を作成しました！それらはホーム画面に表示され、集中力を維持するのに役立ちます。いつでも追加したり、既存のものを編集したりできます。";
+"Good Example" = "良い例";
+"Too Vague" = "曖昧すぎる";
+"Enter your intention..." = "意図を入力...";
+"Get Started" = "始める";
+"Create Intentions" = "意図を作成";
+"Getting Started" = "はじめに";
+
+/* Intention Scopes */
+"Day" = "日";
+"Week" = "週";
+"Month" = "月";
+"Daily" = "毎日";
+"Weekly" = "毎週";
+"Monthly" = "毎月";
+
+/* Examples */
+"Practice gratitude by writing 3 things I'm thankful for each day" = "毎日感謝していることを3つ書いて感謝を実践する";
+"Exercise for 30 minutes, 3 times this week" = "今週は3回、30分間運動する";
+"Read for 20 minutes before bed each night" = "毎晩寝る前に20分間読書する";
+"Call or text one friend or family member daily" = "毎日1人の友人または家族に電話またはメールする";
+"Spend 10 minutes each morning planning my day" = "毎朝10分間、一日の計画を立てる";
+"Complete one important task before checking email" = "メールを確認する前に重要なタスクを1つ完了する";
+"Take a 15-minute walk outside during lunch break" = "昼休みに外を15分間散歩する";
+"Write in my journal for 5 minutes each evening" = "毎晩5分間日記を書く";
+"Do one act of kindness for someone else today" = "今日、誰かのために親切な行いを1つする";
+"Spend quality time with my partner without phones" = "携帯電話なしでパートナーと充実した時間を過ごす";
+"Learn something new for 15 minutes each day" = "毎日15分間新しいことを学ぶ";
+"Practice deep breathing for 5 minutes when stressed" = "ストレスを感じたら5分間深呼吸を実践する";
+
+"Be happy" = "幸せになる";
+"Work harder" = "もっと一生懸命働く";
+"Be better" = "もっと良くなる";
+"Do more" = "もっとやる";
+"Change everything" = "すべてを変える";
+"Fix my life" = "人生を直す";
+"Stop being lazy" = "怠けるのをやめる";
+"Be perfect" = "完璧になる";
+"Never make mistakes" = "決して間違いを犯さない";
+"Always be positive" = "常にポジティブでいる";
+"Have no stress" = "ストレスを持たない";
+"Be successful" = "成功する";
+
+/* Sort Order */
+"Newest First" = "新しい順";
+"Oldest First" = "古い順";
+"By Scope" = "範囲順";
+
+/* Themes */
+"Calm and peaceful" = "穏やかで平和";
+"Warm and cozy" = "暖かくて居心地が良い";
+"Cool and refreshing" = "涼しくて爽やか";
+"Custom theme" = "カスタムテーマ";
+
+/* Notification Types */
+"Remind me to add an intention" = "意図を追加するようにリマインド";
+"Show me my current intention" = "現在の意図を表示";
+"Send encouragement" = "励ましを送る";
+"Time-based reminders" = "時間ベースのリマインダー";
+"Get reminded when it's time to set a new intention" = "新しい意図を設定する時間になったらリマインド";
+"See your current intention throughout the day" = "一日を通して現在の意図を見る";
+"Receive uplifting messages to stay motivated" = "やる気を維持するために高揚感のあるメッセージを受け取る";
+"Reminders at specific times you choose" = "選択した特定の時間にリマインダー";
+
+/* Notification Frequency */
+"Once a month" = "月に1回";
+"Twice a month" = "月に2回";
+"Once a week" = "週に1回";
+"Twice a week" = "週に2回";
+"Every other day" = "1日おき";
+"Once a day" = "1日1回";
+"Twice a day" = "1日2回";
+"Just a gentle monthly reminder" = "毎月の優しいリマインダーだけ";
+"A couple reminders each month" = "毎月いくつかのリマインダー";
+"Weekly check-ins" = "毎週のチェックイン";
+"A few times each week" = "毎週数回";
+"Regular reminders" = "定期的なリマインダー";
+"Daily reminders" = "毎日のリマインダー";
+"Morning and evening reminders" = "朝と夕方のリマインダー";
+
+/* Intention Frequency */
+"Daily" = "毎日";
+"Weekly" = "毎週";
+"Monthly" = "毎月";
+"Set a new intention each day" = "毎日新しい意図を設定";
+"Set a new intention each week" = "毎週新しい意図を設定";
+"Set a new intention each month" = "毎月新しい意図を設定";
+"Set your intention for today" = "今日の意図を設定";
+"Set your intention for this week" = "今週の意図を設定";
+"Set your intention for this month" = "今月の意図を設定";
+
+/* Suggestions */
+"Build healthier habits" = "より健康的な習慣を築く";
+"Focus on personal growth" = "自己成長に焦点を当てる";
+"Strengthen relationships" = "人間関係を強化する";
+"Advance in my career" = "キャリアアップする";
+"Practice mindfulness daily" = "毎日マインドフルネスを実践する";
+"Develop a new skill" = "新しいスキルを開発する";
+"Improve work-life balance" = "ワークライフバランスを改善する";
+"Save money for a goal" = "目標のためにお金を節約する";
+"Read more books" = "もっと本を読む";
+"Spend quality time with family" = "家族と充実した時間を過ごす";
+"Start a new hobby" = "新しい趣味を始める";
+"Reduce stress and anxiety" = "ストレスと不安を軽減する";
+"Eat more nutritious meals" = "より栄養価の高い食事を摂る";
+"Get better sleep" = "より良い睡眠をとる";
+"Learn something new" = "新しいことを学ぶ";
+"Volunteer or give back" = "ボランティアや社会貢献をする";
+"Travel to new places" = "新しい場所に旅行する";
+"Build better routines" = "より良いルーチンを構築する";
+"Focus on mental health" = "メンタルヘルスに焦点を当てる";
+"Achieve a fitness goal" = "フィットネス目標を達成する";
+"Improve communication" = "コミュニケーションを改善する";
+"Declutter and organize" = "断捨離して整理する";
+"Practice self-care" = "セルフケアを実践する";
+"Set financial goals" = "財務目標を設定する";
+"Build confidence" = "自信をつける";
+"Learn to cook" = "料理を学ぶ";
+"Spend time in nature" = "自然の中で過ごす";
+"Reduce screen time" = "スクリーンタイムを減らす";
+"Practice patience" = "忍耐を実践する";
+"Be more present" = "もっと今に集中する";
+"Express gratitude daily" = "毎日感謝を表現する";
+"Take more breaks" = "もっと休憩を取る";
+"Learn a language" = "言語を学ぶ";
+"Start journaling" = "日記をつけ始める";
+"Build better habits" = "より良い習慣を築く";
+"Focus on creativity" = "創造性に焦点を当てる";
+"Improve posture" = "姿勢を良くする";
+"Drink more water" = "もっと水を飲む";
+"Practice deep breathing" = "深呼吸を実践する";
+"Set boundaries" = "境界線を設定する";
+"Be kinder to myself" = "自分にもっと優しくする";
+"Focus on what matters" = "重要なことに焦点を当てる";
+"Reduce procrastination" = "先延ばしを減らす";
+"Build resilience" = "回復力をつける";
+"Practice forgiveness" = "許しを実践する";
+"Be more organized" = "もっと整理整頓する";
+"Focus on solutions" = "解決策に焦点を当てる";
+"Celebrate small wins" = "小さな勝利を祝う";
+"Learn from mistakes" = "間違いから学ぶ";
+"Be more intentional" = "もっと意図的になる";
+
+"Make time for regular exercise" = "定期的な運動の時間を作る";
+"Connect with friends and loved ones" = "友人や愛する人とつながる";
+"Focus on completing important tasks" = "重要なタスクの完了に集中する";
+"Dedicate time to learning" = "学習に時間を割く";
+"Practice gratitude regularly" = "定期的に感謝を実践する";
+"Cook nourishing meals" = "栄養のある食事を作る";
+"Make reading a priority" = "読書を優先する";
+"Take daily walks" = "毎日散歩する";
+"Reach out to family" = "家族に連絡する";
+"Practice acts of kindness" = "親切な行いを実践する";
+"Make meditation part of my routine" = "瞑想をルーチンの一部にする";
+"Write in my journal" = "日記に書く";
+"Try new recipes" = "新しいレシピを試す";
+"Spend time outdoors" = "屋外で過ごす";
+"Complete work projects thoughtfully" = "仕事のプロジェクトを思慮深く完了する";
+"Engage with my hobbies" = "趣味に取り組む";
+"Prioritize restful sleep" = "安らかな睡眠を優先する";
+"Be mindful of social media use" = "ソーシャルメディアの使用に注意する";
+"Express creativity" = "創造性を表現する";
+"Spend quality time with my partner" = "パートナーと充実した時間を過ごす";
+"Declutter and organize my space" = "自分のスペースを断捨離して整理する";
+"Plan nourishing meals" = "栄養のある食事を計画する";
+"Move my body regularly" = "定期的に体を動かす";
+"Read for enjoyment" = "楽しみのために読む";
+"Take regular breaks" = "定期的に休憩を取る";
+"Practice mindfulness" = "マインドフルネスを実践する";
+"Do things that bring me joy" = "喜びをもたらすことをする";
+"Focus on meaningful goals" = "意味のある目標に焦点を当てる";
+"Prioritize self-care" = "セルフケアを優先する";
+"Connect with the natural world" = "自然界とつながる";
+"Show kindness to others" = "他人に親切にする";
+"Be fully present in conversations" = "会話に完全に集中する";
+"Capture meaningful moments" = "意味のある瞬間を捉える";
+"Cultivate gratitude" = "感謝の気持ちを育む";
+"Stay active" = "アクティブでいる";
+"Carve out time for myself" = "自分のための時間を作る";
+"Help others" = "他人を助ける";
+"Develop new skills" = "新しいスキルを開発する";
+"Manage stress mindfully" = "マインドフルにストレスを管理する";
+"Be compassionate with myself" = "自分に思いやりを持つ";
+"Focus on progress over perfection" = "完璧さよりも進歩に焦点を当てる";
+"Celebrate small achievements" = "小さな成果を祝う";
+"Reflect and learn from experiences" = "経験を振り返り学ぶ";
+"Use my time intentionally" = "意図的に時間を使う";
+"Find balance in my life" = "人生のバランスを見つける";
+
+"Go for a 20-minute walk" = "20分間散歩に行く";
+"Call a family member" = "家族に電話する";
+"Read for 15 minutes" = "15分間読書する";
+"Take 5 minutes to meditate" = "5分間瞑想する";
+"Write 3 things I'm grateful for" = "感謝していることを3つ書く";
+"Drink 8 glasses of water" = "水を8杯飲む";
+"Eat 2 servings of vegetables" = "野菜を2皿食べる";
+"Take 3 deep breaths when stressed" = "ストレスを感じたら3回深呼吸する";
+"Spend 10 minutes outside" = "10分間外で過ごす";
+"Do one thing I've been putting off" = "先延ばしにしていたことを1つやる";
+"Practice a hobby for 30 minutes" = "30分間趣味を実践する";
+"Connect with a friend" = "友人とつながる";
+"Do something creative" = "何か創造的なことをする";
+"Exercise for 20 minutes" = "20分間運動する";
+"Get 8 hours of sleep" = "8時間睡眠をとる";
+"Limit phone use to essentials" = "電話の使用を必要最低限に抑える";
+"Cook a healthy meal" = "健康的な食事を作る";
+"Be present in the moment" = "その瞬間に集中する";
+"Express gratitude" = "感謝を表現する";
+"Take breaks when needed" = "必要なときに休憩を取る";
+"Do something fun" = "何か楽しいことをする";
+"Be kind to myself" = "自分に優しくする";
+"Focus on one goal" = "1つの目標に集中する";
+"Complete one important task" = "重要なタスクを1つ完了する";
+"Do something active" = "何かアクティブなことをする";
+"Spend quality time with someone" = "誰かと充実した時間を過ごす";
+"Practice a skill" = "スキルを練習する";
+"Reduce stress" = "ストレスを減らす";
+"Be intentional" = "意図的になる";
+"Celebrate a small win" = "小さな勝利を祝う";
+"Learn from today" = "今日から学ぶ";
+"Practice balance" = "バランスを練習する";
+"Do something I enjoy" = "楽しむことをする";
+"Be present" = "今に集中する";
+"Practice gratitude" = "感謝を練習する";
+"Take care of myself" = "自分を大切にする";
+"Focus on progress" = "進歩に焦点を当てる";
+"Be patient" = "忍耐強くなる";
+"Practice kindness" = "親切を練習する";
+"Be mindful" = "マインドフルになる";
+"Do my best" = "ベストを尽くす";
+"Be present today" = "今日、今に集中する";

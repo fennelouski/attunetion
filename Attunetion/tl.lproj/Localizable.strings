@@ -1,0 +1,316 @@
+/* 
+  Localizable.strings
+  Attunetion
+
+  Created by Nathan Fennel on 12/2/25.
+*/
+
+/* General */
+"Attunetion" = "Attunetion";
+"Back" = "Bumalik";
+"Continue" = "Magpatuloy";
+"Done" = "Tapos na";
+"Close" = "Isara";
+"Cancel" = "Kanselahin";
+"Delete" = "Burahin";
+"Sort" = "Ayusin";
+"Search" = "Maghanap";
+"Settings" = "Mga Setting";
+"Help" = "Tulong";
+"Permissions" = "Mga Pahintulot";
+"About" = "Tungkol sa";
+
+/* IntentionsListView */
+"Set your first intention" = "Itakda ang iyong unang intensyon";
+"Create a daily, weekly, or monthly intention to get started" = "Gumawa ng pang-araw-araw, lingguhan, o buwanang intensyon para makapagsimula";
+"Create Intention" = "Gumawa ng Intensyon";
+"How to create good intentions" = "Paano gumawa ng magagandang intensyon";
+"Current" = "Kasalukuyan";
+"AI" = "AI";
+"All Intentions" = "Lahat ng Intensyon";
+"Need help? Learn how to create great intentions" = "Kailangan ng tulong? Matutunan kung paano gumawa ng mahuhusay na intensyon";
+
+/* SettingsView */
+"App Theme" = "Tema ng App";
+"Default Intention Theme" = "Default na Tema ng Intensyon";
+"None" = "Wala";
+"Default Font" = "Default na Font";
+"System Default" = "Default ng System";
+"Appearance" = "Itsura";
+"Intention Frequency" = "Dalas ng Intensyon";
+"How often you want to set intentions" = "Gaano kadalas mo gustong magtakda ng mga intensyon";
+"Intentions" = "Mga Intensyon";
+"Choose how often you'd like to set new intentions. This helps personalize your widget's placeholder text." = "Piliin kung gaano kadalas mo gustong magtakda ng mga bagong intensyon. Nakakatulong ito na i-personalize ang placeholder text ng iyong widget.";
+"Reminders" = "Mga Paalala";
+"Notifications" = "Mga Abiso";
+"Configure how often and what types of reminders you receive." = "I-configure kung gaano kadalas at anong mga uri ng paalala ang matatanggap mo.";
+"Suggested Intentions" = "Mga Iminungkahing Intensyon";
+"Get personalized suggestions for your intentions" = "Kumuha ng mga personalized na mungkahi para sa iyong mga intensyon";
+"Suggestions" = "Mga Mungkahi";
+"Privacy Policy" = "Patakaran sa Privacy";
+"End User License Agreement" = "Kasunduan sa Lisensya ng End User";
+"Terms of Service" = "Mga Tuntunin ng Serbisyo";
+"Delete All Data" = "Burahin ang Lahat ng Data";
+"Export Data" = "I-export ang Data";
+"Show Onboarding" = "Ipakita ang Onboarding";
+"Learn how to use the app and get inspiration" = "Matutunan kung paano gamitin ang app at makakuha ng inspirasyon";
+"Walk through the onboarding flow again to learn about features and get ideas for how to use the app." = "Daanan muli ang onboarding flow para matuto tungkol sa mga feature at makakuha ng mga ideya kung paano gamitin ang app.";
+"Enable Notifications" = "Paganahin ang Mga Abiso";
+"Enable notifications to receive reminders about setting your intentions." = "Paganahin ang mga abiso upang makatanggap ng mga paalala tungkol sa pagtatakda ng iyong mga intensyon.";
+"Enabled" = "Pinagana";
+"Disabled" = "Hindi Pinagana";
+"Not Set" = "Hindi Nakatakda";
+"Unknown" = "Hindi Alam";
+"You'll receive reminders based on your settings" = "Makakatanggap ka ng mga paalala batay sa iyong mga setting";
+"Notifications are disabled in Settings" = "Ang mga abiso ay hindi pinagana sa Mga Setting";
+"Enable notifications to get reminders" = "Paganahin ang mga abiso upang makakuha ng mga paalala";
+"Notification status unknown" = "Hindi alam ang status ng abiso";
+"This will permanently delete all your intentions, themes, preferences, and profile information. This action cannot be undone. Your data is stored locally and synced via iCloud, so it will be removed from all your devices." = "Ito ay permanenteng magbubura sa lahat ng iyong mga intensyon, tema, kagustuhan, at impormasyon ng profile. Ang aksyong ito ay hindi maaaring bawiin. Ang iyong data ay nakaimbak nang lokal at naka-sync sa pamamagitan ng iCloud, kaya aalisin ito sa lahat ng iyong device.";
+"Open Settings" = "Buksan ang Mga Setting";
+"Maybe Later" = "Siguro Mamaya";
+"To receive reminders, please enable notifications in your device settings." = "Upang makatanggap ng mga paalala, mangyaring paganahin ang mga abiso sa mga setting ng iyong device.";
+
+/* IntentionGuideView */
+"What Makes a Good Intention?" = "Ano ang Gumagawa sa Isang Magandang Intensyon?";
+"Intentions are personal commitments that guide your actions. They work best when they're:\n\n  • Specific and actionable\n  • Positive and meaningful to you\n  • Realistic for the timeframe\n  • Focused on what you can control" = "Ang mga intensyon ay mga personal na pangako na gumagabay sa iyong mga aksyon. Pinakamahusay na gumagana ang mga ito kapag sila ay:\n\n  • Tiyak at naaaksyunan\n  • Positibo at makabuluhan sa iyo\n  • Makatotohanan para sa takdang panahon\n  • Nakatuon sa kung ano ang maaari mong kontrolin";
+"Set Your Monthly Intention" = "Itakda ang Iyong Buwanang Intensyon";
+"Think big picture. What do you want to focus on this month? This is your overarching theme that guides your weekly and daily intentions." = "Isipin ang malaking larawan. Saan mo gustong mag-focus ngayong buwan? Ito ang iyong pangkalahatang tema na gumagabay sa iyong lingguhan at pang-araw-araw na mga intensyon.";
+"e.g., Build healthier habits" = "hal., Bumuo ng mas malusog na gawi";
+"Set Your Weekly Intention" = "Itakda ang Iyong Lingguhang Intensyon";
+"Break down your monthly goal into weekly actions. What specific step will you take this week?" = "Hatiin ang iyong buwanang layunin sa mga lingguhang aksyon. Anong partikular na hakbang ang gagawin mo ngayong linggo?";
+"e.g., Exercise 3 times this week" = "hal., Mag-ehersisyo ng 3 beses ngayong linggo";
+"Set Your Daily Intention" = "Itakda ang Iyong Pang-araw-araw na Intensyon";
+"Make it concrete and achievable today. What one thing will you do today to move toward your goals?" = "Gawin itong konkreto at makakamit ngayon. Anong isang bagay ang gagawin mo ngayon upang umusad patungo sa iyong mga layunin?";
+"e.g., Go for a 20-minute walk" = "hal., Maglakad ng 20 minuto";
+"You're All Set!" = "Handa Ka Na!";
+"You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones." = "Nagawa mo na ang iyong mga unang intensyon! Lilitaw ang mga ito sa iyong home screen at tutulong na panatilihin kang nakatutok. Maaari kang magdagdag palagi ng higit pa o i-edit ang mga umiiral na.";
+"Good Example" = "Magandang Halimbawa";
+"Too Vague" = "Masyadong Malabo";
+"Enter your intention..." = "Ilagay ang iyong intensyon...";
+"Get Started" = "Magsimula";
+"Create Intentions" = "Gumawa ng mga Intensyon";
+"Getting Started" = "Pagsisimula";
+
+/* Intention Scopes */
+"Day" = "Araw";
+"Week" = "Linggo";
+"Month" = "Buwan";
+"Daily" = "Araw-araw";
+"Weekly" = "Lingguhan";
+"Monthly" = "Buwanan";
+
+/* Examples */
+"Practice gratitude by writing 3 things I'm thankful for each day" = "Magsanay ng pasasalamat sa pamamagitan ng pagsulat ng 3 bagay na ipinagpapasalamat ko bawat araw";
+"Exercise for 30 minutes, 3 times this week" = "Mag-ehersisyo ng 30 minuto, 3 beses ngayong linggo";
+"Read for 20 minutes before bed each night" = "Magbasa ng 20 minuto bago matulog gabi-gabi";
+"Call or text one friend or family member daily" = "Tumawag o mag-text sa isang kaibigan o miyembro ng pamilya araw-araw";
+"Spend 10 minutes each morning planning my day" = "Gumugol ng 10 minuto tuwing umaga sa pagpaplano ng aking araw";
+"Complete one important task before checking email" = "Tapusin ang isang mahalagang gawain bago tingnan ang email";
+"Take a 15-minute walk outside during lunch break" = "Maglakad ng 15 minuto sa labas tuwing break sa tanghalian";
+"Write in my journal for 5 minutes each evening" = "Magsulat sa aking journal ng 5 minuto tuwing gabi";
+"Do one act of kindness for someone else today" = "Gumawa ng isang kabutihan para sa ibang tao ngayon";
+"Spend quality time with my partner without phones" = "Gumugol ng de-kalidad na oras kasama ang aking kapareha nang walang mga telepono";
+"Learn something new for 15 minutes each day" = "Matuto ng bagong bagay sa loob ng 15 minuto bawat araw";
+"Practice deep breathing for 5 minutes when stressed" = "Magsanay ng malalim na paghinga ng 5 minuto kapag na-stress";
+
+"Be happy" = "Maging masaya";
+"Work harder" = "Magtrabaho nang mas mahirap";
+"Be better" = "Maging mas mahusay";
+"Do more" = "Gumawa ng higit pa";
+"Change everything" = "Baguhin ang lahat";
+"Fix my life" = "Ayusin ang buhay ko";
+"Stop being lazy" = "Itigil ang pagiging tamad";
+"Be perfect" = "Maging perpekto";
+"Never make mistakes" = "Huwag kailanman magkamali";
+"Always be positive" = "Laging maging positibo";
+"Have no stress" = "Huwag magkaroon ng stress";
+"Be successful" = "Maging matagumpay";
+
+/* Sort Order */
+"Newest First" = "Pinakabago Muna";
+"Oldest First" = "Pinakaluma Muna";
+"By Scope" = "Ayon sa Saklaw";
+
+/* Themes */
+"Calm and peaceful" = "Kalmado at mapayapa";
+"Warm and cozy" = "Mainit at komportable";
+"Cool and refreshing" = "Malamig at nakakapresko";
+"Custom theme" = "Pasadyang tema";
+
+/* Notification Types */
+"Remind me to add an intention" = "Paalalahanan akong magdagdag ng intensyon";
+"Show me my current intention" = "Ipakita sa akin ang aking kasalukuyang intensyon";
+"Send encouragement" = "Magpadala ng pampalakas-loob";
+"Time-based reminders" = "Mga paalala batay sa oras";
+"Get reminded when it's time to set a new intention" = "Mapaalalahanan kapag oras na para magtakda ng bagong intensyon";
+"See your current intention throughout the day" = "Makita ang iyong kasalukuyang intensyon sa buong araw";
+"Receive uplifting messages to stay motivated" = "Makatanggap ng mga nakakapagpasiglang mensahe upang manatiling motivated";
+"Reminders at specific times you choose" = "Mga paalala sa mga partikular na oras na pipiliin mo";
+
+/* Notification Frequency */
+"Once a month" = "Isang beses sa isang buwan";
+"Twice a month" = "Dalawang beses sa isang buwan";
+"Once a week" = "Isang beses sa isang linggo";
+"Twice a week" = "Dalawang beses sa isang linggo";
+"Every other day" = "Tuwing makalawa";
+"Once a day" = "Isang beses sa isang araw";
+"Twice a day" = "Dalawang beses sa isang araw";
+"Just a gentle monthly reminder" = "Isang banayad na buwanang paalala lamang";
+"A couple reminders each month" = "Ilang paalala bawat buwan";
+"Weekly check-ins" = "Lingguhang check-in";
+"A few times each week" = "Ilang beses bawat linggo";
+"Regular reminders" = "Regular na mga paalala";
+"Daily reminders" = "Pang-araw-araw na mga paalala";
+"Morning and evening reminders" = "Mga paalala sa umaga at gabi";
+
+/* Intention Frequency */
+"Daily" = "Araw-araw";
+"Weekly" = "Lingguhan";
+"Monthly" = "Buwanan";
+"Set a new intention each day" = "Magtakda ng bagong intensyon bawat araw";
+"Set a new intention each week" = "Magtakda ng bagong intensyon bawat linggo";
+"Set a new intention each month" = "Magtakda ng bagong intensyon bawat buwan";
+"Set your intention for today" = "Itakda ang iyong intensyon para sa araw na ito";
+"Set your intention for this week" = "Itakda ang iyong intensyon para sa linggong ito";
+"Set your intention for this month" = "Itakda ang iyong intensyon para sa buwang ito";
+
+/* Suggestions */
+"Build healthier habits" = "Bumuo ng mas malusog na gawi";
+"Focus on personal growth" = "Mag-focus sa personal na paglago";
+"Strengthen relationships" = "Patatagin ang mga relasyon";
+"Advance in my career" = "Umunlad sa aking karera";
+"Practice mindfulness daily" = "Magsanay ng mindfulness araw-araw";
+"Develop a new skill" = "Bumuo ng bagong kasanayan";
+"Improve work-life balance" = "Pagbutihin ang balanse sa trabaho at buhay";
+"Save money for a goal" = "Mag-ipon ng pera para sa isang layunin";
+"Read more books" = "Magbasa ng mas maraming libro";
+"Spend quality time with family" = "Gumugol ng de-kalidad na oras kasama ang pamilya";
+"Start a new hobby" = "Magsimula ng bagong libangan";
+"Reduce stress and anxiety" = "Bawasan ang stress at pagkabalisa";
+"Eat more nutritious meals" = "Kumain ng mas masustansyang pagkain";
+"Get better sleep" = "Makakuha ng mas mahusay na tulog";
+"Learn something new" = "Matuto ng bagong bagay";
+"Volunteer or give back" = "Magboluntaryo o tumulong";
+"Travel to new places" = "Maglakbay sa mga bagong lugar";
+"Build better routines" = "Bumuo ng mas mahusay na mga gawain";
+"Focus on mental health" = "Mag-focus sa kalusugan ng isip";
+"Achieve a fitness goal" = "Makamit ang isang layunin sa fitness";
+"Improve communication" = "Pagbutihin ang komunikasyon";
+"Declutter and organize" = "Magbawas ng kalat at mag-ayos";
+"Practice self-care" = "Magsanay ng pangangalaga sa sarili";
+"Set financial goals" = "Magtakda ng mga layunin sa pananalapi";
+"Build confidence" = "Bumuo ng kumpiyansa";
+"Learn to cook" = "Matutong magluto";
+"Spend time in nature" = "Gumugol ng oras sa kalikasan";
+"Reduce screen time" = "Bawasan ang oras sa screen";
+"Practice patience" = "Magsanay ng pasensya";
+"Be more present" = "Maging mas present";
+"Express gratitude daily" = "Magpahayag ng pasasalamat araw-araw";
+"Take more breaks" = "Kumuha ng mas maraming pahinga";
+"Learn a language" = "Matuto ng wika";
+"Start journaling" = "Magsimulang mag-journal";
+"Build better habits" = "Bumuo ng mas mahusay na gawi";
+"Focus on creativity" = "Mag-focus sa pagkamalikhain";
+"Improve posture" = "Pagbutihin ang postura";
+"Drink more water" = "Uminom ng mas maraming tubig";
+"Practice deep breathing" = "Magsanay ng malalim na paghinga";
+"Set boundaries" = "Magtakda ng mga hangganan";
+"Be kinder to myself" = "Maging mas mabait sa sarili ko";
+"Focus on what matters" = "Mag-focus sa kung ano ang mahalaga";
+"Reduce procrastination" = "Bawasan ang pagpapaliban";
+"Build resilience" = "Bumuo ng katatagan";
+"Practice forgiveness" = "Magsanay ng pagpapatawad";
+"Be more organized" = "Maging mas organisado";
+"Focus on solutions" = "Mag-focus sa mga solusyon";
+"Celebrate small wins" = "Ipagdiwang ang maliliit na panalo";
+"Learn from mistakes" = "Matuto mula sa mga pagkakamali";
+"Be more intentional" = "Maging mas intensyonal";
+
+"Make time for regular exercise" = "Maglaan ng oras para sa regular na ehersisyo";
+"Connect with friends and loved ones" = "Kumonekta sa mga kaibigan at mahal sa buhay";
+"Focus on completing important tasks" = "Mag-focus sa pagkumpleto ng mahahalagang gawain";
+"Dedicate time to learning" = "Maglaan ng oras sa pag-aaral";
+"Practice gratitude regularly" = "Magsanay ng pasasalamat nang regular";
+"Cook nourishing meals" = "Magluto ng masustansyang pagkain";
+"Make reading a priority" = "Gawing priyoridad ang pagbabasa";
+"Take daily walks" = "Maglakad araw-araw";
+"Reach out to family" = "Makipag-ugnayan sa pamilya";
+"Practice acts of kindness" = "Magsanay ng mga gawa ng kabutihan";
+"Make meditation part of my routine" = "Gawing bahagi ng aking gawain ang pagmumuni-muni";
+"Write in my journal" = "Magsulat sa aking journal";
+"Try new recipes" = "Sumubok ng mga bagong recipe";
+"Spend time outdoors" = "Gumugol ng oras sa labas";
+"Complete work projects thoughtfully" = "Tapusin ang mga proyekto sa trabaho nang may pag-iisip";
+"Engage with my hobbies" = "Makipag-ugnayan sa aking mga libangan";
+"Prioritize restful sleep" = "Unahin ang mahimbing na tulog";
+"Be mindful of social media use" = "Maging maingat sa paggamit ng social media";
+"Express creativity" = "Ipahayag ang pagkamalikhain";
+"Spend quality time with my partner" = "Gumugol ng de-kalidad na oras kasama ang aking kapareha";
+"Declutter and organize my space" = "Magbawas ng kalat at ayusin ang aking espasyo";
+"Plan nourishing meals" = "Magplano ng masustansyang pagkain";
+"Move my body regularly" = "Igualaw ang aking katawan nang regular";
+"Read for enjoyment" = "Magbasa para sa kasiyahan";
+"Take regular breaks" = "Kumuha ng regular na pahinga";
+"Practice mindfulness" = "Magsanay ng mindfulness";
+"Do things that bring me joy" = "Gawin ang mga bagay na nagdudulot sa akin ng kagalakan";
+"Focus on meaningful goals" = "Mag-focus sa mga makabuluhang layunin";
+"Prioritize self-care" = "Unahin ang pangangalaga sa sarili";
+"Connect with the natural world" = "Kumonekta sa natural na mundo";
+"Show kindness to others" = "Magpakita ng kabutihan sa iba";
+"Be fully present in conversations" = "Maging ganap na present sa mga pag-uusap";
+"Capture meaningful moments" = "Kuhanan ang mga makabuluhang sandali";
+"Cultivate gratitude" = "Linangin ang pasasalamat";
+"Stay active" = "Manatiling aktibo";
+"Carve out time for myself" = "Maglaan ng oras para sa sarili ko";
+"Help others" = "Tumulong sa iba";
+"Develop new skills" = "Bumuo ng mga bagong kasanayan";
+"Manage stress mindfully" = "Pamahalaan ang stress nang may kamalayan";
+"Be compassionate with myself" = "Maging mahabagin sa sarili ko";
+"Focus on progress over perfection" = "Mag-focus sa pag-unlad kaysa sa pagiging perpekto";
+"Celebrate small achievements" = "Ipagdiwang ang maliliit na tagumpay";
+"Reflect and learn from experiences" = "Magnilay at matuto mula sa mga karanasan";
+"Use my time intentionally" = "Gamitin ang aking oras nang may intensyon";
+"Find balance in my life" = "Humanap ng balanse sa aking buhay";
+
+"Go for a 20-minute walk" = "Maglakad ng 20 minuto";
+"Call a family member" = "Tumawag sa isang miyembro ng pamilya";
+"Read for 15 minutes" = "Magbasa ng 15 minuto";
+"Take 5 minutes to meditate" = "Maglaan ng 5 minuto upang magnilay";
+"Write 3 things I'm grateful for" = "Magsulat ng 3 bagay na ipinagpapasalamat ko";
+"Drink 8 glasses of water" = "Uminom ng 8 baso ng tubig";
+"Eat 2 servings of vegetables" = "Kumain ng 2 serving ng gulay";
+"Take 3 deep breaths when stressed" = "Huminga ng 3 malalim kapag na-stress";
+"Spend 10 minutes outside" = "Gumugol ng 10 minuto sa labas";
+"Do one thing I've been putting off" = "Gawin ang isang bagay na ipinagpaliban ko";
+"Practice a hobby for 30 minutes" = "Magsanay ng libangan sa loob ng 30 minuto";
+"Connect with a friend" = "Kumonekta sa isang kaibigan";
+"Do something creative" = "Gumawa ng isang bagay na malikhain";
+"Exercise for 20 minutes" = "Mag-ehersisyo ng 20 minuto";
+"Get 8 hours of sleep" = "Makakuha ng 8 oras na tulog";
+"Limit phone use to essentials" = "Limitahan ang paggamit ng telepono sa mga mahahalaga";
+"Cook a healthy meal" = "Magluto ng masustansyang pagkain";
+"Be present in the moment" = "Maging present sa sandaling ito";
+"Express gratitude" = "Magpahayag ng pasasalamat";
+"Take breaks when needed" = "Kumuha ng pahinga kapag kinakailangan";
+"Do something fun" = "Gumawa ng isang bagay na masaya";
+"Be kind to myself" = "Maging mabait sa sarili ko";
+"Focus on one goal" = "Mag-focus sa isang layunin";
+"Complete one important task" = "Tapusin ang isang mahalagang gawain";
+"Do something active" = "Gumawa ng isang bagay na aktibo";
+"Spend quality time with someone" = "Gumugol ng de-kalidad na oras kasama ang isang tao";
+"Practice a skill" = "Magsanay ng isang kasanayan";
+"Reduce stress" = "Bawasan ang stress";
+"Be intentional" = "Maging intensyonal";
+"Celebrate a small win" = "Ipagdiwang ang isang maliit na panalo";
+"Learn from today" = "Matuto mula sa araw na ito";
+"Practice balance" = "Magsanay ng balanse";
+"Do something I enjoy" = "Gawin ang isang bagay na kinagigiliwan ko";
+"Be present" = "Maging present";
+"Practice gratitude" = "Magsanay ng pasasalamat";
+"Take care of myself" = "Alagaan ang sarili ko";
+"Focus on progress" = "Mag-focus sa pag-unlad";
+"Be patient" = "Maging matiyaga";
+"Practice kindness" = "Magsanay ng kabutihan";
+"Be mindful" = "Maging maingat";
+"Do my best" = "Gawin ang aking makakaya";
+"Be present today" = "Maging present ngayon";

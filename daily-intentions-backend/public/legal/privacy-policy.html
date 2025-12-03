@@ -52,17 +52,20 @@
     </ul>
 
     <h2>3. How We Use Your Information</h2>
-    <h3>3.1 Local Storage</h3>
-    <p>All your data, including intentions, user profile information, and preferences, is stored locally on your device using Apple's CloudKit and SwiftData. This data is synced across your devices using your Apple ID, but we do not have access to it.</p>
+    <h3>3.1 Local Storage via iCloud</h3>
+    <p>All your content stays in iCloud. Your data, including intentions, user profile information, and preferences, is stored locally on your device and automatically synced across your Apple devices using iCloud (powered by Apple's CloudKit and SwiftData). This data synchronization is managed entirely by Apple, and we do not have direct access to your iCloud data.</p>
 
-    <h3>3.2 AI Service</h3>
-    <p>When you enable AI-generated intentions, we send your user profile information to our backend service, which uses OpenAI's API to generate personalized intentions. This information is:</p>
+    <h3>3.2 Suggestion Features and Third-Party Data Sharing</h3>
+    <p>When you use features that generate suggestions for you (such as auto-suggested intentions, rephrasing, or personalized content), we may share your data with third-party services to provide these features. Specifically:</p>
     <ul>
-        <li>Sent only when generating intentions</li>
-        <li>Not stored on our servers</li>
-        <li>Processed by OpenAI according to their privacy policy</li>
-        <li>Used solely for the purpose of generating your intentions</li>
+        <li>Your user profile information and intention-related data may be sent to our backend service</li>
+        <li>Our backend service uses OpenAI's API to generate personalized suggestions</li>
+        <li>This information is sent only when you actively use suggestion features</li>
+        <li>Your data is not stored on our servers</li>
+        <li>Data sent to third parties is processed according to their privacy policies</li>
+        <li>This data is used solely for generating your personalized suggestions</li>
     </ul>
+    <p><strong>Important:</strong> Before using any suggestion features, you will be asked to agree to our Terms of Service and End User License Agreement, which includes consent for sharing your data with third-party services for this specific purpose.</p>
 
     <h2>4. Data Storage and Security</h2>
     <p>Your data is stored locally on your device and synced via Apple's CloudKit. We do not maintain servers that store your personal information. Our backend API:</p>
@@ -75,8 +78,8 @@
     <h2>5. Third-Party Services</h2>
     <p>We use the following third-party services:</p>
     <ul>
-        <li><strong>OpenAI:</strong> For AI-powered intention generation. Your data is subject to OpenAI's privacy policy when used for this purpose.</li>
-        <li><strong>Apple CloudKit:</strong> For syncing your data across devices. Your data is subject to Apple's privacy policy.</li>
+        <li><strong>Third-Party Content Generation Services:</strong> When you use suggestion features, your data may be sent to third-party services (such as OpenAI) to generate personalized content. Your data is subject to the third-party provider's privacy policy when used for this purpose. You must agree to share your data with these services before using suggestion features.</li>
+        <li><strong>Apple iCloud (CloudKit):</strong> For storing and syncing your data across your devices. Your data is subject to Apple's privacy policy.</li>
     </ul>
 
     <h2>6. Your Rights</h2>

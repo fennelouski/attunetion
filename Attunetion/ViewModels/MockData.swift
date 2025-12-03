@@ -138,7 +138,7 @@ struct MockData {
             aiGenerated: true
         ),
         MockIntention(
-            text: "Learn something new every day",
+            text: "Stay open to learning",
             scope: .week,
             date: Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date(),
             themeId: MockPresetThemes.minimal.id

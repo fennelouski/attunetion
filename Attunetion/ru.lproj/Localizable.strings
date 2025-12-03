@@ -1,0 +1,316 @@
+/* 
+  Localizable.strings
+  Attunetion
+
+  Created by Nathan Fennel on 12/2/25.
+*/
+
+/* General */
+"Attunetion" = "Attunetion";
+"Back" = "Назад";
+"Continue" = "Продолжить";
+"Done" = "Готово";
+"Close" = "Закрыть";
+"Cancel" = "Отмена";
+"Delete" = "Удалить";
+"Sort" = "Сортировать";
+"Search" = "Поиск";
+"Settings" = "Настройки";
+"Help" = "Помощь";
+"Permissions" = "Разрешения";
+"About" = "О приложении";
+
+/* IntentionsListView */
+"Set your first intention" = "Установите свое первое намерение";
+"Create a daily, weekly, or monthly intention to get started" = "Создайте ежедневное, еженедельное или ежемесячное намерение, чтобы начать";
+"Create Intention" = "Создать намерение";
+"How to create good intentions" = "Как создавать хорошие намерения";
+"Current" = "Текущее";
+"AI" = "ИИ";
+"All Intentions" = "Все намерения";
+"Need help? Learn how to create great intentions" = "Нужна помощь? Узнайте, как создавать отличные намерения";
+
+/* SettingsView */
+"App Theme" = "Тема приложения";
+"Default Intention Theme" = "Тема намерения по умолчанию";
+"None" = "Нет";
+"Default Font" = "Шрифт по умолчанию";
+"System Default" = "Системный по умолчанию";
+"Appearance" = "Внешний вид";
+"Intention Frequency" = "Частота намерений";
+"How often you want to set intentions" = "Как часто вы хотите устанавливать намерения";
+"Intentions" = "Намерения";
+"Choose how often you'd like to set new intentions. This helps personalize your widget's placeholder text." = "Выберите, как часто вы хотите устанавливать новые намерения. Это поможет персонализировать текст-заполнитель вашего виджета.";
+"Reminders" = "Напоминания";
+"Notifications" = "Уведомления";
+"Configure how often and what types of reminders you receive." = "Настройте, как часто и какие типы напоминаний вы получаете.";
+"Suggested Intentions" = "Предлагаемые намерения";
+"Get personalized suggestions for your intentions" = "Получайте персонализированные предложения для ваших намерений";
+"Suggestions" = "Предложения";
+"Privacy Policy" = "Политика конфиденциальности";
+"End User License Agreement" = "Лицензионное соглашение конечного пользователя";
+"Terms of Service" = "Условия использования";
+"Delete All Data" = "Удалить все данные";
+"Export Data" = "Экспорт данных";
+"Show Onboarding" = "Показать обучение";
+"Learn how to use the app and get inspiration" = "Узнайте, как использовать приложение, и получите вдохновение";
+"Walk through the onboarding flow again to learn about features and get ideas for how to use the app." = "Пройдите обучение снова, чтобы узнать о функциях и получить идеи по использованию приложения.";
+"Enable Notifications" = "Включить уведомления";
+"Enable notifications to receive reminders about setting your intentions." = "Включите уведомления, чтобы получать напоминания об установке ваших намерений.";
+"Enabled" = "Включено";
+"Disabled" = "Отключено";
+"Not Set" = "Не установлено";
+"Unknown" = "Неизвестно";
+"You'll receive reminders based on your settings" = "Вы будете получать напоминания на основе ваших настроек";
+"Notifications are disabled in Settings" = "Уведомления отключены в настройках";
+"Enable notifications to get reminders" = "Включите уведомления, чтобы получать напоминания";
+"Notification status unknown" = "Статус уведомлений неизвестен";
+"This will permanently delete all your intentions, themes, preferences, and profile information. This action cannot be undone. Your data is stored locally and synced via iCloud, so it will be removed from all your devices." = "Это навсегда удалит все ваши намерения, темы, настройки и информацию профиля. Это действие нельзя отменить. Ваши данные хранятся локально и синхронизируются через iCloud, поэтому они будут удалены со всех ваших устройств.";
+"Open Settings" = "Открыть настройки";
+"Maybe Later" = "Может быть позже";
+"To receive reminders, please enable notifications in your device settings." = "Чтобы получать напоминания, пожалуйста, включите уведомления в настройках вашего устройства.";
+
+/* IntentionGuideView */
+"What Makes a Good Intention?" = "Что делает намерение хорошим?";
+"Intentions are personal commitments that guide your actions. They work best when they're:\n\n  • Specific and actionable\n  • Positive and meaningful to you\n  • Realistic for the timeframe\n  • Focused on what you can control" = "Намерения — это личные обязательства, которые направляют ваши действия. Они работают лучше всего, когда они:\n\n  • Конкретные и выполнимые\n  • Позитивные и значимые для вас\n  • Реалистичные для временных рамок\n  • Сосредоточены на том, что вы можете контролировать";
+"Set Your Monthly Intention" = "Установите свое ежемесячное намерение";
+"Think big picture. What do you want to focus on this month? This is your overarching theme that guides your weekly and daily intentions." = "Мыслите масштабно. На чем вы хотите сосредоточиться в этом месяце? Это ваша общая тема, которая направляет ваши еженедельные и ежедневные намерения.";
+"e.g., Build healthier habits" = "например, Создать более здоровые привычки";
+"Set Your Weekly Intention" = "Установите свое еженедельное намерение";
+"Break down your monthly goal into weekly actions. What specific step will you take this week?" = "Разбейте вашу ежемесячную цель на еженедельные действия. Какой конкретный шаг вы сделаете на этой неделе?";
+"e.g., Exercise 3 times this week" = "например, Тренироваться 3 раза на этой неделе";
+"Set Your Daily Intention" = "Установите свое ежедневное намерение";
+"Make it concrete and achievable today. What one thing will you do today to move toward your goals?" = "Сделайте его конкретным и достижимым сегодня. Какую одну вещь вы сделаете сегодня, чтобы продвинуться к своим целям?";
+"e.g., Go for a 20-minute walk" = "например, Прогуляться 20 минут";
+"You're All Set!" = "Все готово!";
+"You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones." = "Вы создали свои первые намерения! Они появятся на вашем главном экране и помогут вам оставаться сосредоточенным. Вы всегда можете добавить больше или отредактировать существующие.";
+"Good Example" = "Хороший пример";
+"Too Vague" = "Слишком расплывчато";
+"Enter your intention..." = "Введите ваше намерение...";
+"Get Started" = "Начать";
+"Create Intentions" = "Создать намерения";
+"Getting Started" = "Начало работы";
+
+/* Intention Scopes */
+"Day" = "День";
+"Week" = "Неделя";
+"Month" = "Месяц";
+"Daily" = "Ежедневно";
+"Weekly" = "Еженедельно";
+"Monthly" = "Ежемесячно";
+
+/* Examples */
+"Practice gratitude by writing 3 things I'm thankful for each day" = "Практиковать благодарность, записывая 3 вещи, за которые я благодарен каждый день";
+"Exercise for 30 minutes, 3 times this week" = "Тренироваться 30 минут, 3 раза на этой неделе";
+"Read for 20 minutes before bed each night" = "Читать 20 минут перед сном каждый вечер";
+"Call or text one friend or family member daily" = "Звонить или писать одному другу или члену семьи ежедневно";
+"Spend 10 minutes each morning planning my day" = "Тратить 10 минут каждое утро на планирование своего дня";
+"Complete one important task before checking email" = "Выполнить одну важную задачу перед проверкой электронной почты";
+"Take a 15-minute walk outside during lunch break" = "Прогуляться 15 минут на улице во время обеденного перерыва";
+"Write in my journal for 5 minutes each evening" = "Писать в дневнике 5 минут каждый вечер";
+"Do one act of kindness for someone else today" = "Сделать одно доброе дело для кого-то другого сегодня";
+"Spend quality time with my partner without phones" = "Провести качественное время с партнером без телефонов";
+"Learn something new for 15 minutes each day" = "Учить что-то новое 15 минут каждый день";
+"Practice deep breathing for 5 minutes when stressed" = "Практиковать глубокое дыхание 5 минут при стрессе";
+
+"Be happy" = "Быть счастливым";
+"Work harder" = "Работать усерднее";
+"Be better" = "Быть лучше";
+"Do more" = "Делать больше";
+"Change everything" = "Изменить все";
+"Fix my life" = "Исправить свою жизнь";
+"Stop being lazy" = "Перестать лениться";
+"Be perfect" = "Быть идеальным";
+"Never make mistakes" = "Никогда не совершать ошибок";
+"Always be positive" = "Всегда быть позитивным";
+"Have no stress" = "Не иметь стресса";
+"Be successful" = "Быть успешным";
+
+/* Sort Order */
+"Newest First" = "Сначала новые";
+"Oldest First" = "Сначала старые";
+"By Scope" = "По охвату";
+
+/* Themes */
+"Calm and peaceful" = "Спокойный и мирный";
+"Warm and cozy" = "Теплый и уютный";
+"Cool and refreshing" = "Прохладный и освежающий";
+"Custom theme" = "Пользовательская тема";
+
+/* Notification Types */
+"Remind me to add an intention" = "Напомнить мне добавить намерение";
+"Show me my current intention" = "Показать мне мое текущее намерение";
+"Send encouragement" = "Отправить поддержку";
+"Time-based reminders" = "Напоминания по времени";
+"Get reminded when it's time to set a new intention" = "Получать напоминание, когда придет время установить новое намерение";
+"See your current intention throughout the day" = "Видеть свое текущее намерение в течение дня";
+"Receive uplifting messages to stay motivated" = "Получать вдохновляющие сообщения, чтобы оставаться мотивированным";
+"Reminders at specific times you choose" = "Напоминания в конкретное время, которое вы выберете";
+
+/* Notification Frequency */
+"Once a month" = "Раз в месяц";
+"Twice a month" = "Дважды в месяц";
+"Once a week" = "Раз в неделю";
+"Twice a week" = "Дважды в неделю";
+"Every other day" = "Через день";
+"Once a day" = "Раз в день";
+"Twice a day" = "Дважды в день";
+"Just a gentle monthly reminder" = "Просто мягкое ежемесячное напоминание";
+"A couple reminders each month" = "Пара напоминаний каждый месяц";
+"Weekly check-ins" = "Еженедельные проверки";
+"A few times each week" = "Несколько раз в неделю";
+"Regular reminders" = "Регулярные напоминания";
+"Daily reminders" = "Ежедневные напоминания";
+"Morning and evening reminders" = "Утренние и вечерние напоминания";
+
+/* Intention Frequency */
+"Daily" = "Ежедневно";
+"Weekly" = "Еженедельно";
+"Monthly" = "Ежемесячно";
+"Set a new intention each day" = "Устанавливать новое намерение каждый день";
+"Set a new intention each week" = "Устанавливать новое намерение каждую неделю";
+"Set a new intention each month" = "Устанавливать новое намерение каждый месяц";
+"Set your intention for today" = "Установите свое намерение на сегодня";
+"Set your intention for this week" = "Установите свое намерение на эту неделю";
+"Set your intention for this month" = "Установите свое намерение на этот месяц";
+
+/* Suggestions */
+"Build healthier habits" = "Создать более здоровые привычки";
+"Focus on personal growth" = "Сосредоточиться на личностном росте";
+"Strengthen relationships" = "Укрепить отношения";
+"Advance in my career" = "Продвинуться в карьере";
+"Practice mindfulness daily" = "Практиковать осознанность ежедневно";
+"Develop a new skill" = "Развить новый навык";
+"Improve work-life balance" = "Улучшить баланс между работой и личной жизнью";
+"Save money for a goal" = "Накопить деньги на цель";
+"Read more books" = "Читать больше книг";
+"Spend quality time with family" = "Проводить качественное время с семьей";
+"Start a new hobby" = "Начать новое хобби";
+"Reduce stress and anxiety" = "Снизить стресс и тревожность";
+"Eat more nutritious meals" = "Есть более питательную пищу";
+"Get better sleep" = "Улучшить сон";
+"Learn something new" = "Узнать что-то новое";
+"Volunteer or give back" = "Заниматься волонтерством или помогать другим";
+"Travel to new places" = "Путешествовать в новые места";
+"Build better routines" = "Создать лучшие рутины";
+"Focus on mental health" = "Сосредоточиться на психическом здоровье";
+"Achieve a fitness goal" = "Достичь фитнес-цели";
+"Improve communication" = "Улучшить общение";
+"Declutter and organize" = "Расхламить и организовать";
+"Practice self-care" = "Практиковать заботу о себе";
+"Set financial goals" = "Установить финансовые цели";
+"Build confidence" = "Развить уверенность";
+"Learn to cook" = "Научиться готовить";
+"Spend time in nature" = "Проводить время на природе";
+"Reduce screen time" = "Сократить время перед экраном";
+"Practice patience" = "Практиковать терпение";
+"Be more present" = "Быть более присутствующим";
+"Express gratitude daily" = "Выражать благодарность ежедневно";
+"Take more breaks" = "Делать больше перерывов";
+"Learn a language" = "Выучить язык";
+"Start journaling" = "Начать вести дневник";
+"Build better habits" = "Создать лучшие привычки";
+"Focus on creativity" = "Сосредоточиться на творчестве";
+"Improve posture" = "Улучшить осанку";
+"Drink more water" = "Пить больше воды";
+"Practice deep breathing" = "Практиковать глубокое дыхание";
+"Set boundaries" = "Установить границы";
+"Be kinder to myself" = "Быть добрее к себе";
+"Focus on what matters" = "Сосредоточиться на том, что важно";
+"Reduce procrastination" = "Снизить прокрастинацию";
+"Build resilience" = "Развить устойчивость";
+"Practice forgiveness" = "Практиковать прощение";
+"Be more organized" = "Быть более организованным";
+"Focus on solutions" = "Сосредоточиться на решениях";
+"Celebrate small wins" = "Праздновать маленькие победы";
+"Learn from mistakes" = "Учиться на ошибках";
+"Be more intentional" = "Быть более осознанным";
+
+"Make time for regular exercise" = "Найти время для регулярных упражнений";
+"Connect with friends and loved ones" = "Общаться с друзьями и близкими";
+"Focus on completing important tasks" = "Сосредоточиться на выполнении важных задач";
+"Dedicate time to learning" = "Посвятить время обучению";
+"Practice gratitude regularly" = "Практиковать благодарность регулярно";
+"Cook nourishing meals" = "Готовить питательные блюда";
+"Make reading a priority" = "Сделать чтение приоритетом";
+"Take daily walks" = "Совершать ежедневные прогулки";
+"Reach out to family" = "Связаться с семьей";
+"Practice acts of kindness" = "Практиковать добрые дела";
+"Make meditation part of my routine" = "Сделать медитацию частью моей рутины";
+"Write in my journal" = "Писать в дневнике";
+"Try new recipes" = "Пробовать новые рецепты";
+"Spend time outdoors" = "Проводить время на свежем воздухе";
+"Complete work projects thoughtfully" = "Вдумчиво завершать рабочие проекты";
+"Engage with my hobbies" = "Заниматься своими хобби";
+"Prioritize restful sleep" = "Приоритезировать полноценный сон";
+"Be mindful of social media use" = "Осознанно использовать социальные сети";
+"Express creativity" = "Выражать творчество";
+"Spend quality time with my partner" = "Проводить качественное время с партнером";
+"Declutter and organize my space" = "Расхламить и организовать свое пространство";
+"Plan nourishing meals" = "Планировать питательные блюда";
+"Move my body regularly" = "Регулярно двигаться";
+"Read for enjoyment" = "Читать для удовольствия";
+"Take regular breaks" = "Делать регулярные перерывы";
+"Practice mindfulness" = "Практиковать осознанность";
+"Do things that bring me joy" = "Делать вещи, которые приносят мне радость";
+"Focus on meaningful goals" = "Сосредоточиться на значимых целях";
+"Prioritize self-care" = "Приоритезировать заботу о себе";
+"Connect with the natural world" = "Соединиться с миром природы";
+"Show kindness to others" = "Проявлять доброту к другим";
+"Be fully present in conversations" = "Быть полностью присутствующим в разговорах";
+"Capture meaningful moments" = "Запечатлеть значимые моменты";
+"Cultivate gratitude" = "Культивировать благодарность";
+"Stay active" = "Оставаться активным";
+"Carve out time for myself" = "Выделить время для себя";
+"Help others" = "Помогать другим";
+"Develop new skills" = "Развивать новые навыки";
+"Manage stress mindfully" = "Осознанно управлять стрессом";
+"Be compassionate with myself" = "Быть сострадательным к себе";
+"Focus on progress over perfection" = "Сосредоточиться на прогрессе, а не на совершенстве";
+"Celebrate small achievements" = "Праздновать небольшие достижения";
+"Reflect and learn from experiences" = "Размышлять и учиться на опыте";
+"Use my time intentionally" = "Использовать свое время осознанно";
+"Find balance in my life" = "Найти баланс в своей жизни";
+
+"Go for a 20-minute walk" = "Прогуляться 20 минут";
+"Call a family member" = "Позвонить члену семьи";
+"Read for 15 minutes" = "Почитать 15 минут";
+"Take 5 minutes to meditate" = "Помедитировать 5 минут";
+"Write 3 things I'm grateful for" = "Записать 3 вещи, за которые я благодарен";
+"Drink 8 glasses of water" = "Выпить 8 стаканов воды";
+"Eat 2 servings of vegetables" = "Съесть 2 порции овощей";
+"Take 3 deep breaths when stressed" = "Сделать 3 глубоких вдоха при стрессе";
+"Spend 10 minutes outside" = "Провести 10 минут на улице";
+"Do one thing I've been putting off" = "Сделать одно дело, которое я откладывал";
+"Practice a hobby for 30 minutes" = "Заняться хобби 30 минут";
+"Connect with a friend" = "Связаться с другом";
+"Do something creative" = "Сделать что-то творческое";
+"Exercise for 20 minutes" = "Потренироваться 20 минут";
+"Get 8 hours of sleep" = "Поспать 8 часов";
+"Limit phone use to essentials" = "Ограничить использование телефона самым необходимым";
+"Cook a healthy meal" = "Приготовить здоровую еду";
+"Be present in the moment" = "Быть в моменте";
+"Express gratitude" = "Выразить благодарность";
+"Take breaks when needed" = "Делать перерывы при необходимости";
+"Do something fun" = "Сделать что-то веселое";
+"Be kind to myself" = "Быть добрым к себе";
+"Focus on one goal" = "Сосредоточиться на одной цели";
+"Complete one important task" = "Выполнить одну важную задачу";
+"Do something active" = "Сделать что-то активное";
+"Spend quality time with someone" = "Провести качественное время с кем-то";
+"Practice a skill" = "Попрактиковать навык";
+"Reduce stress" = "Снизить стресс";
+"Be intentional" = "Быть осознанным";
+"Celebrate a small win" = "Отпраздновать маленькую победу";
+"Learn from today" = "Извлечь урок из сегодняшнего дня";
+"Practice balance" = "Практиковать баланс";
+"Do something I enjoy" = "Сделать что-то, что мне нравится";
+"Be present" = "Быть присутствующим";
+"Practice gratitude" = "Практиковать благодарность";
+"Take care of myself" = "Позаботиться о себе";
+"Focus on progress" = "Сосредоточиться на прогрессе";
+"Be patient" = "Быть терпеливым";
+"Practice kindness" = "Практиковать доброту";
+"Be mindful" = "Быть осознанным";
+"Do my best" = "Сделать все возможное";
+"Be present today" = "Быть присутствующим сегодня";

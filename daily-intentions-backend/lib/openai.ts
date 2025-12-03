@@ -101,7 +101,7 @@ export async function rephraseIntention(
   rephrasedText: string;
   preservedMeaning: boolean;
 }> {
-  const systemPrompt = `You are a writing assistant. Rephrase the given intention text to make it fresh and inspiring while preserving the core meaning. Return ONLY a valid JSON object with these exact keys: rephrasedText (the new phrasing, 5-15 words), and preservedMeaning (boolean). Do not include any markdown formatting or code blocks.`;
+  const systemPrompt = `You are a writing assistant. Rephrase the given intention text to make it fresh and inspiring while preserving the core meaning. Remember: intentions are about HOW you want to be or show up, not specific measurable goals. Focus on being/doing rather than achieving/completing. Return ONLY a valid JSON object with these exact keys: rephrasedText (the new phrasing, 5-15 words), and preservedMeaning (boolean). Do not include any markdown formatting or code blocks.`;
 
   let userPrompt = `Rephrase this intention: "${intentionText}"`;
   
@@ -148,7 +148,7 @@ export async function generateMonthlyIntention(
   intention: string;
   reasoning: string;
 }> {
-  const systemPrompt = `You are a personal growth advisor. Analyze patterns in previous monthly intentions and generate a new intention that builds on those themes. Return ONLY a valid JSON object with these exact keys: intention (5-15 words), and reasoning (one sentence explaining how it builds on previous themes). Do not include any markdown formatting or code blocks.`;
+  const systemPrompt = `You are a personal growth advisor. Analyze patterns in previous monthly intentions and generate a new intention that builds on those themes. Remember: intentions are about HOW you want to be or show up, not specific measurable goals. Focus on being/doing rather than achieving/completing. Return ONLY a valid JSON object with these exact keys: intention (5-15 words), and reasoning (one sentence explaining how it builds on previous themes). Do not include any markdown formatting or code blocks.`;
 
   const intentionsList = previousIntentions
     .map((int) => `${int.month}: ${int.text}`)

@@ -1,0 +1,316 @@
+/* 
+  Localizable.strings
+  Attunetion
+
+  Created by Nathan Fennel on 12/2/25.
+*/
+
+/* General */
+"Attunetion" = "Attunetion";
+"Back" = "뒤로";
+"Continue" = "계속";
+"Done" = "완료";
+"Close" = "닫기";
+"Cancel" = "취소";
+"Delete" = "삭제";
+"Sort" = "정렬";
+"Search" = "검색";
+"Settings" = "설정";
+"Help" = "도움말";
+"Permissions" = "권한";
+"About" = "정보";
+
+/* IntentionsListView */
+"Set your first intention" = "첫 번째 의도를 설정하세요";
+"Create a daily, weekly, or monthly intention to get started" = "시작하려면 일일, 주간 또는 월간 의도를 만드세요";
+"Create Intention" = "의도 만들기";
+"How to create good intentions" = "좋은 의도를 만드는 방법";
+"Current" = "현재";
+"AI" = "AI";
+"All Intentions" = "모든 의도";
+"Need help? Learn how to create great intentions" = "도움이 필요하세요? 훌륭한 의도를 만드는 법을 배우세요";
+
+/* SettingsView */
+"App Theme" = "앱 테마";
+"Default Intention Theme" = "기본 의도 테마";
+"None" = "없음";
+"Default Font" = "기본 글꼴";
+"System Default" = "시스템 기본값";
+"Appearance" = "모양";
+"Intention Frequency" = "의도 빈도";
+"How often you want to set intentions" = "의도를 얼마나 자주 설정하고 싶으신가요";
+"Intentions" = "의도";
+"Choose how often you'd like to set new intentions. This helps personalize your widget's placeholder text." = "새로운 의도를 얼마나 자주 설정할지 선택하세요. 위젯의 자리 표시자 텍스트를 개인화하는 데 도움이 됩니다.";
+"Reminders" = "미리 알림";
+"Notifications" = "알림";
+"Configure how often and what types of reminders you receive." = "알림을 받는 빈도와 유형을 구성하세요.";
+"Suggested Intentions" = "제안된 의도";
+"Get personalized suggestions for your intentions" = "의도에 대한 맞춤 제안 받기";
+"Suggestions" = "제안";
+"Privacy Policy" = "개인정보 처리방침";
+"End User License Agreement" = "최종 사용자 라이선스 계약";
+"Terms of Service" = "서비스 약관";
+"Delete All Data" = "모든 데이터 삭제";
+"Export Data" = "데이터 내보내기";
+"Show Onboarding" = "온보딩 표시";
+"Learn how to use the app and get inspiration" = "앱 사용법을 배우고 영감을 얻으세요";
+"Walk through the onboarding flow again to learn about features and get ideas for how to use the app." = "온보딩 과정을 다시 살펴보며 기능에 대해 알아보고 앱 사용 아이디어를 얻으세요.";
+"Enable Notifications" = "알림 활성화";
+"Enable notifications to receive reminders about setting your intentions." = "의도 설정에 대한 미리 알림을 받으려면 알림을 활성화하세요.";
+"Enabled" = "활성화됨";
+"Disabled" = "비활성화됨";
+"Not Set" = "설정되지 않음";
+"Unknown" = "알 수 없음";
+"You'll receive reminders based on your settings" = "설정에 따라 미리 알림을 받게 됩니다";
+"Notifications are disabled in Settings" = "설정에서 알림이 비활성화되었습니다";
+"Enable notifications to get reminders" = "미리 알림을 받으려면 알림을 활성화하세요";
+"Notification status unknown" = "알림 상태 알 수 없음";
+"This will permanently delete all your intentions, themes, preferences, and profile information. This action cannot be undone. Your data is stored locally and synced via iCloud, so it will be removed from all your devices." = "이 작업은 모든 의도, 테마, 환경 설정 및 프로필 정보를 영구적으로 삭제합니다. 이 작업은 취소할 수 없습니다. 데이터는 로컬에 저장되고 iCloud를 통해 동기화되므로 모든 기기에서 제거됩니다.";
+"Open Settings" = "설정 열기";
+"Maybe Later" = "나중에";
+"To receive reminders, please enable notifications in your device settings." = "미리 알림을 받으려면 기기 설정에서 알림을 활성화하세요.";
+
+/* IntentionGuideView */
+"What Makes a Good Intention?" = "좋은 의도란 무엇인가요?";
+"Intentions are personal commitments that guide your actions. They work best when they're:\n\n  • Specific and actionable\n  • Positive and meaningful to you\n  • Realistic for the timeframe\n  • Focused on what you can control" = "의도는 행동을 안내하는 개인적인 약속입니다. 다음과 같을 때 가장 효과적입니다:\n\n  • 구체적이고 실행 가능함\n  • 긍정적이고 본인에게 의미가 있음\n  • 기간 내에 현실적임\n  • 통제할 수 있는 것에 집중함";
+"Set Your Monthly Intention" = "월간 의도 설정";
+"Think big picture. What do you want to focus on this month? This is your overarching theme that guides your weekly and daily intentions." = "큰 그림을 생각하세요. 이번 달에는 무엇에 집중하고 싶으신가요? 이것은 주간 및 일일 의도를 안내하는 포괄적인 주제입니다.";
+"e.g., Build healthier habits" = "예: 더 건강한 습관 만들기";
+"Set Your Weekly Intention" = "주간 의도 설정";
+"Break down your monthly goal into weekly actions. What specific step will you take this week?" = "월간 목표를 주간 행동으로 나누세요. 이번 주에는 어떤 구체적인 단계를 밟으시겠습니까?";
+"e.g., Exercise 3 times this week" = "예: 이번 주에 3번 운동하기";
+"Set Your Daily Intention" = "일일 의도 설정";
+"Make it concrete and achievable today. What one thing will you do today to move toward your goals?" = "오늘 구체적이고 달성 가능하게 만드세요. 목표를 향해 나아가기 위해 오늘 어떤 한 가지 일을 하시겠습니까?";
+"e.g., Go for a 20-minute walk" = "예: 20분 산책하기";
+"You're All Set!" = "준비 완료!";
+"You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones." = "첫 번째 의도를 만들었습니다! 홈 화면에 나타나 집중력을 유지하는 데 도움이 됩니다. 언제든지 더 추가하거나 기존 의도를 편집할 수 있습니다.";
+"Good Example" = "좋은 예";
+"Too Vague" = "너무 모호함";
+"Enter your intention..." = "의도를 입력하세요...";
+"Get Started" = "시작하기";
+"Create Intentions" = "의도 만들기";
+"Getting Started" = "시작하기";
+
+/* Intention Scopes */
+"Day" = "일";
+"Week" = "주";
+"Month" = "월";
+"Daily" = "매일";
+"Weekly" = "매주";
+"Monthly" = "매월";
+
+/* Examples */
+"Practice gratitude by writing 3 things I'm thankful for each day" = "매일 감사한 일 3가지를 적어 감사 연습하기";
+"Exercise for 30 minutes, 3 times this week" = "이번 주에 3번, 30분씩 운동하기";
+"Read for 20 minutes before bed each night" = "매일 밤 잠들기 전 20분 독서하기";
+"Call or text one friend or family member daily" = "매일 친구나 가족 한 명에게 전화하거나 문자하기";
+"Spend 10 minutes each morning planning my day" = "매일 아침 10분 동안 하루 계획하기";
+"Complete one important task before checking email" = "이메일 확인 전 중요한 업무 하나 완료하기";
+"Take a 15-minute walk outside during lunch break" = "점심 시간에 15분 동안 밖에서 산책하기";
+"Write in my journal for 5 minutes each evening" = "매일 저녁 5분 동안 일기 쓰기";
+"Do one act of kindness for someone else today" = "오늘 다른 사람을 위해 친절한 행동 하나 하기";
+"Spend quality time with my partner without phones" = "휴대폰 없이 파트너와 좋은 시간 보내기";
+"Learn something new for 15 minutes each day" = "매일 15분 동안 새로운 것 배우기";
+"Practice deep breathing for 5 minutes when stressed" = "스트레스 받을 때 5분 동안 심호흡 연습하기";
+
+"Be happy" = "행복하기";
+"Work harder" = "더 열심히 일하기";
+"Be better" = "더 나아지기";
+"Do more" = "더 많이 하기";
+"Change everything" = "모든 것을 바꾸기";
+"Fix my life" = "내 인생 고치기";
+"Stop being lazy" = "게으름 피우지 않기";
+"Be perfect" = "완벽하기";
+"Never make mistakes" = "실수하지 않기";
+"Always be positive" = "항상 긍정적이기";
+"Have no stress" = "스트레스 받지 않기";
+"Be successful" = "성공하기";
+
+/* Sort Order */
+"Newest First" = "최신순";
+"Oldest First" = "오래된순";
+"By Scope" = "범위별";
+
+/* Themes */
+"Calm and peaceful" = "차분하고 평화로움";
+"Warm and cozy" = "따뜻하고 아늑함";
+"Cool and refreshing" = "시원하고 상쾌함";
+"Custom theme" = "사용자 지정 테마";
+
+/* Notification Types */
+"Remind me to add an intention" = "의도 추가 알림";
+"Show me my current intention" = "현재 의도 보기";
+"Send encouragement" = "격려 보내기";
+"Time-based reminders" = "시간 기반 알림";
+"Get reminded when it's time to set a new intention" = "새로운 의도를 설정할 시간이 되면 알림 받기";
+"See your current intention throughout the day" = "하루 종일 현재 의도 확인하기";
+"Receive uplifting messages to stay motivated" = "동기 부여를 유지하기 위해 희망적인 메시지 받기";
+"Reminders at specific times you choose" = "선택한 특정 시간에 알림";
+
+/* Notification Frequency */
+"Once a month" = "한 달에 한 번";
+"Twice a month" = "한 달에 두 번";
+"Once a week" = "일주일에 한 번";
+"Twice a week" = "일주일에 두 번";
+"Every other day" = "이틀에 한 번";
+"Once a day" = "하루에 한 번";
+"Twice a day" = "하루에 두 번";
+"Just a gentle monthly reminder" = "부드러운 월간 알림만";
+"A couple reminders each month" = "매달 몇 번의 알림";
+"Weekly check-ins" = "주간 체크인";
+"A few times each week" = "매주 몇 번";
+"Regular reminders" = "정기적인 알림";
+"Daily reminders" = "일일 알림";
+"Morning and evening reminders" = "아침 및 저녁 알림";
+
+/* Intention Frequency */
+"Daily" = "매일";
+"Weekly" = "매주";
+"Monthly" = "매월";
+"Set a new intention each day" = "매일 새로운 의도 설정";
+"Set a new intention each week" = "매주 새로운 의도 설정";
+"Set a new intention each month" = "매월 새로운 의도 설정";
+"Set your intention for today" = "오늘의 의도 설정";
+"Set your intention for this week" = "이번 주의 의도 설정";
+"Set your intention for this month" = "이번 달의 의도 설정";
+
+/* Suggestions */
+"Build healthier habits" = "더 건강한 습관 만들기";
+"Focus on personal growth" = "개인적 성장에 집중하기";
+"Strengthen relationships" = "관계 강화하기";
+"Advance in my career" = "경력 발전시키기";
+"Practice mindfulness daily" = "매일 마음챙김 연습하기";
+"Develop a new skill" = "새로운 기술 개발하기";
+"Improve work-life balance" = "일과 삶의 균형 개선하기";
+"Save money for a goal" = "목표를 위해 돈 모으기";
+"Read more books" = "책 더 많이 읽기";
+"Spend quality time with family" = "가족과 좋은 시간 보내기";
+"Start a new hobby" = "새로운 취미 시작하기";
+"Reduce stress and anxiety" = "스트레스와 불안 줄이기";
+"Eat more nutritious meals" = "더 영양가 있는 식사하기";
+"Get better sleep" = "더 잘 자기";
+"Learn something new" = "새로운 것 배우기";
+"Volunteer or give back" = "봉사하거나 환원하기";
+"Travel to new places" = "새로운 곳으로 여행하기";
+"Build better routines" = "더 나은 루틴 만들기";
+"Focus on mental health" = "정신 건강에 집중하기";
+"Achieve a fitness goal" = "피트니스 목표 달성하기";
+"Improve communication" = "의사소통 개선하기";
+"Declutter and organize" = "정리 정돈하기";
+"Practice self-care" = "자기 관리 실천하기";
+"Set financial goals" = "재정 목표 설정하기";
+"Build confidence" = "자신감 키우기";
+"Learn to cook" = "요리 배우기";
+"Spend time in nature" = "자연에서 시간 보내기";
+"Reduce screen time" = "스크린 타임 줄이기";
+"Practice patience" = "인내심 기르기";
+"Be more present" = "더 현재에 집중하기";
+"Express gratitude daily" = "매일 감사 표현하기";
+"Take more breaks" = "더 자주 휴식 취하기";
+"Learn a language" = "언어 배우기";
+"Start journaling" = "일기 쓰기 시작하기";
+"Build better habits" = "더 나은 습관 만들기";
+"Focus on creativity" = "창의성에 집중하기";
+"Improve posture" = "자세 개선하기";
+"Drink more water" = "물 더 많이 마시기";
+"Practice deep breathing" = "심호흡 연습하기";
+"Set boundaries" = "경계 설정하기";
+"Be kinder to myself" = "나 자신에게 더 친절하기";
+"Focus on what matters" = "중요한 것에 집중하기";
+"Reduce procrastination" = "미루는 습관 줄이기";
+"Build resilience" = "회복 탄력성 기르기";
+"Practice forgiveness" = "용서 연습하기";
+"Be more organized" = "더 체계적으로 되기";
+"Focus on solutions" = "해결책에 집중하기";
+"Celebrate small wins" = "작은 승리 축하하기";
+"Learn from mistakes" = "실수에서 배우기";
+"Be more intentional" = "더 의도적으로 행동하기";
+
+"Make time for regular exercise" = "규칙적인 운동 시간 만들기";
+"Connect with friends and loved ones" = "친구 및 사랑하는 사람들과 연결하기";
+"Focus on completing important tasks" = "중요한 업무 완료에 집중하기";
+"Dedicate time to learning" = "학습에 시간 투자하기";
+"Practice gratitude regularly" = "정기적으로 감사 연습하기";
+"Cook nourishing meals" = "영양가 있는 식사 요리하기";
+"Make reading a priority" = "독서 우선순위 두기";
+"Take daily walks" = "매일 산책하기";
+"Reach out to family" = "가족에게 연락하기";
+"Practice acts of kindness" = "친절한 행동 실천하기";
+"Make meditation part of my routine" = "명상을 루틴의 일부로 만들기";
+"Write in my journal" = "일기 쓰기";
+"Try new recipes" = "새로운 레시피 시도하기";
+"Spend time outdoors" = "야외에서 시간 보내기";
+"Complete work projects thoughtfully" = "신중하게 업무 프로젝트 완료하기";
+"Engage with my hobbies" = "취미 활동하기";
+"Prioritize restful sleep" = "편안한 수면 우선시하기";
+"Be mindful of social media use" = "소셜 미디어 사용 주의하기";
+"Express creativity" = "창의성 표현하기";
+"Spend quality time with my partner" = "파트너와 좋은 시간 보내기";
+"Declutter and organize my space" = "내 공간 정리 정돈하기";
+"Plan nourishing meals" = "영양가 있는 식사 계획하기";
+"Move my body regularly" = "규칙적으로 몸 움직이기";
+"Read for enjoyment" = "즐거움을 위해 독서하기";
+"Take regular breaks" = "정기적으로 휴식 취하기";
+"Practice mindfulness" = "마음챙김 연습하기";
+"Do things that bring me joy" = "나에게 기쁨을 주는 일 하기";
+"Focus on meaningful goals" = "의미 있는 목표에 집중하기";
+"Prioritize self-care" = "자기 관리 우선시하기";
+"Connect with the natural world" = "자연 세계와 연결하기";
+"Show kindness to others" = "다른 사람에게 친절 베풀기";
+"Be fully present in conversations" = "대화에 온전히 집중하기";
+"Capture meaningful moments" = "의미 있는 순간 포착하기";
+"Cultivate gratitude" = "감사하는 마음 기르기";
+"Stay active" = "활동적으로 지내기";
+"Carve out time for myself" = "나를 위한 시간 만들기";
+"Help others" = "다른 사람 돕기";
+"Develop new skills" = "새로운 기술 개발하기";
+"Manage stress mindfully" = "마음챙김으로 스트레스 관리하기";
+"Be compassionate with myself" = "나 자신에게 연민 가지기";
+"Focus on progress over perfection" = "완벽함보다 진전에 집중하기";
+"Celebrate small achievements" = "작은 성취 축하하기";
+"Reflect and learn from experiences" = "경험을 반성하고 배우기";
+"Use my time intentionally" = "의도적으로 시간 사용하기";
+"Find balance in my life" = "삶의 균형 찾기";
+
+"Go for a 20-minute walk" = "20분 산책하기";
+"Call a family member" = "가족에게 전화하기";
+"Read for 15 minutes" = "15분 독서하기";
+"Take 5 minutes to meditate" = "5분 명상하기";
+"Write 3 things I'm grateful for" = "감사한 일 3가지 적기";
+"Drink 8 glasses of water" = "물 8잔 마시기";
+"Eat 2 servings of vegetables" = "채소 2인분 먹기";
+"Take 3 deep breaths when stressed" = "스트레스 받을 때 심호흡 3번 하기";
+"Spend 10 minutes outside" = "10분 동안 밖에 있기";
+"Do one thing I've been putting off" = "미루던 일 하나 하기";
+"Practice a hobby for 30 minutes" = "30분 동안 취미 활동하기";
+"Connect with a friend" = "친구와 연락하기";
+"Do something creative" = "창의적인 일 하기";
+"Exercise for 20 minutes" = "20분 운동하기";
+"Get 8 hours of sleep" = "8시간 자기";
+"Limit phone use to essentials" = "휴대폰 사용을 필수적인 것으로 제한하기";
+"Cook a healthy meal" = "건강한 식사 요리하기";
+"Be present in the moment" = "현재 순간에 집중하기";
+"Express gratitude" = "감사 표현하기";
+"Take breaks when needed" = "필요할 때 휴식 취하기";
+"Do something fun" = "재미있는 일 하기";
+"Be kind to myself" = "나 자신에게 친절하기";
+"Focus on one goal" = "하나의 목표에 집중하기";
+"Complete one important task" = "중요한 업무 하나 완료하기";
+"Do something active" = "활동적인 일 하기";
+"Spend quality time with someone" = "누군가와 좋은 시간 보내기";
+"Practice a skill" = "기술 연습하기";
+"Reduce stress" = "스트레스 줄이기";
+"Be intentional" = "의도적으로 행동하기";
+"Celebrate a small win" = "작은 승리 축하하기";
+"Learn from today" = "오늘 하루에서 배우기";
+"Practice balance" = "균형 연습하기";
+"Do something I enjoy" = "내가 즐기는 일 하기";
+"Be present" = "현재에 집중하기";
+"Practice gratitude" = "감사 연습하기";
+"Take care of myself" = "나 자신 돌보기";
+"Focus on progress" = "진전에 집중하기";
+"Be patient" = "인내심 갖기";
+"Practice kindness" = "친절 연습하기";
+"Be mindful" = "마음 챙기기";
+"Do my best" = "최선 다하기";
+"Be present today" = "오늘 현재에 집중하기";

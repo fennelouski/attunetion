@@ -18,26 +18,26 @@ enum NotificationType: String, Codable, CaseIterable {
     var displayName: String {
         switch self {
         case .reminderToAdd:
-            return "Remind me to add an intention"
+            return String(localized: "Remind me to add an intention")
         case .reminderOfIntention:
-            return "Show me my current intention"
+            return String(localized: "Show me my current intention")
         case .encouragement:
-            return "Send encouragement"
+            return String(localized: "Send encouragement")
         case .timeOfDay:
-            return "Time-based reminders"
+            return String(localized: "Time-based reminders")
         }
     }
     
     var description: String {
         switch self {
         case .reminderToAdd:
-            return "Get reminded when it's time to set a new intention"
+            return String(localized: "Get reminded when it's time to set a new intention")
         case .reminderOfIntention:
-            return "See your current intention throughout the day"
+            return String(localized: "See your current intention throughout the day")
         case .encouragement:
-            return "Receive uplifting messages to stay motivated"
+            return String(localized: "Receive uplifting messages to stay motivated")
         case .timeOfDay:
-            return "Reminders at specific times you choose"
+            return String(localized: "Reminders at specific times you choose")
         }
     }
 }
@@ -55,38 +55,38 @@ enum NotificationFrequency: Int, Codable, CaseIterable {
     var displayName: String {
         switch self {
         case .oncePerMonth:
-            return "Once a month"
+            return String(localized: "Once a month")
         case .twicePerMonth:
-            return "Twice a month"
+            return String(localized: "Twice a month")
         case .oncePerWeek:
-            return "Once a week"
+            return String(localized: "Once a week")
         case .twicePerWeek:
-            return "Twice a week"
+            return String(localized: "Twice a week")
         case .everyOtherDay:
-            return "Every other day"
+            return String(localized: "Every other day")
         case .daily:
-            return "Once a day"
+            return String(localized: "Once a day")
         case .twiceDaily:
-            return "Twice a day"
+            return String(localized: "Twice a day")
         }
     }
     
     var description: String {
         switch self {
         case .oncePerMonth:
-            return "Just a gentle monthly reminder"
+            return String(localized: "Just a gentle monthly reminder")
         case .twicePerMonth:
-            return "A couple reminders each month"
+            return String(localized: "A couple reminders each month")
         case .oncePerWeek:
-            return "Weekly check-ins"
+            return String(localized: "Weekly check-ins")
         case .twicePerWeek:
-            return "A few times each week"
+            return String(localized: "A few times each week")
         case .everyOtherDay:
-            return "Regular reminders"
+            return String(localized: "Regular reminders")
         case .daily:
-            return "Daily reminders"
+            return String(localized: "Daily reminders")
         case .twiceDaily:
-            return "Morning and evening reminders"
+            return String(localized: "Morning and evening reminders")
         }
     }
 }
@@ -177,33 +177,33 @@ enum IntentionFrequency: String, Codable, CaseIterable {
     var displayName: String {
         switch self {
         case .daily:
-            return "Daily"
+            return String(localized: "Daily")
         case .weekly:
-            return "Weekly"
+            return String(localized: "Weekly")
         case .monthly:
-            return "Monthly"
+            return String(localized: "Monthly")
         }
     }
     
     var description: String {
         switch self {
         case .daily:
-            return "Set a new intention each day"
+            return String(localized: "Set a new intention each day")
         case .weekly:
-            return "Set a new intention each week"
+            return String(localized: "Set a new intention each week")
         case .monthly:
-            return "Set a new intention each month"
+            return String(localized: "Set a new intention each month")
         }
     }
     
     var placeholderText: String {
         switch self {
         case .daily:
-            return "Set your intention for today"
+            return String(localized: "Set your intention for today")
         case .weekly:
-            return "Set your intention for this week"
+            return String(localized: "Set your intention for this week")
         case .monthly:
-            return "Set your intention for this month"
+            return String(localized: "Set your intention for this month")
         }
     }
 }

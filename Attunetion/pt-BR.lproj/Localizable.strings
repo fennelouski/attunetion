@@ -1,0 +1,316 @@
+/* 
+  Localizable.strings
+  Attunetion
+
+  Created by Nathan Fennel on 12/2/25.
+*/
+
+/* General */
+"Attunetion" = "Attunetion";
+"Back" = "Voltar";
+"Continue" = "Continuar";
+"Done" = "Concluído";
+"Close" = "Fechar";
+"Cancel" = "Cancelar";
+"Delete" = "Excluir";
+"Sort" = "Ordenar";
+"Search" = "Buscar";
+"Settings" = "Ajustes";
+"Help" = "Ajuda";
+"Permissions" = "Permissões";
+"About" = "Sobre";
+
+/* IntentionsListView */
+"Set your first intention" = "Defina sua primeira intenção";
+"Create a daily, weekly, or monthly intention to get started" = "Crie uma intenção diária, semanal ou mensal para começar";
+"Create Intention" = "Criar Intenção";
+"How to create good intentions" = "Como criar boas intenções";
+"Current" = "Atual";
+"AI" = "IA";
+"All Intentions" = "Todas as Intenções";
+"Need help? Learn how to create great intentions" = "Precisa de ajuda? Aprenda a criar ótimas intenções";
+
+/* SettingsView */
+"App Theme" = "Tema do App";
+"Default Intention Theme" = "Tema de Intenção Padrão";
+"None" = "Nenhum";
+"Default Font" = "Fonte Padrão";
+"System Default" = "Padrão do Sistema";
+"Appearance" = "Aparência";
+"Intention Frequency" = "Frequência de Intenção";
+"How often you want to set intentions" = "Com que frequência você quer definir intenções";
+"Intentions" = "Intenções";
+"Choose how often you'd like to set new intentions. This helps personalize your widget's placeholder text." = "Escolha com que frequência você gostaria de definir novas intenções. Isso ajuda a personalizar o texto do seu widget.";
+"Reminders" = "Lembretes";
+"Notifications" = "Notificações";
+"Configure how often and what types of reminders you receive." = "Configure com que frequência e quais tipos de lembretes você recebe.";
+"Suggested Intentions" = "Intenções Sugeridas";
+"Get personalized suggestions for your intentions" = "Receba sugestões personalizadas para suas intenções";
+"Suggestions" = "Sugestões";
+"Privacy Policy" = "Política de Privacidade";
+"End User License Agreement" = "Contrato de Licença de Usuário Final";
+"Terms of Service" = "Termos de Serviço";
+"Delete All Data" = "Excluir Todos os Dados";
+"Export Data" = "Exportar Dados";
+"Show Onboarding" = "Mostrar Introdução";
+"Learn how to use the app and get inspiration" = "Aprenda a usar o app e obtenha inspiração";
+"Walk through the onboarding flow again to learn about features and get ideas for how to use the app." = "Percorra o fluxo de introdução novamente para aprender sobre recursos e obter ideias de como usar o app.";
+"Enable Notifications" = "Ativar Notificações";
+"Enable notifications to receive reminders about setting your intentions." = "Ative as notificações para receber lembretes sobre a definição de suas intenções.";
+"Enabled" = "Ativado";
+"Disabled" = "Desativado";
+"Not Set" = "Não Definido";
+"Unknown" = "Desconhecido";
+"You'll receive reminders based on your settings" = "Você receberá lembretes com base nas suas configurações";
+"Notifications are disabled in Settings" = "As notificações estão desativadas nos Ajustes";
+"Enable notifications to get reminders" = "Ative as notificações para receber lembretes";
+"Notification status unknown" = "Status de notificação desconhecido";
+"This will permanently delete all your intentions, themes, preferences, and profile information. This action cannot be undone. Your data is stored locally and synced via iCloud, so it will be removed from all your devices." = "Isso excluirá permanentemente todas as suas intenções, temas, preferências e informações de perfil. Esta ação não pode ser desfeita. Seus dados são armazenados localmente e sincronizados via iCloud, então serão removidos de todos os seus dispositivos.";
+"Open Settings" = "Abrir Ajustes";
+"Maybe Later" = "Talvez Mais Tarde";
+"To receive reminders, please enable notifications in your device settings." = "Para receber lembretes, ative as notificações nas configurações do seu dispositivo.";
+
+/* IntentionGuideView */
+"What Makes a Good Intention?" = "O que faz uma boa intenção?";
+"Intentions are personal commitments that guide your actions. They work best when they're:\n\n  • Specific and actionable\n  • Positive and meaningful to you\n  • Realistic for the timeframe\n  • Focused on what you can control" = "Intenções são compromissos pessoais que guiam suas ações. Elas funcionam melhor quando são:\n\n  • Específicas e acionáveis\n  • Positivas e significativas para você\n  • Realistas para o prazo\n  • Focadas no que você pode controlar";
+"Set Your Monthly Intention" = "Defina Sua Intenção Mensal";
+"Think big picture. What do you want to focus on this month? This is your overarching theme that guides your weekly and daily intentions." = "Pense no panorama geral. Em que você quer focar este mês? Este é o seu tema abrangente que guia suas intenções semanais e diárias.";
+"e.g., Build healthier habits" = "ex: Criar hábitos mais saudáveis";
+"Set Your Weekly Intention" = "Defina Sua Intenção Semanal";
+"Break down your monthly goal into weekly actions. What specific step will you take this week?" = "Divida seu objetivo mensal em ações semanais. Qual passo específico você dará esta semana?";
+"e.g., Exercise 3 times this week" = "ex: Exercitar-se 3 vezes esta semana";
+"Set Your Daily Intention" = "Defina Sua Intenção Diária";
+"Make it concrete and achievable today. What one thing will you do today to move toward your goals?" = "Torne concreto e alcançável hoje. Qual coisa você fará hoje para avançar em direção aos seus objetivos?";
+"e.g., Go for a 20-minute walk" = "ex: Fazer uma caminhada de 20 minutos";
+"You're All Set!" = "Tudo Pronto!";
+"You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones." = "Você criou suas primeiras intenções! Elas aparecerão na sua tela inicial e ajudarão a manter o foco. Você sempre pode adicionar mais ou editar as existentes.";
+"Good Example" = "Bom Exemplo";
+"Too Vague" = "Muito Vago";
+"Enter your intention..." = "Digite sua intenção...";
+"Get Started" = "Começar";
+"Create Intentions" = "Criar Intenções";
+"Getting Started" = "Começando";
+
+/* Intention Scopes */
+"Day" = "Dia";
+"Week" = "Semana";
+"Month" = "Mês";
+"Daily" = "Diário";
+"Weekly" = "Semanal";
+"Monthly" = "Mensal";
+
+/* Examples */
+"Practice gratitude by writing 3 things I'm thankful for each day" = "Praticar gratidão escrevendo 3 coisas pelas quais sou grato a cada dia";
+"Exercise for 30 minutes, 3 times this week" = "Exercitar-se por 30 minutos, 3 vezes esta semana";
+"Read for 20 minutes before bed each night" = "Ler por 20 minutos antes de dormir todas as noites";
+"Call or text one friend or family member daily" = "Ligar ou mandar mensagem para um amigo ou familiar diariamente";
+"Spend 10 minutes each morning planning my day" = "Gastar 10 minutos todas as manhãs planejando meu dia";
+"Complete one important task before checking email" = "Completar uma tarefa importante antes de checar o e-mail";
+"Take a 15-minute walk outside during lunch break" = "Fazer uma caminhada de 15 minutos ao ar livre durante o almoço";
+"Write in my journal for 5 minutes each evening" = "Escrever no meu diário por 5 minutos todas as noites";
+"Do one act of kindness for someone else today" = "Fazer um ato de bondade para alguém hoje";
+"Spend quality time with my partner without phones" = "Passar tempo de qualidade com meu parceiro sem celulares";
+"Learn something new for 15 minutes each day" = "Aprender algo novo por 15 minutos a cada dia";
+"Practice deep breathing for 5 minutes when stressed" = "Praticar respiração profunda por 5 minutos quando estressado";
+
+"Be happy" = "Ser feliz";
+"Work harder" = "Trabalhar mais duro";
+"Be better" = "Ser melhor";
+"Do more" = "Fazer mais";
+"Change everything" = "Mudar tudo";
+"Fix my life" = "Consertar minha vida";
+"Stop being lazy" = "Parar de ser preguiçoso";
+"Be perfect" = "Ser perfeito";
+"Never make mistakes" = "Nunca cometer erros";
+"Always be positive" = "Ser sempre positivo";
+"Have no stress" = "Não ter estresse";
+"Be successful" = "Ser bem-sucedido";
+
+/* Sort Order */
+"Newest First" = "Mais Recentes Primeiro";
+"Oldest First" = "Mais Antigos Primeiro";
+"By Scope" = "Por Escopo";
+
+/* Themes */
+"Calm and peaceful" = "Calmo e pacífico";
+"Warm and cozy" = "Quente e aconchegante";
+"Cool and refreshing" = "Fresco e refrescante";
+"Custom theme" = "Tema personalizado";
+
+/* Notification Types */
+"Remind me to add an intention" = "Lembre-me de adicionar uma intenção";
+"Show me my current intention" = "Mostre-me minha intenção atual";
+"Send encouragement" = "Envie encorajamento";
+"Time-based reminders" = "Lembretes baseados em horário";
+"Get reminded when it's time to set a new intention" = "Seja lembrado quando for hora de definir uma nova intenção";
+"See your current intention throughout the day" = "Veja sua intenção atual ao longo do dia";
+"Receive uplifting messages to stay motivated" = "Receba mensagens edificantes para se manter motivado";
+"Reminders at specific times you choose" = "Lembretes em horários específicos que você escolher";
+
+/* Notification Frequency */
+"Once a month" = "Uma vez por mês";
+"Twice a month" = "Duas vezes por mês";
+"Once a week" = "Uma vez por semana";
+"Twice a week" = "Duas vezes por semana";
+"Every other day" = "Dia sim, dia não";
+"Once a day" = "Uma vez por dia";
+"Twice a day" = "Duas vezes por dia";
+"Just a gentle monthly reminder" = "Apenas um lembrete mensal suave";
+"A couple reminders each month" = "Alguns lembretes a cada mês";
+"Weekly check-ins" = "Check-ins semanais";
+"A few times each week" = "Algumas vezes por semana";
+"Regular reminders" = "Lembretes regulares";
+"Daily reminders" = "Lembretes diários";
+"Morning and evening reminders" = "Lembretes de manhã e à noite";
+
+/* Intention Frequency */
+"Daily" = "Diário";
+"Weekly" = "Semanal";
+"Monthly" = "Mensal";
+"Set a new intention each day" = "Defina uma nova intenção a cada dia";
+"Set a new intention each week" = "Defina uma nova intenção a cada semana";
+"Set a new intention each month" = "Defina uma nova intenção a cada mês";
+"Set your intention for today" = "Defina sua intenção para hoje";
+"Set your intention for this week" = "Defina sua intenção para esta semana";
+"Set your intention for this month" = "Defina sua intenção para este mês";
+
+/* Suggestions */
+"Build healthier habits" = "Criar hábitos mais saudáveis";
+"Focus on personal growth" = "Focar no crescimento pessoal";
+"Strengthen relationships" = "Fortalecer relacionamentos";
+"Advance in my career" = "Avançar na minha carreira";
+"Practice mindfulness daily" = "Praticar mindfulness diariamente";
+"Develop a new skill" = "Desenvolver uma nova habilidade";
+"Improve work-life balance" = "Melhorar o equilíbrio trabalho-vida";
+"Save money for a goal" = "Economizar dinheiro para um objetivo";
+"Read more books" = "Ler mais livros";
+"Spend quality time with family" = "Passar tempo de qualidade com a família";
+"Start a new hobby" = "Começar um novo hobby";
+"Reduce stress and anxiety" = "Reduzir estresse e ansiedade";
+"Eat more nutritious meals" = "Comer refeições mais nutritivas";
+"Get better sleep" = "Dormir melhor";
+"Learn something new" = "Aprender algo novo";
+"Volunteer or give back" = "Ser voluntário ou retribuir";
+"Travel to new places" = "Viajar para novos lugares";
+"Build better routines" = "Criar melhores rotinas";
+"Focus on mental health" = "Focar na saúde mental";
+"Achieve a fitness goal" = "Alcançar um objetivo de fitness";
+"Improve communication" = "Melhorar a comunicação";
+"Declutter and organize" = "Destralhar e organizar";
+"Practice self-care" = "Praticar autocuidado";
+"Set financial goals" = "Definir metas financeiras";
+"Build confidence" = "Construir confiança";
+"Learn to cook" = "Aprender a cozinhar";
+"Spend time in nature" = "Passar tempo na natureza";
+"Reduce screen time" = "Reduzir tempo de tela";
+"Practice patience" = "Praticar paciência";
+"Be more present" = "Estar mais presente";
+"Express gratitude daily" = "Expressar gratidão diariamente";
+"Take more breaks" = "Fazer mais pausas";
+"Learn a language" = "Aprender um idioma";
+"Start journaling" = "Começar a escrever um diário";
+"Build better habits" = "Construir melhores hábitos";
+"Focus on creativity" = "Focar na criatividade";
+"Improve posture" = "Melhorar a postura";
+"Drink more water" = "Beber mais água";
+"Practice deep breathing" = "Praticar respiração profunda";
+"Set boundaries" = "Definir limites";
+"Be kinder to myself" = "Ser mais gentil comigo mesmo";
+"Focus on what matters" = "Focar no que importa";
+"Reduce procrastination" = "Reduzir a procrastinação";
+"Build resilience" = "Construir resiliência";
+"Practice forgiveness" = "Praticar o perdão";
+"Be more organized" = "Ser mais organizado";
+"Focus on solutions" = "Focar em soluções";
+"Celebrate small wins" = "Celebrar pequenas vitórias";
+"Learn from mistakes" = "Aprender com os erros";
+"Be more intentional" = "Ser mais intencional";
+
+"Make time for regular exercise" = "Arranjar tempo para exercício regular";
+"Connect with friends and loved ones" = "Conectar com amigos e entes queridos";
+"Focus on completing important tasks" = "Focar em completar tarefas importantes";
+"Dedicate time to learning" = "Dedicar tempo ao aprendizado";
+"Practice gratitude regularly" = "Praticar gratidão regularmente";
+"Cook nourishing meals" = "Cozinhar refeições nutritivas";
+"Make reading a priority" = "Tornar a leitura uma prioridade";
+"Take daily walks" = "Fazer caminhadas diárias";
+"Reach out to family" = "Entrar em contato com a família";
+"Practice acts of kindness" = "Praticar atos de bondade";
+"Make meditation part of my routine" = "Tornar a meditação parte da minha rotina";
+"Write in my journal" = "Escrever no meu diário";
+"Try new recipes" = "Experimentar novas receitas";
+"Spend time outdoors" = "Passar tempo ao ar livre";
+"Complete work projects thoughtfully" = "Completar projetos de trabalho com atenção";
+"Engage with my hobbies" = "Envolver-me com meus hobbies";
+"Prioritize restful sleep" = "Priorizar sono reparador";
+"Be mindful of social media use" = "Estar atento ao uso de redes sociais";
+"Express creativity" = "Expressar criatividade";
+"Spend quality time with my partner" = "Passar tempo de qualidade com meu parceiro";
+"Declutter and organize my space" = "Destralhar e organizar meu espaço";
+"Plan nourishing meals" = "Planejar refeições nutritivas";
+"Move my body regularly" = "Mover meu corpo regularmente";
+"Read for enjoyment" = "Ler por prazer";
+"Take regular breaks" = "Fazer pausas regulares";
+"Practice mindfulness" = "Praticar mindfulness";
+"Do things that bring me joy" = "Fazer coisas que me trazem alegria";
+"Focus on meaningful goals" = "Focar em objetivos significativos";
+"Prioritize self-care" = "Priorizar autocuidado";
+"Connect with the natural world" = "Conectar com o mundo natural";
+"Show kindness to others" = "Mostrar bondade aos outros";
+"Be fully present in conversations" = "Estar totalmente presente em conversas";
+"Capture meaningful moments" = "Capturar momentos significativos";
+"Cultivate gratitude" = "Cultivar gratidão";
+"Stay active" = "Manter-se ativo";
+"Carve out time for myself" = "Reservar tempo para mim";
+"Help others" = "Ajudar os outros";
+"Develop new skills" = "Desenvolver novas habilidades";
+"Manage stress mindfully" = "Gerenciar estresse conscientemente";
+"Be compassionate with myself" = "Ser compassivo comigo mesmo";
+"Focus on progress over perfection" = "Focar no progresso em vez da perfeição";
+"Celebrate small achievements" = "Celebrar pequenas conquistas";
+"Reflect and learn from experiences" = "Refletir e aprender com experiências";
+"Use my time intentionally" = "Usar meu tempo intencionalmente";
+"Find balance in my life" = "Encontrar equilíbrio na minha vida";
+
+"Go for a 20-minute walk" = "Fazer uma caminhada de 20 minutos";
+"Call a family member" = "Ligar para um familiar";
+"Read for 15 minutes" = "Ler por 15 minutos";
+"Take 5 minutes to meditate" = "Tirar 5 minutos para meditar";
+"Write 3 things I'm grateful for" = "Escrever 3 coisas pelas quais sou grato";
+"Drink 8 glasses of water" = "Beber 8 copos de água";
+"Eat 2 servings of vegetables" = "Comer 2 porções de vegetais";
+"Take 3 deep breaths when stressed" = "Respirar fundo 3 vezes quando estressado";
+"Spend 10 minutes outside" = "Passar 10 minutos lá fora";
+"Do one thing I've been putting off" = "Fazer uma coisa que venho adiando";
+"Practice a hobby for 30 minutes" = "Praticar um hobby por 30 minutos";
+"Connect with a friend" = "Conectar com um amigo";
+"Do something creative" = "Fazer algo criativo";
+"Exercise for 20 minutes" = "Exercitar-se por 20 minutos";
+"Get 8 hours of sleep" = "Dormir 8 horas";
+"Limit phone use to essentials" = "Limitar uso do telefone ao essencial";
+"Cook a healthy meal" = "Cozinhar uma refeição saudável";
+"Be present in the moment" = "Estar presente no momento";
+"Express gratitude" = "Expressar gratidão";
+"Take breaks when needed" = "Fazer pausas quando necessário";
+"Do something fun" = "Fazer algo divertido";
+"Be kind to myself" = "Ser gentil comigo mesmo";
+"Focus on one goal" = "Focar em um objetivo";
+"Complete one important task" = "Completar uma tarefa importante";
+"Do something active" = "Fazer algo ativo";
+"Spend quality time with someone" = "Passar tempo de qualidade com alguém";
+"Practice a skill" = "Praticar uma habilidade";
+"Reduce stress" = "Reduzir o estresse";
+"Be intentional" = "Ser intencional";
+"Celebrate a small win" = "Celebrar uma pequena vitória";
+"Learn from today" = "Aprender com o dia de hoje";
+"Practice balance" = "Praticar equilíbrio";
+"Do something I enjoy" = "Fazer algo que eu goste";
+"Be present" = "Estar presente";
+"Practice gratitude" = "Praticar gratidão";
+"Take care of myself" = "Cuidar de mim mesmo";
+"Focus on progress" = "Focar no progresso";
+"Be patient" = "Ser paciente";
+"Practice kindness" = "Praticar bondade";
+"Be mindful" = "Estar atento";
+"Do my best" = "Fazer o meu melhor";
+"Be present today" = "Estar presente hoje";

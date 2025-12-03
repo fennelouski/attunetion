@@ -21,7 +21,7 @@ extension ExampleIntention {
     static let examples: [ExampleIntention] = [
         // Personal Growth
         ExampleIntention(text: "Practice gratitude daily", scope: .day, category: "Growth"),
-        ExampleIntention(text: "Read for 30 minutes", scope: .day, category: "Learning"),
+        ExampleIntention(text: "Engage with books mindfully", scope: .day, category: "Learning"),
         ExampleIntention(text: "Be present with loved ones", scope: .day, category: "Relationships"),
         
         // Health & Wellness
@@ -31,8 +31,8 @@ extension ExampleIntention {
         
         // Productivity
         ExampleIntention(text: "Focus on deep work", scope: .day, category: "Productivity"),
-        ExampleIntention(text: "Complete one important task", scope: .day, category: "Productivity"),
-        ExampleIntention(text: "Launch my project", scope: .month, category: "Goals"),
+        ExampleIntention(text: "Work with focus and purpose", scope: .day, category: "Productivity"),
+        ExampleIntention(text: "Show up consistently for my project", scope: .month, category: "Growth"),
         
         // Mindfulness
         ExampleIntention(text: "Start the day with meditation", scope: .day, category: "Mindfulness"),
@@ -42,11 +42,11 @@ extension ExampleIntention {
         // Creativity
         ExampleIntention(text: "Create something new", scope: .day, category: "Creativity"),
         ExampleIntention(text: "Explore a creative hobby", scope: .week, category: "Creativity"),
-        ExampleIntention(text: "Finish my creative project", scope: .month, category: "Creativity"),
+        ExampleIntention(text: "Show up for my creative work", scope: .month, category: "Creativity"),
         
         // Additional examples
         ExampleIntention(text: "Express kindness to someone", scope: .day, category: "Relationships"),
-        ExampleIntention(text: "Learn something new", scope: .week, category: "Learning"),
+        ExampleIntention(text: "Stay open to new ideas", scope: .week, category: "Learning"),
         ExampleIntention(text: "Build meaningful connections", scope: .month, category: "Relationships"),
         ExampleIntention(text: "Take time for self-care", scope: .day, category: "Wellness"),
         ExampleIntention(text: "Reflect on my progress", scope: .week, category: "Growth"),

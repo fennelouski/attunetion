@@ -151,6 +151,8 @@ async function handleMiniMode(
     // Build system prompt
     const systemPrompt = `You are a personal growth and mindfulness advisor. Based on information about a user, generate personalized daily, weekly, and monthly intentions for a specific week. 
 
+IMPORTANT: Intentions are about HOW you want to be or show up, not specific measurable goals. Focus on the quality of being, mindset, or approach rather than outcomes or achievements.
+
 Return ONLY a valid JSON object with this exact structure:
 {
   "intentions": [
@@ -176,10 +178,12 @@ Rules:
 - Generate exactly ONE daily intention for each day of the week (7 days)
 - Generate exactly ONE weekly intention for the week
 - Generate exactly ONE monthly intention for the month (if the week spans a month boundary, use the month that contains most days)
-- Daily intentions should be specific and actionable for that day
+- Daily intentions should focus on how the user wants to be/show up that day
 - Weekly intention should be broader and guide the whole week
 - Monthly intention should be the most general and guide the whole month
 - Make intentions personal, relevant, and inspiring based on the user's information
+- Focus on being/doing rather than achieving/completing
+- Avoid specific measurable targets (e.g., "Exercise for 30 minutes" → "Move my body joyfully")
 - Use dates in YYYY-MM-DD format
 - Do not include any markdown formatting or code blocks`;
 
@@ -226,7 +230,7 @@ async function handleNanoMode(
     return handleShuffleMode(body, weekStart, weekEnd, rateLimit);
   }
   
-  const systemPrompt = `You are a personal growth advisor. Rephrase the given intentions to make them fresh and relevant for a new week. Return ONLY a valid JSON object with this structure:
+  const systemPrompt = `You are a personal growth advisor. Rephrase the given intentions to make them fresh and relevant for a new week. Remember: intentions are about HOW you want to be or show up, not specific measurable goals. Focus on being/doing rather than achieving/completing. Return ONLY a valid JSON object with this structure:
 {
   "intentions": [
     {"date": "YYYY-MM-DD", "text": "rephrased text (5-15 words)", "scope": "day"},

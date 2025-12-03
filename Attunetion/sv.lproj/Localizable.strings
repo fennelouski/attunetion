@@ -1,0 +1,316 @@
+/* 
+  Localizable.strings
+  Attunetion
+
+  Created by Nathan Fennel on 12/2/25.
+*/
+
+/* General */
+"Attunetion" = "Attunetion";
+"Back" = "Tillbaka";
+"Continue" = "Fortsätt";
+"Done" = "Klar";
+"Close" = "Stäng";
+"Cancel" = "Avbryt";
+"Delete" = "Radera";
+"Sort" = "Sortera";
+"Search" = "Sök";
+"Settings" = "Inställningar";
+"Help" = "Hjälp";
+"Permissions" = "Behörigheter";
+"About" = "Om";
+
+/* IntentionsListView */
+"Set your first intention" = "Sätt din första intention";
+"Create a daily, weekly, or monthly intention to get started" = "Skapa en daglig, veckovis eller månatlig intention för att komma igång";
+"Create Intention" = "Skapa intention";
+"How to create good intentions" = "Hur man skapar bra intentioner";
+"Current" = "Nuvarande";
+"AI" = "AI";
+"All Intentions" = "Alla intentioner";
+"Need help? Learn how to create great intentions" = "Behöver du hjälp? Lär dig hur du skapar bra intentioner";
+
+/* SettingsView */
+"App Theme" = "App-tema";
+"Default Intention Theme" = "Standard intentionstema";
+"None" = "Ingen";
+"Default Font" = "Standardtypsnitt";
+"System Default" = "Systemstandard";
+"Appearance" = "Utseende";
+"Intention Frequency" = "Intentionsfrekvens";
+"How often you want to set intentions" = "Hur ofta du vill sätta intentioner";
+"Intentions" = "Intentioner";
+"Choose how often you'd like to set new intentions. This helps personalize your widget's placeholder text." = "Välj hur ofta du vill sätta nya intentioner. Detta hjälper till att anpassa din widgets platshållartext.";
+"Reminders" = "Påminnelser";
+"Notifications" = "Notiser";
+"Configure how often and what types of reminders you receive." = "Konfigurera hur ofta och vilka typer av påminnelser du får.";
+"Suggested Intentions" = "Föreslagna intentioner";
+"Get personalized suggestions for your intentions" = "Få personliga förslag på dina intentioner";
+"Suggestions" = "Förslag";
+"Privacy Policy" = "Integritetspolicy";
+"End User License Agreement" = "Licensavtal för slutanvändare";
+"Terms of Service" = "Användarvillkor";
+"Delete All Data" = "Radera all data";
+"Export Data" = "Exportera data";
+"Show Onboarding" = "Visa introduktion";
+"Learn how to use the app and get inspiration" = "Lär dig hur du använder appen och få inspiration";
+"Walk through the onboarding flow again to learn about features and get ideas for how to use the app." = "Gå igenom introduktionsflödet igen för att lära dig om funktioner och få idéer om hur du använder appen.";
+"Enable Notifications" = "Aktivera notiser";
+"Enable notifications to receive reminders about setting your intentions." = "Aktivera notiser för att få påminnelser om att sätta dina intentioner.";
+"Enabled" = "Aktiverad";
+"Disabled" = "Inaktiverad";
+"Not Set" = "Ej inställd";
+"Unknown" = "Okänd";
+"You'll receive reminders based on your settings" = "Du kommer att få påminnelser baserat på dina inställningar";
+"Notifications are disabled in Settings" = "Notiser är inaktiverade i Inställningar";
+"Enable notifications to get reminders" = "Aktivera notiser för att få påminnelser";
+"Notification status unknown" = "Notisstatus okänd";
+"This will permanently delete all your intentions, themes, preferences, and profile information. This action cannot be undone. Your data is stored locally and synced via iCloud, so it will be removed from all your devices." = "Detta kommer permanent att radera alla dina intentioner, teman, inställningar och profilinformation. Denna åtgärd kan inte ångras. Din data lagras lokalt och synkroniseras via iCloud, så den kommer att tas bort från alla dina enheter.";
+"Open Settings" = "Öppna Inställningar";
+"Maybe Later" = "Kanske senare";
+"To receive reminders, please enable notifications in your device settings." = "För att ta emot påminnelser, vänligen aktivera notiser i dina enhetsinställningar.";
+
+/* IntentionGuideView */
+"What Makes a Good Intention?" = "Vad gör en bra intention?";
+"Intentions are personal commitments that guide your actions. They work best when they're:\n\n  • Specific and actionable\n  • Positive and meaningful to you\n  • Realistic for the timeframe\n  • Focused on what you can control" = "Intentioner är personliga åtaganden som vägleder dina handlingar. De fungerar bäst när de är:\n\n  • Specifika och genomförbara\n  • Positiva och meningsfulla för dig\n  • Realistiska för tidsramen\n  • Fokuserade på vad du kan kontrollera";
+"Set Your Monthly Intention" = "Sätt din månatliga intention";
+"Think big picture. What do you want to focus on this month? This is your overarching theme that guides your weekly and daily intentions." = "Tänk på helheten. Vad vill du fokusera på den här månaden? Detta är ditt övergripande tema som vägleder dina veckovisa och dagliga intentioner.";
+"e.g., Build healthier habits" = "t.ex. Bygga hälsosammare vanor";
+"Set Your Weekly Intention" = "Sätt din veckovisa intention";
+"Break down your monthly goal into weekly actions. What specific step will you take this week?" = "Bryt ner ditt månatliga mål i veckovisa åtgärder. Vilket specifikt steg kommer du att ta denna vecka?";
+"e.g., Exercise 3 times this week" = "t.ex. Träna 3 gånger denna vecka";
+"Set Your Daily Intention" = "Sätt din dagliga intention";
+"Make it concrete and achievable today. What one thing will you do today to move toward your goals?" = "Gör det konkret och uppnåeligt idag. Vilken sak kommer du att göra idag för att röra dig mot dina mål?";
+"e.g., Go for a 20-minute walk" = "t.ex. Gå en 20-minuters promenad";
+"You're All Set!" = "Du är klar!";
+"You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones." = "Du har skapat dina första intentioner! De kommer att visas på din hemskärm och hjälpa dig att hålla fokus. Du kan alltid lägga till fler eller redigera befintliga.";
+"Good Example" = "Bra exempel";
+"Too Vague" = "För vagt";
+"Enter your intention..." = "Ange din intention...";
+"Get Started" = "Kom igång";
+"Create Intentions" = "Skapa intentioner";
+"Getting Started" = "Komma igång";
+
+/* Intention Scopes */
+"Day" = "Dag";
+"Week" = "Vecka";
+"Month" = "Månad";
+"Daily" = "Dagligen";
+"Weekly" = "Veckovis";
+"Monthly" = "Månatligen";
+
+/* Examples */
+"Practice gratitude by writing 3 things I'm thankful for each day" = "Öva tacksamhet genom att skriva 3 saker jag är tacksam för varje dag";
+"Exercise for 30 minutes, 3 times this week" = "Träna i 30 minuter, 3 gånger denna vecka";
+"Read for 20 minutes before bed each night" = "Läsa i 20 minuter innan sänggåendet varje kväll";
+"Call or text one friend or family member daily" = "Ringa eller sms:a en vän eller familjemedlem dagligen";
+"Spend 10 minutes each morning planning my day" = "Spendera 10 minuter varje morgon med att planera min dag";
+"Complete one important task before checking email" = "Slutföra en viktig uppgift innan jag kollar e-post";
+"Take a 15-minute walk outside during lunch break" = "Ta en 15-minuters promenad utomhus under lunchrasten";
+"Write in my journal for 5 minutes each evening" = "Skriva i min dagbok i 5 minuter varje kväll";
+"Do one act of kindness for someone else today" = "Göra en vänlig handling för någon annan idag";
+"Spend quality time with my partner without phones" = "Spendera kvalitetstid med min partner utan telefoner";
+"Learn something new for 15 minutes each day" = "Lära mig något nytt i 15 minuter varje dag";
+"Practice deep breathing for 5 minutes when stressed" = "Öva djupandning i 5 minuter vid stress";
+
+"Be happy" = "Vara lycklig";
+"Work harder" = "Arbeta hårdare";
+"Be better" = "Vara bättre";
+"Do more" = "Göra mer";
+"Change everything" = "Ändra allt";
+"Fix my life" = "Fixa mitt liv";
+"Stop being lazy" = "Sluta vara lat";
+"Be perfect" = "Vara perfekt";
+"Never make mistakes" = "Aldrig göra misstag";
+"Always be positive" = "Alltid vara positiv";
+"Have no stress" = "Inte ha någon stress";
+"Be successful" = "Vara framgångsrik";
+
+/* Sort Order */
+"Newest First" = "Nyaste först";
+"Oldest First" = "Äldsta först";
+"By Scope" = "Efter omfattning";
+
+/* Themes */
+"Calm and peaceful" = "Lugn och fridfull";
+"Warm and cozy" = "Varm och mysig";
+"Cool and refreshing" = "Sval och uppfriskande";
+"Custom theme" = "Anpassat tema";
+
+/* Notification Types */
+"Remind me to add an intention" = "Påminn mig om att lägga till en intention";
+"Show me my current intention" = "Visa mig min nuvarande intention";
+"Send encouragement" = "Skicka uppmuntran";
+"Time-based reminders" = "Tidsbaserade påminnelser";
+"Get reminded when it's time to set a new intention" = "Bli påmind när det är dags att sätta en ny intention";
+"See your current intention throughout the day" = "Se din nuvarande intention under dagen";
+"Receive uplifting messages to stay motivated" = "Ta emot upplyftande meddelanden för att hålla motivationen uppe";
+"Reminders at specific times you choose" = "Påminnelser vid specifika tider du väljer";
+
+/* Notification Frequency */
+"Once a month" = "En gång i månaden";
+"Twice a month" = "Två gånger i månaden";
+"Once a week" = "En gång i veckan";
+"Twice a week" = "Två gånger i veckan";
+"Every other day" = "Varannan dag";
+"Once a day" = "En gång om dagen";
+"Twice a day" = "Två gånger om dagen";
+"Just a gentle monthly reminder" = "Bara en mild månatlig påminnelse";
+"A couple reminders each month" = "Ett par påminnelser varje månad";
+"Weekly check-ins" = "Veckovisa avstämningar";
+"A few times each week" = "Några gånger varje vecka";
+"Regular reminders" = "Regelbundna påminnelser";
+"Daily reminders" = "Dagliga påminnelser";
+"Morning and evening reminders" = "Morgon- och kvällspåminnelser";
+
+/* Intention Frequency */
+"Daily" = "Dagligen";
+"Weekly" = "Veckovis";
+"Monthly" = "Månatligen";
+"Set a new intention each day" = "Sätt en ny intention varje dag";
+"Set a new intention each week" = "Sätt en ny intention varje vecka";
+"Set a new intention each month" = "Sätt en ny intention varje månad";
+"Set your intention for today" = "Sätt din intention för idag";
+"Set your intention for this week" = "Sätt din intention för denna vecka";
+"Set your intention for this month" = "Sätt din intention för denna månad";
+
+/* Suggestions */
+"Build healthier habits" = "Bygga hälsosammare vanor";
+"Focus on personal growth" = "Fokusera på personlig utveckling";
+"Strengthen relationships" = "Stärka relationer";
+"Advance in my career" = "Avancera i min karriär";
+"Practice mindfulness daily" = "Öva mindfulness dagligen";
+"Develop a new skill" = "Utveckla en ny färdighet";
+"Improve work-life balance" = "Förbättra balansen mellan arbete och privatliv";
+"Save money for a goal" = "Spara pengar till ett mål";
+"Read more books" = "Läsa fler böcker";
+"Spend quality time with family" = "Spendera kvalitetstid med familjen";
+"Start a new hobby" = "Börja med en ny hobby";
+"Reduce stress and anxiety" = "Minska stress och ångest";
+"Eat more nutritious meals" = "Äta mer näringsrika måltider";
+"Get better sleep" = "Få bättre sömn";
+"Learn something new" = "Lära mig något nytt";
+"Volunteer or give back" = "Volontärarbeta eller ge tillbaka";
+"Travel to new places" = "Resa till nya platser";
+"Build better routines" = "Bygga bättre rutiner";
+"Focus on mental health" = "Fokusera på mental hälsa";
+"Achieve a fitness goal" = "Uppnå ett träningsmål";
+"Improve communication" = "Förbättra kommunikation";
+"Declutter and organize" = "Rensa och organisera";
+"Practice self-care" = "Utöva egenvård";
+"Set financial goals" = "Sätta finansiella mål";
+"Build confidence" = "Bygga självförtroende";
+"Learn to cook" = "Lära mig laga mat";
+"Spend time in nature" = "Spendera tid i naturen";
+"Reduce screen time" = "Minska skärmtid";
+"Practice patience" = "Öva tålamod";
+"Be more present" = "Vara mer närvarande";
+"Express gratitude daily" = "Uttrycka tacksamhet dagligen";
+"Take more breaks" = "Ta fler pauser";
+"Learn a language" = "Lära mig ett språk";
+"Start journaling" = "Börja skriva dagbok";
+"Build better habits" = "Bygga bättre vanor";
+"Focus on creativity" = "Fokusera på kreativitet";
+"Improve posture" = "Förbättra hållning";
+"Drink more water" = "Dricka mer vatten";
+"Practice deep breathing" = "Öva djupandning";
+"Set boundaries" = "Sätta gränser";
+"Be kinder to myself" = "Vara snällare mot mig själv";
+"Focus on what matters" = "Fokusera på det som betyder något";
+"Reduce procrastination" = "Minska prokrastinering";
+"Build resilience" = "Bygga motståndskraft";
+"Practice forgiveness" = "Öva förlåtelse";
+"Be more organized" = "Vara mer organiserad";
+"Focus on solutions" = "Fokusera på lösningar";
+"Celebrate small wins" = "Fira små segrar";
+"Learn from mistakes" = "Lära av misstag";
+"Be more intentional" = "Vara mer avsiktlig";
+
+"Make time for regular exercise" = "Göra tid för regelbunden träning";
+"Connect with friends and loved ones" = "Knyta an till vänner och nära och kära";
+"Focus on completing important tasks" = "Fokusera på att slutföra viktiga uppgifter";
+"Dedicate time to learning" = "Dedikera tid till lärande";
+"Practice gratitude regularly" = "Öva tacksamhet regelbundet";
+"Cook nourishing meals" = "Laga näringsrika måltider";
+"Make reading a priority" = "Göra läsning till en prioritet";
+"Take daily walks" = "Ta dagliga promenader";
+"Reach out to family" = "Höra av mig till familjen";
+"Practice acts of kindness" = "Utöva vänliga handlingar";
+"Make meditation part of my routine" = "Göra meditation till en del av min rutin";
+"Write in my journal" = "Skriva i min dagbok";
+"Try new recipes" = "Prova nya recept";
+"Spend time outdoors" = "Spendera tid utomhus";
+"Complete work projects thoughtfully" = "Slutföra arbetsprojekt med omtanke";
+"Engage with my hobbies" = "Engagera mig i mina hobbies";
+"Prioritize restful sleep" = "Prioritera vilsam sömn";
+"Be mindful of social media use" = "Vara medveten om användning av sociala medier";
+"Express creativity" = "Uttrycka kreativitet";
+"Spend quality time with my partner" = "Spendera kvalitetstid med min partner";
+"Declutter and organize my space" = "Rensa och organisera mitt utrymme";
+"Plan nourishing meals" = "Planera näringsrika måltider";
+"Move my body regularly" = "Röra på min kropp regelbundet";
+"Read for enjoyment" = "Läsa för nöjes skull";
+"Take regular breaks" = "Ta regelbundna pauser";
+"Practice mindfulness" = "Öva mindfulness";
+"Do things that bring me joy" = "Göra saker som ger mig glädje";
+"Focus on meaningful goals" = "Fokusera på meningsfulla mål";
+"Prioritize self-care" = "Prioritera egenvård";
+"Connect with the natural world" = "Knyta an till naturen";
+"Show kindness to others" = "Visa vänlighet mot andra";
+"Be fully present in conversations" = "Vara fullt närvarande i samtal";
+"Capture meaningful moments" = "Fånga meningsfulla ögonblick";
+"Cultivate gratitude" = "Odla tacksamhet";
+"Stay active" = "Hålla mig aktiv";
+"Carve out time for myself" = "Skapa tid för mig själv";
+"Help others" = "Hjälpa andra";
+"Develop new skills" = "Utveckla nya färdigheter";
+"Manage stress mindfully" = "Hantera stress medvetet";
+"Be compassionate with myself" = "Vara medkännande med mig själv";
+"Focus on progress over perfection" = "Fokusera på framsteg framför perfektion";
+"Celebrate small achievements" = "Fira små prestationer";
+"Reflect and learn from experiences" = "Reflektera och lära av erfarenheter";
+"Use my time intentionally" = "Använda min tid avsiktligt";
+"Find balance in my life" = "Hitta balans i mitt liv";
+
+"Go for a 20-minute walk" = "Gå en 20-minuters promenad";
+"Call a family member" = "Ringa en familjemedlem";
+"Read for 15 minutes" = "Läsa i 15 minuter";
+"Take 5 minutes to meditate" = "Ta 5 minuter för att meditera";
+"Write 3 things I'm grateful for" = "Skriva 3 saker jag är tacksam för";
+"Drink 8 glasses of water" = "Dricka 8 glas vatten";
+"Eat 2 servings of vegetables" = "Äta 2 portioner grönsaker";
+"Take 3 deep breaths when stressed" = "Ta 3 djupa andetag vid stress";
+"Spend 10 minutes outside" = "Spendera 10 minuter utomhus";
+"Do one thing I've been putting off" = "Göra en sak jag har skjutit upp";
+"Practice a hobby for 30 minutes" = "Utöva en hobby i 30 minuter";
+"Connect with a friend" = "Knyta an till en vän";
+"Do something creative" = "Göra något kreativt";
+"Exercise for 20 minutes" = "Träna i 20 minuter";
+"Get 8 hours of sleep" = "Få 8 timmars sömn";
+"Limit phone use to essentials" = "Begränsa telefonanvändning till det väsentliga";
+"Cook a healthy meal" = "Laga en hälsosam måltid";
+"Be present in the moment" = "Vara närvarande i stunden";
+"Express gratitude" = "Uttrycka tacksamhet";
+"Take breaks when needed" = "Ta pauser vid behov";
+"Do something fun" = "Göra något roligt";
+"Be kind to myself" = "Vara snäll mot mig själv";
+"Focus on one goal" = "Fokusera på ett mål";
+"Complete one important task" = "Slutföra en viktig uppgift";
+"Do something active" = "Göra något aktivt";
+"Spend quality time with someone" = "Spendera kvalitetstid med någon";
+"Practice a skill" = "Öva på en färdighet";
+"Reduce stress" = "Minska stress";
+"Be intentional" = "Vara avsiktlig";
+"Celebrate a small win" = "Fira en liten seger";
+"Learn from today" = "Lära av dagen";
+"Practice balance" = "Öva balans";
+"Do something I enjoy" = "Göra något jag tycker om";
+"Be present" = "Vara närvarande";
+"Practice gratitude" = "Öva tacksamhet";
+"Take care of myself" = "Ta hand om mig själv";
+"Focus on progress" = "Fokusera på framsteg";
+"Be patient" = "Vara tålamodig";
+"Practice kindness" = "Öva vänlighet";
+"Be mindful" = "Vara medveten";
+"Do my best" = "Göra mitt bästa";
+"Be present today" = "Vara närvarande idag";
