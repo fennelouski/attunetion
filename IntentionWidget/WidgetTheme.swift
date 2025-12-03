@@ -69,5 +69,51 @@ struct WidgetTheme {
             opacity: Double(a) / 255
         )
     }
+    
+    /// Create a beautiful gradient from theme colors
+    /// Inspired by serene, natural backgrounds with smooth color transitions
+    static func gradient(for theme: ThemeData?) -> LinearGradient {
+        if let theme = theme {
+            let baseColor = color(from: theme.backgroundColor)
+            let accentColor = theme.accentColor.map { color(from: $0) } ?? baseColor
+            
+            // Create a gradient that transitions from lighter accent to darker base
+            // This creates depth and visual interest
+            return LinearGradient(
+                gradient: Gradient(colors: [
+                    accentColor.opacity(0.6),
+                    baseColor,
+                    baseColor.opacity(0.9)
+                ]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        } else {
+            // Default beautiful gradient (purple/pink to dark blue)
+            return LinearGradient(
+                gradient: Gradient(colors: [
+                    Color(red: 0.7, green: 0.5, blue: 0.9), // Soft purple
+                    Color(red: 0.9, green: 0.6, blue: 0.8), // Pink
+                    Color(red: 0.2, green: 0.2, blue: 0.4)  // Dark blue
+                ]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+        }
+    }
+    
+    /// Create a subtle overlay gradient for depth
+    static func overlayGradient() -> LinearGradient {
+        LinearGradient(
+            gradient: Gradient(colors: [
+                Color.black.opacity(0.0),
+                Color.black.opacity(0.1)
+            ]),
+            startPoint: .top,
+            endPoint: .bottom
+        )
+    }
 }
+
+
 

@@ -8,14 +8,14 @@ Users want configurable reminders to set daily/weekly/monthly intentions. Notifi
 
 ## Your Scope - FILES YOU OWN
 
-Create these files in `Daily Intentions/Services/`:
+Create these files in `Attunetion/Services/`:
 ```
 Services/
 ├── NotificationManager.swift (main notification service)
 └── NotificationHandler.swift (handle notification responses)
 ```
 
-Create these files in `Daily Intentions/Views/Settings/`:
+Create these files in `Attunetion/Views/Settings/`:
 ```
 Views/Settings/
 ├── NotificationSettingsView.swift (UI for configuring notifications)

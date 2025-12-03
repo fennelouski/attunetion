@@ -13,7 +13,7 @@ struct IntentionWidgetProvider: TimelineProvider {
     typealias Entry = IntentionWidgetEntry
     
     // App Group identifier for data sharing
-    private let appGroupIdentifier = "group.com.nathanfennel.Daily-Intentions"
+    private let appGroupIdentifier = "group.com.nathanfennel.Attunetion"
     
     func placeholder(in context: Context) -> IntentionWidgetEntry {
         IntentionWidgetEntry.mock()
@@ -49,17 +49,17 @@ struct IntentionWidgetProvider: TimelineProvider {
     
     // MARK: - Private Helpers
     
-    /// Get current intention from App Group (currently returns mock data)
+    /// Get current intention from App Group
     private func getCurrentIntention() -> IntentionData? {
-        // TODO: Read from App Group UserDefaults when data layer is ready
-        // For now, return mock data
-        return IntentionData.mock()
+        return WidgetDataService.shared.getCurrentIntentionData()
     }
     
-    /// Get current theme from App Group (currently returns mock data)
+    /// Get current theme from App Group
     private func getCurrentTheme() -> ThemeData? {
-        // TODO: Read from App Group UserDefaults when data layer is ready
-        // For now, return mock theme
+        if let themeData = WidgetDataService.shared.getCurrentThemeData() {
+            return themeData
+        }
+        // Fallback to default theme if no theme set
         return WidgetTheme.ocean
     }
     

@@ -8,84 +8,70 @@
 import SwiftUI
 import WidgetKit
 
-/// Small widget view (systemSmall)
+/// Small widget view (systemSmall) - Beautiful, centered design
 struct SmallWidgetView: View {
     var entry: IntentionWidgetProvider.Entry
     
+    private var placeholderText: String {
+        let frequency = WidgetDataService.shared.getDefaultIntentionFrequency()
+        switch frequency {
+        case "daily":
+            return "Set your intention for today"
+        case "weekly":
+            return "Set your intention for this week"
+        case "monthly":
+            return "Set your intention for this month"
+        default:
+            return "Set your intention"
+        }
+    }
+    
     var body: some View {
         ZStack {
-            // Background
-            if let theme = entry.theme {
-                WidgetTheme.color(from: theme.backgroundColor)
-            } else {
-                Color.blue
-            }
+            // Beautiful gradient background
+            WidgetTheme.gradient(for: entry.theme)
             
-            VStack(alignment: .leading, spacing: 8) {
-                Spacer()
-                
-                // Intention text
-                if let intention = entry.intention {
-                    Text(intention.text)
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(entry.theme.map { WidgetTheme.color(from: $0.textColor) } ?? .white)
-                        .lineLimit(3)
-                        .multilineTextAlignment(.leading)
-                    
+            // Subtle overlay for depth
+            WidgetTheme.overlayGradient()
+            
+            // Content
+            if let intention = entry.intention {
+                VStack(spacing: 0) {
                     Spacer()
                     
-                    // Scope badge
-                    HStack {
-                        scopeBadge(for: intention.scope)
-                        Spacer()
-                    }
-                } else {
-                    // Empty state
-                    VStack(spacing: 4) {
-                        Text("No intention set")
-                            .font(.system(size: 12, weight: .medium))
-                            .foregroundColor(.secondary)
-                        Text("Tap to create")
-                            .font(.system(size: 10))
-                            .foregroundColor(.secondary)
-                    }
+                    // Intention text - centered and elegant
+                    Text(intention.text)
+                        .font(.system(size: 16, weight: .medium, design: .rounded))
+                        .foregroundColor(entry.theme.map { WidgetTheme.color(from: $0.textColor) } ?? .white)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(4)
+                        .lineSpacing(2)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
+                    
                     Spacer()
                 }
+            } else {
+                // Empty state - elegant and inviting with contextual placeholder
+                VStack(spacing: 8) {
+                    Image(systemName: "sparkles")
+                        .font(.system(size: 24, weight: .light))
+                        .foregroundColor(.white.opacity(0.7))
+                    
+                    Text(placeholderText)
+                        .font(.system(size: 14, weight: .medium, design: .rounded))
+                        .foregroundColor(.white.opacity(0.9))
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                        .padding(.horizontal, 8)
+                    
+                    Text("Tap to create")
+                        .font(.system(size: 11, weight: .regular, design: .rounded))
+                        .foregroundColor(.white.opacity(0.7))
+                }
             }
-            .padding(12)
         }
-        .widgetURL(entry.intention.map { URL(string: "dailyintentions://intention/\($0.id.uuidString)") })
-    }
-    
-    @ViewBuilder
-    private func scopeBadge(for scope: String) -> some View {
-        let (label, icon) = scopeInfo(for: scope)
-        HStack(spacing: 4) {
-            Image(systemName: icon)
-                .font(.system(size: 10))
-            Text(label)
-                .font(.system(size: 10, weight: .medium))
-        }
-        .foregroundColor(entry.theme?.accentColor.map { WidgetTheme.color(from: $0) } ?? .white.opacity(0.8))
-        .padding(.horizontal, 8)
-        .padding(.vertical, 4)
-        .background(
-            Capsule()
-                .fill(entry.theme?.accentColor.map { WidgetTheme.color(from: $0).opacity(0.2) } ?? Color.white.opacity(0.2))
-        )
-    }
-    
-    private func scopeInfo(for scope: String) -> (String, String) {
-        switch scope.lowercased() {
-        case "day":
-            return ("Day", "sun.max.fill")
-        case "week":
-            return ("Week", "calendar")
-        case "month":
-            return ("Month", "calendar.badge.clock")
-        default:
-            return ("Day", "sun.max.fill")
-        }
+        .widgetURL(entry.intention.flatMap { URL(string: "dailyintentions://intention/\($0.id.uuidString)") })
+        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 }
-

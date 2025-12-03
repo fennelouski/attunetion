@@ -4,12 +4,12 @@
 Build the Vercel backend API that handles AI features (theme generation, quote finding, intention rephrasing) and provides REST endpoints for data sync.
 
 ## Context
-You're building the backend for a Daily Intentions app. The iOS app uses SwiftData for local storage, but needs AI features powered by OpenAI. The backend will run on Vercel with serverless functions.
+You're building the backend for a Attunetion app. The iOS app uses SwiftData for local storage, but needs AI features powered by OpenAI. The backend will run on Vercel with serverless functions.
 
 ## Your Scope - FILES YOU OWN
 Create a new Vercel project in a separate directory (NOT in the Xcode project):
 ```
-daily-intentions-backend/
+attunetion-backend/
 ├── api/
 │   ├── intentions/
 │   │   ├── index.ts (GET all, POST create)

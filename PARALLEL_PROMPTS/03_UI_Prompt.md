@@ -1,13 +1,13 @@
 # Chat 3: Main App UI (iOS/macOS)
 
 ## Your Mission
-Build the core user interface for the Daily Intentions app - the main screens users interact with to create, view, search, and manage their intentions.
+Build the core user interface for the Attunetion app - the main screens users interact with to create, view, search, and manage their intentions.
 
 ## Context
 You're building a SwiftUI app where users set daily/weekly/monthly intentions. The data layer is being built by another team, so you'll start with mock data and switch to real repositories later. Focus on creating an intuitive, beautiful UI.
 
 ## Your Scope - FILES YOU OWN
-Create these files in `Daily Intentions/Views/`:
+Create these files in `Attunetion/Views/`:
 ```
 Views/
 ├── Main/
@@ -26,7 +26,7 @@ Views/
     └── AboutView.swift
 ```
 
-Create these files in `Daily Intentions/ViewModels/`:
+Create these files in `Attunetion/ViewModels/`:
 ```
 ViewModels/
 ├── IntentionsViewModel.swift

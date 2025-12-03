@@ -4,8 +4,10 @@
 <dict>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.com.nathanfennel.Daily-Intentions</string>
+		<string>group.com.nathanfennel.Attunetion</string>
 	</array>
 </dict>
 </plist>
+
+
 

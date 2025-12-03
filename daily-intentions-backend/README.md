@@ -1,6 +1,6 @@
-# Daily Intentions Backend API
+# Attunetion Backend API
 
-Vercel serverless backend API for the Daily Intentions iOS/macOS app, providing AI-powered features including theme generation, quote finding, intention rephrasing, and monthly intention generation.
+Vercel serverless backend API for the Attunetion iOS/macOS app, providing AI-powered features including theme generation, quote finding, intention rephrasing, and monthly intention generation.
 
 ## 🚀 Quick Start
 
@@ -449,7 +449,7 @@ curl -X POST https://your-project.vercel.app/api/ai/generate-quote \
 ## 📦 Project Structure
 
 ```
-daily-intentions-backend/
+attunetion-backend/
 ├── api/
 │   ├── ai/
 │   │   ├── generate-theme.ts
@@ -543,4 +543,6 @@ MIT
 ## 🤝 Support
 
 For issues or questions, contact the backend team or refer to the main project documentation.
+
+
 

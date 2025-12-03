@@ -1,6 +1,6 @@
 # iOS Integration Guide
 
-Quick reference for integrating the Daily Intentions backend API into the iOS app.
+Quick reference for integrating the Attunetion backend API into the iOS app.
 
 ## Base URL
 
@@ -258,4 +258,6 @@ enum APIEnvironment {
     }
 }
 ```
+
+
 

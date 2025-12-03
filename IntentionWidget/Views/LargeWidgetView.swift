@@ -8,95 +8,119 @@
 import SwiftUI
 import WidgetKit
 
-/// Large widget view (systemLarge)
+/// Large widget view (systemLarge) - Elegant, spacious design
 struct LargeWidgetView: View {
     var entry: IntentionWidgetProvider.Entry
     
+    private var placeholderText: String {
+        let frequency = WidgetDataService.shared.getDefaultIntentionFrequency()
+        switch frequency {
+        case "daily":
+            return "Set your intention for today"
+        case "weekly":
+            return "Set your intention for this week"
+        case "monthly":
+            return "Set your intention for this month"
+        default:
+            return "Set your intention"
+        }
+    }
+    
     var body: some View {
         ZStack {
-            // Background
-            if let theme = entry.theme {
-                WidgetTheme.color(from: theme.backgroundColor)
-            } else {
-                Color.blue
-            }
+            // Beautiful gradient background
+            WidgetTheme.gradient(for: entry.theme)
             
-            VStack(alignment: .leading, spacing: 16) {
-                // Scope badge at top
-                if let intention = entry.intention {
+            // Subtle overlay for depth
+            WidgetTheme.overlayGradient()
+            
+            if let intention = entry.intention {
+                VStack(alignment: .leading, spacing: 0) {
+                    // Scope badge at top
                     HStack {
                         scopeBadge(for: intention.scope)
                         Spacer()
                     }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 16)
                     
                     Spacer()
                     
-                    // Intention text (larger font)
-                    Text(intention.text)
-                        .font(.system(size: 24, weight: .bold))
-                        .foregroundColor(entry.theme.map { WidgetTheme.color(from: $0.textColor) } ?? .white)
-                        .lineLimit(6)
-                        .multilineTextAlignment(.leading)
-                    
-                    Spacer()
-                    
-                    // Quote (if available)
-                    if let quote = intention.quote, !quote.isEmpty {
-                        VStack(alignment: .leading, spacing: 4) {
+                    // Main intention text - large, prominent, elegant
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text(intention.text)
+                            .font(.system(size: 26, weight: .semibold, design: .rounded))
+                            .foregroundColor(entry.theme.map { WidgetTheme.color(from: $0.textColor) } ?? .white)
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(6)
+                            .lineSpacing(6)
+                        
+                        // Quote (if available) - styled elegantly
+                        if let quote = intention.quote, !quote.isEmpty {
                             Text("\"\(quote)\"")
-                                .font(.system(size: 14, weight: .regular))
+                                .font(.system(size: 15, weight: .regular, design: .rounded))
                                 .italic()
-                                .foregroundColor(entry.theme?.accentColor.map { WidgetTheme.color(from: $0) } ?? .white.opacity(0.9))
+                                .foregroundColor(entry.theme?.accentColor.map { WidgetTheme.color(from: $0).opacity(0.9) } ?? .white.opacity(0.8))
+                                .lineLimit(2)
+                                .padding(.top, 4)
                         }
-                        .padding(.vertical, 8)
                     }
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 12)
                     
                     Spacer()
                     
                     // Date range at bottom
                     HStack(spacing: 6) {
                         Image(systemName: "calendar")
-                            .font(.system(size: 14))
+                            .font(.system(size: 12, weight: .medium))
                         Text(formatDate(for: intention))
-                            .font(.system(size: 14, weight: .medium))
+                            .font(.system(size: 13, weight: .medium, design: .rounded))
                     }
-                    .foregroundColor(entry.theme?.accentColor.map { WidgetTheme.color(from: $0) } ?? .white.opacity(0.8))
-                } else {
-                    // Empty state
-                    VStack(spacing: 12) {
-                        Image(systemName: "sparkles")
-                            .font(.system(size: 48))
-                            .foregroundColor(.secondary)
-                        Text("No intention set")
-                            .font(.system(size: 20, weight: .semibold))
-                            .foregroundColor(.secondary)
-                        Text("Tap to create one")
-                            .font(.system(size: 14))
-                            .foregroundColor(.secondary)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .foregroundColor(entry.theme?.accentColor.map { WidgetTheme.color(from: $0).opacity(0.8) } ?? .white.opacity(0.7))
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 16)
                 }
+            } else {
+                // Empty state - elegant and inviting with contextual placeholder
+                VStack(spacing: 16) {
+                    Image(systemName: "sparkles")
+                        .font(.system(size: 48, weight: .light))
+                        .foregroundColor(.white.opacity(0.7))
+                    
+                    Text(placeholderText)
+                        .font(.system(size: 22, weight: .semibold, design: .rounded))
+                        .foregroundColor(.white.opacity(0.9))
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                        .padding(.horizontal, 20)
+                    
+                    Text("Tap to create one")
+                        .font(.system(size: 15, weight: .regular, design: .rounded))
+                        .foregroundColor(.white.opacity(0.7))
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .padding(20)
         }
-        .widgetURL(entry.intention.map { URL(string: "dailyintentions://intention/\($0.id.uuidString)") })
+        .widgetURL(entry.intention.flatMap { URL(string: "dailyintentions://intention/\($0.id.uuidString)") })
+        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
     }
     
     @ViewBuilder
     private func scopeBadge(for scope: String) -> some View {
         let (label, icon) = scopeInfo(for: scope)
-        HStack(spacing: 8) {
+        HStack(spacing: 6) {
             Image(systemName: icon)
-                .font(.system(size: 14))
+                .font(.system(size: 12, weight: .medium))
             Text(label)
-                .font(.system(size: 14, weight: .bold))
+                .font(.system(size: 12, weight: .semibold, design: .rounded))
         }
         .foregroundColor(entry.theme?.accentColor.map { WidgetTheme.color(from: $0) } ?? .white)
-        .padding(.horizontal, 12)
-        .padding(.vertical, 8)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 6)
         .background(
             Capsule()
-                .fill(entry.theme?.accentColor.map { WidgetTheme.color(from: $0).opacity(0.2) } ?? Color.white.opacity(0.2))
+                .fill(Color.white.opacity(0.2))
         )
     }
     
@@ -136,4 +160,3 @@ struct LargeWidgetView: View {
         }
     }
 }
-

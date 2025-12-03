@@ -9,7 +9,7 @@
 ## Step 1: Install Dependencies
 
 ```bash
-cd daily-intentions-backend
+cd attunetion-backend
 npm install
 ```
 
@@ -126,4 +126,6 @@ CORS is configured in `vercel.json`. If you see CORS errors:
 - [ ] Error handling tested
 - [ ] Production URL shared with iOS team
 - [ ] API documentation updated with production URL
+
+
 

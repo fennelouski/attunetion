@@ -1,13 +1,13 @@
 //
 //  PresetThemes.swift
-//  Daily Intentions
+//  Attunetion
 //
 //  Created by Nathan Fennel on 12/2/25.
 //
 
 import Foundation
 
-/// Preset themes for the Daily Intentions app
+/// Preset themes for the Attunetion app
 enum PresetThemes {
     /// Get all preset theme definitions
     static func getAll() -> [IntentionTheme] {
@@ -99,7 +99,6 @@ enum PresetThemes {
     /// This should be called during app initialization or onboarding
     static func populatePresetThemes(in repository: ThemeRepository) throws {
         let existingThemes = repository.getPresetThemes()
-        let presetThemeNames = Set(PresetThemes.getAll().map { $0.name })
         let existingThemeNames = Set(existingThemes.map { $0.name })
         
         // Only add themes that don't already exist
@@ -110,4 +109,6 @@ enum PresetThemes {
         }
     }
 }
+
+
 

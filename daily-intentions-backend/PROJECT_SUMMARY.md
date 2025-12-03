@@ -1,8 +1,8 @@
-# Daily Intentions Backend - Project Summary
+# Attunetion Backend - Project Summary
 
 ## ✅ What Was Built
 
-A complete Vercel serverless backend API for the Daily Intentions app with the following features:
+A complete Vercel serverless backend API for the Attunetion app with the following features:
 
 ### 🤖 AI Endpoints (4 endpoints)
 1. **POST /api/ai/generate-theme** - Generate color themes based on intention text
@@ -30,7 +30,7 @@ A complete Vercel serverless backend API for the Daily Intentions app with the f
 ## 📁 Project Structure
 
 ```
-daily-intentions-backend/
+attunetion-backend/
 ├── api/                    # Serverless function endpoints
 │   ├── ai/                 # AI-powered endpoints
 │   ├── intentions/         # CRUD endpoints
@@ -150,4 +150,6 @@ For questions or issues:
 ---
 
 **Status**: ✅ Ready for deployment and iOS integration
+
+
 

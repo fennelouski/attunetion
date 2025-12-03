@@ -1,4 +1,4 @@
-# Daily Intentions App - Parallelizable Implementation Plan
+# Attunetion App - Parallelizable Implementation Plan
 
 ## Project Overview
 A multi-platform app (iOS, macOS, watchOS, iPadOS) for tracking daily/weekly/monthly intentions with widgets, AI features, and cross-device sync.
@@ -360,7 +360,7 @@ Each module should include:
 ## File Structure (Proposed)
 
 ```
-Daily Intentions/
+Attunetion/
 ├── Models/
 │   ├── Intention.swift
 │   ├── IntentionTheme.swift

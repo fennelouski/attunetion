@@ -1,18 +1,18 @@
 # Chat 1: Data Models & Repository Layer
 
 ## Your Mission
-Build the complete data layer for the Daily Intentions app using SwiftData with CloudKit sync support.
+Build the complete data layer for the Attunetion app using SwiftData with CloudKit sync support.
 
 ## Context
 You're working on a multi-platform app (iOS/macOS/watchOS) where users track daily/weekly/monthly intentions. The app needs local persistence with SwiftData and cloud sync with CloudKit. Other teams are building the UI and backend API in parallel.
 
 ## Your Scope - FILES YOU OWN
-Create these files in `Daily Intentions/Models/`:
+Create these files in `Attunetion/Models/`:
 - `Intention.swift`
 - `IntentionTheme.swift`
 - `UserPreferences.swift`
 
-Create these files in `Daily Intentions/Services/`:
+Create these files in `Attunetion/Services/`:
 - `IntentionRepository.swift`
 - `ThemeRepository.swift`
 - `UserPreferencesRepository.swift`

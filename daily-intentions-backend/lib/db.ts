@@ -84,3 +84,5 @@ export function belongsToUser(intentionId: string, userId: string): boolean {
   return intention?.userId === userId;
 }
 
+
+

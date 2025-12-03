@@ -1,6 +1,6 @@
 # Data Model Documentation
 
-This document describes the data models and repository layer for the Daily Intentions app.
+This document describes the data models and repository layer for the Attunetion app.
 
 ## Overview
 
@@ -219,4 +219,6 @@ All repositories are `@MainActor` classes, ensuring:
 - Consider adding indexes for frequently queried fields
 - Add migration support for schema changes
 - Implement conflict resolution for CloudKit sync
+
+
 

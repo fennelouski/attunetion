@@ -1,4 +1,4 @@
-# Daily Intentions - Parallel Development Prompts
+# Attunetion - Parallel Development Prompts
 
 This folder contains detailed prompts for 6 parallel development streams. Each prompt is designed to be completely independent, allowing different developers (or AI assistants) to work simultaneously without conflicts.
 
@@ -90,45 +90,45 @@ Each chat "owns" specific directories/files. **Never modify files owned by anoth
 
 ### Chat 1 (Data Models) Owns:
 ```
-Daily Intentions/Models/
-Daily Intentions/Services/IntentionRepository.swift
-Daily Intentions/Services/ThemeRepository.swift
-Daily Intentions/Services/UserPreferencesRepository.swift
+Attunetion/Models/
+Attunetion/Services/IntentionRepository.swift
+Attunetion/Services/ThemeRepository.swift
+Attunetion/Services/UserPreferencesRepository.swift
 ```
 
 ### Chat 2 (Backend) Owns:
 ```
-daily-intentions-backend/ (entire separate project)
+attunetion-backend/ (entire separate project)
 ```
 
 ### Chat 3 (UI) Owns:
 ```
-Daily Intentions/Views/Main/
-Daily Intentions/Views/Components/
-Daily Intentions/Views/Settings/SettingsView.swift
-Daily Intentions/ViewModels/IntentionsViewModel.swift
-Daily Intentions/ViewModels/ThemeViewModel.swift
-Daily Intentions/ContentView.swift (will modify this)
+Attunetion/Views/Main/
+Attunetion/Views/Components/
+Attunetion/Views/Settings/SettingsView.swift
+Attunetion/ViewModels/IntentionsViewModel.swift
+Attunetion/ViewModels/ThemeViewModel.swift
+Attunetion/ContentView.swift (will modify this)
 ```
 
 ### Chat 4 (Widget) Owns:
 ```
 IntentionWidget/ (entire widget target)
-Daily Intentions.xcodeproj (widget target configuration)
+Attunetion.xcodeproj (widget target configuration)
 ```
 
 ### Chat 5 (Notifications) Owns:
 ```
-Daily Intentions/Services/NotificationManager.swift
-Daily Intentions/Services/NotificationHandler.swift
-Daily Intentions/Views/Settings/NotificationSettingsView.swift
+Attunetion/Services/NotificationManager.swift
+Attunetion/Services/NotificationHandler.swift
+Attunetion/Views/Settings/NotificationSettingsView.swift
 IntentionNotificationService/ (if creating notification service extension)
 ```
 
 ### Chat 6 (Onboarding) Owns:
 ```
-Daily Intentions/Views/Onboarding/
-Daily Intentions/Utilities/OnboardingManager.swift
+Attunetion/Views/Onboarding/
+Attunetion/Utilities/OnboardingManager.swift
 ```
 
 ## Shared Files (Coordinate Changes)

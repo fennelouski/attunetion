@@ -8,82 +8,107 @@
 import SwiftUI
 import WidgetKit
 
-/// Medium widget view (systemMedium)
+/// Medium widget view (systemMedium) - Beautiful, intentional design
 struct MediumWidgetView: View {
     var entry: IntentionWidgetProvider.Entry
     
+    private var placeholderText: String {
+        let frequency = WidgetDataService.shared.getDefaultIntentionFrequency()
+        switch frequency {
+        case "daily":
+            return "Set your intention for today"
+        case "weekly":
+            return "Set your intention for this week"
+        case "monthly":
+            return "Set your intention for this month"
+        default:
+            return "Set your intention"
+        }
+    }
+    
     var body: some View {
         ZStack {
-            // Background
-            if let theme = entry.theme {
-                WidgetTheme.color(from: theme.backgroundColor)
-            } else {
-                Color.blue
-            }
+            // Beautiful gradient background
+            WidgetTheme.gradient(for: entry.theme)
             
-            VStack(alignment: .leading, spacing: 12) {
-                // Scope badge at top
-                if let intention = entry.intention {
+            // Subtle overlay for depth
+            WidgetTheme.overlayGradient()
+            
+            if let intention = entry.intention {
+                VStack(alignment: .leading, spacing: 0) {
+                    // Subtle scope indicator at top
                     HStack {
                         scopeBadge(for: intention.scope)
                         Spacer()
                     }
+                    .padding(.horizontal, 16)
+                    .padding(.top, 12)
                     
                     Spacer()
                     
-                    // Intention text
+                    // Main intention text - prominent and centered
                     Text(intention.text)
-                        .font(.system(size: 18, weight: .semibold))
+                        .font(.system(size: 20, weight: .semibold, design: .rounded))
                         .foregroundColor(entry.theme.map { WidgetTheme.color(from: $0.textColor) } ?? .white)
-                        .lineLimit(4)
                         .multilineTextAlignment(.leading)
+                        .lineLimit(4)
+                        .lineSpacing(4)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
                     
                     Spacer()
                     
-                    // Date subtitle
-                    HStack(spacing: 4) {
+                    // Subtle date indicator at bottom
+                    HStack {
                         Image(systemName: "calendar")
-                            .font(.system(size: 12))
+                            .font(.system(size: 11, weight: .medium))
                         Text(formatDate(for: intention))
-                            .font(.system(size: 12, weight: .medium))
+                            .font(.system(size: 11, weight: .medium, design: .rounded))
                     }
-                    .foregroundColor(entry.theme?.accentColor.map { WidgetTheme.color(from: $0) } ?? .white.opacity(0.8))
-                } else {
-                    // Empty state
-                    VStack(spacing: 8) {
-                        Image(systemName: "sparkles")
-                            .font(.system(size: 32))
-                            .foregroundColor(.secondary)
-                        Text("No intention set")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.secondary)
-                        Text("Tap to create one")
-                            .font(.system(size: 12))
-                            .foregroundColor(.secondary)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .foregroundColor(entry.theme?.accentColor.map { WidgetTheme.color(from: $0).opacity(0.8) } ?? .white.opacity(0.7))
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 12)
                 }
+            } else {
+                // Empty state with contextual placeholder
+                VStack(spacing: 12) {
+                    Image(systemName: "sparkles")
+                        .font(.system(size: 36, weight: .light))
+                        .foregroundColor(.white.opacity(0.7))
+                    
+                    Text(placeholderText)
+                        .font(.system(size: 18, weight: .semibold, design: .rounded))
+                        .foregroundColor(.white.opacity(0.9))
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                        .padding(.horizontal, 16)
+                    
+                    Text("Tap to create one")
+                        .font(.system(size: 13, weight: .regular, design: .rounded))
+                        .foregroundColor(.white.opacity(0.7))
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .padding(16)
         }
-        .widgetURL(entry.intention.map { URL(string: "dailyintentions://intention/\($0.id.uuidString)") })
+        .widgetURL(entry.intention.flatMap { URL(string: "dailyintentions://intention/\($0.id.uuidString)") })
+        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
     }
     
     @ViewBuilder
     private func scopeBadge(for scope: String) -> some View {
         let (label, icon) = scopeInfo(for: scope)
-        HStack(spacing: 6) {
+        HStack(spacing: 5) {
             Image(systemName: icon)
-                .font(.system(size: 12))
+                .font(.system(size: 10, weight: .medium))
             Text(label)
-                .font(.system(size: 12, weight: .semibold))
+                .font(.system(size: 10, weight: .semibold, design: .rounded))
         }
         .foregroundColor(entry.theme?.accentColor.map { WidgetTheme.color(from: $0) } ?? .white)
-        .padding(.horizontal, 10)
-        .padding(.vertical, 6)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
         .background(
             Capsule()
-                .fill(entry.theme?.accentColor.map { WidgetTheme.color(from: $0).opacity(0.2) } ?? Color.white.opacity(0.2))
+                .fill(Color.white.opacity(0.2))
         )
     }
     
@@ -123,4 +148,3 @@ struct MediumWidgetView: View {
         }
     }
 }
-

@@ -8,7 +8,7 @@ When users first open the app, they should see a brief onboarding flow (3-5 scre
 
 ## Your Scope - FILES YOU OWN
 
-Create these files in `Daily Intentions/Views/Onboarding/`:
+Create these files in `Attunetion/Views/Onboarding/`:
 ```
 Views/Onboarding/
 ├── OnboardingContainerView.swift (main coordinator)
@@ -24,7 +24,7 @@ Views/Onboarding/
     └── ExampleIntentionCard.swift
 ```
 
-Create `Daily Intentions/Utilities/`:
+Create `Attunetion/Utilities/`:
 ```
 Utilities/
 └── OnboardingManager.swift
@@ -40,7 +40,7 @@ Utilities/
 │                                  │
 │         [App Icon/Logo]          │
 │                                  │
-│     Daily Intentions             │
+│     Attunetion             │
 │                                  │
 │   Set intentions. Stay focused.  │
 │   Build a meaningful life.       │
