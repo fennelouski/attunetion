@@ -1,9 +1,5 @@
 {
-  "functions": {
-    "api/**/*.ts": {
-      "runtime": "nodejs20.x"
-    }
-  },
+  "buildCommand": "npm run build",
   "headers": [
     {
       "source": "/api/(.*)",
@@ -18,7 +14,7 @@
         },
         {
           "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type, Authorization, X-API-Key"
+          "value": "Content-Type, Authorization, X-API-Key, X-User-Id"
         }
       ]
     }
