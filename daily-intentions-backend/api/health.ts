@@ -1,5 +1,3 @@
-import { HealthResponse } from "../types";
-
 export default async function handler(request: Request): Promise<Response> {
   // Handle CORS preflight
   if (request.method === "OPTIONS") {
@@ -22,14 +20,16 @@ export default async function handler(request: Request): Promise<Response> {
     });
   }
 
-  const response: HealthResponse = {
+  const response = {
     status: "ok",
     timestamp: new Date().toISOString(),
     version: "1.0.0",
   };
 
-  return Response.json(response, {
+  return new Response(JSON.stringify(response), {
+    status: 200,
     headers: {
+      "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
     },
   });
