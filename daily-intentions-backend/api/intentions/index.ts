@@ -1,7 +1,7 @@
 import { validateApiKey, getUserId } from "../../lib/auth";
 import { handleError, ErrorCodes, createErrorResponse } from "../../lib/errors";
 import { getIntentionsByUserId, createIntention } from "../../lib/db";
-import { CreateIntentionRequest, Intention } from "../../types";
+import { CreateIntentionRequest } from "../../types";
 
 export default async function handler(request: Request): Promise<Response> {
   // Handle CORS preflight
@@ -43,7 +43,7 @@ export default async function handler(request: Request): Promise<Response> {
 
     // POST: Create a new intention
     if (request.method === "POST") {
-      const body: CreateIntentionRequest = await request.json();
+      const body = await request.json() as CreateIntentionRequest;
 
       // Validation
       if (!body.userId || typeof body.userId !== "string") {

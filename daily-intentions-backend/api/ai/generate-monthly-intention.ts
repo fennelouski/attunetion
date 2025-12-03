@@ -56,7 +56,7 @@ export default async function handler(request: Request): Promise<Response> {
     }
 
     // Parse request body
-    const body: GenerateMonthlyIntentionRequest = await request.json();
+    const body = await request.json() as GenerateMonthlyIntentionRequest;
     
     if (!body.previousIntentions || !Array.isArray(body.previousIntentions) || body.previousIntentions.length === 0) {
       return Response.json(

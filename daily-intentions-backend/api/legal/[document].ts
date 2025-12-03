@@ -1,6 +1,3 @@
-import { readFile } from 'fs/promises';
-import { join } from 'path';
-
 const LEGAL_DOCUMENTS: Record<string, string> = {
   'privacy-policy': 'privacy-policy.html',
   'eula': 'eula.html',

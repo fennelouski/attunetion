@@ -1,5 +1,5 @@
 import { generateTheme } from "../../lib/openai";
-import { validateApiKey, getUserId } from "../../lib/auth";
+import { validateApiKey } from "../../lib/auth";
 import { checkRateLimit, getRateLimitIdentifier } from "../../lib/rateLimit";
 import { handleError, ErrorCodes, createErrorResponse } from "../../lib/errors";
 import { GenerateThemeRequest, ThemeResponse } from "../../types";
@@ -56,7 +56,7 @@ export default async function handler(request: Request): Promise<Response> {
     }
 
     // Parse request body
-    const body: GenerateThemeRequest = await request.json();
+    const body = await request.json() as GenerateThemeRequest;
     
     if (!body.intentionText || typeof body.intentionText !== "string" || body.intentionText.trim().length === 0) {
       return Response.json(

@@ -56,7 +56,7 @@ export default async function handler(request: Request): Promise<Response> {
     }
 
     // Parse request body
-    const body: GenerateQuoteRequest = await request.json();
+    const body = await request.json() as GenerateQuoteRequest;
     
     if (!body.intentionText || typeof body.intentionText !== "string" || body.intentionText.trim().length === 0) {
       return Response.json(

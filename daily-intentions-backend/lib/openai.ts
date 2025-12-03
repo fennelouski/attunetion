@@ -151,7 +151,7 @@ export async function generateMonthlyIntention(
   const systemPrompt = `You are a personal growth advisor. Analyze patterns in previous monthly intentions and generate a new intention that builds on those themes. Return ONLY a valid JSON object with these exact keys: intention (5-15 words), and reasoning (one sentence explaining how it builds on previous themes). Do not include any markdown formatting or code blocks.`;
 
   const intentionsList = previousIntentions
-    .map((int, idx) => `${int.month}: ${int.text}`)
+    .map((int) => `${int.month}: ${int.text}`)
     .join("\n");
 
   const userPrompt = `Based on these previous monthly intentions:\n${intentionsList}\n\nGenerate a new monthly intention that builds on these themes.`;

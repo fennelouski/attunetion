@@ -84,7 +84,7 @@ export default async function handler(
         );
       }
 
-      const body: UpdateIntentionRequest = await request.json();
+      const body = await request.json() as UpdateIntentionRequest;
 
       // Validate scope if provided
       if (body.scope && !["day", "week", "month"].includes(body.scope)) {

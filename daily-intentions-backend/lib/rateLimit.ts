@@ -15,7 +15,7 @@ const REQUEST_EXPIRY_MS = 2 * 60 * 60 * 1000; // 2 hours per request
 // Tiered rate limits for cost control
 const TIER_1_MAX_REQUESTS = 10; // First 10 requests: use gpt-5.1-mini
 const TIER_2_MAX_REQUESTS = 20; // Next 10 requests: use gpt-5.1-nano for rephrasing
-const TIER_3_MAX_REQUESTS = 50; // After 20 requests: shuffle existing intentions
+// TIER_3: After 20 requests, shuffle existing intentions
 const RATE_LIMIT_MAX_REQUESTS = 50; // Hard limit
 
 /**

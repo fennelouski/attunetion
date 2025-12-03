@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { validateApiKey, getUserId } from "../../lib/auth";
+import { validateApiKey } from "../../lib/auth";
 import { checkRateLimit, getRateLimitIdentifier } from "../../lib/rateLimit";
 import { handleError, ErrorCodes, createErrorResponse } from "../../lib/errors";
 
@@ -92,7 +92,7 @@ export default async function handler(request: Request): Promise<Response> {
     }
 
     // Parse request body
-    const body: GenerateWeeklyIntentionsRequest = await request.json();
+    const body = await request.json() as GenerateWeeklyIntentionsRequest;
     
     if (!body.userInfo || typeof body.userInfo !== "string") {
       return Response.json(
