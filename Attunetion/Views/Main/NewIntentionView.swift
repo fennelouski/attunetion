@@ -63,7 +63,7 @@ struct NewIntentionView: View {
                         .overlay(
                             Group {
                                 if intentionText.isEmpty {
-                                    Text("Enter your intention...")
+                                    Text(String(localized: "Enter your intention..."))
                                         .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                                         .padding(.top, 8)
                                         .padding(.leading, 5)
@@ -86,7 +86,7 @@ struct NewIntentionView: View {
                                 HStack(spacing: 6) {
                                     Image(systemName: "lightbulb.fill")
                                         .font(.system(size: 14, weight: .medium))
-                                    Text("Need inspiration?")
+                                    Text(String(localized: "Need inspiration?"))
                                         .font(.system(size: 14, weight: .medium, design: .default))
                                 }
                                 .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
@@ -99,14 +99,14 @@ struct NewIntentionView: View {
                     }
                 } header: {
                     ThemedSectionHeader(
-                        text: "Intention",
+                        text: String(localized: "Intention"),
                         themeManager: themeManager
                     )
                 }
                 
                 Section {
                     // Scope selector
-                    Picker("Scope", selection: $selectedScope) {
+                    Picker(String(localized: "Scope"), selection: $selectedScope) {
                         ForEach(IntentionScope.allCases, id: \.self) { scope in
                             Text(scope.rawValue.capitalized).tag(scope)
                         }
@@ -117,12 +117,12 @@ struct NewIntentionView: View {
                     
                     // Date picker
                     DatePicker(
-                        "Date",
+                        String(localized: "Date"),
                         selection: $selectedDate,
                         displayedComponents: selectedScope == .day ? [.date] : [.date]
                     )
                 } header: {
-                    Text("Timing")
+                    Text(String(localized: "Timing"))
                 }
                 
                 Section {
@@ -134,14 +134,14 @@ struct NewIntentionView: View {
                         showingThemePicker.toggle()
                     }) {
                         HStack {
-                            Text("Theme")
+                            Text(String(localized: "Theme"))
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                             Spacer()
                             if let theme = selectedTheme {
                                 Text(theme.name)
                                     .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                             } else {
-                                Text("None")
+                                Text(String(localized: "None"))
                                     .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                             }
                             Image(systemName: "chevron.right")
@@ -173,7 +173,7 @@ struct NewIntentionView: View {
                         showingFontPicker.toggle()
                     }) {
                         HStack {
-                            Text("Font")
+                            Text(String(localized: "Font"))
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                             Spacer()
                             if let fontId = selectedFont,
@@ -181,7 +181,7 @@ struct NewIntentionView: View {
                                 Text(fontOption.name)
                                     .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                             } else {
-                                Text("System Default")
+                                Text(String(localized: "System Default"))
                                     .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                             }
                             Image(systemName: "chevron.right")
@@ -216,7 +216,7 @@ struct NewIntentionView: View {
             }
             .scrollContentBackground(.hidden)
         }
-        .navigationTitle("New Intention")
+        .navigationTitle(String(localized: "New Intention"))
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif

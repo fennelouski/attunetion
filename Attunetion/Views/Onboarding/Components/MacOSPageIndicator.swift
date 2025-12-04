@@ -53,7 +53,7 @@ struct MacOSPageIndicator: View {
             .frame(height: 3)
             
             // Subtle page counter text
-            Text("\(currentPage + 1) of \(pageCount)")
+            Text(String(format: String(localized: "%1$d of %2$d"), currentPage + 1, pageCount))
                 .font(.system(size: 11, weight: .regular, design: .default))
                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.6))
         }

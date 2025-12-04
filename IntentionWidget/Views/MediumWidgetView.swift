@@ -16,13 +16,13 @@ struct MediumWidgetView: View {
         let frequency = WidgetDataService.shared.getDefaultIntentionFrequency()
         switch frequency {
         case "daily":
-            return "Set your intention for today"
+            return String(localized: "Set your intention for today")
         case "weekly":
-            return "Set your intention for this week"
+            return String(localized: "Set your intention for this week")
         case "monthly":
-            return "Set your intention for this month"
+            return String(localized: "Set your intention for this month")
         default:
-            return "Set your intention"
+            return String(localized: "Set your intention")
         }
     }
     
@@ -83,7 +83,7 @@ struct MediumWidgetView: View {
                         .lineLimit(2)
                         .padding(.horizontal, 16)
                     
-                    Text("Tap to create one")
+                    Text(String(localized: "Tap to create one"))
                         .font(.system(size: 13, weight: .regular, design: .rounded))
                         .foregroundColor(.white.opacity(0.7))
                 }
@@ -115,13 +115,13 @@ struct MediumWidgetView: View {
     private func scopeInfo(for scope: String) -> (String, String) {
         switch scope.lowercased() {
         case "day":
-            return ("Today", "sun.max.fill")
+            return (String(localized: "Today"), "sun.max.fill")
         case "week":
-            return ("This Week", "calendar")
+            return (String(localized: "This Week"), "calendar")
         case "month":
-            return ("This Month", "calendar.badge.clock")
+            return (String(localized: "This Month"), "calendar.badge.clock")
         default:
-            return ("Today", "sun.max.fill")
+            return (String(localized: "Today"), "sun.max.fill")
         }
     }
     

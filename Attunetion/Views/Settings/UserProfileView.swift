@@ -46,9 +46,9 @@ struct UserProfileView: View {
                 Form {
                     Section {
                         // Input mode selector
-                        Picker("Input Style", selection: $inputMode) {
-                            Text("Free-form").tag(InputMode.freeform)
-                            Text("Guided").tag(InputMode.guided)
+                        Picker(String(localized: "Input Style"), selection: $inputMode) {
+                            Text(String(localized: "Free-form")).tag(InputMode.freeform)
+                            Text(String(localized: "Guided")).tag(InputMode.guided)
                         }
                         .pickerStyle(.segmented)
                         .padding(.vertical, 4)
@@ -57,12 +57,12 @@ struct UserProfileView: View {
                             syncDataBetweenModes(from: oldValue, to: newValue)
                         }
                     } header: {
-                        ThemedSectionHeader(text: "How would you like to share?", themeManager: themeManager)
+                        ThemedSectionHeader(text: String(localized: "How would you like to share?"), themeManager: themeManager)
                     } footer: {
                         ThemedSectionFooter(
                             text: inputMode == .freeform 
-                                ? "Write freely about yourself, your goals, and what matters to you."
-                                : "Answer what feels right - you can skip any question.",
+                                ? String(localized: "Write freely about yourself, your goals, and what matters to you.")
+                                : String(localized: "Answer what feels right - you can skip any question."),
                             themeManager: themeManager
                         )
                     }
@@ -74,7 +74,7 @@ struct UserProfileView: View {
                             guidedInput
                         }
                     } header: {
-                        ThemedSectionHeader(text: "Your Information", themeManager: themeManager)
+                        ThemedSectionHeader(text: String(localized: "Your Information"), themeManager: themeManager)
                     }
                     
                     Section {
@@ -90,9 +90,9 @@ struct UserProfileView: View {
                             }
                         )) {
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("Auto-Suggest Intentions")
+                                Text(String(localized: "Auto-Suggest Intentions"))
                                     .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                                Text("Automatically receive personalized suggestions for daily, weekly, and monthly intentions based on your profile")
+                                Text(String(localized: "Automatically receive personalized suggestions for daily, weekly, and monthly intentions based on your profile"))
                                     .font(.caption)
                                     .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                             }
@@ -103,25 +103,25 @@ struct UserProfileView: View {
                             HStack {
                                 Image(systemName: "info.circle")
                                     .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
-                                Text("Requires accepting Terms of Service")
+                                Text(String(localized: "Requires accepting Terms of Service"))
                                     .font(.caption)
                                     .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                             }
                         }
                     } header: {
                         ThemedSectionHeader(
-                            text: "Auto-Suggestions",
+                            text: String(localized: "Auto-Suggestions"),
                             themeManager: themeManager
                         )
                     } footer: {
                         if autoGenerateEnabled {
                             ThemedSectionFooter(
-                                text: "Suggestions will be created weekly. You can always edit or delete them. Your data may be shared with third-party services to generate suggestions.",
+                                text: String(localized: "Suggestions will be created weekly. You can always edit or delete them. Your data may be shared with third-party services to generate suggestions."),
                                 themeManager: themeManager
                             )
                         } else {
                             ThemedSectionFooter(
-                                text: "Enable this to receive automatic suggestions for your intentions each week. You'll need to agree to our Terms of Service first.",
+                                text: String(localized: "Enable this to receive automatic suggestions for your intentions each week. You'll need to agree to our Terms of Service first."),
                                 themeManager: themeManager
                             )
                         }
@@ -129,20 +129,20 @@ struct UserProfileView: View {
                 }
                 .scrollContentBackground(.hidden)
             }
-            .navigationTitle("Suggested Intentions")
+            .navigationTitle(String(localized: "Suggested Intentions"))
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
+                    Button(String(localized: "Cancel")) {
                         dismiss()
                     }
                     .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                 }
                 
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
+                    Button(String(localized: "Save")) {
                         saveProfile()
                     }
                     .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
@@ -152,17 +152,17 @@ struct UserProfileView: View {
             .onAppear {
                 loadProfile()
             }
-            .alert("Error", isPresented: $showError) {
-                Button("OK", role: .cancel) {}
+            .alert(String(localized: "Error"), isPresented: $showError) {
+                Button(String(localized: "OK"), role: .cancel) {}
             } message: {
                 Text(errorMessage)
             }
-            .alert("Saved", isPresented: $showSuccess) {
-                Button("OK") {
+            .alert(String(localized: "Saved"), isPresented: $showSuccess) {
+                Button(String(localized: "OK")) {
                     dismiss()
                 }
             } message: {
-                Text("Your profile has been saved successfully.")
+                Text(String(localized: "Your profile has been saved successfully."))
             }
             .sheet(isPresented: $showConsentDialog) {
                 LegalConsentView(
@@ -184,11 +184,11 @@ struct UserProfileView: View {
     
     private var freeFormInput: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Tell us about yourself")
+            Text(String(localized: "Tell us about yourself"))
                 .font(.headline)
                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
             
-            Text("Share anything that helps us create personalized suggestions for you. This could include your goals, values, interests, challenges, or anything else you'd like us to know.")
+            Text(String(localized: "Share anything that helps us create personalized suggestions for you. This could include your goals, values, interests, challenges, or anything else you'd like us to know."))
                 .font(.subheadline)
                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
             
@@ -221,11 +221,11 @@ struct UserProfileView: View {
             
             // Goals
             VStack(alignment: .leading, spacing: 8) {
-                Text("What are you working toward?")
+                Text(String(localized: "What are you working toward?"))
                     .font(.system(size: 15, weight: .medium))
                     .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                 
-                TextField("e.g., Better health, career growth, stronger relationships", text: $goals, axis: .vertical)
+                TextField(String(localized: "e.g., Better health, career growth, stronger relationships"), text: $goals, axis: .vertical)
                     .textFieldStyle(.plain)
                     .padding(12)
                     .background(
@@ -244,11 +244,11 @@ struct UserProfileView: View {
             
             // Values/Interests
             VStack(alignment: .leading, spacing: 8) {
-                Text("What matters most to you?")
+                Text(String(localized: "What matters most to you?"))
                     .font(.system(size: 15, weight: .medium))
                     .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                 
-                TextField("e.g., Family, creativity, learning, helping others", text: $values, axis: .vertical)
+                TextField(String(localized: "e.g., Family, creativity, learning, helping others"), text: $values, axis: .vertical)
                     .textFieldStyle(.plain)
                     .padding(12)
                     .background(
@@ -267,11 +267,11 @@ struct UserProfileView: View {
             
             // Challenges
             VStack(alignment: .leading, spacing: 8) {
-                Text("What would you like to improve?")
+                Text(String(localized: "What would you like to improve?"))
                     .font(.system(size: 15, weight: .medium))
                     .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                 
-                TextField("e.g., Managing stress, staying organized, being present", text: $challenges, axis: .vertical)
+                TextField(String(localized: "e.g., Managing stress, staying organized, being present"), text: $challenges, axis: .vertical)
                     .textFieldStyle(.plain)
                     .padding(12)
                     .background(
@@ -290,11 +290,11 @@ struct UserProfileView: View {
             
             // Focus Areas
             VStack(alignment: .leading, spacing: 8) {
-                Text("What would you like to focus on?")
+                Text(String(localized: "What would you like to focus on?"))
                     .font(.system(size: 15, weight: .medium))
                     .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                 
-                TextField("e.g., Mindfulness, productivity, connection, growth", text: $focusAreas, axis: .vertical)
+                TextField(String(localized: "e.g., Mindfulness, productivity, connection, growth"), text: $focusAreas, axis: .vertical)
                     .textFieldStyle(.plain)
                     .padding(12)
                     .background(
@@ -311,7 +311,7 @@ struct UserProfileView: View {
                     .lineLimit(2...4)
             }
             
-            Text("This information is stored locally on your device and only used when generating suggestions. We don't store it on our servers.")
+            Text(String(localized: "This information is stored locally on your device and only used when generating suggestions. We don't store it on our servers."))
                 .font(.caption)
                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                 .padding(.top, 4)

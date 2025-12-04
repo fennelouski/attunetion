@@ -87,8 +87,10 @@ struct PrimaryButton: View {
             Text(title)
                 .font(.system(size: fontSize, weight: .semibold, design: fontDesign))
                 .foregroundColor(themeManager.buttonTextColor(for: colorScheme).toSwiftUIColor())
+                .fixedSize(horizontal: false, vertical: true)
+                .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity)
-                .frame(height: buttonHeight)
+                .frame(minHeight: buttonHeight)
                 .background(
                     RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                         .fill(themeManager.buttonBackgroundColor(for: colorScheme).toSwiftUIColor())
@@ -124,8 +126,10 @@ struct SecondaryButton: View {
             Text(title)
                 .font(.system(size: 16, weight: .medium, design: .default))
                 .foregroundColor(themeManager.secondaryButtonTextColor(for: colorScheme).toSwiftUIColor())
+                .fixedSize(horizontal: false, vertical: true)
+                .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity)
-                .frame(height: 44)
+                .frame(minHeight: 44)
                 .background(
                     RoundedRectangle(cornerRadius: 12, style: .continuous)
                         .fill(themeManager.secondaryButtonBackgroundColor(for: colorScheme).toSwiftUIColor())
@@ -155,6 +159,7 @@ struct TextButton: View {
             Text(title)
                 .font(.system(size: 15, weight: .medium, design: .default))
                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                .fixedSize(horizontal: false, vertical: true)
         }
         .buttonStyle(.plain)
     }

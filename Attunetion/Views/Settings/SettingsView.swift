@@ -320,9 +320,9 @@ struct SettingsView: View {
                         }
                     }
                 } header: {
-                    Text("Help")
+                    Text(String(localized: "Help"))
                 } footer: {
-                    Text("Walk through the onboarding flow again to learn about features and get ideas for how to use the app.")
+                    Text(String(localized: "Walk through the onboarding flow again to learn about features and get ideas for how to use the app."))
                 }
                 
                 // Permissions Section - only show if not authorized, and at the bottom
@@ -332,7 +332,7 @@ struct SettingsView: View {
                 }
                 .scrollContentBackground(.hidden)
             }
-            .navigationTitle("Settings")
+            .navigationTitle(String(localized: "Settings"))
             .sheet(isPresented: $showingAbout) {
                 AboutView()
             }
@@ -436,10 +436,10 @@ struct SettingsView: View {
                 .disabled(isRequestingPermission)
             }
         } header: {
-            Text("Permissions")
+            Text(String(localized: "Permissions"))
         } footer: {
             if notificationAuthorizationStatus != .authorized {
-                Text("Enable notifications to receive reminders about setting your intentions.")
+                Text(String(localized: "Enable notifications to receive reminders about setting your intentions."))
             }
         }
     }
@@ -593,13 +593,13 @@ struct AppThemePickerView: View {
                 }
                 .scrollContentBackground(.hidden)
             }
-            .navigationTitle("App Theme")
+            .navigationTitle(String(localized: "App Theme"))
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Done") {
+                    Button(String(localized: "Done")) {
                         dismiss()
                     }
                     .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
@@ -671,7 +671,7 @@ struct DefaultThemePickerView: View {
                 }
             }
         }
-        .navigationTitle("Default Theme")
+        .navigationTitle(String(localized: "Default Theme"))
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
@@ -706,7 +706,7 @@ struct DefaultFontPickerView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(fontOption.name)
                         
-                        Text("Sample Text Preview")
+                        Text(String(localized: "Sample Text Preview"))
                             .font(fontOption.font)
                             .foregroundColor(.secondary)
                     }
@@ -723,7 +723,7 @@ struct DefaultFontPickerView: View {
                 }
             }
         }
-        .navigationTitle("Default Font")
+        .navigationTitle(String(localized: "Default Font"))
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
@@ -736,10 +736,10 @@ struct NotificationSettingsPlaceholderView: View {
             Image(systemName: "bell.slash")
                 .font(.system(size: 60))
                 .foregroundColor(.secondary)
-            Text("Notification Settings")
+            Text(String(localized: "Notification Settings"))
                 .font(.title2)
                 .fontWeight(.semibold)
-            Text("Notification settings will be available here once the notification team completes their work.")
+            Text(String(localized: "Notification settings will be available here once the notification team completes their work."))
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
@@ -747,7 +747,7 @@ struct NotificationSettingsPlaceholderView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
-        .navigationTitle("Notifications")
+        .navigationTitle(String(localized: "Notifications"))
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif

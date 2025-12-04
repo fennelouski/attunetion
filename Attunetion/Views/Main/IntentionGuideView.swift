@@ -17,7 +17,6 @@ struct IntentionGuideView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var themeManager: AppThemeManager
-    @EnvironmentObject var backendHealth: BackendHealthManager
     
     @State private var viewModel: IntentionsViewModel
     
@@ -33,7 +32,7 @@ struct IntentionGuideView: View {
     @State private var weeklyIconIndex = 0
     @State private var dailyIconIndex = 0
     
-    private let weeklyIcons = ["7.lane", "7.square", "7.calendar", "7.circle", "7.square.fill", "7.circle.fill"]
+    private let weeklyIcons = ["7.lane", "7.square", "7.circle", "7.square.fill", "7.circle.fill"]
     @State private var goodExampleIndex = 0
     @State private var badExampleIndex = 0
     @State private var lastGoodTapTime: Date?
@@ -150,6 +149,9 @@ struct IntentionGuideView: View {
                         }
                     }
                     .frame(height: 4)
+                    #if os(macOS)
+                    .padding(.top, 20)
+                    #endif
                     
                     // Content with gradient fade
                     ZStack {
@@ -194,12 +196,12 @@ struct IntentionGuideView: View {
                                 }
                                 
                                 Text(currentGuideStep.title)
-                                    .font(.system(size: 28, weight: .light, design: .default))
+                                    .font(.system(size: 24, weight: .light, design: .default))
                                     .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                                     .multilineTextAlignment(.center)
                                 
                                 Text(currentGuideStep.description)
-                                    .font(.system(size: 16, weight: .regular, design: .default))
+                                    .font(.system(size: 14, weight: .regular, design: .default))
                                     .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                                     .multilineTextAlignment(.center)
                                     .lineSpacing(4)
@@ -212,7 +214,7 @@ struct IntentionGuideView: View {
                                 VStack(alignment: .leading, spacing: 16) {
                                     InteractiveExampleCard(
                                         themeManager: themeManager,
-                                        title: "Good Example",
+                                        title: String(localized: "Good Example"),
                                         examples: goodExamples,
                                         currentIndex: $goodExampleIndex,
                                         lastTapTime: $lastGoodTapTime,
@@ -221,7 +223,7 @@ struct IntentionGuideView: View {
                                     
                                     InteractiveExampleCard(
                                         themeManager: themeManager,
-                                        title: "Too Vague",
+                                        title: String(localized: "Too Vague"),
                                         examples: badExamples,
                                         currentIndex: $badExampleIndex,
                                         lastTapTime: $lastBadTapTime,
@@ -235,7 +237,7 @@ struct IntentionGuideView: View {
                             if let scope = currentGuideStep.scope, currentStep >= 1 && currentStep <= 3 {
                                 VStack(spacing: 16) {
                                     TextField(
-                                        currentGuideStep.placeholder ?? "Enter your intention...",
+                                        currentGuideStep.placeholder ?? String(localized: "Enter your intention..."),
                                         text: bindingForScope(scope),
                                         axis: .vertical
                                     )
@@ -285,7 +287,7 @@ struct IntentionGuideView: View {
                                 .padding(.horizontal, 40)
                             }
                             
-                            Spacer(minLength: 40)
+                            Spacer(minLength: 10)
                             }
                         }
                         
@@ -331,11 +333,14 @@ struct IntentionGuideView: View {
                                 
                                 // Continue button (always enabled - users can skip intentions)
                                 PrimaryButton(
-                                    currentStep == 0 ? "Get Started" : "Continue",
+                                    currentStep == 0 ? LocalizedStringKey("Get Started") : LocalizedStringKey("Continue"),
                                     themeManager: themeManager
                                 ) {
                                     handleContinue()
                                 }
+                                #if os(macOS)
+                                .frame(height: 44)
+                                #endif
                             }
                             .padding(.horizontal, 40)
                         } else {
@@ -350,7 +355,7 @@ struct IntentionGuideView: View {
                                 let hasPack = selectedIntentionPack != nil
                                 
                                 PrimaryButton(
-                                    hasIntentions || hasPack ? "Create Intentions" : "Done",
+                                    hasIntentions || hasPack ? LocalizedStringKey("Create Intentions") : LocalizedStringKey("Done"),
                                     themeManager: themeManager
                                 ) {
                                     if hasIntentions || hasPack {
@@ -359,6 +364,9 @@ struct IntentionGuideView: View {
                                         dismiss()
                                     }
                                 }
+                                #if os(macOS)
+                                .frame(height: 44)
+                                #endif
                             }
                             .padding(.horizontal, 40)
                         }
@@ -372,20 +380,55 @@ struct IntentionGuideView: View {
                         themeManager: themeManager
                     )
                     .padding(.bottom, 16)
+                    #if os(macOS)
+                    .padding(.bottom, 20)
+                    #endif
                 }
+                #if os(macOS)
+                .frame(maxWidth: 1000)
+                #else
+                .frame(maxWidth: .infinity)
+                #endif
+                
+                #if os(macOS)
+                // Floating close button in top left corner (macOS only)
+                VStack {
+                    HStack {
+                        Button(action: {
+                            dismiss()
+                        }) {
+                            Image(systemName: "xmark.circle.fill")
+                                .font(.system(size: 24, weight: .regular))
+                                .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.6))
+                                .background(
+                                    Circle()
+                                        .fill(themeManager.backgroundColor(for: colorScheme).toSwiftUIColor().opacity(0.8))
+                                        .frame(width: 32, height: 32)
+                                )
+                        }
+                        .buttonStyle(.plain)
+                        .padding(.leading, 20)
+                        .padding(.top, 20)
+                        Spacer()
+                    }
+                    Spacer()
+                }
+                #endif
             }
-            .navigationTitle("Getting Started")
-            #if os(iOS)
+            #if os(macOS)
+            .toolbar(.hidden, for: .automatic)
+            #else
+            .navigationTitle(String(localized: "Getting Started"))
             .navigationBarTitleDisplayMode(.inline)
-            #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Close") {
+                    Button(String(localized: "Close")) {
                         dismiss()
                     }
                     .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                 }
             }
+            #endif
             .sheet(isPresented: $showingNewIntention) {
                 NewIntentionView(viewModel: viewModel)
             }
@@ -690,6 +733,7 @@ struct IntentionGuideView: View {
                 String(localized: "Connect with the natural world"),
                 String(localized: "Show kindness to others"),
                 String(localized: "Practice patience"),
+                String(localized: "Practice gratitude"),
                 String(localized: "Be fully present in conversations"),
                 String(localized: "Capture meaningful moments"),
                 String(localized: "Cultivate gratitude"),
@@ -732,32 +776,32 @@ struct IntentionGuideView: View {
                 String(localized: "Practice self-care"),
                 String(localized: "Be present in the moment"),
                 String(localized: "Express gratitude"),
-                "Take breaks when needed",
-                "Do something fun",
-                "Practice patience",
-                "Be kind to myself",
-                "Focus on what matters most",
-                "Work with intention",
-                "Practice deep breathing",
-                "Move my body",
-                "Spend quality time with someone",
-                "Engage with learning",
-                "Manage stress with care",
-                "Be intentional",
-                "Celebrate a small win",
-                "Learn from today",
-                "Practice balance",
-                "Do something I enjoy",
-                "Be present",
-                "Practice gratitude",
-                "Take care of myself",
-                "Focus on progress",
-                "Be patient",
-                "Practice kindness",
-                "Be mindful",
-                "Do my best",
-                "Be present today"
-            ].map { String(localized: String.LocalizationValue($0)) }
+                String(localized: "Take breaks when needed"),
+                String(localized: "Do something fun"),
+                String(localized: "Practice patience"),
+                String(localized: "Be kind to myself"),
+                String(localized: "Focus on what matters most"),
+                String(localized: "Work with intention"),
+                String(localized: "Practice deep breathing"),
+                String(localized: "Move my body"),
+                String(localized: "Spend quality time with someone"),
+                String(localized: "Engage with learning"),
+                String(localized: "Manage stress with care"),
+                String(localized: "Be intentional"),
+                String(localized: "Celebrate a small win"),
+                String(localized: "Learn from today"),
+                String(localized: "Practice balance"),
+                String(localized: "Do something I enjoy"),
+                String(localized: "Be present"),
+                String(localized: "Practice gratitude"),
+                String(localized: "Take care of myself"),
+                String(localized: "Focus on progress"),
+                String(localized: "Be patient"),
+                String(localized: "Practice kindness"),
+                String(localized: "Be mindful"),
+                String(localized: "Do my best"),
+                String(localized: "Be present today")
+            ]
         }
     }
     
@@ -1045,23 +1089,25 @@ struct QuickIdeasSection: View {
     
     var body: some View {
         VStack(spacing: 12) {
+            #if os(macOS)
+            // Centered layout for macOS
             HStack {
                 Button(action: {
                     withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
                         navigateToPrevious()
                     }
-                    #if os(iOS)
-                    HapticFeedback.light()
-                    #endif
                 }) {
                     Image(systemName: "chevron.left")
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                         .frame(width: 32, height: 32)
                 }
+                .buttonStyle(.plain)
                 
-                Text("Quick ideas:")
-                    .font(.system(size: 14, weight: .medium, design: .default))
+                Spacer()
+                
+                Text(String(localized: "Quick ideas"))
+                    .font(.system(size: 13, weight: .medium, design: .default))
                     .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                 
                 Spacer()
@@ -1070,16 +1116,50 @@ struct QuickIdeasSection: View {
                     withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
                         navigateToNext()
                     }
-                    #if os(iOS)
-                    HapticFeedback.light()
-                    #endif
                 }) {
                     Image(systemName: "chevron.right")
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                         .frame(width: 32, height: 32)
                 }
+                .buttonStyle(.plain)
             }
+            #else
+            // Original layout for iOS
+            HStack {
+                Button(action: {
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                        navigateToPrevious()
+                    }
+                    HapticFeedback.light()
+                }) {
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                        .frame(width: 32, height: 32)
+                }
+                .buttonStyle(.plain)
+                
+                Text(String(localized: "Quick ideas:"))
+                    .font(.system(size: 13, weight: .medium, design: .default))
+                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                
+                Spacer()
+                
+                Button(action: {
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                        navigateToNext()
+                    }
+                    HapticFeedback.light()
+                }) {
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                        .frame(width: 32, height: 32)
+                }
+                .buttonStyle(.plain)
+            }
+            #endif
             
             // Content with swipe gesture and animation
             VStack(spacing: 12) {
@@ -1091,7 +1171,7 @@ struct QuickIdeasSection: View {
                         #endif
                     }) {
                         Text(suggestion)
-                            .font(.system(size: 14, weight: .regular, design: .default))
+                            .font(.system(size: 13, weight: .regular, design: .default))
                             .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                             .padding(.horizontal, 16)
                             .padding(.vertical, 8)
@@ -1100,6 +1180,7 @@ struct QuickIdeasSection: View {
                                     .fill(themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.1))
                             )
                     }
+                    .buttonStyle(.plain)
                 }
             }
             .offset(x: dragOffset)
@@ -1188,14 +1269,14 @@ struct InteractiveExampleCard: View {
     
     private var titleFont: Font {
         isGood
-            ? .system(size: 14, weight: .semibold, design: .rounded)
-            : .system(size: 14, weight: .medium, design: .default)
+            ? .system(size: 13, weight: .semibold, design: .rounded)
+            : .system(size: 13, weight: .medium, design: .default)
     }
     
     private var textFont: Font {
         isGood
-            ? .system(size: 15, weight: .regular, design: .rounded)
-            : .system(size: 15, weight: .light, design: .default)
+            ? .system(size: 14, weight: .regular, design: .rounded)
+            : .system(size: 14, weight: .light, design: .default)
     }
     
     private var iconColor: Color {
@@ -1208,7 +1289,7 @@ struct InteractiveExampleCard: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Image(systemName: iconName)
-                    .font(.system(size: 16, weight: .medium))
+                    .font(.system(size: 15, weight: .medium))
                     .foregroundColor(iconColor)
                 Text(title)
                     .font(titleFont)
@@ -1358,11 +1439,11 @@ struct CompletionStepContent: View {
             if hasIntentions {
                 // Show created intentions
                 VStack(spacing: 20) {
-                    Text("You're All Set!")
+                    Text(String(localized: "You're All Set!"))
                         .font(.system(size: 28, weight: .light, design: .default))
                         .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                     
-                    Text("You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones.")
+                    Text(String(localized: "You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones."))
                         .font(.system(size: 16, weight: .regular, design: .default))
                         .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                         .multilineTextAlignment(.center)
@@ -1400,12 +1481,14 @@ struct CompletionStepContent: View {
                     Image(systemName: "sparkles")
                         .font(.system(size: 64, weight: .ultraLight))
                         .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                        .symbolEffect(.variableColor.iterative, options: .repeating.speed(0.5))
+                        .symbolEffect(.pulse, options: .repeating.speed(0.5))
                     
-                    Text("Need Some Ideas?")
+                    Text(String(localized: "Need Some Ideas?"))
                         .font(.system(size: 28, weight: .light, design: .default))
                         .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                     
-                    Text("If you're not sure where to start, here are some ready-to-use intention packs. You can preview them to see what they include.")
+                    Text(String(localized: "If you're not sure where to start, here are some ready-to-use intention packs. You can preview them to see what they include."))
                         .font(.system(size: 16, weight: .regular, design: .default))
                         .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                         .multilineTextAlignment(.center)
@@ -1436,7 +1519,7 @@ struct CompletionStepContent: View {
                     }
                     
                     // AI option - only show if backend is available
-                    if backendHealth.isBackendAvailable {
+                    if BackendHealthManager.shared.isBackendAvailable {
                         Button(action: {
                             showingAIGenerator = true
                             #if os(iOS)
@@ -1446,7 +1529,9 @@ struct CompletionStepContent: View {
                             HStack {
                                 Image(systemName: "sparkles")
                                     .font(.system(size: 16, weight: .medium))
-                                Text("Or tell us about yourself and we'll create custom intentions")
+                                    .symbolEffect(.variableColor.iterative, options: .repeating.speed(0.5))
+                                    .symbolEffect(.pulse, options: .repeating.speed(0.5))
+                                Text(String(localized: "Or tell us about yourself and we'll create custom intentions"))
                                     .font(.system(size: 15, weight: .medium, design: .default))
                             }
                             .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
@@ -1599,12 +1684,14 @@ struct AIIntentionGeneratorView: View {
                         Image(systemName: "sparkles")
                             .font(.system(size: 48, weight: .ultraLight))
                             .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                            .symbolEffect(.variableColor.iterative, options: .repeating.speed(0.5))
+                            .symbolEffect(.pulse, options: .repeating.speed(0.5))
                         
-                        Text("Generate Personalized Intentions")
+                        Text(String(localized: "Generate Personalized Intentions"))
                             .font(.system(size: 24, weight: .light, design: .default))
                             .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                         
-                        Text("Tell us a bit about yourself, your goals, or what you'd like to focus on, and we'll create personalized intentions for you.")
+                        Text(String(localized: "Tell us a bit about yourself, your goals, or what you'd like to focus on, and we'll create personalized intentions for you."))
                             .font(.system(size: 16, weight: .regular, design: .default))
                             .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                             .multilineTextAlignment(.center)
@@ -1624,7 +1711,7 @@ struct AIIntentionGeneratorView: View {
                             .overlay(
                                 Group {
                                     if userInfo.isEmpty {
-                                        Text("e.g., I want to focus on health, build better relationships, and advance in my career...")
+                                        Text(String(localized: "e.g., I want to focus on health, build better relationships, and advance in my career..."))
                                             .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                                             .padding(.top, 16)
                                             .padding(.leading, 12)
@@ -1638,7 +1725,7 @@ struct AIIntentionGeneratorView: View {
                             ProgressView()
                                 .tint(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                         } else {
-                            PrimaryButton("Generate Intentions", themeManager: themeManager) {
+                            PrimaryButton(LocalizedStringKey("Generate Intentions"), themeManager: themeManager) {
                                 generateIntentions()
                             }
                             .disabled(userInfo.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
@@ -1647,13 +1734,13 @@ struct AIIntentionGeneratorView: View {
                     .padding(40)
                 }
             }
-            .navigationTitle("AI Generator")
+            .navigationTitle(String(localized: "AI Generator"))
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
+                    Button(String(localized: "Cancel")) {
                         dismiss()
                     }
                     .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
@@ -1713,7 +1800,7 @@ struct IntentionPackPreviewView: View {
                 
                 ScrollView {
                     VStack(spacing: 24) {
-                        Text("Preview")
+                        Text(String(localized: "Preview"))
                             .font(.system(size: 20, weight: .light, design: .default))
                             .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                         
@@ -1749,13 +1836,13 @@ struct IntentionPackPreviewView: View {
                     .padding(40)
                 }
             }
-            .navigationTitle("Pack Preview")
+            .navigationTitle(String(localized: "Pack Preview"))
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Close") {
+                    Button(String(localized: "Close")) {
                         dismiss()
                     }
                     .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())

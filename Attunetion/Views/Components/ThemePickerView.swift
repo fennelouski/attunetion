@@ -10,7 +10,6 @@ import SwiftData
 
 struct ThemePickerView: View {
     @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject var backendHealth: BackendHealthManager
     @Binding var selectedTheme: IntentionTheme?
     @State private var isGeneratingAITheme = false
     let intentionText: String
@@ -36,7 +35,7 @@ struct ThemePickerView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Choose Theme")
+            Text(String(localized: "Choose Theme"))
                 .font(.system(size: 17, weight: .semibold, design: .default))
                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
             
@@ -58,7 +57,7 @@ struct ThemePickerView: View {
             }
             
             // AI Generate button - only show if backend is available
-            if backendHealth.isBackendAvailable {
+            if BackendHealthManager.shared.isBackendAvailable {
                 Button(action: {
                     #if os(iOS)
                     HapticFeedback.light()
@@ -77,7 +76,7 @@ struct ThemePickerView: View {
                         } else {
                             Image(systemName: "sparkles")
                         }
-                        Text("Generate AI Theme")
+                        Text(String(localized: "Generate AI Theme"))
                             .font(.system(size: 15, weight: .medium, design: .default))
                     }
                     .frame(maxWidth: .infinity)

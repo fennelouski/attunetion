@@ -38,20 +38,25 @@ struct WidgetSetupPage: View {
                             .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                         
                         VStack(spacing: 16) {
-                            Text("Your intention,")
+                            Text(String(localized: "Your intention,"))
                                 .font(.system(size: 28, weight: .light, design: .default))
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                                .fixedSize(horizontal: false, vertical: true)
+                                .multilineTextAlignment(.center)
                             
-                            Text("always visible")
+                            Text(String(localized: "always visible"))
                                 .font(.system(size: 28, weight: .light, design: .default))
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                                .fixedSize(horizontal: false, vertical: true)
+                                .multilineTextAlignment(.center)
                         }
                         
-                        Text("Add a widget to your home screen or lock screen to keep your intention in sight")
+                        Text(String(localized: "Add a widget to your home screen or lock screen to keep your intention in sight"))
                             .font(.system(size: 17, weight: .light, design: .default))
                             .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                            .opacity(0.75)
+                            .fixedSize(horizontal: false, vertical: true)
                             .multilineTextAlignment(.center)
+                            .opacity(0.75)
                             .padding(.horizontal, 60)
                             .frame(maxWidth: 700)
                         
@@ -66,13 +71,17 @@ struct WidgetSetupPage: View {
                                 .frame(height: 120)
                                 .overlay(
                                     VStack(spacing: 8) {
-                                        Text("TODAY")
+                                        Text(String(localized: "TODAY"))
                                             .font(.system(size: 12, weight: .medium, design: .default))
                                             .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                                        Text("Be present")
+                                            .fixedSize(horizontal: false, vertical: true)
+                                        Text(String(localized: "Be present"))
                                             .font(.system(size: 20, weight: .light, design: .default))
                                             .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                                            .fixedSize(horizontal: false, vertical: true)
+                                            .multilineTextAlignment(.center)
                                     }
+                                    .padding(.horizontal, 8)
                                 )
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 16, style: .continuous)
@@ -89,9 +98,11 @@ struct WidgetSetupPage: View {
                                 )
                                 .padding(.horizontal, 32)
                             
-                            Text("Customize with themes and fonts")
+                            Text(String(localized: "Customize with themes and fonts"))
                                 .font(.caption)
                                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                                .fixedSize(horizontal: false, vertical: true)
+                                .multilineTextAlignment(.center)
                                 .opacity(0.75)
                         }
                     }
@@ -101,11 +112,12 @@ struct WidgetSetupPage: View {
                     // Action buttons
                     VStack(spacing: 20) {
                         PrimaryButton("Continue", themeManager: themeManager, action: onContinue)
-                            .frame(maxWidth: 400)
+                            .frame(maxWidth: 360)
                         
                         TextButton("Skip", themeManager: themeManager, action: onSkip)
                             .padding(.top, 4)
                     }
+                    .padding(.horizontal, 40)
                     .padding(.bottom, 80)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)

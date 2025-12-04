@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 /// Manages backend health status and availability checks
 @MainActor

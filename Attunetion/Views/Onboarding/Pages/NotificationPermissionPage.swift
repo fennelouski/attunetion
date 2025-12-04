@@ -33,15 +33,18 @@ struct NotificationPermissionPage: View {
                             .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                         
                         VStack(spacing: 16) {
-                            Text("Stay on track with reminders")
+                            Text(String(localized: "Stay on track with reminders"))
                                 .font(.system(size: 28, weight: .light, design: .default))
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                                .fixedSize(horizontal: false, vertical: true)
+                                .multilineTextAlignment(.center)
                             
-                            Text("Get gentle reminders to set your daily, weekly, or monthly intentions")
+                            Text(String(localized: "Get gentle reminders to set your daily, weekly, or monthly intentions"))
                                 .font(.system(size: 17, weight: .light, design: .default))
                                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                                .opacity(0.75)
+                                .fixedSize(horizontal: false, vertical: true)
                                 .multilineTextAlignment(.center)
+                                .opacity(0.75)
                                 .padding(.horizontal, 60)
                                 .frame(maxWidth: 700)
                         }
@@ -54,11 +57,12 @@ struct NotificationPermissionPage: View {
                         PrimaryButton("Enable Notifications", themeManager: themeManager) {
                             requestNotificationPermission()
                         }
-                        .frame(maxWidth: 400)
+                        .frame(maxWidth: 360)
                         
                         TextButton("Maybe Later", themeManager: themeManager, action: onContinue)
                             .padding(.top, 4)
                     }
+                    .padding(.horizontal, 40)
                     .padding(.bottom, 80)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)

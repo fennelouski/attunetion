@@ -16,13 +16,13 @@ struct SmallWidgetView: View {
         let frequency = WidgetDataService.shared.getDefaultIntentionFrequency()
         switch frequency {
         case "daily":
-            return "Set your intention for today"
+            return String(localized: "Set your intention for today")
         case "weekly":
-            return "Set your intention for this week"
+            return String(localized: "Set your intention for this week")
         case "monthly":
-            return "Set your intention for this month"
+            return String(localized: "Set your intention for this month")
         default:
-            return "Set your intention"
+            return String(localized: "Set your intention")
         }
     }
     
@@ -65,7 +65,7 @@ struct SmallWidgetView: View {
                         .lineLimit(2)
                         .padding(.horizontal, 8)
                     
-                    Text("Tap to create")
+                    Text(String(localized: "Tap to create"))
                         .font(.system(size: 11, weight: .regular, design: .rounded))
                         .foregroundColor(.white.opacity(0.7))
                 }

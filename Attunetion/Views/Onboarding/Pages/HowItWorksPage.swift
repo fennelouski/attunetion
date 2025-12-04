@@ -32,13 +32,17 @@ struct HowItWorksPage: View {
                             .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                         
                         VStack(spacing: 16) {
-                            Text("Set intentions for your")
+                            Text(String(localized: "Set intentions for your"))
                                 .font(.system(size: 28, weight: .light, design: .default))
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                                .fixedSize(horizontal: false, vertical: true)
+                                .multilineTextAlignment(.center)
                             
-                            Text("day, week, or month")
+                            Text(String(localized: "day, week, or month"))
                                 .font(.system(size: 28, weight: .light, design: .default))
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                                .fixedSize(horizontal: false, vertical: true)
+                                .multilineTextAlignment(.center)
                         }
                         
                         // Example intentions
@@ -78,11 +82,12 @@ struct HowItWorksPage: View {
                     // Action buttons
                     VStack(spacing: 20) {
                         PrimaryButton("Continue", themeManager: themeManager, action: onContinue)
-                            .frame(maxWidth: 400)
+                            .frame(maxWidth: 360)
                         
                         TextButton("Skip", themeManager: themeManager, action: onSkip)
                             .padding(.top, 4)
                     }
+                    .padding(.horizontal, 40)
                     .padding(.bottom, 80)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)

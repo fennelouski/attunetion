@@ -33,17 +33,20 @@ struct FirstIntentionPage: View {
                     
                     // Main content area
                     VStack(spacing: 24) {
-                        Text("Set your first intention")
+                        Text(String(localized: "Set your first intention"))
                             .font(.system(size: 28, weight: .light, design: .default))
                             .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                            .fixedSize(horizontal: false, vertical: true)
+                            .multilineTextAlignment(.center)
                         
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("What do you want to focus on?")
+                            Text(String(localized: "What do you want to focus on?"))
                                 .font(.system(size: 15, weight: .light, design: .default))
                                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                                .fixedSize(horizontal: false, vertical: true)
                                 .opacity(0.75)
                             
-                            TextField("Enter your intention...", text: $intentionText, axis: .vertical)
+                            TextField(String(localized: "Enter your intention..."), text: $intentionText, axis: .vertical)
                                 #if !os(watchOS)
                                 .textFieldStyle(.roundedBorder)
                                 #endif
@@ -69,9 +72,10 @@ struct FirstIntentionPage: View {
                         
                         if showingSuggestions {
                             VStack(alignment: .leading, spacing: 8) {
-                                Text("Or try one of these:")
+                                Text(String(localized: "Or try one of these:"))
                                     .font(.system(size: 15, weight: .light, design: .default))
                                     .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                                    .fixedSize(horizontal: false, vertical: true)
                                     .opacity(0.75)
                                     .padding(.horizontal, 60)
                                 
@@ -97,11 +101,12 @@ struct FirstIntentionPage: View {
                     VStack(spacing: 20) {
                         if intentionText.isEmpty {
                             Button(action: {}) {
-                                Text("Get Started")
+                                Text(String(localized: "Get Started"))
                                     .font(.system(size: 17, weight: .semibold, design: .default))
                                     .foregroundColor(themeManager.buttonTextColor(for: colorScheme).toSwiftUIColor())
-                                    .frame(maxWidth: 400)
-                                    .frame(height: 50)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .frame(maxWidth: 360)
+                                    .frame(minHeight: 50)
                                     .background(
                                         RoundedRectangle(cornerRadius: 12, style: .continuous)
                                             .fill(themeManager.buttonBackgroundColor(for: colorScheme).toSwiftUIColor().opacity(0.5))
@@ -112,9 +117,10 @@ struct FirstIntentionPage: View {
                             PrimaryButton("Get Started", themeManager: themeManager) {
                                 createFirstIntention()
                             }
-                            .frame(maxWidth: 400)
+                            .frame(maxWidth: 360)
                         }
                     }
+                    .padding(.horizontal, 40)
                     .padding(.bottom, 80)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)

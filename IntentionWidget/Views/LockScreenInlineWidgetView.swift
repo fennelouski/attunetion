@@ -25,7 +25,7 @@ struct LockScreenInlineWidgetView: View {
             HStack(spacing: 4) {
                 Image(systemName: "sparkles")
                     .font(.system(size: 10))
-                Text("No intention set")
+                Text(String(localized: "No intention set"))
                     .font(.system(size: 12, weight: .medium))
             }
         }

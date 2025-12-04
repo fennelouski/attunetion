@@ -20,6 +20,7 @@ struct IntentionsListView: View {
     @State private var showingGuide = false
     @State private var sortOrder: SortOrder = .newestFirst
     @State private var isSearchBarVisible = false
+    @State private var buttonWidth: CGFloat = 0
     
     private var verticalPadding: CGFloat {
         #if os(iOS)
@@ -166,11 +167,21 @@ struct IntentionsListView: View {
     private var guideVerticalPadding: CGFloat { 14 }
     private var guideHorizontalPadding: CGFloat { 16 }
     private var guideTopPadding: CGFloat { 12 }
+    private var createButtonFontSize: CGFloat { 19 }
+    private var createButtonHeight: CGFloat { 52 }
+    private var createButtonCornerRadius: CGFloat { 14 }
+    private var createButtonShadowRadius: CGFloat { 8 }
+    private var createButtonShadowY: CGFloat { 4 }
     #else
     private var guideFontSize: CGFloat { 15 }
     private var guideVerticalPadding: CGFloat { 12 }
     private var guideHorizontalPadding: CGFloat { 0 }
     private var guideTopPadding: CGFloat { 4 }
+    private var createButtonFontSize: CGFloat { 17 }
+    private var createButtonHeight: CGFloat { 50 }
+    private var createButtonCornerRadius: CGFloat { 12 }
+    private var createButtonShadowRadius: CGFloat { 6 }
+    private var createButtonShadowY: CGFloat { 2 }
     #endif
     
     /// Check if search button should be shown (requires at least 3 intentions)
@@ -223,59 +234,94 @@ struct IntentionsListView: View {
                             if viewModel.filteredIntentions.isEmpty && viewModel.currentIntention == nil {
                                 // Empty state
                                 VStack(spacing: emptyStateVStackSpacing) {
-                                    Image(systemName: "sparkles")
-                                        .font(.system(size: emptyStateIconSize, weight: .ultraLight))
-                                        .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                                    AnimatedSparklesIcon(
+                                        size: emptyStateIconSize,
+                                        color: themeManager.accentColor(for: colorScheme).toSwiftUIColor()
+                                    )
                                     
                                     VStack(spacing: emptyStateInnerVStackSpacing) {
-                                        Text("Set your first intention")
+                                        Text(String(localized: "Set your first intention"))
                                             .font(.system(size: emptyStateTitleFontSize, weight: .light, design: emptyStateTitleFontDesign))
                                             .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                                         
-                                        Text("Create a daily, weekly, or monthly intention to get started")
+                                        Text(String(localized: "Create a daily, weekly, or monthly intention to get started"))
                                             .font(.system(size: emptyStateSubtitleFontSize, weight: .regular, design: emptyStateSubtitleFontDesign))
                                             .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                                             .multilineTextAlignment(.center)
                                             .padding(.horizontal, emptyStateHorizontalPadding)
                                     }
                                     
-                                    // Add intention button
-                                    PrimaryButton("Create Intention", themeManager: themeManager) {
-                                        #if os(iOS)
-                                        HapticFeedback.medium()
-                                        #endif
-                                        showingNewIntention = true
+                                    // Buttons container - ensures equal width based on longest content
+                                    VStack(spacing: guideTopPadding) {
+                                        // Create Intention button (primary action) - bottom
+                                        Button(action: {
+                                            #if os(iOS)
+                                            HapticFeedback.medium()
+                                            #endif
+                                            showingNewIntention = true
+                                        }) {
+                                            Text(String(localized: "Create Intention"))
+                                                .font(.system(size: createButtonFontSize, weight: .semibold, design: .default))
+                                                .foregroundColor(themeManager.buttonTextColor(for: colorScheme).toSwiftUIColor())
+                                                .frame(width: buttonWidth > 0 ? buttonWidth : nil)
+                                                .frame(height: createButtonHeight)
+                                                .background {
+                                                    RoundedRectangle(cornerRadius: createButtonCornerRadius, style: .continuous)
+                                                        .fill(themeManager.buttonBackgroundColor(for: colorScheme).toSwiftUIColor())
+                                                }
+                                                .shadow(
+                                                    color: themeManager.buttonBackgroundColor(for: colorScheme).toSwiftUIColor().opacity(0.3),
+                                                    radius: createButtonShadowRadius,
+                                                    x: 0,
+                                                    y: createButtonShadowY
+                                                )
+                                        }
+                                        .buttonStyle(.plain)
+                                        .frame(width: buttonWidth > 0 ? buttonWidth : nil)
+                                        
+                                        // Guide button (longer text) - top, measure its natural width
+                                        Button(action: {
+                                            #if os(iOS)
+                                            HapticFeedback.light()
+                                            #endif
+                                            showingGuide = true
+                                        }) {
+                                            HStack(spacing: 8) {
+                                                Image(systemName: "questionmark.circle")
+                                                    .font(.system(size: guideFontSize, weight: .medium))
+                                                Text(String(localized: "How to create good intentions"))
+                                                    .font(.system(size: guideFontSize, weight: .medium, design: .default))
+                                            }
+                                            .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                                            .padding(.vertical, guideVerticalPadding)
+                                            .padding(.horizontal, guideHorizontalPadding)
+                                            #if os(macOS)
+                                            .background {
+                                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                                    .fill(themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.1))
+                                            }
+                                            #endif
+                                        }
+                                        .buttonStyle(.plain)
+                                        .fixedSize(horizontal: buttonWidth == 0, vertical: false)
+                                        .frame(width: buttonWidth > 0 ? buttonWidth : nil)
+                                        .background(
+                                            GeometryReader { geometry in
+                                                Color.clear.preference(
+                                                    key: ButtonWidthPreferenceKey.self,
+                                                    value: geometry.size.width
+                                                )
+                                            }
+                                        )
                                     }
+                                    .onPreferenceChange(ButtonWidthPreferenceKey.self) { width in
+                                        if width > 0 && buttonWidth == 0 {
+                                            buttonWidth = width
+                                        }
+                                    }
+                                    .frame(maxWidth: .infinity)
                                     .padding(.horizontal, horizontalPadding)
                                     .padding(.top, 8)
-                                    
-                                    // Guide button - more prominent on macOS
-                                    Button(action: {
-                                        #if os(iOS)
-                                        HapticFeedback.light()
-                                        #endif
-                                        showingGuide = true
-                                    }) {
-                                        HStack(spacing: 8) {
-                                            Image(systemName: "questionmark.circle")
-                                                .font(.system(size: guideFontSize, weight: .medium))
-                                            Text("How to create good intentions")
-                                                .font(.system(size: guideFontSize, weight: .medium, design: .default))
-                                        }
-                                        .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
-                                        .frame(maxWidth: .infinity)
-                                        .padding(.vertical, guideVerticalPadding)
-                                        .padding(.horizontal, guideHorizontalPadding)
-                                        #if os(macOS)
-                                        .background {
-                                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                                .fill(themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.1))
-                                        }
-                                        #endif
-                                    }
-                                    .buttonStyle(.plain)
-                                    .padding(.horizontal, horizontalPadding)
-                                    .padding(.top, guideTopPadding)
                                 }
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                             } else {
@@ -305,7 +351,7 @@ struct IntentionsListView: View {
                                         if !viewModel.pastAndFutureIntentions.isEmpty {
                                             VStack(alignment: .leading, spacing: 16) {
                                                 HStack {
-                                                    Text("All Intentions")
+                                                    Text(String(localized: "All Intentions"))
                                                         .font(.system(size: 20, weight: .light, design: .default))
                                                         .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                                                     
@@ -337,7 +383,7 @@ struct IntentionsListView: View {
                                                         }
                                                     } label: {
                                                         HStack(spacing: 6) {
-                                                            Text("Sort")
+                                                            Text(String(localized: "Sort"))
                                                                 .font(.system(size: 14, weight: .medium, design: .default))
                                                                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                                                             Image(systemName: "arrow.up.arrow.down")
@@ -379,7 +425,7 @@ struct IntentionsListView: View {
                                             HStack(spacing: 8) {
                                                 Image(systemName: "lightbulb.fill")
                                                     .font(.system(size: 16, weight: .medium))
-                                                Text("Need help? Learn how to create great intentions")
+                                                Text(String(localized: "Need help? Learn how to create great intentions"))
                                                     .font(.system(size: 15, weight: .medium, design: .default))
                                             }
                                             .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
@@ -407,8 +453,7 @@ struct IntentionsListView: View {
                             }
                         }
                     }
-                    .animation(.spring(response: 0.3, dampingFraction: 0.8), value: isSearchBarVisible)
-                    .navigationTitle("Attunetion")
+                    .navigationTitle(String(localized: "Attunetion"))
                     #if os(iOS)
                     .navigationBarTitleDisplayMode(.large)
                     #endif
@@ -469,12 +514,18 @@ struct IntentionsListView: View {
                                     .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                                     .frame(width: toolbarButtonSize, height: toolbarButtonSize)
                             }
+                            .transaction { transaction in
+                                transaction.animation = nil
+                            }
                         }
                         
                         ToolbarItem(placement: .automatic) {
                             NavigationLink(destination: SettingsView()) {
                                 Image(systemName: "gearshape")
                                     .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                            }
+                            .transaction { transaction in
+                                transaction.animation = nil
                             }
                         }
                     }
@@ -552,7 +603,7 @@ struct CurrentIntentionCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
-                Text("Current")
+                Text(String(localized: "Current"))
                     .font(.system(size: 12, weight: .semibold, design: .default))
                     .foregroundColor(.white)
                     .padding(.horizontal, 12)
@@ -567,7 +618,7 @@ struct CurrentIntentionCard: View {
                 if intention.aiGenerated {
                     HStack(spacing: 4) {
                         Image(systemName: "sparkles")
-                        Text("AI")
+                        Text(String(localized: "AI"))
                     }
                     .font(.system(size: 11, weight: .medium, design: .default))
                     .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
@@ -633,6 +684,14 @@ struct CurrentIntentionCard: View {
             x: 0,
             y: 4
         )
+    }
+}
+
+// PreferenceKey to measure button width
+struct ButtonWidthPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
     }
 }
 

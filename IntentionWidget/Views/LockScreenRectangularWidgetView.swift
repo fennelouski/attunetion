@@ -30,7 +30,7 @@ struct LockScreenRectangularWidgetView: View {
             HStack(spacing: 8) {
                 Image(systemName: "sparkles")
                     .font(.system(size: 12))
-                Text("No intention set")
+                Text(String(localized: "No intention set"))
                     .font(.system(size: 12, weight: .medium))
             }
         }

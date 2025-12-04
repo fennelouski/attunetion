@@ -78,15 +78,18 @@ struct ExampleIntentionCard: View {
                     Text(intention.scope.rawValue.uppercased())
                         .font(.system(size: 11, weight: .semibold, design: .default))
                         .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                        .fixedSize(horizontal: false, vertical: true)
                     Spacer()
                     Text(intention.category)
                         .font(.system(size: 11, weight: .medium, design: .default))
                         .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 
                 Text(intention.text)
                     .font(.system(size: 17, weight: .light, design: .default))
                     .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                    .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(.leading)
                     .lineSpacing(2)
             }

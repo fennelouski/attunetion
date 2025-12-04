@@ -30,7 +30,7 @@ struct AboutView: View {
                                 .font(.system(size: 36, weight: .light, design: .default))
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                             
-                            Text("Version 1.0.0")
+                            Text(String(localized: "Version 1.0.0"))
                                 .font(.system(size: 15, weight: .regular, design: .default))
                                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                         }
@@ -40,11 +40,11 @@ struct AboutView: View {
                             .padding(.horizontal, 40)
                         
                         VStack(alignment: .leading, spacing: 16) {
-                            Text("About")
+                            Text(String(localized: "About"))
                                 .font(.system(size: 20, weight: .light, design: .default))
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                             
-                            Text("Attunetion helps you set and track your intentions for each day, week, and month. Stay focused on what matters most.")
+                            Text(String(localized: "Attunetion helps you set and track your intentions for each day, week, and month. Stay focused on what matters most."))
                                 .font(.system(size: 16, weight: .regular, design: .default))
                                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                                 .lineSpacing(4)
@@ -53,17 +53,17 @@ struct AboutView: View {
                         .padding(.horizontal, 40)
                         
                         VStack(alignment: .leading, spacing: 16) {
-                            Text("Privacy & Legal")
+                            Text(String(localized: "Privacy & Legal"))
                                 .font(.system(size: 20, weight: .light, design: .default))
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
 
                             VStack(alignment: .leading, spacing: 12) {
-                                legalLink(title: "Privacy Policy", document: "privacy-policy")
-                                legalLink(title: "Terms of Service", document: "terms-of-service")
-                                legalLink(title: "End User License Agreement", document: "eula")
+                                legalLink(title: String(localized: "Privacy Policy"), document: "privacy-policy")
+                                legalLink(title: String(localized: "Terms of Service"), document: "terms-of-service")
+                                legalLink(title: String(localized: "End User License Agreement"), document: "eula")
                             }
 
-                            Text("All your content stays in iCloud and is synced across your devices. When you use suggestion features, we may share data with third-party services with your consent.")
+                            Text(String(localized: "All your content stays in iCloud and is synced across your devices. When you use suggestion features, we may share data with third-party services with your consent."))
                                 .font(.system(size: 14, weight: .regular, design: .default))
                                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                                 .lineSpacing(4)
@@ -73,11 +73,11 @@ struct AboutView: View {
                         .padding(.horizontal, 40)
 
                         VStack(alignment: .leading, spacing: 16) {
-                            Text("Credits")
+                            Text(String(localized: "Credits"))
                                 .font(.system(size: 20, weight: .light, design: .default))
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
 
-                            Text("Built with SwiftUI and SwiftData")
+                            Text(String(localized: "Built with SwiftUI and SwiftData"))
                                 .font(.system(size: 16, weight: .regular, design: .default))
                                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                         }
@@ -90,13 +90,13 @@ struct AboutView: View {
                     .padding(.vertical, 20)
                 }
             }
-            .navigationTitle("About")
+            .navigationTitle(String(localized: "About"))
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") {
+                    Button(String(localized: "Done")) {
                         dismiss()
                     }
                     .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())

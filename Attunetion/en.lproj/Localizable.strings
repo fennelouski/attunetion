@@ -90,6 +90,89 @@
 "Get Started" = "Get Started";
 "Create Intentions" = "Create Intentions";
 "Getting Started" = "Getting Started";
+"Quick ideas" = "Quick ideas";
+"Quick ideas:" = "Quick ideas:";
+"Need Some Ideas?" = "Need Some Ideas?";
+"If you're not sure where to start, here are some ready-to-use intention packs. You can preview them to see what they include." = "If you're not sure where to start, here are some ready-to-use intention packs. You can preview them to see what they include.";
+"Or tell us about yourself and we'll create custom intentions" = "Or tell us about yourself and we'll create custom intentions";
+"Generate Personalized Intentions" = "Generate Personalized Intentions";
+"Tell us a bit about yourself, your goals, or what you'd like to focus on, and we'll create personalized intentions for you." = "Tell us a bit about yourself, your goals, or what you'd like to focus on, and we'll create personalized intentions for you.";
+"e.g., I want to focus on health, build better relationships, and advance in my career..." = "e.g., I want to focus on health, build better relationships, and advance in my career...";
+"AI Generator" = "AI Generator";
+"Generate Intentions" = "Generate Intentions";
+"Preview" = "Preview";
+"Pack Preview" = "Pack Preview";
+"Choose Theme" = "Choose Theme";
+"Generate AI Theme" = "Generate AI Theme";
+
+/* Widgets */
+"Tap to create" = "Tap to create";
+"Tap to create one" = "Tap to create one";
+"No intention set" = "No intention set";
+"Today" = "Today";
+"This Week" = "This Week";
+"This Month" = "This Month";
+"Set your intention" = "Set your intention";
+
+/* Onboarding */
+"Welcome to Attunetion" = "Welcome to Attunetion";
+"Set intentions for your day, week, or month." = "Set intentions for your day, week, or month.";
+"Stay focused on what matters most." = "Stay focused on what matters most.";
+"Skip for now" = "Skip for now";
+"Set intentions for your" = "Set intentions for your";
+"day, week, or month" = "day, week, or month";
+"Your intention," = "Your intention,";
+"always visible" = "always visible";
+"Add a widget to your home screen or lock screen to keep your intention in sight" = "Add a widget to your home screen or lock screen to keep your intention in sight";
+"TODAY" = "TODAY";
+"Be present" = "Be present";
+"Customize with themes and fonts" = "Customize with themes and fonts";
+"Works across" = "Works across";
+"all your devices" = "all your devices";
+"Your intentions sync automatically across iPhone, iPad, Mac, and Apple Watch. Set an intention on one device and it's available everywhere." = "Your intentions sync automatically across iPhone, iPad, Mac, and Apple Watch. Set an intention on one device and it's available everywhere.";
+"Stay on track with reminders" = "Stay on track with reminders";
+"Get gentle reminders to set your daily, weekly, or monthly intentions" = "Get gentle reminders to set your daily, weekly, or monthly intentions";
+"What do you want to focus on?" = "What do you want to focus on?";
+"Or try one of these:" = "Or try one of these:";
+"\(currentPage + 1) of \(pageCount)" = "%1$d of %2$d";
+
+/* Settings */
+"Input Style" = "Input Style";
+"Free-form" = "Free-form";
+"Guided" = "Guided";
+"How would you like to share?" = "How would you like to share?";
+"Write freely about yourself, your goals, and what matters to you." = "Write freely about yourself, your goals, and what matters to you.";
+"Answer what feels right - you can skip any question." = "Answer what feels right - you can skip any question.";
+"Your Information" = "Your Information";
+"Auto-Suggest Intentions" = "Auto-Suggest Intentions";
+"Automatically receive personalized suggestions for daily, weekly, and monthly intentions based on your profile" = "Automatically receive personalized suggestions for daily, weekly, and monthly intentions based on your profile";
+"Requires accepting Terms of Service" = "Requires accepting Terms of Service";
+"Auto-Suggestions" = "Auto-Suggestions";
+"Suggestions will be created weekly. You can always edit or delete them. Your data may be shared with third-party services to generate suggestions." = "Suggestions will be created weekly. You can always edit or delete them. Your data may be shared with third-party services to generate suggestions.";
+"Enable this to receive automatic suggestions for your intentions each week. You'll need to agree to our Terms of Service first." = "Enable this to receive automatic suggestions for your intentions each week. You'll need to agree to our Terms of Service first.";
+"Save" = "Save";
+"Error" = "Error";
+"OK" = "OK";
+"Saved" = "Saved";
+"Your profile has been saved successfully." = "Your profile has been saved successfully.";
+"Version 1.0.0" = "Version 1.0.0";
+"Privacy & Legal" = "Privacy & Legal";
+"All your content stays in iCloud and is synced across your devices. When you use suggestion features, we may share data with third-party services with your consent." = "All your content stays in iCloud and is synced across your devices. When you use suggestion features, we may share data with third-party services with your consent.";
+"Credits" = "Credits";
+"Built with SwiftUI and SwiftData" = "Built with SwiftUI and SwiftData";
+"Notification Settings" = "Notification Settings";
+"Notification settings will be available here once the notification team completes their work." = "Notification settings will be available here once the notification team completes their work.";
+"Default Theme" = "Default Theme";
+"Sample Text Preview" = "Sample Text Preview";
+
+/* New Intention */
+"New Intention" = "New Intention";
+"Intention" = "Intention";
+"Scope" = "Scope";
+"Date" = "Date";
+"Timing" = "Timing";
+"Font" = "Font";
+"Need inspiration?" = "Need inspiration?";
 
 /* Intention Scopes */
 "Day" = "Day";

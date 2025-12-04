@@ -28,8 +28,8 @@ struct WelcomePage: View {
                 VStack(spacing: 0) {
                     Spacer()
                     
-                    // Main content area - macOS optimized layout
-                    VStack(spacing: macOSSpacing) {
+                    // Main content area - centered vertically
+                    VStack(spacing: contentSpacing) {
                         // Icon with subtle animation
                         ZStack {
                             // Enhanced glow effect with multiple layers
@@ -64,28 +64,33 @@ struct WelcomePage: View {
                                 .scaleEffect(contentAppeared ? 1.0 : 0.8)
                                 .animation(.spring(response: 0.6, dampingFraction: 0.7).delay(0.2), value: contentAppeared)
                         }
-                        .padding(.bottom, 8)
                         
                         // Welcome card with enhanced glass morphism
                         VStack(spacing: 24) {
-                            Text("Welcome to Attunetion")
+                            Text(String(localized: "Welcome to Attunetion"))
                                 .font(.system(size: titleFontSize, weight: .thin, design: .default))
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                                 .tracking(-0.8)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .multilineTextAlignment(.center)
                                 .opacity(contentAppeared ? 1.0 : 0.0)
                                 .offset(y: contentAppeared ? 0 : 10)
                                 .animation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.3), value: contentAppeared)
                             
                             VStack(spacing: 16) {
-                                Text("Set intentions for your day, week, or month.")
+                                Text(String(localized: "Set intentions for your day, week, or month."))
                                     .font(.system(size: bodyFontSize, weight: .light, design: .default))
                                     .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .multilineTextAlignment(.center)
                                     .opacity(0.85)
                                     .lineSpacing(4)
                                 
-                                Text("Stay focused on what matters most.")
+                                Text(String(localized: "Stay focused on what matters most."))
                                     .font(.system(size: secondaryFontSize, weight: .light, design: .default))
                                     .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .multilineTextAlignment(.center)
                                     .opacity(0.75)
                                     .lineSpacing(2)
                             }
@@ -98,36 +103,35 @@ struct WelcomePage: View {
                         .padding(.vertical, cardVerticalPadding)
                         .frame(maxWidth: cardMaxWidth)
                         .background {
-                            // Enhanced glass morphism effect
-                            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                                .fill(
-                                    colorScheme == .dark
-                                        ? Color.white.opacity(0.08)
-                                        : Color.black.opacity(0.04)
-                                )
-                                .background {
-                                    // Blur effect
-                                    RoundedRectangle(cornerRadius: 24, style: .continuous)
-                                        .fill(
-                                            .ultraThinMaterial
-                                        )
-                                }
-                                .overlay {
-                                    // Subtle border
-                                    RoundedRectangle(cornerRadius: 24, style: .continuous)
-                                        .stroke(
-                                            themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.15),
-                                            lineWidth: 1
-                                        )
-                                }
-                                .shadow(
-                                    color: colorScheme == .dark
-                                        ? Color.black.opacity(0.3)
-                                        : Color.black.opacity(0.08),
-                                    radius: 20,
-                                    x: 0,
-                                    y: 8
-                                )
+                            ZStack {
+                                // Blur effect (glass morphism)
+                                RoundedRectangle(cornerRadius: 24, style: .continuous)
+                                    .fill(.ultraThinMaterial)
+                                
+                                // Tint overlay
+                                RoundedRectangle(cornerRadius: 24, style: .continuous)
+                                    .fill(
+                                        colorScheme == .dark
+                                            ? Color.white.opacity(0.08)
+                                            : Color.black.opacity(0.04)
+                                    )
+                            }
+                            .overlay {
+                                // Subtle border
+                                RoundedRectangle(cornerRadius: 24, style: .continuous)
+                                    .stroke(
+                                        themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.15),
+                                        lineWidth: 1
+                                    )
+                            }
+                            .shadow(
+                                color: colorScheme == .dark
+                                    ? Color.black.opacity(0.3)
+                                    : Color.black.opacity(0.08),
+                                radius: 20,
+                                x: 0,
+                                y: 8
+                            )
                         }
                         .opacity(contentAppeared ? 1.0 : 0.0)
                         .scaleEffect(contentAppeared ? 1.0 : 0.95)
@@ -138,7 +142,7 @@ struct WelcomePage: View {
                     Spacer()
                     
                     // Action buttons - macOS optimized
-                    VStack(spacing: 20) {
+                    VStack(spacing: buttonSpacing) {
                         Button(action: {
                             #if os(iOS)
                             HapticFeedback.medium()
@@ -149,11 +153,12 @@ struct WelcomePage: View {
                                 onContinue()
                             }
                         }) {
-                            Text("Get Started")
+                            Text(String(localized: "Get Started"))
                                 .font(.system(size: buttonFontSize, weight: .semibold, design: .default))
                                 .foregroundColor(themeManager.buttonTextColor(for: colorScheme).toSwiftUIColor())
+                                .fixedSize(horizontal: false, vertical: true)
                                 .frame(maxWidth: buttonMaxWidth)
-                                .frame(height: buttonHeight)
+                                .frame(minHeight: buttonHeight)
                                 .background {
                                     RoundedRectangle(cornerRadius: 16, style: .continuous)
                                         .fill(themeManager.buttonBackgroundColor(for: colorScheme).toSwiftUIColor())
@@ -175,23 +180,22 @@ struct WelcomePage: View {
                         #if os(macOS)
                         // On macOS, make skip button less prominent
                         Button(action: onSkip) {
-                            Text("Skip for now")
+                            Text(String(localized: "Skip for now"))
                                 .font(.system(size: 15, weight: .regular, design: .default))
                                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                                .fixedSize(horizontal: false, vertical: true)
                         }
                         .buttonStyle(.plain)
-                        .padding(.top, 4)
                         .opacity(contentAppeared ? 1.0 : 0.0)
                         .animation(.easeOut(duration: 0.4).delay(0.6), value: contentAppeared)
                         #else
                         TextButton("Skip", themeManager: themeManager, action: onSkip)
-                            .padding(.top, 4)
                             .opacity(contentAppeared ? 1.0 : 0.0)
                             .animation(.easeOut(duration: 0.4).delay(0.6), value: contentAppeared)
                         #endif
                     }
-                    .padding(.horizontal, 40)
-                    .padding(.bottom, bottomPadding)
+                    .padding(.horizontal, buttonHorizontalPadding)
+                    .padding(.bottom, bottomSpacing)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
             }
@@ -207,7 +211,9 @@ struct WelcomePage: View {
     // MARK: - Platform-specific sizing
     
     #if os(macOS)
-    private var macOSSpacing: CGFloat { 64 }
+    private var contentSpacing: CGFloat { 56 }
+    private var buttonSpacing: CGFloat { 16 }
+    private var bottomSpacing: CGFloat { 80 }
     private var iconSize: CGFloat { 220 }
     private var iconFontSize: CGFloat { 90 }
     private var titleFontSize: CGFloat { 44 }
@@ -218,24 +224,26 @@ struct WelcomePage: View {
     private var cardMaxWidth: CGFloat { 800 }
     private var contentHorizontalPadding: CGFloat { 60 }
     private var buttonFontSize: CGFloat { 19 }
-    private var buttonMaxWidth: CGFloat { 450 }
+    private var buttonMaxWidth: CGFloat { 380 }
     private var buttonHeight: CGFloat { 60 }
-    private var bottomPadding: CGFloat { 100 }
+    private var buttonHorizontalPadding: CGFloat { 60 }
     #else
-    private var macOSSpacing: CGFloat { 56 }
-    private var iconSize: CGFloat { 200 }
-    private var iconFontSize: CGFloat { 80 }
-    private var titleFontSize: CGFloat { 38 }
-    private var bodyFontSize: CGFloat { 19 }
-    private var secondaryFontSize: CGFloat { 17 }
-    private var cardHorizontalPadding: CGFloat { 48 }
-    private var cardVerticalPadding: CGFloat { 40 }
-    private var cardMaxWidth: CGFloat { 680 }
-    private var contentHorizontalPadding: CGFloat { 32 }
-    private var buttonFontSize: CGFloat { 18 }
-    private var buttonMaxWidth: CGFloat { 400 }
-    private var buttonHeight: CGFloat { 56 }
-    private var bottomPadding: CGFloat { 80 }
+    private var contentSpacing: CGFloat { 48 }
+    private var buttonSpacing: CGFloat { 16 }
+    private var bottomSpacing: CGFloat { 60 }
+    private var iconSize: CGFloat { 180 }
+    private var iconFontSize: CGFloat { 72 }
+    private var titleFontSize: CGFloat { 36 }
+    private var bodyFontSize: CGFloat { 18 }
+    private var secondaryFontSize: CGFloat { 16 }
+    private var cardHorizontalPadding: CGFloat { 32 }
+    private var cardVerticalPadding: CGFloat { 36 }
+    private var cardMaxWidth: CGFloat { .infinity }
+    private var contentHorizontalPadding: CGFloat { 24 }
+    private var buttonFontSize: CGFloat { 17 }
+    private var buttonMaxWidth: CGFloat { 360 }
+    private var buttonHeight: CGFloat { 54 }
+    private var buttonHorizontalPadding: CGFloat { 40 }
     #endif
 }
 

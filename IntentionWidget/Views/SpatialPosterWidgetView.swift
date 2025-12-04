@@ -70,10 +70,10 @@ struct SpatialPosterWidgetView: View {
                         Image(systemName: "sparkles")
                             .font(.system(size: 64))
                             .foregroundColor(.secondary)
-                        Text("No intention set")
+                        Text(String(localized: "No intention set"))
                             .font(.system(size: 32, weight: .semibold))
                             .foregroundColor(.secondary)
-                        Text("Tap to create one")
+                        Text(String(localized: "Tap to create one"))
                             .font(.system(size: 20))
                             .foregroundColor(.secondary)
                     }
@@ -110,13 +110,13 @@ struct SpatialPosterWidgetView: View {
     private func scopeInfo(for scope: String) -> (String, String) {
         switch scope.lowercased() {
         case "day":
-            return ("Today", "sun.max.fill")
+            return (String(localized: "Today"), "sun.max.fill")
         case "week":
-            return ("This Week", "calendar")
+            return (String(localized: "This Week"), "calendar")
         case "month":
-            return ("This Month", "calendar.badge.clock")
+            return (String(localized: "This Month"), "calendar.badge.clock")
         default:
-            return ("Today", "sun.max.fill")
+            return (String(localized: "Today"), "sun.max.fill")
         }
     }
     

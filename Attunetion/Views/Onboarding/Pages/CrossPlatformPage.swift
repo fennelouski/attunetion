@@ -32,20 +32,25 @@ struct CrossPlatformPage: View {
                             .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                         
                         VStack(spacing: 16) {
-                            Text("Works across")
+                            Text(String(localized: "Works across"))
                                 .font(.system(size: 28, weight: .light, design: .default))
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                                .fixedSize(horizontal: false, vertical: true)
+                                .multilineTextAlignment(.center)
                             
-                            Text("all your devices")
+                            Text(String(localized: "all your devices"))
                                 .font(.system(size: 28, weight: .light, design: .default))
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                                .fixedSize(horizontal: false, vertical: true)
+                                .multilineTextAlignment(.center)
                         }
                         
-                        Text("Your intentions sync automatically across iPhone, iPad, Mac, and Apple Watch. Set an intention on one device and it's available everywhere.")
+                        Text(String(localized: "Your intentions sync automatically across iPhone, iPad, Mac, and Apple Watch. Set an intention on one device and it's available everywhere."))
                             .font(.system(size: 17, weight: .light, design: .default))
                             .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                            .opacity(0.75)
+                            .fixedSize(horizontal: false, vertical: true)
                             .multilineTextAlignment(.center)
+                            .opacity(0.75)
                             .padding(.horizontal, 60)
                             .frame(maxWidth: 700)
                         
@@ -81,11 +86,12 @@ struct CrossPlatformPage: View {
                     // Action buttons
                     VStack(spacing: 20) {
                         PrimaryButton("Continue", themeManager: themeManager, action: onContinue)
-                            .frame(maxWidth: 400)
+                            .frame(maxWidth: 360)
                         
                         TextButton("Skip", themeManager: themeManager, action: onSkip)
                             .padding(.top, 4)
                     }
+                    .padding(.horizontal, 40)
                     .padding(.bottom, 80)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
@@ -111,6 +117,7 @@ private struct DeviceIcon: View {
             Text(label)
                 .font(.caption2)
                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                .fixedSize(horizontal: false, vertical: true)
                 .opacity(0.75)
         }
     }
