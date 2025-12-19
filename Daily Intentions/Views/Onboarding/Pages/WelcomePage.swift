@@ -11,6 +11,7 @@ import SwiftUI
 struct WelcomePage: View {
     let onContinue: () -> Void
     let onSkip: () -> Void
+    @Environment(\.colorScheme) var colorScheme
 
     @State private var sparkleAnimation = false
 
@@ -18,11 +19,7 @@ struct WelcomePage: View {
         GeometryReader { geometry in
             ZStack {
                 // Sage-themed gradient background
-                LinearGradient(
-                    gradient: Gradient(colors: Theme.backgroundGradient),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
+                AppThemeManager.shared.backgroundColor(for: colorScheme)
                 .ignoresSafeArea()
 
                 VStack(spacing: 0) {
@@ -89,17 +86,21 @@ struct WelcomePage: View {
 
                     // Action buttons - clear call to action
                     VStack(spacing: 16) {
-                        Button {
-                            onContinue()
-                        } label: {
-                            Text("Get Started")
-                                .font(.system(size: 18, weight: .semibold))
-                                .foregroundColor(Theme.buttonText)
-                                .frame(maxWidth: 400)
-                                .padding(.vertical, 16)
-                                .padding(.horizontal, 40)
-                                .background(Theme.buttonBackground)
-                                .cornerRadius(12)
+                        HStack {
+                            Spacer(minLength: 32)
+                            Button {
+                                onContinue()
+                            } label: {
+                                Text("Get Started")
+                                    .font(.system(size: 18, weight: .semibold))
+                                    .foregroundColor(Theme.buttonText)
+                                    .frame(maxWidth: 400)
+                                    .padding(.vertical, 16)
+                                    .padding(.horizontal, 40)
+                                    .background(Theme.buttonBackground)
+                                    .cornerRadius(12)
+                            }
+                            Spacer(minLength: 32)
                         }
 
                         Button {

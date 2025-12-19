@@ -93,7 +93,7 @@ struct IntentionGuideView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(colorScheme == .dark ? .black : Color(white: 0.95))
+                AppThemeManager.shared.backgroundColor(for: colorScheme)
                     .ignoresSafeArea()
 
                 VStack(spacing: 20) {
@@ -101,9 +101,9 @@ struct IntentionGuideView: View {
                     GeometryReader { geometry in
                         ZStack(alignment: .leading) {
                             Rectangle()
-                                .fill(Color.secondary.opacity(0.2))
+                                .fill(AppThemeManager.shared.secondaryTextColor(for: colorScheme).opacity(0.2))
                             Rectangle()
-                                .fill(Color.accentColor)
+                                .fill(AppThemeManager.shared.accentColor(for: colorScheme))
                                 .frame(width: geometry.size.width * progress)
                         }
                     }
@@ -115,17 +115,17 @@ struct IntentionGuideView: View {
                             VStack(spacing: 16) {
                                 Image(systemName: currentGuideStep.icon)
                                     .font(.system(size: 48, weight: .ultraLight))
-                                    .foregroundColor(.accentColor)
+                                    .foregroundColor(AppThemeManager.shared.accentColor(for: colorScheme))
                                     .frame(width: 48, height: 48)
 
                                 Text(currentGuideStep.title)
                                     .font(.system(size: 24, weight: .light))
-                                    .foregroundColor(.primary)
+                                    .foregroundColor(AppThemeManager.shared.primaryTextColor(for: colorScheme))
                                     .multilineTextAlignment(.center)
 
                                 Text(currentGuideStep.description)
                                     .font(.system(size: 16, weight: .regular))
-                                    .foregroundColor(.secondary)
+                                    .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
                                     .multilineTextAlignment(.center)
                                     .lineSpacing(4)
                                     .padding(.horizontal, 20)
@@ -140,12 +140,12 @@ struct IntentionGuideView: View {
                                                 .foregroundColor(.green)
                                             Text("Good Examples")
                                                 .font(.system(size: 16, weight: .semibold))
-                                                .foregroundColor(.primary)
+                                                .foregroundColor(AppThemeManager.shared.primaryTextColor(for: colorScheme))
                                         }
                                         ForEach(goodExamples, id: \.self) { example in
                                             Text("• \(example)")
                                                 .font(.system(size: 14))
-                                                .foregroundColor(.secondary)
+                                                .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
                                         }
                                     }
 
@@ -155,12 +155,12 @@ struct IntentionGuideView: View {
                                                 .foregroundColor(.red)
                                             Text("Too Vague")
                                                 .font(.system(size: 16, weight: .semibold))
-                                                .foregroundColor(.primary)
+                                                .foregroundColor(AppThemeManager.shared.primaryTextColor(for: colorScheme))
                                         }
                                         ForEach(badExamples, id: \.self) { example in
                                             Text("• \(example)")
                                                 .font(.system(size: 14))
-                                                .foregroundColor(.secondary)
+                                                .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
                                         }
                                     }
                                 }
@@ -184,7 +184,7 @@ struct IntentionGuideView: View {
                                     VStack(alignment: .leading, spacing: 8) {
                                         Text("Quick ideas:")
                                             .font(.system(size: 14, weight: .medium))
-                                            .foregroundColor(.secondary)
+                                            .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
 
                                         VStack(spacing: 8) {
                                             ForEach(Array(suggestions), id: \.self) { suggestion in
@@ -193,7 +193,7 @@ struct IntentionGuideView: View {
                                                 }) {
                                                     Text(suggestion)
                                                         .font(.system(size: 14))
-                                                        .foregroundColor(.accentColor)
+                                                        .foregroundColor(AppThemeManager.shared.accentColor(for: colorScheme))
                                                         .padding(.horizontal, 12)
                                                         .padding(.vertical, 6)
                                                         .background(
@@ -215,7 +215,7 @@ struct IntentionGuideView: View {
                                     if !monthlyIntention.isEmpty || !weeklyIntention.isEmpty || !dailyIntention.isEmpty {
                                         Text("Your intentions:")
                                             .font(.system(size: 18, weight: .semibold))
-                                            .foregroundColor(.primary)
+                                            .foregroundColor(AppThemeManager.shared.primaryTextColor(for: colorScheme))
 
                                         VStack(spacing: 12) {
                                             if !monthlyIntention.isEmpty {
@@ -417,17 +417,17 @@ struct IntentionSummaryRow: View {
         HStack(spacing: 12) {
             Image(systemName: scopeIcon)
                 .font(.system(size: 20, weight: .medium))
-                .foregroundColor(.accentColor)
+                .foregroundColor(AppThemeManager.shared.accentColor(for: colorScheme))
                 .frame(width: 24)
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(scope.rawValue.capitalized)
                     .font(.system(size: 12, weight: .semibold))
-                    .foregroundColor(.secondary)
+                    .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
 
                 Text(text)
                     .font(.system(size: 15, weight: .regular))
-                    .foregroundColor(.primary)
+                    .foregroundColor(AppThemeManager.shared.primaryTextColor(for: colorScheme))
             }
 
             Spacer()
@@ -435,7 +435,7 @@ struct IntentionSummaryRow: View {
         .padding(12)
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .fill(Color(colorScheme == .dark ? .black : Color(white: 0.95)).opacity(0.6))
+                .fill(AppThemeManager.shared.secondaryButtonBackground(for: colorScheme))
         )
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AboutView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         NavigationStack {
@@ -77,7 +78,7 @@ struct AboutView: View {
                     Button("Done") {
                         dismiss()
                     }
-                    .foregroundColor(Theme.primary)
+                    .foregroundColor(AppThemeManager.shared.accentColor(for: colorScheme))
                 }
             }
         }

@@ -97,7 +97,6 @@ struct PrimaryButton: View {
             Text(title)
                 .font(.system(size: fontSize, weight: .semibold, design: fontDesign))
                 .foregroundColor(themeManager.buttonTextColor(for: colorScheme).toSwiftUIColor())
-                .fixedSize(horizontal: false, vertical: true)
                 .multilineTextAlignment(.center)
                 .lineLimit(nil)
                 .padding(.horizontal, horizontalPadding)
@@ -114,7 +113,6 @@ struct PrimaryButton: View {
                 )
         }
         .buttonStyle(.plain)
-        .fixedSize(horizontal: true, vertical: false)
         .contentShape(Rectangle())
     }
 }

@@ -5,6 +5,7 @@ import SwiftData
 struct NewIntentionView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) var colorScheme
 
     @State private var text = ""
     @State private var scope: IntentionScope = .day
@@ -29,7 +30,7 @@ struct NewIntentionView: View {
                                 Text("Need inspiration?")
                                     .font(.system(size: 14, weight: .medium, design: .default))
                             }
-                            .foregroundColor(Theme.primary)
+                            .foregroundColor(AppThemeManager.shared.accentColor(for: colorScheme))
                         }
                         .padding(.top, 8)
                     }
@@ -57,17 +58,17 @@ struct NewIntentionView: View {
                     Button("Cancel") {
                         dismiss()
                     }
-                    .foregroundColor(Theme.textSecondary)
+                    .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
                 }
 
                 ToolbarItem(placement: .confirmationAction) {
                         Button("Save") {
                             saveIntention()
                         }
-                        .foregroundColor(Theme.buttonText)
+                        .foregroundColor(AppThemeManager.shared.buttonTextColor(for: colorScheme))
                         .padding(.vertical, 12)
                         .padding(.horizontal, 24)
-                        .background(Theme.buttonBackground)
+                        .background(AppThemeManager.shared.accentColor(for: colorScheme))
                         .cornerRadius(8)
                         .disabled(text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }

@@ -4,13 +4,14 @@ import SwiftData
 
 struct IntentionsListView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.colorScheme) var colorScheme
     @Query private var intentions: [Intention]
     @State private var showingNewIntention = false
 
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.gray.opacity(0.1)
+                AppThemeManager.shared.backgroundColor(for: colorScheme)
                     .ignoresSafeArea()
 
                 VStack {
@@ -18,19 +19,19 @@ struct IntentionsListView: View {
                         VStack(spacing: 20) {
                             Image(systemName: "sparkles")
                                 .font(.system(size: 64, weight: .ultraLight))
-                                .foregroundColor(Theme.primary)
+                                .foregroundColor(AppThemeManager.shared.accentColor(for: colorScheme))
 
                             Text("No intentions yet")
                                 .font(.title2)
-                                .foregroundColor(Theme.textSecondary)
+                                .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
 
                             Button("Create Your First Intention") {
                                 showingNewIntention = true
                             }
                             .font(.headline)
-                            .foregroundColor(Theme.buttonText)
+                            .foregroundColor(AppThemeManager.shared.buttonTextColor(for: colorScheme))
                             .padding()
-                            .background(Theme.buttonBackground)
+                            .background(AppThemeManager.shared.accentColor(for: colorScheme))
                             .cornerRadius(12)
                         }
                         .padding()
@@ -39,18 +40,18 @@ struct IntentionsListView: View {
                             VStack(alignment: .leading, spacing: 8) {
                                 Text(intention.text)
                                     .font(.headline)
-                                    .foregroundColor(Theme.textPrimary)
+                                    .foregroundColor(AppThemeManager.shared.primaryTextColor(for: colorScheme))
 
                                 HStack {
                                     Text(intention.scope.rawValue.capitalized)
                                         .font(.subheadline)
-                                        .foregroundColor(Theme.textSecondary)
+                                        .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
 
                                     Spacer()
 
                                     Text(intention.date, style: .date)
                                         .font(.caption)
-                                        .foregroundColor(Theme.textSecondary)
+                                        .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
                                 }
                             }
                             .padding(.vertical, 8)
