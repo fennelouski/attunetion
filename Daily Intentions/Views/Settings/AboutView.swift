@@ -69,7 +69,9 @@ struct AboutView: View {
                 }
             }
             .navigationTitle("About")
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {

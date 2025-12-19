@@ -9,6 +9,7 @@ struct NewIntentionView: View {
     @State private var text = ""
     @State private var scope: IntentionScope = .day
     @State private var date = Date()
+    @State private var showingGuide = false
 
     var body: some View {
         NavigationStack {
@@ -16,6 +17,22 @@ struct NewIntentionView: View {
                 Section("Intention") {
                     TextField("What do you want to focus on?", text: $text, axis: .vertical)
                         .lineLimit(3...6)
+
+                    // Guide button (only show when text is empty)
+                    if text.isEmpty {
+                        Button(action: {
+                            showingGuide = true
+                        }) {
+                            HStack(spacing: 6) {
+                                Image(systemName: "lightbulb.fill")
+                                    .font(.system(size: 14, weight: .medium))
+                                Text("Need inspiration?")
+                                    .font(.system(size: 14, weight: .medium, design: .default))
+                            }
+                            .foregroundColor(Theme.primary)
+                        }
+                        .padding(.top, 8)
+                    }
                 }
 
                 Section("Scope") {
@@ -32,7 +49,9 @@ struct NewIntentionView: View {
                 }
             }
             .navigationTitle("New Intention")
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
@@ -52,6 +71,9 @@ struct NewIntentionView: View {
                         .cornerRadius(8)
                         .disabled(text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
+            }
+            .sheet(isPresented: $showingGuide) {
+                IntentionGuideView(modelContext: modelContext)
             }
         }
     }
