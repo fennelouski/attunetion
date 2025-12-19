@@ -7,6 +7,9 @@
 
 import SwiftUI
 import SwiftData
+#if canImport(WidgetKit)
+import WidgetKit
+#endif
 
 /// Fifth page of onboarding - Create first intention
 struct FirstIntentionPage: View {
@@ -38,12 +41,14 @@ struct FirstIntentionPage: View {
                             .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                             .fixedSize(horizontal: false, vertical: true)
                             .multilineTextAlignment(.center)
+                            .lineLimit(nil)
                         
                         VStack(alignment: .leading, spacing: 12) {
                             Text(String(localized: "What do you want to focus on?"))
                                 .font(.system(size: 15, weight: .light, design: .default))
                                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                                 .fixedSize(horizontal: false, vertical: true)
+                                .lineLimit(nil)
                                 .opacity(0.75)
                             
                             TextField(String(localized: "Enter your intention..."), text: $intentionText, axis: .vertical)
@@ -76,6 +81,7 @@ struct FirstIntentionPage: View {
                                     .font(.system(size: 15, weight: .light, design: .default))
                                     .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                                     .fixedSize(horizontal: false, vertical: true)
+                                    .lineLimit(nil)
                                     .opacity(0.75)
                                     .padding(.horizontal, 60)
                                 
@@ -97,27 +103,10 @@ struct FirstIntentionPage: View {
                     
                     Spacer()
                     
-                    // Action button
+                    // Action button - always enabled
                     VStack(spacing: 20) {
-                        if intentionText.isEmpty {
-                            Button(action: {}) {
-                                Text(String(localized: "Get Started"))
-                                    .font(.system(size: 17, weight: .semibold, design: .default))
-                                    .foregroundColor(themeManager.buttonTextColor(for: colorScheme).toSwiftUIColor())
-                                    .fixedSize(horizontal: false, vertical: true)
-                                    .frame(maxWidth: 360)
-                                    .frame(minHeight: 50)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                            .fill(themeManager.buttonBackgroundColor(for: colorScheme).toSwiftUIColor().opacity(0.5))
-                                    )
-                            }
-                            .disabled(true)
-                        } else {
-                            PrimaryButton("Get Started", themeManager: themeManager) {
-                                createFirstIntention()
-                            }
-                            .frame(maxWidth: 360)
+                        PrimaryButton("Get Started", themeManager: themeManager) {
+                            createFirstIntention()
                         }
                     }
                     .padding(.horizontal, 40)
@@ -129,29 +118,40 @@ struct FirstIntentionPage: View {
     }
     
     func createFirstIntention() {
-        guard !intentionText.isEmpty else { return }
+        // Only create intention if user provided text
+        let trimmedText = intentionText.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        let intention = Intention(
-            text: intentionText.trimmingCharacters(in: .whitespacesAndNewlines),
-            scope: selectedScope,
-            date: Date()
-        )
-        
-        do {
-            let repository = IntentionRepository(modelContext: modelContext)
-            try repository.create(intention)
+        if !trimmedText.isEmpty {
+            let intention = Intention(
+                text: trimmedText,
+                scope: selectedScope,
+                date: Date()
+            )
             
-            // Sync widget data after creating first intention
-            WidgetDataService.shared.updateWidgetDataFromSwiftData(modelContext: modelContext)
-            
-            OnboardingManager.shared.completeOnboarding()
-            onComplete()
-        } catch {
-            print("Error creating first intention: \(error)")
-            // Still complete onboarding even if intention creation fails
-            OnboardingManager.shared.completeOnboarding()
-            onComplete()
+            do {
+                let repository = IntentionRepository(modelContext: modelContext)
+                try repository.create(intention)
+                
+                // Sync widget data after creating first intention - pass intention directly
+                WidgetDataService.shared.updateWidgetDataFromSwiftData(modelContext: modelContext, currentIntention: intention)
+                
+                // Reload widget timelines
+                #if canImport(WidgetKit) && !os(visionOS)
+                Task { @MainActor in
+                    // Small delay to ensure UserDefaults are written to disk
+                    try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
+                #endif
+            } catch {
+                print("Error creating first intention: \(error)")
+                // Continue with onboarding even if intention creation fails
+            }
         }
+        
+        // Always complete onboarding, even if no intention was created
+        OnboardingManager.shared.completeOnboarding()
+        onComplete()
     }
 }
 

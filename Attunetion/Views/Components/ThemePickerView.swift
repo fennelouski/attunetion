@@ -74,7 +74,7 @@ struct ThemePickerView: View {
                                 .scaleEffect(0.8)
                                 .tint(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                         } else {
-                            Image(systemName: "sparkles")
+                            Image(systemName: "target")
                         }
                         Text(String(localized: "Generate AI Theme"))
                             .font(.system(size: 15, weight: .medium, design: .default))

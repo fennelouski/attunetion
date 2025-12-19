@@ -77,11 +77,11 @@
 "Think big picture. What do you want to focus on this month? This is your overarching theme that guides your weekly and daily intentions." = "Isipin ang malaking larawan. Saan mo gustong mag-focus ngayong buwan? Ito ang iyong pangkalahatang tema na gumagabay sa iyong lingguhan at pang-araw-araw na mga intensyon.";
 "e.g., Build healthier habits" = "hal., Bumuo ng mas malusog na gawi";
 "Set Your Weekly Intention" = "Itakda ang Iyong Lingguhang Intensyon";
-"Break down your monthly goal into weekly actions. What specific step will you take this week?" = "Hatiin ang iyong buwanang layunin sa mga lingguhang aksyon. Anong partikular na hakbang ang gagawin mo ngayong linggo?";
-"e.g., Exercise 3 times this week" = "hal., Mag-ehersisyo ng 3 beses ngayong linggo";
+"Break down your monthly intention into weekly focus. What will you prioritize this week?" = "Hatiin ang iyong buwanang intensyon sa lingguhang pokus. Ano ang uunahin mo ngayong linggo?";
+"e.g., Move my body regularly" = "hal., Regular na ilipat ang aking katawan";
 "Set Your Daily Intention" = "Itakda ang Iyong Pang-araw-araw na Intensyon";
-"Make it concrete and achievable today. What one thing will you do today to move toward your goals?" = "Gawin itong konkreto at makakamit ngayon. Anong isang bagay ang gagawin mo ngayon upang umusad patungo sa iyong mga layunin?";
-"e.g., Go for a 20-minute walk" = "hal., Maglakad ng 20 minuto";
+"Make it present and meaningful today. What will you focus on today?" = "Gawin itong kasalukuyan at makabuluhan ngayon. Ano ang pagtutuunan mo ng pansin ngayon?";
+"e.g., Move my body" = "hal., Ilipat ang aking katawan";
 "You're All Set!" = "Handa Ka Na!";
 "You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones." = "Nagawa mo na ang iyong mga unang intensyon! Lilitaw ang mga ito sa iyong home screen at tutulong na panatilihin kang nakatutok. Maaari kang magdagdag palagi ng higit pa o i-edit ang mga umiiral na.";
 "Good Example" = "Magandang Halimbawa";
@@ -100,18 +100,18 @@
 "Monthly" = "Buwanan";
 
 /* Examples */
-"Practice gratitude by writing 3 things I'm thankful for each day" = "Magsanay ng pasasalamat sa pamamagitan ng pagsulat ng 3 bagay na ipinagpapasalamat ko bawat araw";
-"Exercise for 30 minutes, 3 times this week" = "Mag-ehersisyo ng 30 minuto, 3 beses ngayong linggo";
-"Read for 20 minutes before bed each night" = "Magbasa ng 20 minuto bago matulog gabi-gabi";
-"Call or text one friend or family member daily" = "Tumawag o mag-text sa isang kaibigan o miyembro ng pamilya araw-araw";
-"Spend 10 minutes each morning planning my day" = "Gumugol ng 10 minuto tuwing umaga sa pagpaplano ng aking araw";
-"Complete one important task before checking email" = "Tapusin ang isang mahalagang gawain bago tingnan ang email";
-"Take a 15-minute walk outside during lunch break" = "Maglakad ng 15 minuto sa labas tuwing break sa tanghalian";
-"Write in my journal for 5 minutes each evening" = "Magsulat sa aking journal ng 5 minuto tuwing gabi";
-"Do one act of kindness for someone else today" = "Gumawa ng isang kabutihan para sa ibang tao ngayon";
-"Spend quality time with my partner without phones" = "Gumugol ng de-kalidad na oras kasama ang aking kapareha nang walang mga telepono";
-"Learn something new for 15 minutes each day" = "Matuto ng bagong bagay sa loob ng 15 minuto bawat araw";
-"Practice deep breathing for 5 minutes when stressed" = "Magsanay ng malalim na paghinga ng 5 minuto kapag na-stress";
+"Practice gratitude by reflecting on what I'm thankful for" = "Magsanay ng pasasalamat sa pamamagitan ng pag-iisip tungkol sa mga bagay na ipinagpapasalamat ko";
+"Move my body regularly throughout the week" = "Ilipat ang aking katawan nang regular sa buong linggo";
+"End my day with reading" = "Tapusin ang aking araw sa pagbabasa";
+"Connect with friends and family daily" = "Makipag-ugnayan sa mga kaibigan at pamilya araw-araw";
+"Start each morning with intention" = "Simulan ang bawat umaga nang may intensyon";
+"Focus on what matters most before distractions" = "Tumutok sa pinakamahalaga bago ang mga abala";
+"Connect with nature during breaks" = "Makipag-ugnayan sa kalikasan sa panahon ng mga pahinga";
+"Create space for reflection each evening" = "Lumikha ng espasyo para sa pagmumuni-muni tuwing gabi";
+"Show kindness to others" = "Magpakita ng kabaitan sa iba";
+"Be fully present with my partner" = "Maging ganap na naroroon kasama ang aking kapareha";
+"Stay open to learning and new ideas" = "Manatiling bukas sa pag-aaral at mga bagong ideya";
+"Return to my breath when I feel stressed" = "Bumalik sa aking paghinga kapag nakakaramdam ako ng stress";
 
 "Be happy" = "Maging masaya";
 "Work harder" = "Magtrabaho nang mas mahirap";

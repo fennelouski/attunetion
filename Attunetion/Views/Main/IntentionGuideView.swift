@@ -102,17 +102,17 @@ struct IntentionGuideView: View {
             ),
             GuideStep(
                 title: String(localized: "Set Your Weekly Intention"),
-                description: String(localized: "Break down your monthly goal into weekly actions. What specific step will you take this week?"),
+                description: String(localized: "Break down your monthly intention into weekly focus. What will you prioritize this week?"),
                 icon: "calendar.badge.clock",
                 scope: .week,
-                placeholder: String(localized: "e.g., Exercise 3 times this week")
+                placeholder: String(localized: "e.g., Move my body regularly")
             ),
             GuideStep(
                 title: String(localized: "Set Your Daily Intention"),
-                description: String(localized: "Make it concrete and achievable today. What one thing will you do today to move toward your goals?"),
+                description: String(localized: "Make it present and meaningful today. What will you focus on today?"),
                 icon: "sun.max.fill",
                 scope: .day,
-                placeholder: String(localized: "e.g., Go for a 20-minute walk")
+                placeholder: String(localized: "e.g., Move my body")
             ),
             GuideStep(
                 title: String(localized: "You're All Set!"),
@@ -1412,9 +1412,9 @@ extension IntentionPack {
         ),
         IntentionPack(
             name: "Productivity & Focus",
-            description: "Achieve goals and stay organized",
-            monthly: "Make meaningful progress on my goals",
-            weekly: "Complete important tasks thoughtfully",
+            description: "Work with purpose and stay organized",
+            monthly: "Show up fully for my work",
+            weekly: "Focus on important work",
             daily: "Focus on what matters most"
         )
     ]
@@ -1478,7 +1478,7 @@ struct CompletionStepContent: View {
             } else {
                 // Show options for creating intentions
                 VStack(spacing: 24) {
-                    Image(systemName: "sparkles")
+                    Image(systemName: "target")
                         .font(.system(size: 64, weight: .ultraLight))
                         .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                         .symbolEffect(.variableColor.iterative, options: .repeating.speed(0.5))
@@ -1527,7 +1527,7 @@ struct CompletionStepContent: View {
                             #endif
                         }) {
                             HStack {
-                                Image(systemName: "sparkles")
+                                Image(systemName: "target")
                                     .font(.system(size: 16, weight: .medium))
                                     .symbolEffect(.variableColor.iterative, options: .repeating.speed(0.5))
                                     .symbolEffect(.pulse, options: .repeating.speed(0.5))
@@ -1681,7 +1681,7 @@ struct AIIntentionGeneratorView: View {
                 
                 ScrollView {
                     VStack(spacing: 24) {
-                        Image(systemName: "sparkles")
+                        Image(systemName: "target")
                             .font(.system(size: 48, weight: .ultraLight))
                             .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                             .symbolEffect(.variableColor.iterative, options: .repeating.speed(0.5))
@@ -1767,8 +1767,8 @@ struct AIIntentionGeneratorView: View {
                     generatedDaily = "Take care of my body and mind"
                 } else if keywords.contains("career") || keywords.contains("work") || keywords.contains("professional") {
                     generatedMonthly = "Focus on professional growth and development"
-                    generatedWeekly = "Complete important work tasks thoughtfully"
-                    generatedDaily = "Make progress on my career goals"
+                    generatedWeekly = "Show up fully for my work"
+                    generatedDaily = "Work with intention and purpose"
                 } else if keywords.contains("relationship") || keywords.contains("family") || keywords.contains("friend") {
                     generatedMonthly = "Nurture meaningful relationships"
                     generatedWeekly = "Connect with friends and family"

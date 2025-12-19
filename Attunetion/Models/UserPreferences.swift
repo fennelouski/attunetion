@@ -217,6 +217,7 @@ final class UserPreferences {
     var appThemeId: String? // App-wide UI theme ID (stored as string for CloudKit compatibility)
     var defaultFont: String?
     var defaultIntentionFrequency: String // Store as string for CloudKit compatibility (monthly/weekly/daily)
+    var widgetThemeId: String? // Widget appearance theme ID (nil = use intention's theme)
     
     // Store NotificationSettings as JSON string for CloudKit compatibility
     @Attribute(.externalStorage) var notificationSettingsData: Data?
@@ -228,6 +229,7 @@ final class UserPreferences {
         appThemeId: String? = nil,
         defaultFont: String? = nil,
         defaultIntentionFrequency: IntentionFrequency = .monthly,
+        widgetThemeId: String? = nil,
         notificationSettings: NotificationSettings = NotificationSettings()
     ) {
         self.id = id
@@ -236,6 +238,7 @@ final class UserPreferences {
         self.appThemeId = appThemeId
         self.defaultFont = defaultFont
         self.defaultIntentionFrequency = defaultIntentionFrequency.rawValue
+        self.widgetThemeId = widgetThemeId
         // Encode synchronously - NotificationSettings is a plain struct, so encoding is safe
         self.notificationSettingsData = Self.encodeNotificationSettings(notificationSettings)
     }

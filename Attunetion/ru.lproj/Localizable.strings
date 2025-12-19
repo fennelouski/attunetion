@@ -77,11 +77,11 @@
 "Think big picture. What do you want to focus on this month? This is your overarching theme that guides your weekly and daily intentions." = "Мыслите масштабно. На чем вы хотите сосредоточиться в этом месяце? Это ваша общая тема, которая направляет ваши еженедельные и ежедневные намерения.";
 "e.g., Build healthier habits" = "например, Создать более здоровые привычки";
 "Set Your Weekly Intention" = "Установите свое еженедельное намерение";
-"Break down your monthly goal into weekly actions. What specific step will you take this week?" = "Разбейте вашу ежемесячную цель на еженедельные действия. Какой конкретный шаг вы сделаете на этой неделе?";
-"e.g., Exercise 3 times this week" = "например, Тренироваться 3 раза на этой неделе";
+"Break down your monthly intention into weekly focus. What will you prioritize this week?" = "Разбейте ваше ежемесячное намерение на еженедельный фокус. На чем вы сосредоточитесь на этой неделе?";
+"e.g., Move my body regularly" = "например, Регулярно двигать своим телом";
 "Set Your Daily Intention" = "Установите свое ежедневное намерение";
-"Make it concrete and achievable today. What one thing will you do today to move toward your goals?" = "Сделайте его конкретным и достижимым сегодня. Какую одну вещь вы сделаете сегодня, чтобы продвинуться к своим целям?";
-"e.g., Go for a 20-minute walk" = "например, Прогуляться 20 минут";
+"Make it present and meaningful today. What will you focus on today?" = "Сделайте его присутствующим и значимым сегодня. На чем вы сосредоточитесь сегодня?";
+"e.g., Move my body" = "например, Двигать своим телом";
 "You're All Set!" = "Все готово!";
 "You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones." = "Вы создали свои первые намерения! Они появятся на вашем главном экране и помогут вам оставаться сосредоточенным. Вы всегда можете добавить больше или отредактировать существующие.";
 "Good Example" = "Хороший пример";
@@ -100,18 +100,18 @@
 "Monthly" = "Ежемесячно";
 
 /* Examples */
-"Practice gratitude by writing 3 things I'm thankful for each day" = "Практиковать благодарность, записывая 3 вещи, за которые я благодарен каждый день";
-"Exercise for 30 minutes, 3 times this week" = "Тренироваться 30 минут, 3 раза на этой неделе";
-"Read for 20 minutes before bed each night" = "Читать 20 минут перед сном каждый вечер";
-"Call or text one friend or family member daily" = "Звонить или писать одному другу или члену семьи ежедневно";
-"Spend 10 minutes each morning planning my day" = "Тратить 10 минут каждое утро на планирование своего дня";
-"Complete one important task before checking email" = "Выполнить одну важную задачу перед проверкой электронной почты";
-"Take a 15-minute walk outside during lunch break" = "Прогуляться 15 минут на улице во время обеденного перерыва";
-"Write in my journal for 5 minutes each evening" = "Писать в дневнике 5 минут каждый вечер";
-"Do one act of kindness for someone else today" = "Сделать одно доброе дело для кого-то другого сегодня";
-"Spend quality time with my partner without phones" = "Провести качественное время с партнером без телефонов";
-"Learn something new for 15 minutes each day" = "Учить что-то новое 15 минут каждый день";
-"Practice deep breathing for 5 minutes when stressed" = "Практиковать глубокое дыхание 5 минут при стрессе";
+"Practice gratitude by reflecting on what I'm thankful for" = "Практиковать благодарность, размышляя о том, за что я благодарен";
+"Move my body regularly throughout the week" = "Регулярно двигать своим телом в течение недели";
+"End my day with reading" = "Заканчивать свой день чтением";
+"Connect with friends and family daily" = "Ежедневно общаться с друзьями и семьей";
+"Start each morning with intention" = "Начинать каждое утро с намерения";
+"Focus on what matters most before distractions" = "Сосредоточиться на самом важном до отвлечений";
+"Connect with nature during breaks" = "Связываться с природой во время перерывов";
+"Create space for reflection each evening" = "Создавать пространство для размышлений каждый вечер";
+"Show kindness to others" = "Проявлять доброту к другим";
+"Be fully present with my partner" = "Быть полностью присутствующим с моим партнером";
+"Stay open to learning and new ideas" = "Оставаться открытым к обучению и новым идеям";
+"Return to my breath when I feel stressed" = "Возвращаться к своему дыханию, когда я чувствую стресс";
 
 "Be happy" = "Быть счастливым";
 "Work harder" = "Работать усерднее";

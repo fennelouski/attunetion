@@ -37,12 +37,14 @@ struct HowItWorksPage: View {
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                                 .fixedSize(horizontal: false, vertical: true)
                                 .multilineTextAlignment(.center)
+                                .lineLimit(nil)
                             
                             Text(String(localized: "day, week, or month"))
                                 .font(.system(size: 28, weight: .light, design: .default))
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                                 .fixedSize(horizontal: false, vertical: true)
                                 .multilineTextAlignment(.center)
+                                .lineLimit(nil)
                         }
                         
                         // Example intentions
@@ -82,7 +84,6 @@ struct HowItWorksPage: View {
                     // Action buttons
                     VStack(spacing: 20) {
                         PrimaryButton("Continue", themeManager: themeManager, action: onContinue)
-                            .frame(maxWidth: 360)
                         
                         TextButton("Skip", themeManager: themeManager, action: onSkip)
                             .padding(.top, 4)

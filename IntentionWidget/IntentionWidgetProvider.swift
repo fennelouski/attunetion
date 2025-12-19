@@ -51,7 +51,13 @@ struct IntentionWidgetProvider: TimelineProvider {
     
     /// Get current intention from App Group
     private func getCurrentIntention() -> IntentionData? {
-        return WidgetDataService.shared.getCurrentIntentionData()
+        let intention = WidgetDataService.shared.getCurrentIntentionData()
+        if let intention = intention {
+            print("WidgetProvider: Found intention: '\(intention.text)'")
+        } else {
+            print("WidgetProvider: No intention found in UserDefaults")
+        }
+        return intention
     }
     
     /// Get current theme from App Group

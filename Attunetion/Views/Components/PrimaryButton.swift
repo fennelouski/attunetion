@@ -77,6 +77,16 @@ struct PrimaryButton: View {
         #endif
     }
     
+    private var horizontalPadding: CGFloat {
+        #if os(watchOS)
+        return 20
+        #elseif os(iOS)
+        return 24
+        #else
+        return 32
+        #endif
+    }
+    
     var body: some View {
         Button(action: {
             #if os(iOS)
@@ -89,7 +99,8 @@ struct PrimaryButton: View {
                 .foregroundColor(themeManager.buttonTextColor(for: colorScheme).toSwiftUIColor())
                 .fixedSize(horizontal: false, vertical: true)
                 .multilineTextAlignment(.center)
-                .frame(maxWidth: .infinity)
+                .lineLimit(nil)
+                .padding(.horizontal, horizontalPadding)
                 .frame(minHeight: buttonHeight)
                 .background(
                     RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
@@ -103,6 +114,7 @@ struct PrimaryButton: View {
                 )
         }
         .buttonStyle(.plain)
+        .fixedSize(horizontal: true, vertical: false)
         .contentShape(Rectangle())
     }
 }
@@ -128,7 +140,8 @@ struct SecondaryButton: View {
                 .foregroundColor(themeManager.secondaryButtonTextColor(for: colorScheme).toSwiftUIColor())
                 .fixedSize(horizontal: false, vertical: true)
                 .multilineTextAlignment(.center)
-                .frame(maxWidth: .infinity)
+                .lineLimit(nil)
+                .padding(.horizontal, 24)
                 .frame(minHeight: 44)
                 .background(
                     RoundedRectangle(cornerRadius: 12, style: .continuous)
@@ -160,6 +173,7 @@ struct TextButton: View {
                 .font(.system(size: 15, weight: .medium, design: .default))
                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                 .fixedSize(horizontal: false, vertical: true)
+                .lineLimit(nil)
         }
         .buttonStyle(.plain)
     }

@@ -13,27 +13,30 @@ struct MediumWidgetView: View {
     var entry: IntentionWidgetProvider.Entry
     
     private var placeholderText: String {
-        let frequency = WidgetDataService.shared.getDefaultIntentionFrequency()
-        switch frequency {
-        case "daily":
+        let userState = WidgetDataService.shared.getUserState()
+        
+        // If we have user state, use it
+        if let state = userState {
+            // First time user
+            if !state.hasSetIntentionsBefore {
+                return String(localized: "Set your first intention")
+            }
+            
+            // User has set intentions before - suggest today
+            // Check if hasn't set monthly and it's been 10+ days
+            if !state.hasSetMonthlyBefore, let days = state.daysSinceLastIntention, days >= 10 {
+                return String(localized: "Try an intention pack to stay focused")
+            }
             return String(localized: "Set your intention for today")
-        case "weekly":
-            return String(localized: "Set your intention for this week")
-        case "monthly":
-            return String(localized: "Set your intention for this month")
-        default:
-            return String(localized: "Set your intention")
         }
+        
+        // No user state available - likely first time user or state not synced yet
+        // Default to "Set your first intention" as it's the most helpful message
+        return String(localized: "Set your first intention")
     }
     
     var body: some View {
-        ZStack {
-            // Beautiful gradient background
-            WidgetTheme.gradient(for: entry.theme)
-            
-            // Subtle overlay for depth
-            WidgetTheme.overlayGradient()
-            
+        Group {
             if let intention = entry.intention {
                 VStack(alignment: .leading, spacing: 0) {
                     // Subtle scope indicator at top
@@ -51,10 +54,11 @@ struct MediumWidgetView: View {
                         .font(.system(size: 20, weight: .semibold, design: .rounded))
                         .foregroundColor(entry.theme.map { WidgetTheme.color(from: $0.textColor) } ?? .white)
                         .multilineTextAlignment(.leading)
-                        .lineLimit(4)
+                        .lineLimit(nil)
                         .lineSpacing(4)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 8)
+                        .fixedSize(horizontal: false, vertical: true)
                     
                     Spacer()
                     
@@ -72,7 +76,7 @@ struct MediumWidgetView: View {
             } else {
                 // Empty state with contextual placeholder
                 VStack(spacing: 12) {
-                    Image(systemName: "sparkles")
+                    Image(systemName: "target")
                         .font(.system(size: 36, weight: .light))
                         .foregroundColor(.white.opacity(0.7))
                     
@@ -90,8 +94,18 @@ struct MediumWidgetView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
-        .widgetURL(entry.intention.flatMap { URL(string: "dailyintentions://intention/\($0.id.uuidString)") })
-        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .widgetURL(entry.intention != nil 
+            ? URL(string: "dailyintentions://intention/\(entry.intention!.id.uuidString)")
+            : URL(string: "dailyintentions://new"))
+        .containerBackground(for: .widget) {
+            ZStack {
+                // Beautiful gradient background
+                WidgetTheme.gradient(for: entry.theme)
+                
+                // Subtle overlay for depth
+                WidgetTheme.overlayGradient()
+            }
+        }
     }
     
     @ViewBuilder

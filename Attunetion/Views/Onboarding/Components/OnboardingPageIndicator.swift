@@ -58,8 +58,8 @@ struct OnboardingPageIndicator: View {
             Capsule()
                 .fill(
                     colorScheme == .dark
-                        ? Color.white.opacity(0.05)
-                        : Color.black.opacity(0.03)
+                        ? themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.05)
+                        : themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.03)
                 )
                 .background {
                     Capsule()

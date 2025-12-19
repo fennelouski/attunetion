@@ -77,11 +77,11 @@
 "Think big picture. What do you want to focus on this month? This is your overarching theme that guides your weekly and daily intentions." = "Denk aan het grote geheel. Waar wil je je deze maand op richten? Dit is je overkoepelende thema dat je wekelijkse en dagelijkse intenties stuurt.";
 "e.g., Build healthier habits" = "bijv. Gezondere gewoonten opbouwen";
 "Set Your Weekly Intention" = "Stel je wekelijkse intentie in";
-"Break down your monthly goal into weekly actions. What specific step will you take this week?" = "Deel je maandelijkse doel op in wekelijkse acties. Welke specifieke stap ga je deze week zetten?";
-"e.g., Exercise 3 times this week" = "bijv. 3 keer sporten deze week";
+"Break down your monthly intention into weekly focus. What will you prioritize this week?" = "Deel je maandelijkse intentie op in wekelijkse focus. Waarop ga je deze week de nadruk leggen?";
+"e.g., Move my body regularly" = "bijv. Mijn lichaam regelmatig bewegen";
 "Set Your Daily Intention" = "Stel je dagelijkse intentie in";
-"Make it concrete and achievable today. What one thing will you do today to move toward your goals?" = "Maak het vandaag concreet en haalbaar. Wat is één ding dat je vandaag gaat doen om dichter bij je doelen te komen?";
-"e.g., Go for a 20-minute walk" = "bijv. Een wandeling van 20 minuten maken";
+"Make it present and meaningful today. What will you focus on today?" = "Maak het vandaag aanwezig en betekenisvol. Waarop ga je je vandaag concentreren?";
+"e.g., Move my body" = "bijv. Mijn lichaam bewegen";
 "You're All Set!" = "Je bent helemaal klaar!";
 "You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones." = "Je hebt je eerste intenties gemaakt! Ze verschijnen op je startscherm en helpen je gefocust te blijven. Je kunt er altijd meer toevoegen of bestaande bewerken.";
 "Good Example" = "Goed voorbeeld";
@@ -100,18 +100,18 @@
 "Monthly" = "Maandelijks";
 
 /* Examples */
-"Practice gratitude by writing 3 things I'm thankful for each day" = "Dankbaarheid oefenen door elke dag 3 dingen op te schrijven waarvoor ik dankbaar ben";
-"Exercise for 30 minutes, 3 times this week" = "30 minuten sporten, 3 keer deze week";
-"Read for 20 minutes before bed each night" = "Elke avond 20 minuten lezen voor het slapengaan";
-"Call or text one friend or family member daily" = "Dagelijks een vriend of familielid bellen of sms'en";
-"Spend 10 minutes each morning planning my day" = "Elke ochtend 10 minuten besteden aan het plannen van mijn dag";
-"Complete one important task before checking email" = "Eén belangrijke taak voltooien voordat ik e-mail controleer";
-"Take a 15-minute walk outside during lunch break" = "Een wandeling van 15 minuten buiten maken tijdens de lunchpauze";
-"Write in my journal for 5 minutes each evening" = "Elke avond 5 minuten in mijn dagboek schrijven";
-"Do one act of kindness for someone else today" = "Vandaag een vriendelijke daad voor iemand anders doen";
-"Spend quality time with my partner without phones" = "Quality time doorbrengen met mijn partner zonder telefoons";
-"Learn something new for 15 minutes each day" = "Elke dag 15 minuten iets nieuws leren";
-"Practice deep breathing for 5 minutes when stressed" = "5 minuten diep ademhalen bij stress";
+"Practice gratitude by reflecting on what I'm thankful for" = "Dankbaarheid oefenen door na te denken over waar ik dankbaar voor ben";
+"Move my body regularly throughout the week" = "Mijn lichaam regelmatig bewegen gedurende de week";
+"End my day with reading" = "Mijn dag beëindigen met lezen";
+"Connect with friends and family daily" = "Dagelijks contact hebben met vrienden en familie";
+"Start each morning with intention" = "Elke ochtend beginnen met intentie";
+"Focus on what matters most before distractions" = "Focussen op wat het belangrijkst is voordat afleidingen komen";
+"Connect with nature during breaks" = "Verbinden met de natuur tijdens pauzes";
+"Create space for reflection each evening" = "Elke avond ruimte creëren voor reflectie";
+"Show kindness to others" = "Vriendelijkheid tonen aan anderen";
+"Be fully present with my partner" = "Volledig aanwezig zijn bij mijn partner";
+"Stay open to learning and new ideas" = "Open blijven voor leren en nieuwe ideeën";
+"Return to my breath when I feel stressed" = "Terugkeren naar mijn ademhaling wanneer ik gestrest ben";
 
 "Be happy" = "Gelukkig zijn";
 "Work harder" = "Harder werken";

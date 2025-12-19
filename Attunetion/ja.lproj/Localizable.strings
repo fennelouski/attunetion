@@ -77,11 +77,11 @@
 "Think big picture. What do you want to focus on this month? This is your overarching theme that guides your weekly and daily intentions." = "全体像を考えてください。今月は何に集中したいですか？これは、毎週および毎日の意図を導く包括的なテーマです。";
 "e.g., Build healthier habits" = "例：より健康的な習慣を築く";
 "Set Your Weekly Intention" = "今週の意図を設定";
-"Break down your monthly goal into weekly actions. What specific step will you take this week?" = "月間目標を週間アクションに分解します。今週は具体的にどのようなステップを踏みますか？";
-"e.g., Exercise 3 times this week" = "例：今週は3回運動する";
+"Break down your monthly intention into weekly focus. What will you prioritize this week?" = "月間の意図を週間の焦点に分解します。今週は何を優先しますか？";
+"e.g., Move my body regularly" = "例：定期的に体を動かす";
 "Set Your Daily Intention" = "今日の意図を設定";
-"Make it concrete and achievable today. What one thing will you do today to move toward your goals?" = "今日、具体的で達成可能なものにしましょう。目標に向かって進むために、今日何を行いますか？";
-"e.g., Go for a 20-minute walk" = "例：20分間散歩に行く";
+"Make it present and meaningful today. What will you focus on today?" = "今日、それを現在のものとして意味のあるものにしましょう。今日は何に焦点を当てますか？";
+"e.g., Move my body" = "例：体を動かす";
 "You're All Set!" = "準備完了！";
 "You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones." = "最初の意図を作成しました！それらはホーム画面に表示され、集中力を維持するのに役立ちます。いつでも追加したり、既存のものを編集したりできます。";
 "Good Example" = "良い例";
@@ -100,18 +100,18 @@
 "Monthly" = "毎月";
 
 /* Examples */
-"Practice gratitude by writing 3 things I'm thankful for each day" = "毎日感謝していることを3つ書いて感謝を実践する";
-"Exercise for 30 minutes, 3 times this week" = "今週は3回、30分間運動する";
-"Read for 20 minutes before bed each night" = "毎晩寝る前に20分間読書する";
-"Call or text one friend or family member daily" = "毎日1人の友人または家族に電話またはメールする";
-"Spend 10 minutes each morning planning my day" = "毎朝10分間、一日の計画を立てる";
-"Complete one important task before checking email" = "メールを確認する前に重要なタスクを1つ完了する";
-"Take a 15-minute walk outside during lunch break" = "昼休みに外を15分間散歩する";
-"Write in my journal for 5 minutes each evening" = "毎晩5分間日記を書く";
-"Do one act of kindness for someone else today" = "今日、誰かのために親切な行いを1つする";
-"Spend quality time with my partner without phones" = "携帯電話なしでパートナーと充実した時間を過ごす";
-"Learn something new for 15 minutes each day" = "毎日15分間新しいことを学ぶ";
-"Practice deep breathing for 5 minutes when stressed" = "ストレスを感じたら5分間深呼吸を実践する";
+"Practice gratitude by reflecting on what I'm thankful for" = "感謝していることについて振り返りながら感謝を実践する";
+"Move my body regularly throughout the week" = "週を通して定期的に体を動かす";
+"End my day with reading" = "読書で一日を終える";
+"Connect with friends and family daily" = "毎日友人や家族とつながる";
+"Start each morning with intention" = "毎朝意図を持って始める";
+"Focus on what matters most before distractions" = "気が散る前に最も重要なことに焦点を当てる";
+"Connect with nature during breaks" = "休憩中に自然とつながる";
+"Create space for reflection each evening" = "毎晩振り返りのための空間を作る";
+"Show kindness to others" = "他の人に親切を示す";
+"Be fully present with my partner" = "パートナーと完全に存在する";
+"Stay open to learning and new ideas" = "学習と新しいアイデアに開かれたままにする";
+"Return to my breath when I feel stressed" = "ストレスを感じたときに呼吸に戻る";
 
 "Be happy" = "幸せになる";
 "Work harder" = "もっと一生懸命働く";

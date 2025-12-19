@@ -56,6 +56,7 @@ struct MacOSPageIndicator: View {
             Text(String(format: String(localized: "%1$d of %2$d"), currentPage + 1, pageCount))
                 .font(.system(size: 11, weight: .regular, design: .default))
                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.6))
+                .lineLimit(nil)
         }
         .frame(width: 200)
     }
@@ -83,6 +84,6 @@ struct MacOSPageIndicator: View {
     }
     .padding()
     .frame(width: 800)
-    .background(Color.black)
+    .background(AppBackground(themeManager: AppThemeManager()))
 }
 

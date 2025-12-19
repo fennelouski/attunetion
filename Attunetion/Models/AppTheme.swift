@@ -115,9 +115,29 @@ struct GradientPoint: Codable {
 // MARK: - SwiftUI Color Conversion
 
 extension ThemeColor {
-    /// Convert to SwiftUI Color
+    /// Convert to SwiftUI Color (for solid colors) or return a Color that represents the theme color
+    func toColor(colorScheme: ColorScheme) -> Color {
+        switch type {
+        case .solid:
+            if let hex = hex {
+                return Color(hex: hex)
+            } else {
+                return Color.clear
+            }
+        case .gradient:
+            // For gradients, return the first color as a fallback
+            // In practice, gradients should be handled differently in views
+            if let colors = gradientColors, let firstColor = colors.first {
+                return Color(hex: firstColor)
+            } else {
+                return Color.clear
+            }
+        }
+    }
+
+    /// Convert to SwiftUI View (supports gradients)
     @ViewBuilder
-    func toColor(colorScheme: ColorScheme) -> some View {
+    func toView(colorScheme: ColorScheme) -> some View {
         switch type {
         case .solid:
             if let hex = hex {
@@ -187,26 +207,26 @@ extension AppTheme {
     /// Default inspirational theme - spa-like, Apple-inspired
     static let defaultTheme = AppTheme(
         id: UUID(uuidString: "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF")!,
-        name: "Serenity",
+        name: "Sage Serenity",
         isPreset: true,
-        // Light mode - soft, calming, spa-like
-        lightBackground: ThemeColor(hex: "#FAF9F6"),
-        lightPrimaryText: ThemeColor(hex: "#1A1A1A"),
-        lightSecondaryText: ThemeColor(hex: "#6B7280"),
-        lightAccent: ThemeColor(hex: "#7C9A9B"),
-        lightButtonBackground: ThemeColor(hex: "#5B7A7B"),
-        lightButtonText: ThemeColor(hex: "#FFFFFF"),
-        lightSecondaryButtonBackground: ThemeColor(hex: "#E8E8E8"),
-        lightSecondaryButtonText: ThemeColor(hex: "#4B5563"),
+        // Light mode - soft, calming, spa-like sage green theme
+        lightBackground: ThemeColor(hex: "#FAF9F6"), // Soft cream background
+        lightPrimaryText: ThemeColor(hex: "#2D3748"), // Deep charcoal text
+        lightSecondaryText: ThemeColor(hex: "#718096"), // Muted gray text
+        lightAccent: ThemeColor(hex: "#7C9A9B"), // Sage green accent
+        lightButtonBackground: ThemeColor(hex: "#5B7A7B"), // Deeper sage button
+        lightButtonText: ThemeColor(hex: "#FFFFFF"), // White text
+        lightSecondaryButtonBackground: ThemeColor(hex: "#E8E8E8"), // Light gray button
+        lightSecondaryButtonText: ThemeColor(hex: "#4B5563"), // Dark gray text
         // Dark mode - deep, peaceful, elegant
-        darkBackground: ThemeColor(hex: "#0F1419"),
-        darkPrimaryText: ThemeColor(hex: "#F5F5F5"),
-        darkSecondaryText: ThemeColor(hex: "#9CA3AF"),
-        darkAccent: ThemeColor(hex: "#7C9A9B"),
-        darkButtonBackground: ThemeColor(hex: "#5B7A7B"),
-        darkButtonText: ThemeColor(hex: "#FFFFFF"),
-        darkSecondaryButtonBackground: ThemeColor(hex: "#1F2937"),
-        darkSecondaryButtonText: ThemeColor(hex: "#D1D5DB")
+        darkBackground: ThemeColor(hex: "#1A1A1A"), // Deep charcoal
+        darkPrimaryText: ThemeColor(hex: "#F5F5F5"), // Soft white text
+        darkSecondaryText: ThemeColor(hex: "#A0AEC0"), // Light gray text
+        darkAccent: ThemeColor(hex: "#7C9A9B"), // Sage green accent
+        darkButtonBackground: ThemeColor(hex: "#5B7A7B"), // Deeper sage button
+        darkButtonText: ThemeColor(hex: "#FFFFFF"), // White text
+        darkSecondaryButtonBackground: ThemeColor(hex: "#2D3748"), // Dark gray button
+        darkSecondaryButtonText: ThemeColor(hex: "#D1D5DB") // Light gray text
     )
     
     /// Warm sunset theme
@@ -214,50 +234,50 @@ extension AppTheme {
         id: UUID(uuidString: "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFE")!,
         name: "Sunset",
         isPreset: true,
-        lightBackground: ThemeColor(hex: "#FFF8F0"),
-        lightPrimaryText: ThemeColor(hex: "#2D1810"),
-        lightSecondaryText: ThemeColor(hex: "#8B6F47"),
-        lightAccent: ThemeColor(hex: "#D4A574"),
-        lightButtonBackground: ThemeColor(hex: "#C97D60"),
-        lightButtonText: ThemeColor(hex: "#FFFFFF"),
-        lightSecondaryButtonBackground: ThemeColor(hex: "#F5E6D3"),
-        lightSecondaryButtonText: ThemeColor(hex: "#8B6F47"),
-        darkBackground: ThemeColor(hex: "#1A0F0A"),
-        darkPrimaryText: ThemeColor(hex: "#F5E6D3"),
-        darkSecondaryText: ThemeColor(hex: "#C97D60"),
-        darkAccent: ThemeColor(hex: "#D4A574"),
-        darkButtonBackground: ThemeColor(hex: "#C97D60"),
-        darkButtonText: ThemeColor(hex: "#FFFFFF"),
-        darkSecondaryButtonBackground: ThemeColor(hex: "#2D1810"),
-        darkSecondaryButtonText: ThemeColor(hex: "#D4A574")
+        lightBackground: ThemeColor(hex: "#FEF5E7"), // Warm cream background
+        lightPrimaryText: ThemeColor(hex: "#7C2D12"), // Deep orange text
+        lightSecondaryText: ThemeColor(hex: "#EA580C"), // Bright orange text
+        lightAccent: ThemeColor(hex: "#F97316"), // Vibrant orange accent
+        lightButtonBackground: ThemeColor(hex: "#EA580C"), // Orange button
+        lightButtonText: ThemeColor(hex: "#FFFFFF"), // White text
+        lightSecondaryButtonBackground: ThemeColor(hex: "#FED7AA"), // Light orange button
+        lightSecondaryButtonText: ThemeColor(hex: "#9A3412"), // Dark orange text
+        darkBackground: ThemeColor(hex: "#451A03"), // Dark brown
+        darkPrimaryText: ThemeColor(hex: "#FFEDD5"), // Light cream text
+        darkSecondaryText: ThemeColor(hex: "#FDBA74"), // Light orange text
+        darkAccent: ThemeColor(hex: "#F97316"), // Vibrant orange accent
+        darkButtonBackground: ThemeColor(hex: "#EA580C"), // Orange button
+        darkButtonText: ThemeColor(hex: "#FFFFFF"), // White text
+        darkSecondaryButtonBackground: ThemeColor(hex: "#7C2D12"), // Dark orange button
+        darkSecondaryButtonText: ThemeColor(hex: "#FED7AA") // Light orange text
     )
-    
-    /// Ocean breeze theme
+
+    /// Spa-like sage green theme - calming and restorative
     static let ocean = AppTheme(
         id: UUID(uuidString: "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFD")!,
-        name: "Ocean",
+        name: "Sage Spa",
         isPreset: true,
-        lightBackground: ThemeColor(hex: "#F0F7FA"),
-        lightPrimaryText: ThemeColor(hex: "#0A2540"),
-        lightSecondaryText: ThemeColor(hex: "#4A6FA5"),
-        lightAccent: ThemeColor(hex: "#5B9BD5"),
-        lightButtonBackground: ThemeColor(hex: "#4A90E2"),
-        lightButtonText: ThemeColor(hex: "#FFFFFF"),
-        lightSecondaryButtonBackground: ThemeColor(hex: "#E3F2FD"),
-        lightSecondaryButtonText: ThemeColor(hex: "#4A90E2"),
-        darkBackground: ThemeColor(hex: "#0A1628"),
-        darkPrimaryText: ThemeColor(hex: "#E3F2FD"),
-        darkSecondaryText: ThemeColor(hex: "#87CEEB"),
-        darkAccent: ThemeColor(hex: "#5B9BD5"),
-        darkButtonBackground: ThemeColor(hex: "#4A90E2"),
-        darkButtonText: ThemeColor(hex: "#FFFFFF"),
-        darkSecondaryButtonBackground: ThemeColor(hex: "#1A2F4A"),
-        darkSecondaryButtonText: ThemeColor(hex: "#87CEEB")
+        lightBackground: ThemeColor(hex: "#F7FAF7"), // Soft sage-tinted cream
+        lightPrimaryText: ThemeColor(hex: "#2D3748"), // Deep forest text
+        lightSecondaryText: ThemeColor(hex: "#4A5568"), // Muted sage text
+        lightAccent: ThemeColor(hex: "#68B0AB"), // Calming sage green accent
+        lightButtonBackground: ThemeColor(hex: "#5A8F8A"), // Deep sage button
+        lightButtonText: ThemeColor(hex: "#FFFFFF"), // White text
+        lightSecondaryButtonBackground: ThemeColor(hex: "#E8F4F1"), // Light sage button
+        lightSecondaryButtonText: ThemeColor(hex: "#2D5F5F"), // Dark sage text
+        darkBackground: ThemeColor(hex: "#1A1F1E"), // Deep forest
+        darkPrimaryText: ThemeColor(hex: "#F0F4F0"), // Soft sage white
+        darkSecondaryText: ThemeColor(hex: "#A8B5B2"), // Light sage text
+        darkAccent: ThemeColor(hex: "#68B0AB"), // Calming sage green accent
+        darkButtonBackground: ThemeColor(hex: "#5A8F8A"), // Deep sage button
+        darkButtonText: ThemeColor(hex: "#FFFFFF"), // White text
+        darkSecondaryButtonBackground: ThemeColor(hex: "#2D5F5F"), // Dark sage button
+        darkSecondaryButtonText: ThemeColor(hex: "#C8D9D6") // Light sage text
     )
     
     /// All preset themes
     static var presetThemes: [AppTheme] {
-        [defaultTheme, sunset, ocean]
+        [ocean, defaultTheme, sunset] // Sage Spa first as the calming default
     }
 }
 

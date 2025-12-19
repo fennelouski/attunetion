@@ -77,11 +77,11 @@
 "Think big picture. What do you want to focus on this month? This is your overarching theme that guides your weekly and daily intentions." = "큰 그림을 생각하세요. 이번 달에는 무엇에 집중하고 싶으신가요? 이것은 주간 및 일일 의도를 안내하는 포괄적인 주제입니다.";
 "e.g., Build healthier habits" = "예: 더 건강한 습관 만들기";
 "Set Your Weekly Intention" = "주간 의도 설정";
-"Break down your monthly goal into weekly actions. What specific step will you take this week?" = "월간 목표를 주간 행동으로 나누세요. 이번 주에는 어떤 구체적인 단계를 밟으시겠습니까?";
-"e.g., Exercise 3 times this week" = "예: 이번 주에 3번 운동하기";
+"Break down your monthly intention into weekly focus. What will you prioritize this week?" = "월간 의도를 주간 집중으로 나누세요. 이번 주에는 무엇을 우선순위로 두시겠습니까?";
+"e.g., Move my body regularly" = "예: 정기적으로 내 몸 움직이기";
 "Set Your Daily Intention" = "일일 의도 설정";
-"Make it concrete and achievable today. What one thing will you do today to move toward your goals?" = "오늘 구체적이고 달성 가능하게 만드세요. 목표를 향해 나아가기 위해 오늘 어떤 한 가지 일을 하시겠습니까?";
-"e.g., Go for a 20-minute walk" = "예: 20분 산책하기";
+"Make it present and meaningful today. What will you focus on today?" = "오늘 그것을 현재적이고 의미 있게 만드세요. 오늘 무엇에 집중하시겠습니까?";
+"e.g., Move my body" = "예: 내 몸 움직이기";
 "You're All Set!" = "준비 완료!";
 "You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones." = "첫 번째 의도를 만들었습니다! 홈 화면에 나타나 집중력을 유지하는 데 도움이 됩니다. 언제든지 더 추가하거나 기존 의도를 편집할 수 있습니다.";
 "Good Example" = "좋은 예";
@@ -100,18 +100,18 @@
 "Monthly" = "매월";
 
 /* Examples */
-"Practice gratitude by writing 3 things I'm thankful for each day" = "매일 감사한 일 3가지를 적어 감사 연습하기";
-"Exercise for 30 minutes, 3 times this week" = "이번 주에 3번, 30분씩 운동하기";
-"Read for 20 minutes before bed each night" = "매일 밤 잠들기 전 20분 독서하기";
-"Call or text one friend or family member daily" = "매일 친구나 가족 한 명에게 전화하거나 문자하기";
-"Spend 10 minutes each morning planning my day" = "매일 아침 10분 동안 하루 계획하기";
-"Complete one important task before checking email" = "이메일 확인 전 중요한 업무 하나 완료하기";
-"Take a 15-minute walk outside during lunch break" = "점심 시간에 15분 동안 밖에서 산책하기";
-"Write in my journal for 5 minutes each evening" = "매일 저녁 5분 동안 일기 쓰기";
-"Do one act of kindness for someone else today" = "오늘 다른 사람을 위해 친절한 행동 하나 하기";
-"Spend quality time with my partner without phones" = "휴대폰 없이 파트너와 좋은 시간 보내기";
-"Learn something new for 15 minutes each day" = "매일 15분 동안 새로운 것 배우기";
-"Practice deep breathing for 5 minutes when stressed" = "스트레스 받을 때 5분 동안 심호흡 연습하기";
+"Practice gratitude by reflecting on what I'm thankful for" = "감사한 것에 대해 생각하며 감사 연습하기";
+"Move my body regularly throughout the week" = "주중에 정기적으로 내 몸 움직이기";
+"End my day with reading" = "독서로 하루 마무리하기";
+"Connect with friends and family daily" = "매일 친구와 가족과 소통하기";
+"Start each morning with intention" = "매일 아침 의도와 함께 시작하기";
+"Focus on what matters most before distractions" = "산만해지기 전에 가장 중요한 것에 집중하기";
+"Connect with nature during breaks" = "휴식 시간에 자연과 연결하기";
+"Create space for reflection each evening" = "매일 저녁 성찰을 위한 공간 만들기";
+"Show kindness to others" = "다른 사람에게 친절 보여주기";
+"Be fully present with my partner" = "파트너와 완전히 함께 있기";
+"Stay open to learning and new ideas" = "학습과 새로운 아이디어에 열려있기";
+"Return to my breath when I feel stressed" = "스트레스를 느낄 때 내 호흡으로 돌아가기";
 
 "Be happy" = "행복하기";
 "Work harder" = "더 열심히 일하기";

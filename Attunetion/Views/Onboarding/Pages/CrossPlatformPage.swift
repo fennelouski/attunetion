@@ -37,12 +37,14 @@ struct CrossPlatformPage: View {
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                                 .fixedSize(horizontal: false, vertical: true)
                                 .multilineTextAlignment(.center)
+                                .lineLimit(nil)
                             
                             Text(String(localized: "all your devices"))
                                 .font(.system(size: 28, weight: .light, design: .default))
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                                 .fixedSize(horizontal: false, vertical: true)
                                 .multilineTextAlignment(.center)
+                                .lineLimit(nil)
                         }
                         
                         Text(String(localized: "Your intentions sync automatically across iPhone, iPad, Mac, and Apple Watch. Set an intention on one device and it's available everywhere."))
@@ -50,6 +52,7 @@ struct CrossPlatformPage: View {
                             .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                             .fixedSize(horizontal: false, vertical: true)
                             .multilineTextAlignment(.center)
+                            .lineLimit(nil)
                             .opacity(0.75)
                             .padding(.horizontal, 60)
                             .frame(maxWidth: 700)
@@ -86,7 +89,6 @@ struct CrossPlatformPage: View {
                     // Action buttons
                     VStack(spacing: 20) {
                         PrimaryButton("Continue", themeManager: themeManager, action: onContinue)
-                            .frame(maxWidth: 360)
                         
                         TextButton("Skip", themeManager: themeManager, action: onSkip)
                             .padding(.top, 4)
@@ -118,6 +120,7 @@ private struct DeviceIcon: View {
                 .font(.caption2)
                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                 .fixedSize(horizontal: false, vertical: true)
+                .lineLimit(nil)
                 .opacity(0.75)
         }
     }

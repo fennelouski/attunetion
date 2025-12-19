@@ -17,7 +17,6 @@ struct WelcomePage: View {
     
     @State private var sparkleAnimation = false
     @State private var contentAppeared = false
-    @State private var buttonPressed = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -56,7 +55,7 @@ struct WelcomePage: View {
                                 )
                             
                             // Icon with enhanced styling
-                            Image(systemName: "sparkles")
+                            Image(systemName: "target")
                                 .font(.system(size: iconFontSize, weight: .ultraLight))
                                 .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                                 .symbolEffect(.pulse, options: .repeating.speed(0.4))
@@ -64,6 +63,7 @@ struct WelcomePage: View {
                                 .scaleEffect(contentAppeared ? 1.0 : 0.8)
                                 .animation(.spring(response: 0.6, dampingFraction: 0.7).delay(0.2), value: contentAppeared)
                         }
+                        .frame(height: iconSize)
                         
                         // Welcome card with enhanced glass morphism
                         VStack(spacing: 24) {
@@ -73,6 +73,7 @@ struct WelcomePage: View {
                                 .tracking(-0.8)
                                 .fixedSize(horizontal: false, vertical: true)
                                 .multilineTextAlignment(.center)
+                                .lineLimit(nil)
                                 .opacity(contentAppeared ? 1.0 : 0.0)
                                 .offset(y: contentAppeared ? 0 : 10)
                                 .animation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.3), value: contentAppeared)
@@ -83,6 +84,7 @@ struct WelcomePage: View {
                                     .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                                     .fixedSize(horizontal: false, vertical: true)
                                     .multilineTextAlignment(.center)
+                                    .lineLimit(nil)
                                     .opacity(0.85)
                                     .lineSpacing(4)
                                 
@@ -91,6 +93,7 @@ struct WelcomePage: View {
                                     .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                                     .fixedSize(horizontal: false, vertical: true)
                                     .multilineTextAlignment(.center)
+                                    .lineLimit(nil)
                                     .opacity(0.75)
                                     .lineSpacing(2)
                             }
@@ -108,12 +111,12 @@ struct WelcomePage: View {
                                 RoundedRectangle(cornerRadius: 24, style: .continuous)
                                     .fill(.ultraThinMaterial)
                                 
-                                // Tint overlay
+                                // Tint overlay using themed colors
                                 RoundedRectangle(cornerRadius: 24, style: .continuous)
                                     .fill(
                                         colorScheme == .dark
-                                            ? Color.white.opacity(0.08)
-                                            : Color.black.opacity(0.04)
+                                            ? themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.08)
+                                            : themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.04)
                                     )
                             }
                             .overlay {
@@ -125,9 +128,7 @@ struct WelcomePage: View {
                                     )
                             }
                             .shadow(
-                                color: colorScheme == .dark
-                                    ? Color.black.opacity(0.3)
-                                    : Color.black.opacity(0.08),
+                                color: themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor().opacity(colorScheme == .dark ? 0.3 : 0.08),
                                 radius: 20,
                                 x: 0,
                                 y: 8
@@ -141,38 +142,16 @@ struct WelcomePage: View {
                     
                     Spacer()
                     
+                    Spacer()
+                    
                     // Action buttons - macOS optimized
                     VStack(spacing: buttonSpacing) {
-                        Button(action: {
+                        PrimaryButton("Get Started", themeManager: themeManager) {
                             #if os(iOS)
                             HapticFeedback.medium()
                             #endif
-                            buttonPressed = true
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                buttonPressed = false
-                                onContinue()
-                            }
-                        }) {
-                            Text(String(localized: "Get Started"))
-                                .font(.system(size: buttonFontSize, weight: .semibold, design: .default))
-                                .foregroundColor(themeManager.buttonTextColor(for: colorScheme).toSwiftUIColor())
-                                .fixedSize(horizontal: false, vertical: true)
-                                .frame(maxWidth: buttonMaxWidth)
-                                .frame(minHeight: buttonHeight)
-                                .background {
-                                    RoundedRectangle(cornerRadius: 16, style: .continuous)
-                                        .fill(themeManager.buttonBackgroundColor(for: colorScheme).toSwiftUIColor())
-                                        .shadow(
-                                            color: themeManager.buttonBackgroundColor(for: colorScheme).toSwiftUIColor().opacity(0.4),
-                                            radius: buttonPressed ? 8 : 12,
-                                            x: 0,
-                                            y: buttonPressed ? 2 : 4
-                                        )
-                                }
-                                .scaleEffect(buttonPressed ? 0.97 : 1.0)
-                                .animation(.spring(response: 0.3, dampingFraction: 0.6), value: buttonPressed)
+                            onContinue()
                         }
-                        .buttonStyle(.plain)
                         .opacity(contentAppeared ? 1.0 : 0.0)
                         .offset(y: contentAppeared ? 0 : 20)
                         .animation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.5), value: contentAppeared)
@@ -184,6 +163,7 @@ struct WelcomePage: View {
                                 .font(.system(size: 15, weight: .regular, design: .default))
                                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                                 .fixedSize(horizontal: false, vertical: true)
+                                .lineLimit(nil)
                         }
                         .buttonStyle(.plain)
                         .opacity(contentAppeared ? 1.0 : 0.0)
@@ -195,7 +175,7 @@ struct WelcomePage: View {
                         #endif
                     }
                     .padding(.horizontal, buttonHorizontalPadding)
-                    .padding(.bottom, bottomSpacing)
+                    .padding(.bottom, skipButtonBottomPadding)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
             }
@@ -211,11 +191,11 @@ struct WelcomePage: View {
     // MARK: - Platform-specific sizing
     
     #if os(macOS)
-    private var contentSpacing: CGFloat { 56 }
+    private var contentSpacing: CGFloat { 40 }
     private var buttonSpacing: CGFloat { 16 }
-    private var bottomSpacing: CGFloat { 80 }
-    private var iconSize: CGFloat { 220 }
-    private var iconFontSize: CGFloat { 90 }
+    private var skipButtonBottomPadding: CGFloat { 100 }
+    private var iconSize: CGFloat { 180 }
+    private var iconFontSize: CGFloat { 72 }
     private var titleFontSize: CGFloat { 44 }
     private var bodyFontSize: CGFloat { 21 }
     private var secondaryFontSize: CGFloat { 19 }
@@ -228,11 +208,11 @@ struct WelcomePage: View {
     private var buttonHeight: CGFloat { 60 }
     private var buttonHorizontalPadding: CGFloat { 60 }
     #else
-    private var contentSpacing: CGFloat { 48 }
+    private var contentSpacing: CGFloat { 32 }
     private var buttonSpacing: CGFloat { 16 }
-    private var bottomSpacing: CGFloat { 60 }
-    private var iconSize: CGFloat { 180 }
-    private var iconFontSize: CGFloat { 72 }
+    private var skipButtonBottomPadding: CGFloat { 80 }
+    private var iconSize: CGFloat { 140 }
+    private var iconFontSize: CGFloat { 56 }
     private var titleFontSize: CGFloat { 36 }
     private var bodyFontSize: CGFloat { 18 }
     private var secondaryFontSize: CGFloat { 16 }

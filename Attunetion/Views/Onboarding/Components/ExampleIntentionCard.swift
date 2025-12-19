@@ -79,11 +79,13 @@ struct ExampleIntentionCard: View {
                         .font(.system(size: 11, weight: .semibold, design: .default))
                         .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                         .fixedSize(horizontal: false, vertical: true)
+                        .lineLimit(nil)
                     Spacer()
                     Text(intention.category)
                         .font(.system(size: 11, weight: .medium, design: .default))
                         .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                         .fixedSize(horizontal: false, vertical: true)
+                        .lineLimit(nil)
                 }
                 
                 Text(intention.text)
@@ -91,6 +93,7 @@ struct ExampleIntentionCard: View {
                     .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(.leading)
+                    .lineLimit(nil)
                     .lineSpacing(2)
             }
             .padding(16)
@@ -99,7 +102,7 @@ struct ExampleIntentionCard: View {
                     .fill(
                         colorScheme == .dark
                             ? themeManager.currentTheme.darkSecondaryButtonBackground.toSwiftUIColor().opacity(0.4)
-                            : Color.white.opacity(0.6)
+                            : themeManager.currentTheme.lightSecondaryButtonBackground.toSwiftUIColor().opacity(0.6)
                     )
             )
             .overlay(

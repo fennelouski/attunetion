@@ -77,11 +77,11 @@
 "Think big picture. What do you want to focus on this month? This is your overarching theme that guides your weekly and daily intentions." = "从大局考虑。这个月你想专注于什么？这是指导你每周和每日意图的总体主题。";
 "e.g., Build healthier habits" = "例如：建立更健康的习惯";
 "Set Your Weekly Intention" = "设定你的每周意图";
-"Break down your monthly goal into weekly actions. What specific step will you take this week?" = "将你的月度目标分解为每周行动。这周你将采取什么具体步骤？";
-"e.g., Exercise 3 times this week" = "例如：这周锻炼3次";
+"Break down your monthly intention into weekly focus. What will you prioritize this week?" = "将你的月度意图分解为每周重点。这周你将优先考虑什么？";
+"e.g., Move my body regularly" = "例如：定期活动我的身体";
 "Set Your Daily Intention" = "设定你的每日意图";
-"Make it concrete and achievable today. What one thing will you do today to move toward your goals?" = "让它在今天具体且可实现。为了朝着你的目标迈进，你今天会做哪一件事？";
-"e.g., Go for a 20-minute walk" = "例如：去散步20分钟";
+"Make it present and meaningful today. What will you focus on today?" = "让它在今天变得当下且有意义。今天你将专注于什么？";
+"e.g., Move my body" = "例如：活动我的身体";
 "You're All Set!" = "一切就绪！";
 "You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones." = "你已经创建了你的第一个意图！它们将出现在你的主屏幕上，帮助你保持专注。你可以随时添加更多或编辑现有的。";
 "Good Example" = "好例子";
@@ -100,18 +100,18 @@
 "Monthly" = "每月";
 
 /* Examples */
-"Practice gratitude by writing 3 things I'm thankful for each day" = "每天写下3件我感激的事情来练习感恩";
-"Exercise for 30 minutes, 3 times this week" = "这周锻炼3次，每次30分钟";
-"Read for 20 minutes before bed each night" = "每晚睡前阅读20分钟";
-"Call or text one friend or family member daily" = "每天给一个朋友或家人打电话或发短信";
-"Spend 10 minutes each morning planning my day" = "每天早上花10分钟计划我的一天";
-"Complete one important task before checking email" = "在查看邮件前完成一项重要任务";
-"Take a 15-minute walk outside during lunch break" = "午休时间在外面散步15分钟";
-"Write in my journal for 5 minutes each evening" = "每晚写5分钟日记";
-"Do one act of kindness for someone else today" = "今天为别人做一件善事";
-"Spend quality time with my partner without phones" = "不带手机与伴侣共度美好时光";
-"Learn something new for 15 minutes each day" = "每天花15分钟学习新东西";
-"Practice deep breathing for 5 minutes when stressed" = "压力大时练习深呼吸5分钟";
+"Practice gratitude by reflecting on what I'm thankful for" = "通过反思我感激的事情来练习感恩";
+"Move my body regularly throughout the week" = "整周定期活动我的身体";
+"End my day with reading" = "以阅读结束我的一天";
+"Connect with friends and family daily" = "每天与朋友和家人联系";
+"Start each morning with intention" = "带着意图开始每个早晨";
+"Focus on what matters most before distractions" = "在分心之前专注于最重要的事情";
+"Connect with nature during breaks" = "在休息时与自然连接";
+"Create space for reflection each evening" = "每晚创造反思的空间";
+"Show kindness to others" = "向他人展示善意";
+"Be fully present with my partner" = "与我的伴侣完全在一起";
+"Stay open to learning and new ideas" = "保持对学习和新想法的开放";
+"Return to my breath when I feel stressed" = "当我感到压力时回到我的呼吸";
 
 "Be happy" = "快乐";
 "Work harder" = "更努力工作";

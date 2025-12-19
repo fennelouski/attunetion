@@ -78,7 +78,7 @@ struct IntentionDetailView: View {
                         
                         if intention.aiGenerated {
                             HStack(spacing: 4) {
-                                Image(systemName: "sparkles")
+                                Image(systemName: "target")
                                     .font(.system(size: 10, weight: .medium))
                                 Text("Suggested")
                             }
@@ -258,6 +258,9 @@ struct DetailRow: View {
             Text(value)
                 .font(.system(size: 14, weight: .regular, design: .default))
                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                .lineLimit(nil)
+                .fixedSize(horizontal: false, vertical: true)
+                .multilineTextAlignment(.trailing)
         }
     }
 }

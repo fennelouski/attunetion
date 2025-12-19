@@ -9,23 +9,25 @@ import SwiftUI
 
 /// First page of onboarding - Welcome screen with spa-like, Apple-inspired design
 struct WelcomePage: View {
-    @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject var themeManager: AppThemeManager
-    
     let onContinue: () -> Void
     let onSkip: () -> Void
-    
+
     @State private var sparkleAnimation = false
-    
+
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                // Custom background
-                AppBackground(themeManager: themeManager)
-                
+                // Sage-themed gradient background
+                LinearGradient(
+                    gradient: Gradient(colors: Theme.backgroundGradient),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .ignoresSafeArea()
+
                 VStack(spacing: 0) {
                     Spacer()
-                    
+
                     // Main content area - centered and properly sized
                     VStack(spacing: 48) {
                         // Icon with subtle animation
@@ -35,8 +37,8 @@ struct WelcomePage: View {
                                 .fill(
                                     RadialGradient(
                                         colors: [
-                                            themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.2),
-                                            themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.0)
+                                            Theme.glow,
+                                            Theme.primary.opacity(0.0)
                                         ],
                                         center: .center,
                                         startRadius: 20,
@@ -51,30 +53,30 @@ struct WelcomePage: View {
                                         .repeatForever(autoreverses: true),
                                     value: sparkleAnimation
                                 )
-                            
+
                             // Icon
                             Image(systemName: "sparkles")
                                 .font(.system(size: 72, weight: .ultraLight))
-                                .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                                .foregroundColor(Theme.primary)
                                 .symbolEffect(.pulse, options: .repeating.speed(0.5))
                         }
-                        
+
                         // Title and description
                         VStack(spacing: 20) {
                             Text("Welcome to Attunetion")
                                 .font(.system(size: 42, weight: .ultraLight, design: .default))
-                                .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                                .foregroundColor(Theme.textPrimary)
                                 .tracking(-0.5)
-                            
+
                             VStack(spacing: 12) {
                                 Text("Set intentions for your day, week, or month.")
                                     .font(.system(size: 20, weight: .light, design: .default))
-                                    .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                                    .foregroundColor(Theme.textPrimary)
                                     .opacity(0.9)
-                                
+
                                 Text("Stay focused on what matters most.")
                                     .font(.system(size: 18, weight: .light, design: .default))
-                                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                                    .foregroundColor(Theme.textSecondary)
                                     .opacity(0.8)
                             }
                         }
@@ -82,28 +84,32 @@ struct WelcomePage: View {
                         .padding(.horizontal, 60)
                         .frame(maxWidth: 700)
                     }
-                    
+
                     Spacer()
-                    
+
                     // Action buttons - clear call to action
                     VStack(spacing: 16) {
-                        PrimaryButton("Get Started", themeManager: themeManager, action: onContinue)
-                            .frame(maxWidth: 400)
-                            .padding(.horizontal, 40)
-                        
-                        #if os(macOS)
-                        // On macOS, make skip button less prominent
-                        Button(action: onSkip) {
-                            Text("Skip for now")
-                                .font(.system(size: 15, weight: .regular, design: .default))
-                                .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                        Button {
+                            onContinue()
+                        } label: {
+                            Text("Get Started")
+                                .font(.system(size: 18, weight: .semibold))
+                                .foregroundColor(Theme.buttonText)
+                                .frame(maxWidth: 400)
+                                .padding(.vertical, 16)
+                                .padding(.horizontal, 40)
+                                .background(Theme.buttonBackground)
+                                .cornerRadius(12)
                         }
-                        .buttonStyle(.plain)
+
+                        Button {
+                            onSkip()
+                        } label: {
+                            Text("Skip for now")
+                                .font(.system(size: 15, weight: .regular))
+                                .foregroundColor(Theme.textSecondary)
+                        }
                         .padding(.top, 8)
-                        #else
-                        TextButton("Skip", themeManager: themeManager, action: onSkip)
-                            .padding(.top, 4)
-                        #endif
                     }
                     .padding(.bottom, 60)
                 }
@@ -121,6 +127,5 @@ struct WelcomePage: View {
         onContinue: { print("Continue") },
         onSkip: { print("Skip") }
     )
-    .environmentObject(AppThemeManager())
     .frame(width: 800, height: 600)
 }

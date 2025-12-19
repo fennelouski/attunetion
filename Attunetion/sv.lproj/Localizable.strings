@@ -77,11 +77,11 @@
 "Think big picture. What do you want to focus on this month? This is your overarching theme that guides your weekly and daily intentions." = "Tänk på helheten. Vad vill du fokusera på den här månaden? Detta är ditt övergripande tema som vägleder dina veckovisa och dagliga intentioner.";
 "e.g., Build healthier habits" = "t.ex. Bygga hälsosammare vanor";
 "Set Your Weekly Intention" = "Sätt din veckovisa intention";
-"Break down your monthly goal into weekly actions. What specific step will you take this week?" = "Bryt ner ditt månatliga mål i veckovisa åtgärder. Vilket specifikt steg kommer du att ta denna vecka?";
-"e.g., Exercise 3 times this week" = "t.ex. Träna 3 gånger denna vecka";
+"Break down your monthly intention into weekly focus. What will you prioritize this week?" = "Bryt ner din månatliga intention i veckovis fokus. Vad kommer du att prioritera denna vecka?";
+"e.g., Move my body regularly" = "t.ex. Röra min kropp regelbundet";
 "Set Your Daily Intention" = "Sätt din dagliga intention";
-"Make it concrete and achievable today. What one thing will you do today to move toward your goals?" = "Gör det konkret och uppnåeligt idag. Vilken sak kommer du att göra idag för att röra dig mot dina mål?";
-"e.g., Go for a 20-minute walk" = "t.ex. Gå en 20-minuters promenad";
+"Make it present and meaningful today. What will you focus on today?" = "Gör det närvarande och meningsfullt idag. Vad kommer du att fokusera på idag?";
+"e.g., Move my body" = "t.ex. Röra min kropp";
 "You're All Set!" = "Du är klar!";
 "You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones." = "Du har skapat dina första intentioner! De kommer att visas på din hemskärm och hjälpa dig att hålla fokus. Du kan alltid lägga till fler eller redigera befintliga.";
 "Good Example" = "Bra exempel";
@@ -100,18 +100,18 @@
 "Monthly" = "Månatligen";
 
 /* Examples */
-"Practice gratitude by writing 3 things I'm thankful for each day" = "Öva tacksamhet genom att skriva 3 saker jag är tacksam för varje dag";
-"Exercise for 30 minutes, 3 times this week" = "Träna i 30 minuter, 3 gånger denna vecka";
-"Read for 20 minutes before bed each night" = "Läsa i 20 minuter innan sänggåendet varje kväll";
-"Call or text one friend or family member daily" = "Ringa eller sms:a en vän eller familjemedlem dagligen";
-"Spend 10 minutes each morning planning my day" = "Spendera 10 minuter varje morgon med att planera min dag";
-"Complete one important task before checking email" = "Slutföra en viktig uppgift innan jag kollar e-post";
-"Take a 15-minute walk outside during lunch break" = "Ta en 15-minuters promenad utomhus under lunchrasten";
-"Write in my journal for 5 minutes each evening" = "Skriva i min dagbok i 5 minuter varje kväll";
-"Do one act of kindness for someone else today" = "Göra en vänlig handling för någon annan idag";
-"Spend quality time with my partner without phones" = "Spendera kvalitetstid med min partner utan telefoner";
-"Learn something new for 15 minutes each day" = "Lära mig något nytt i 15 minuter varje dag";
-"Practice deep breathing for 5 minutes when stressed" = "Öva djupandning i 5 minuter vid stress";
+"Practice gratitude by reflecting on what I'm thankful for" = "Öva tacksamhet genom att reflektera över vad jag är tacksam för";
+"Move my body regularly throughout the week" = "Röra min kropp regelbundet under veckan";
+"End my day with reading" = "Avsluta min dag med läsning";
+"Connect with friends and family daily" = "Kontakta vänner och familj dagligen";
+"Start each morning with intention" = "Börja varje morgon med intention";
+"Focus on what matters most before distractions" = "Fokusera på det viktigaste innan distraktioner";
+"Connect with nature during breaks" = "Kontakta naturen under raster";
+"Create space for reflection each evening" = "Skapa utrymme för reflektion varje kväll";
+"Show kindness to others" = "Visa vänlighet mot andra";
+"Be fully present with my partner" = "Vara helt närvarande med min partner";
+"Stay open to learning and new ideas" = "Hålla sig öppen för lärande och nya idéer";
+"Return to my breath when I feel stressed" = "Återvända till min andning när jag känner mig stressad";
 
 "Be happy" = "Vara lycklig";
 "Work harder" = "Arbeta hårdare";

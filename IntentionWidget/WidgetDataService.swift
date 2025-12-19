@@ -8,6 +8,14 @@
 
 import Foundation
 
+/// User state data for widget empty state logic
+struct WidgetUserState: Codable {
+    let hasSetIntentionsBefore: Bool
+    let lastIntentionDate: Date?
+    let daysSinceLastIntention: Int?
+    let hasSetMonthlyBefore: Bool
+}
+
 /// Service for reading intention data from App Group (widget target version)
 class WidgetDataService {
     static let shared = WidgetDataService()
@@ -16,6 +24,7 @@ class WidgetDataService {
     private let intentionDataKey = "currentIntentionData"
     private let themeDataKey = "currentThemeData"
     private let frequencyKey = "defaultIntentionFrequency"
+    private let userStateKey = "widgetUserState"
     
     private init() {}
     
@@ -29,11 +38,22 @@ class WidgetDataService {
     
     /// Get current intention data from App Group (for widget)
     func getCurrentIntentionData() -> IntentionData? {
-        guard let userDefaults = UserDefaults(suiteName: appGroupIdentifier),
-              let data = userDefaults.data(forKey: intentionDataKey),
-              let intentionData = try? JSONDecoder().decode(IntentionData.self, from: data) else {
+        guard let userDefaults = UserDefaults(suiteName: appGroupIdentifier) else {
+            print("WidgetDataService: Failed to access App Group UserDefaults")
             return nil
         }
+        
+        guard let data = userDefaults.data(forKey: intentionDataKey) else {
+            print("WidgetDataService: No data found for key '\(intentionDataKey)'")
+            return nil
+        }
+        
+        guard let intentionData = try? JSONDecoder().decode(IntentionData.self, from: data) else {
+            print("WidgetDataService: Failed to decode intention data")
+            return nil
+        }
+        
+        print("WidgetDataService: Successfully read intention: '\(intentionData.text)'")
         return intentionData
     }
     
@@ -45,6 +65,16 @@ class WidgetDataService {
             return nil
         }
         return themeData
+    }
+    
+    /// Get user state for widget empty state logic
+    func getUserState() -> WidgetUserState? {
+        guard let userDefaults = UserDefaults(suiteName: appGroupIdentifier),
+              let data = userDefaults.data(forKey: userStateKey),
+              let userState = try? JSONDecoder().decode(WidgetUserState.self, from: data) else {
+            return nil
+        }
+        return userState
     }
 }
 

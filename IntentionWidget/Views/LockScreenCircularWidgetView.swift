@@ -37,7 +37,7 @@ struct LockScreenCircularWidgetView: View {
                         .foregroundColor(entry.theme.map { WidgetTheme.color(from: $0.textColor) } ?? .white)
                 }
             } else {
-                Image(systemName: "sparkles")
+                Image(systemName: "target")
                     .font(.system(size: 20, weight: .medium))
                     .foregroundColor(.secondary)
             }

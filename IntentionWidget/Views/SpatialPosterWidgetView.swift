@@ -14,79 +14,74 @@ struct SpatialPosterWidgetView: View {
     var entry: IntentionWidgetProvider.Entry
     
     var body: some View {
-        ZStack {
+        VStack(alignment: .leading, spacing: 24) {
+            // Scope badge at top
+            if let intention = entry.intention {
+                HStack {
+                    scopeBadge(for: intention.scope)
+                    Spacer()
+                }
+                
+                Spacer()
+                
+                // Intention text (large, bold, readable from distance)
+                Text(intention.text)
+                    .font(.system(size: 48, weight: .bold, design: .rounded))
+                    .foregroundColor(entry.theme.map { WidgetTheme.color(from: $0.textColor) } ?? .white)
+                    .lineLimit(nil)
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .minimumScaleFactor(0.7)
+                
+                Spacer()
+                
+                // Quote (if available) - displayed prominently
+                if let quote = intention.quote, !quote.isEmpty {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("\"\(quote)\"")
+                            .font(.system(size: 24, weight: .regular, design: .serif))
+                            .italic()
+                            .foregroundColor(entry.theme?.accentColor.map { WidgetTheme.color(from: $0) } ?? .white.opacity(0.9))
+                    }
+                    .padding(.vertical, 12)
+                }
+                
+                Spacer()
+                
+                // Date range at bottom
+                HStack(spacing: 8) {
+                    Image(systemName: "calendar")
+                        .font(.system(size: 20))
+                    Text(formatDate(for: intention))
+                        .font(.system(size: 20, weight: .medium))
+                }
+                .foregroundColor(entry.theme?.accentColor.map { WidgetTheme.color(from: $0) } ?? .white.opacity(0.8))
+            } else {
+                // Empty state
+                VStack(spacing: 16) {
+                    Image(systemName: "target")
+                        .font(.system(size: 64))
+                        .foregroundColor(.secondary)
+                    Text(String(localized: "No intention set"))
+                        .font(.system(size: 32, weight: .semibold))
+                        .foregroundColor(.secondary)
+                    Text(String(localized: "Tap to create one"))
+                        .font(.system(size: 20))
+                        .foregroundColor(.secondary)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+        }
+        .padding(32)
+        .widgetURL(entry.intention.flatMap { URL(string: "dailyintentions://intention/\($0.id.uuidString)") })
+        .containerBackground(for: .widget) {
             // Background with subtle depth effect
             if let theme = entry.theme {
                 WidgetTheme.color(from: theme.backgroundColor)
             } else {
                 Color.blue
             }
-            
-            VStack(alignment: .leading, spacing: 24) {
-                // Scope badge at top
-                if let intention = entry.intention {
-                    HStack {
-                        scopeBadge(for: intention.scope)
-                        Spacer()
-                    }
-                    
-                    Spacer()
-                    
-                    // Intention text (large, bold, readable from distance)
-                    Text(intention.text)
-                        .font(.system(size: 48, weight: .bold, design: .rounded))
-                        .foregroundColor(entry.theme.map { WidgetTheme.color(from: $0.textColor) } ?? .white)
-                        .lineLimit(nil)
-                        .multilineTextAlignment(.leading)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .minimumScaleFactor(0.7)
-                    
-                    Spacer()
-                    
-                    // Quote (if available) - displayed prominently
-                    if let quote = intention.quote, !quote.isEmpty {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("\"\(quote)\"")
-                                .font(.system(size: 24, weight: .regular, design: .serif))
-                                .italic()
-                                .foregroundColor(entry.theme?.accentColor.map { WidgetTheme.color(from: $0) } ?? .white.opacity(0.9))
-                        }
-                        .padding(.vertical, 12)
-                    }
-                    
-                    Spacer()
-                    
-                    // Date range at bottom
-                    HStack(spacing: 8) {
-                        Image(systemName: "calendar")
-                            .font(.system(size: 20))
-                        Text(formatDate(for: intention))
-                            .font(.system(size: 20, weight: .medium))
-                    }
-                    .foregroundColor(entry.theme?.accentColor.map { WidgetTheme.color(from: $0) } ?? .white.opacity(0.8))
-                } else {
-                    // Empty state
-                    VStack(spacing: 16) {
-                        Image(systemName: "sparkles")
-                            .font(.system(size: 64))
-                            .foregroundColor(.secondary)
-                        Text(String(localized: "No intention set"))
-                            .font(.system(size: 32, weight: .semibold))
-                            .foregroundColor(.secondary)
-                        Text(String(localized: "Tap to create one"))
-                            .font(.system(size: 20))
-                            .foregroundColor(.secondary)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-            }
-            .padding(32)
         }
-        .widgetURL(entry.intention.flatMap { URL(string: "dailyintentions://intention/\($0.id.uuidString)") })
-        #if os(visionOS)
-        // Add depth and dimension for spatial display
-        .containerBackground(.clear, for: .widget)
-        #endif
     }
     
     @ViewBuilder

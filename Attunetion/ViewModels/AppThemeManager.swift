@@ -17,15 +17,15 @@ class AppThemeManager: ObservableObject {
     private var modelContext: ModelContext?
     
     init(modelContext: ModelContext? = nil) {
-        // Initialize with default theme
-        self.currentTheme = .defaultTheme
+        // Initialize with Sage Spa theme (calming green) as default instead of blue
+        self.currentTheme = .ocean // Sage Spa theme
         self.modelContext = modelContext
-        
+
         // Try to load saved theme preference
         if let context = modelContext {
             self.userPreferencesRepository = UserPreferencesRepository(modelContext: context)
             loadThemePreference()
-            
+
             // Observe CloudKit changes for theme sync
             observeCloudKitChanges(context: context)
         } else {
@@ -48,16 +48,13 @@ class AppThemeManager: ObservableObject {
         guard let repo = userPreferencesRepository,
               let prefs = repo.getPreferences(),
               let themeIdString = prefs.appThemeId,
-              let themeId = UUID(uuidString: themeIdString) else {
+              let themeId = UUID(uuidString: themeIdString),
+              let theme = AppTheme.presetThemes.first(where: { $0.id == themeId }),
+              theme.id != currentTheme.id else {
             return
         }
-        
-        // Find theme by ID in preset themes
-        if let theme = AppTheme.presetThemes.first(where: { $0.id == themeId }),
-           theme.id != currentTheme.id {
-            // Only update if theme actually changed (prevents unnecessary UI updates)
-            self.currentTheme = theme
-        }
+
+        self.currentTheme = theme
     }
     
     /// Set current theme and save preference
@@ -65,6 +62,15 @@ class AppThemeManager: ObservableObject {
     func setTheme(_ theme: AppTheme) {
         self.currentTheme = theme
         saveThemePreference()
+
+        // Update widget data if widget is using app theme (no widget theme preference set)
+        if let context = modelContext {
+            let prefsRepo = UserPreferencesRepository(modelContext: context)
+            if let prefs = prefsRepo.getPreferences(), prefs.widgetThemeId == nil {
+                // Widget is using app theme, so update it
+                WidgetDataService.shared.updateWidgetDataFromSwiftData(modelContext: context)
+            }
+        }
     }
     
     /// Save theme preference to UserPreferences

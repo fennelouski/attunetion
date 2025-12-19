@@ -143,13 +143,33 @@ struct AttunetionApp: App {
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var themeManager: AppThemeManager
+    @State private var pendingURL: URL?
     
     var body: some View {
         #if os(watchOS)
         WatchOSIntentionsView()
+            .onOpenURL { url in
+                handleURL(url)
+            }
         #else
-        IntentionsListView()
+        IntentionsListView(pendingURL: $pendingURL)
+            .onOpenURL { url in
+                handleURL(url)
+            }
         #endif
+    }
+    
+    private func handleURL(_ url: URL) {
+        guard url.scheme == "dailyintentions" else { return }
+        
+        if url.host == "new" {
+            // Open new intention view
+            pendingURL = url
+        } else if url.host == "intention" {
+            // Open specific intention (could navigate to detail view)
+            // For now, just open new intention view
+            pendingURL = URL(string: "dailyintentions://new")
+        }
     }
 }
 

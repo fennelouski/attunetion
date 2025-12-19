@@ -36,6 +36,30 @@ struct OnboardingContainerView: View {
         return currentPage
     }
     
+    // Computed property to determine the last page index
+    private var lastPageIndex: Int {
+        return 5 // FirstIntentionPage is always the last page
+    }
+    
+    // Computed property to determine if we're on the first page
+    private var isFirstPage: Bool {
+        return currentPage == 0
+    }
+    
+    // Computed property to determine if we're on the last page
+    private var isLastPage: Bool {
+        return currentPage == lastPageIndex
+    }
+    
+    // MARK: - Platform-specific sizing
+    private var pageIndicatorBottomPadding: CGFloat {
+        #if os(macOS)
+        return 24
+        #else
+        return 24
+        #endif
+    }
+    
     init(onComplete: (() -> Void)? = nil) {
         self.onComplete = onComplete
         // Initialize theme manager - will be updated with modelContext in onAppear
@@ -101,6 +125,30 @@ struct OnboardingContainerView: View {
             .tabViewStyle(.page)
             #endif
             .animation(.easeInOut(duration: 0.3), value: currentPage)
+            #if os(iOS) || os(watchOS)
+            .highPriorityGesture(
+                DragGesture(minimumDistance: 30)
+                    .onEnded { value in
+                        let horizontalTranslation = value.translation.width
+                        let swipeThreshold: CGFloat = 50
+                        
+                        // Swipe right (positive translation) = go backward
+                        if horizontalTranslation > swipeThreshold {
+                            // Only allow backward swipe if not on first page
+                            if !isFirstPage {
+                                previousPage()
+                            }
+                        }
+                        // Swipe left (negative translation) = go forward
+                        else if horizontalTranslation < -swipeThreshold {
+                            // Only allow forward swipe if not on last page
+                            if !isLastPage {
+                                nextPage()
+                            }
+                        }
+                    }
+            )
+            #endif
             
             // Page indicator overlay - positioned at bottom center
             // macOS uses a different, more desktop-appropriate indicator
@@ -123,7 +171,7 @@ struct OnboardingContainerView: View {
                     #endif
                     Spacer()
                 }
-                .padding(.bottom, 32)
+                .padding(.bottom, pageIndicatorBottomPadding)
             }
         }
         .onAppear {
@@ -151,6 +199,22 @@ struct OnboardingContainerView: View {
             }
         } else {
             completeOnboarding()
+        }
+    }
+    
+    func previousPage() {
+        var previousPageIndex = currentPage - 1
+        
+        // Skip cross-platform page if we don't want to show it
+        if previousPageIndex == 4 && !shouldShowCrossPlatformPage {
+            previousPageIndex = 3 // Skip back to NotificationPermissionPage
+        }
+        
+        // Minimum page index is 0 (WelcomePage)
+        if previousPageIndex >= 0 {
+            withAnimation(.easeInOut(duration: 0.3)) {
+                currentPage = previousPageIndex
+            }
         }
     }
     

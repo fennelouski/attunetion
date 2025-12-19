@@ -43,12 +43,14 @@ struct WidgetSetupPage: View {
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                                 .fixedSize(horizontal: false, vertical: true)
                                 .multilineTextAlignment(.center)
+                                .lineLimit(nil)
                             
                             Text(String(localized: "always visible"))
                                 .font(.system(size: 28, weight: .light, design: .default))
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                                 .fixedSize(horizontal: false, vertical: true)
                                 .multilineTextAlignment(.center)
+                                .lineLimit(nil)
                         }
                         
                         Text(String(localized: "Add a widget to your home screen or lock screen to keep your intention in sight"))
@@ -56,6 +58,7 @@ struct WidgetSetupPage: View {
                             .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                             .fixedSize(horizontal: false, vertical: true)
                             .multilineTextAlignment(.center)
+                            .lineLimit(nil)
                             .opacity(0.75)
                             .padding(.horizontal, 60)
                             .frame(maxWidth: 700)
@@ -66,7 +69,7 @@ struct WidgetSetupPage: View {
                                 .fill(
                                     colorScheme == .dark
                                         ? themeManager.currentTheme.darkSecondaryButtonBackground.toSwiftUIColor().opacity(0.4)
-                                        : Color.white.opacity(0.6)
+                                        : themeManager.currentTheme.lightSecondaryButtonBackground.toSwiftUIColor().opacity(0.6)
                                 )
                                 .frame(height: 120)
                                 .overlay(
@@ -75,11 +78,13 @@ struct WidgetSetupPage: View {
                                             .font(.system(size: 12, weight: .medium, design: .default))
                                             .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                                             .fixedSize(horizontal: false, vertical: true)
+                                            .lineLimit(nil)
                                         Text(String(localized: "Be present"))
                                             .font(.system(size: 20, weight: .light, design: .default))
                                             .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                                             .fixedSize(horizontal: false, vertical: true)
                                             .multilineTextAlignment(.center)
+                                            .lineLimit(nil)
                                     }
                                     .padding(.horizontal, 8)
                                 )
@@ -103,6 +108,7 @@ struct WidgetSetupPage: View {
                                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                                 .fixedSize(horizontal: false, vertical: true)
                                 .multilineTextAlignment(.center)
+                                .lineLimit(nil)
                                 .opacity(0.75)
                         }
                     }
@@ -112,7 +118,6 @@ struct WidgetSetupPage: View {
                     // Action buttons
                     VStack(spacing: 20) {
                         PrimaryButton("Continue", themeManager: themeManager, action: onContinue)
-                            .frame(maxWidth: 360)
                         
                         TextButton("Skip", themeManager: themeManager, action: onSkip)
                             .padding(.top, 4)

@@ -139,7 +139,8 @@ class IntentionsViewModel {
     func addIntention(_ intention: Intention) throws {
         try repository.create(intention)
         loadIntentions()
-        syncWidgetData()
+        // Pass the newly created intention directly to avoid query timing issues
+        syncWidgetData(currentIntention: intention)
     }
     
     func updateIntention(_ intention: Intention) throws {
@@ -155,11 +156,26 @@ class IntentionsViewModel {
     }
     
     /// Sync widget data after changes
-    private func syncWidgetData() {
-        WidgetDataService.shared.updateWidgetDataFromSwiftData(modelContext: modelContext)
-        // Reload widget timelines (WidgetCenter not available on visionOS)
+    private func syncWidgetData(currentIntention: Intention? = nil) {
+        print("IntentionsViewModel: syncWidgetData called, currentIntention: \(currentIntention?.text ?? "nil")")
+        
+        // Update widget data from SwiftData
+        WidgetDataService.shared.updateWidgetDataFromSwiftData(modelContext: modelContext, currentIntention: currentIntention)
+        
+        print("IntentionsViewModel: Widget data update completed, reloading timelines...")
+        
+        // Reload widget timelines immediately (WidgetCenter not available on visionOS)
         #if canImport(WidgetKit) && !os(visionOS)
+        // Reload synchronously on main thread to ensure it happens immediately
         WidgetCenter.shared.reloadAllTimelines()
+        print("IntentionsViewModel: Widget timelines reloaded immediately")
+        
+        // Also reload after a small delay to catch any timing issues
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 200_000_000) // 0.2 seconds
+            WidgetCenter.shared.reloadAllTimelines()
+            print("IntentionsViewModel: Widget timelines reloaded after delay")
+        }
         #endif
     }
     

@@ -101,6 +101,25 @@ struct SettingsView: View {
                     }
                 
                 Section {
+                    // Widget appearance
+                    NavigationLink(destination: WidgetAppearanceView()) {
+                        HStack {
+                            Image(systemName: "square.grid.2x2")
+                                .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                                .frame(width: 24)
+                            Text("Widget Appearance")
+                                .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                        }
+                    }
+                } header: {
+                    ThemedSectionHeader(text: "Widget", themeManager: themeManager)
+                }
+                
+                Section {
                     // Default intention frequency
                     Picker(selection: Binding(
                         get: {
@@ -529,98 +548,6 @@ struct SettingsView: View {
     }
 }
 
-/// App Theme Picker View
-struct AppThemePickerView: View {
-    @Environment(\.colorScheme) var colorScheme
-    @Environment(\.dismiss) private var dismiss
-    @ObservedObject var themeManager: AppThemeManager
-    
-    var body: some View {
-        NavigationStack {
-            ZStack {
-                AppBackground(themeManager: themeManager)
-                
-                List {
-                    ForEach(AppTheme.presetThemes) { theme in
-                        Button(action: {
-                            #if os(iOS)
-                            HapticFeedback.medium()
-                            #endif
-                            themeManager.setTheme(theme)
-                            dismiss()
-                        }) {
-                            HStack(spacing: 16) {
-                                // Theme preview
-                                HStack(spacing: 0) {
-                                    Rectangle()
-                                        .fill(theme.lightBackground.toSwiftUIColor())
-                                        .frame(width: 40, height: 40)
-                                    Rectangle()
-                                        .fill(theme.lightAccent.toSwiftUIColor())
-                                        .frame(width: 20, height: 40)
-                                }
-                                .cornerRadius(8)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .stroke(
-                                            themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.2),
-                                            lineWidth: 1
-                                        )
-                                )
-                                
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(LocalizedStringKey(theme.name))
-                                        .font(.system(size: 16, weight: .medium, design: .default))
-                                        .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                                    
-                                    Text(themeDescription(for: theme))
-                                        .font(.system(size: 13, weight: .regular, design: .default))
-                                        .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                                }
-                                
-                                Spacer()
-                                
-                                if themeManager.currentTheme.id == theme.id {
-                                    Image(systemName: "checkmark")
-                                        .font(.system(size: 16, weight: .semibold))
-                                        .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
-                                }
-                            }
-                            .padding(.vertical, 4)
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
-                .scrollContentBackground(.hidden)
-            }
-            .navigationTitle(String(localized: "App Theme"))
-            #if os(iOS)
-            .navigationBarTitleDisplayMode(.inline)
-            #endif
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button(String(localized: "Done")) {
-                        dismiss()
-                    }
-                    .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
-                }
-            }
-        }
-    }
-    
-    private func themeDescription(for theme: AppTheme) -> String {
-        switch theme.name {
-        case "Serenity":
-            return String(localized: "Calm and peaceful")
-        case "Sunset":
-            return String(localized: "Warm and cozy")
-        case "Ocean":
-            return String(localized: "Cool and refreshing")
-        default:
-            return String(localized: "Custom theme")
-        }
-    }
-}
 
 struct DefaultThemePickerView: View {
     @Binding var selectedTheme: PresetTheme?

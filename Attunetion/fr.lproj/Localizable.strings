@@ -77,11 +77,11 @@
 "Think big picture. What do you want to focus on this month? This is your overarching theme that guides your weekly and daily intentions." = "Voyez grand. Sur quoi voulez-vous vous concentrer ce mois-ci ? C'est votre thème global qui guide vos intentions hebdomadaires et quotidiennes.";
 "e.g., Build healthier habits" = "ex : Construire des habitudes plus saines";
 "Set Your Weekly Intention" = "Définissez votre intention hebdomadaire";
-"Break down your monthly goal into weekly actions. What specific step will you take this week?" = "Décomposez votre objectif mensuel en actions hebdomadaires. Quelle étape spécifique allez-vous franchir cette semaine ?";
-"e.g., Exercise 3 times this week" = "ex : Faire du sport 3 fois cette semaine";
+"Break down your monthly intention into weekly focus. What will you prioritize this week?" = "Décomposez votre intention mensuelle en un focus hebdomadaire. Sur quoi vous concentrerez-vous cette semaine ?";
+"e.g., Move my body regularly" = "ex : Bouger mon corps régulièrement";
 "Set Your Daily Intention" = "Définissez votre intention quotidienne";
-"Make it concrete and achievable today. What one thing will you do today to move toward your goals?" = "Rendez-la concrète et réalisable aujourd'hui. Quelle chose ferez-vous aujourd'hui pour avancer vers vos objectifs ?";
-"e.g., Go for a 20-minute walk" = "ex : Faire une marche de 20 minutes";
+"Make it present and meaningful today. What will you focus on today?" = "Rendez-la présente et significative aujourd'hui. Sur quoi vous concentrerez-vous aujourd'hui ?";
+"e.g., Move my body" = "ex : Bouger mon corps";
 "You're All Set!" = "Tout est prêt !";
 "You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones." = "Vous avez créé vos premières intentions ! Elles apparaîtront sur votre écran d'accueil et vous aideront à rester concentré. Vous pouvez toujours en ajouter d'autres ou modifier celles existantes.";
 "Good Example" = "Bon exemple";
@@ -100,18 +100,18 @@
 "Monthly" = "Mensuel";
 
 /* Examples */
-"Practice gratitude by writing 3 things I'm thankful for each day" = "Pratiquer la gratitude en écrivant 3 choses pour lesquelles je suis reconnaissant chaque jour";
-"Exercise for 30 minutes, 3 times this week" = "Faire de l'exercice pendant 30 minutes, 3 fois cette semaine";
-"Read for 20 minutes before bed each night" = "Lire pendant 20 minutes avant de dormir chaque soir";
-"Call or text one friend or family member daily" = "Appeler ou envoyer un message à un ami ou un membre de la famille chaque jour";
-"Spend 10 minutes each morning planning my day" = "Passer 10 minutes chaque matin à planifier ma journée";
-"Complete one important task before checking email" = "Terminer une tâche importante avant de consulter mes e-mails";
-"Take a 15-minute walk outside during lunch break" = "Faire une marche de 15 minutes dehors pendant la pause déjeuner";
-"Write in my journal for 5 minutes each evening" = "Écrire dans mon journal pendant 5 minutes chaque soir";
-"Do one act of kindness for someone else today" = "Faire un acte de gentillesse pour quelqu'un d'autre aujourd'hui";
-"Spend quality time with my partner without phones" = "Passer du temps de qualité avec mon partenaire sans téléphone";
-"Learn something new for 15 minutes each day" = "Apprendre quelque chose de nouveau pendant 15 minutes chaque jour";
-"Practice deep breathing for 5 minutes when stressed" = "Pratiquer la respiration profonde pendant 5 minutes en cas de stress";
+"Practice gratitude by reflecting on what I'm thankful for" = "Pratiquer la gratitude en réfléchissant à ce pour quoi je suis reconnaissant";
+"Move my body regularly throughout the week" = "Bouger mon corps régulièrement tout au long de la semaine";
+"End my day with reading" = "Terminer ma journée par la lecture";
+"Connect with friends and family daily" = "Se connecter avec les amis et la famille quotidiennement";
+"Start each morning with intention" = "Commencer chaque matin avec intention";
+"Focus on what matters most before distractions" = "Se concentrer sur ce qui compte le plus avant les distractions";
+"Connect with nature during breaks" = "Se connecter avec la nature pendant les pauses";
+"Create space for reflection each evening" = "Créer un espace de réflexion chaque soir";
+"Show kindness to others" = "Montrer de la gentillesse aux autres";
+"Be fully present with my partner" = "Être pleinement présent avec mon partenaire";
+"Stay open to learning and new ideas" = "Rester ouvert à l'apprentissage et aux nouvelles idées";
+"Return to my breath when I feel stressed" = "Revenir à ma respiration quand je me sens stressé";
 
 "Be happy" = "Être heureux";
 "Work harder" = "Travailler plus dur";

@@ -38,12 +38,14 @@ struct NotificationPermissionPage: View {
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                                 .fixedSize(horizontal: false, vertical: true)
                                 .multilineTextAlignment(.center)
+                                .lineLimit(nil)
                             
                             Text(String(localized: "Get gentle reminders to set your daily, weekly, or monthly intentions"))
                                 .font(.system(size: 17, weight: .light, design: .default))
                                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                                 .fixedSize(horizontal: false, vertical: true)
                                 .multilineTextAlignment(.center)
+                                .lineLimit(nil)
                                 .opacity(0.75)
                                 .padding(.horizontal, 60)
                                 .frame(maxWidth: 700)
@@ -57,7 +59,6 @@ struct NotificationPermissionPage: View {
                         PrimaryButton("Enable Notifications", themeManager: themeManager) {
                             requestNotificationPermission()
                         }
-                        .frame(maxWidth: 360)
                         
                         TextButton("Maybe Later", themeManager: themeManager, action: onContinue)
                             .padding(.top, 4)

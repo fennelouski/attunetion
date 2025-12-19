@@ -56,6 +56,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		80A64A4F2EDF5F0700C98A14 /* Exceptions for "Daily Intentions" folder in "Daily Intentions" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 80A64A122EDF5F0600C98A14 /* Daily Intentions */;
+		};
 		80A64A502EDF5F0700C98A14 /* Exceptions for "IntentionWidget" folder in "IntentionWidget" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -68,6 +75,9 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		80A64A152EDF5F0600C98A14 /* Daily Intentions */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				80A64A4F2EDF5F0700C98A14 /* Exceptions for "Daily Intentions" folder in "Daily Intentions" target */,
+			);
 			path = "Daily Intentions";
 			sourceTree = "<group>";
 		};

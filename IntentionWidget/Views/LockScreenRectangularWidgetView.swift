@@ -23,12 +23,13 @@ struct LockScreenRectangularWidgetView: View {
                 // Intention text (compact, 2-3 lines max)
                 Text(intention.text)
                     .font(.system(size: 12, weight: .medium))
-                    .lineLimit(2)
+                    .lineLimit(nil)
                     .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
             }
         } else {
             HStack(spacing: 8) {
-                Image(systemName: "sparkles")
+                Image(systemName: "target")
                     .font(.system(size: 12))
                 Text(String(localized: "No intention set"))
                     .font(.system(size: 12, weight: .medium))

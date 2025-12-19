@@ -77,11 +77,11 @@
 "Think big picture. What do you want to focus on this month? This is your overarching theme that guides your weekly and daily intentions." = "Pense no panorama geral. Em que você quer focar este mês? Este é o seu tema abrangente que guia suas intenções semanais e diárias.";
 "e.g., Build healthier habits" = "ex: Criar hábitos mais saudáveis";
 "Set Your Weekly Intention" = "Defina Sua Intenção Semanal";
-"Break down your monthly goal into weekly actions. What specific step will you take this week?" = "Divida seu objetivo mensal em ações semanais. Qual passo específico você dará esta semana?";
-"e.g., Exercise 3 times this week" = "ex: Exercitar-se 3 vezes esta semana";
+"Break down your monthly intention into weekly focus. What will you prioritize this week?" = "Divida sua intenção mensal em um foco semanal. Em que você se concentrará esta semana?";
+"e.g., Move my body regularly" = "ex: Mover meu corpo regularmente";
 "Set Your Daily Intention" = "Defina Sua Intenção Diária";
-"Make it concrete and achievable today. What one thing will you do today to move toward your goals?" = "Torne concreto e alcançável hoje. Qual coisa você fará hoje para avançar em direção aos seus objetivos?";
-"e.g., Go for a 20-minute walk" = "ex: Fazer uma caminhada de 20 minutos";
+"Make it present and meaningful today. What will you focus on today?" = "Torne presente e significativo hoje. Em que você se concentrará hoje?";
+"e.g., Move my body" = "ex: Mover meu corpo";
 "You're All Set!" = "Tudo Pronto!";
 "You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones." = "Você criou suas primeiras intenções! Elas aparecerão na sua tela inicial e ajudarão a manter o foco. Você sempre pode adicionar mais ou editar as existentes.";
 "Good Example" = "Bom Exemplo";
@@ -100,18 +100,18 @@
 "Monthly" = "Mensal";
 
 /* Examples */
-"Practice gratitude by writing 3 things I'm thankful for each day" = "Praticar gratidão escrevendo 3 coisas pelas quais sou grato a cada dia";
-"Exercise for 30 minutes, 3 times this week" = "Exercitar-se por 30 minutos, 3 vezes esta semana";
-"Read for 20 minutes before bed each night" = "Ler por 20 minutos antes de dormir todas as noites";
-"Call or text one friend or family member daily" = "Ligar ou mandar mensagem para um amigo ou familiar diariamente";
-"Spend 10 minutes each morning planning my day" = "Gastar 10 minutos todas as manhãs planejando meu dia";
-"Complete one important task before checking email" = "Completar uma tarefa importante antes de checar o e-mail";
-"Take a 15-minute walk outside during lunch break" = "Fazer uma caminhada de 15 minutos ao ar livre durante o almoço";
-"Write in my journal for 5 minutes each evening" = "Escrever no meu diário por 5 minutos todas as noites";
-"Do one act of kindness for someone else today" = "Fazer um ato de bondade para alguém hoje";
-"Spend quality time with my partner without phones" = "Passar tempo de qualidade com meu parceiro sem celulares";
-"Learn something new for 15 minutes each day" = "Aprender algo novo por 15 minutos a cada dia";
-"Practice deep breathing for 5 minutes when stressed" = "Praticar respiração profunda por 5 minutos quando estressado";
+"Practice gratitude by reflecting on what I'm thankful for" = "Praticar gratidão refletindo sobre aquilo pelo qual sou grato";
+"Move my body regularly throughout the week" = "Mover meu corpo regularmente durante a semana";
+"End my day with reading" = "Terminar meu dia com leitura";
+"Connect with friends and family daily" = "Conectar-me com amigos e família diariamente";
+"Start each morning with intention" = "Começar cada manhã com intenção";
+"Focus on what matters most before distractions" = "Focar no que mais importa antes das distrações";
+"Connect with nature during breaks" = "Conectar-me com a natureza durante as pausas";
+"Create space for reflection each evening" = "Criar espaço para reflexão todas as noites";
+"Show kindness to others" = "Mostrar bondade aos outros";
+"Be fully present with my partner" = "Estar completamente presente com meu parceiro";
+"Stay open to learning and new ideas" = "Manter-me aberto ao aprendizado e novas ideias";
+"Return to my breath when I feel stressed" = "Voltar à minha respiração quando me sinto estressado";
 
 "Be happy" = "Ser feliz";
 "Work harder" = "Trabalhar mais duro";

@@ -254,7 +254,7 @@ struct IntentionCardView: View {
                 } else {
                     // Empty state
                     VStack(spacing: WatchOSSpacing.medium) {
-                        Image(systemName: "sparkles")
+                        Image(systemName: "target")
                             .font(.system(size: 32, weight: .ultraLight))
                             .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                         

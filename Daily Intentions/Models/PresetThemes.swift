@@ -96,11 +96,11 @@ enum PresetThemes {
     }
     
     /// Helper function to populate preset themes in the database
-    /// This should be called during app initialization or onboarding
+    /// This is called during app initialization to ensure themes are available
     static func populatePresetThemes(in repository: ThemeRepository) throws {
         let existingThemes = repository.getPresetThemes()
         let existingThemeNames = Set(existingThemes.map { $0.name })
-        
+
         // Only add themes that don't already exist
         for theme in PresetThemes.getAll() {
             if !existingThemeNames.contains(theme.name) {

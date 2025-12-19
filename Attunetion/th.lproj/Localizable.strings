@@ -77,11 +77,11 @@
 "Think big picture. What do you want to focus on this month? This is your overarching theme that guides your weekly and daily intentions." = "คิดภาพรวม เดือนนี้คุณต้องการโฟกัสที่อะไร? นี่คือธีมหลักที่ชี้นำเจตนารายสัปดาห์และรายวันของคุณ";
 "e.g., Build healthier habits" = "เช่น สร้างนิสัยที่ดีต่อสุขภาพมากขึ้น";
 "Set Your Weekly Intention" = "ตั้งเจตนาประจำสัปดาห์ของคุณ";
-"Break down your monthly goal into weekly actions. What specific step will you take this week?" = "แบ่งเป้าหมายรายเดือนของคุณออกเป็นการกระทำรายสัปดาห์ สัปดาห์นี้คุณจะทำขั้นตอนใดโดยเฉพาะ?";
-"e.g., Exercise 3 times this week" = "เช่น ออกกำลังกาย 3 ครั้งในสัปดาห์นี้";
+"Break down your monthly intention into weekly focus. What will you prioritize this week?" = "แบ่งเจตนารายเดือนของคุณออกเป็นโฟกัสรายสัปดาห์ สัปดาห์นี้คุณจะให้ความสำคัญกับอะไร?";
+"e.g., Move my body regularly" = "เช่น เคลื่อนไหวร่างกายของฉันเป็นประจำ";
 "Set Your Daily Intention" = "ตั้งเจตนาประจำวันของคุณ";
-"Make it concrete and achievable today. What one thing will you do today to move toward your goals?" = "ทำให้เป็นรูปธรรมและบรรลุได้ในวันนี้ วันนี้คุณจะทำอะไรหนึ่งอย่างเพื่อก้าวไปสู่เป้าหมายของคุณ?";
-"e.g., Go for a 20-minute walk" = "เช่น ไปเดินเล่น 20 นาที";
+"Make it present and meaningful today. What will you focus on today?" = "ทำให้เป็นปัจจุบันและมีความหมายในวันนี้ วันนี้คุณจะมุ่งเน้นที่อะไร?";
+"e.g., Move my body" = "เช่น เคลื่อนไหวร่างกายของฉัน";
 "You're All Set!" = "เรียบร้อยแล้ว!";
 "You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones." = "คุณสร้างเจตนาแรกของคุณแล้ว! เจตนาจะปรากฏบนหน้าจอหลักและช่วยให้คุณจดจ่อ คุณสามารถเพิ่มหรือแก้ไขเจตนาที่มีอยู่ได้เสมอ";
 "Good Example" = "ตัวอย่างที่ดี";
@@ -100,18 +100,18 @@
 "Monthly" = "รายเดือน";
 
 /* Examples */
-"Practice gratitude by writing 3 things I'm thankful for each day" = "ฝึกความกตัญญูโดยเขียน 3 สิ่งที่ฉันรู้สึกขอบคุณในแต่ละวัน";
-"Exercise for 30 minutes, 3 times this week" = "ออกกำลังกาย 30 นาที 3 ครั้งในสัปดาห์นี้";
-"Read for 20 minutes before bed each night" = "อ่านหนังสือ 20 นาทีก่อนนอนทุกคืน";
-"Call or text one friend or family member daily" = "โทรหรือส่งข้อความหาเพื่อนหรือสมาชิกในครอบครัวหนึ่งคนทุกวัน";
-"Spend 10 minutes each morning planning my day" = "ใช้เวลา 10 นาทีทุกเช้าวางแผนวันของฉัน";
-"Complete one important task before checking email" = "ทำงานสำคัญหนึ่งอย่างให้เสร็จก่อนเช็คอีเมล";
-"Take a 15-minute walk outside during lunch break" = "เดินเล่นข้างนอก 15 นาทีช่วงพักกลางวัน";
-"Write in my journal for 5 minutes each evening" = "เขียนบันทึกประจำวัน 5 นาทีทุกเย็น";
-"Do one act of kindness for someone else today" = "ทำความดีหนึ่งอย่างเพื่อคนอื่นในวันนี้";
-"Spend quality time with my partner without phones" = "ใช้เวลาคุณภาพกับคู่รักโดยไม่มีโทรศัพท์";
-"Learn something new for 15 minutes each day" = "เรียนรู้สิ่งใหม่ 15 นาทีในแต่ละวัน";
-"Practice deep breathing for 5 minutes when stressed" = "ฝึกหายใจเข้าลึกๆ 5 นาทีเมื่อเครียด";
+"Practice gratitude by reflecting on what I'm thankful for" = "ฝึกความกตัญญูโดยไตร่ตรองสิ่งที่ฉันรู้สึกขอบคุณ";
+"Move my body regularly throughout the week" = "เคลื่อนไหวร่างกายของฉันเป็นประจำตลอดทั้งสัปดาห์";
+"End my day with reading" = "จบวันของฉันด้วยการอ่าน";
+"Connect with friends and family daily" = "เชื่อมต่อกับเพื่อนและครอบครัวทุกวัน";
+"Start each morning with intention" = "เริ่มต้นทุกเช้าด้วยเจตนา";
+"Focus on what matters most before distractions" = "มุ่งเน้นสิ่งที่สำคัญที่สุดก่อนที่จะถูกรบกวน";
+"Connect with nature during breaks" = "เชื่อมต่อกับธรรมชาติระหว่างพัก";
+"Create space for reflection each evening" = "สร้างพื้นที่สำหรับการไตร่ตรองทุกเย็น";
+"Show kindness to others" = "แสดงความเมตตาต่อผู้อื่น";
+"Be fully present with my partner" = "อยู่กับคู่รักอย่างเต็มที่";
+"Stay open to learning and new ideas" = "เปิดรับการเรียนรู้และแนวคิดใหม่ๆ";
+"Return to my breath when I feel stressed" = "กลับมาที่ลมหายใจของฉันเมื่อรู้สึกเครียด";
 
 "Be happy" = "มีความสุข";
 "Work harder" = "ทำงานหนักขึ้น";

@@ -29,6 +29,9 @@ struct NewIntentionView: View {
     @State private var validationMessage = ""
     @State private var isGeneratingAITheme = false
     @State private var showingGuide = false
+    #if os(iOS)
+    @FocusState private var isTextEditorFocused: Bool
+    #endif
     
     private var characterCount: Int {
         intentionText.count
@@ -60,6 +63,9 @@ struct NewIntentionView: View {
                     #else
                     TextEditor(text: $intentionText)
                         .frame(minHeight: 120)
+                        #if os(iOS)
+                        .focused($isTextEditorFocused)
+                        #endif
                         .overlay(
                             Group {
                                 if intentionText.isEmpty {
@@ -80,6 +86,7 @@ struct NewIntentionView: View {
                             Button(action: {
                                 #if os(iOS)
                                 HapticFeedback.light()
+                                isTextEditorFocused = false
                                 #endif
                                 showingGuide = true
                             }) {
@@ -113,6 +120,9 @@ struct NewIntentionView: View {
                     }
                     .onChange(of: selectedScope) { _, _ in
                         selectedDate = defaultDateForScope
+                        #if os(iOS)
+                        isTextEditorFocused = false
+                        #endif
                     }
                     
                     // Date picker
@@ -121,6 +131,11 @@ struct NewIntentionView: View {
                         selection: $selectedDate,
                         displayedComponents: selectedScope == .day ? [.date] : [.date]
                     )
+                    #if os(iOS)
+                    .onChange(of: selectedDate) { _, _ in
+                        isTextEditorFocused = false
+                    }
+                    #endif
                 } header: {
                     Text(String(localized: "Timing"))
                 }
@@ -130,6 +145,7 @@ struct NewIntentionView: View {
                     Button(action: {
                         #if os(iOS)
                         HapticFeedback.light()
+                        isTextEditorFocused = false
                         #endif
                         showingThemePicker.toggle()
                     }) {
@@ -154,7 +170,12 @@ struct NewIntentionView: View {
                         ThemePickerView(
                             selectedTheme: Binding(
                                 get: { selectedTheme },
-                                set: { selectedTheme = $0 }
+                                set: { newTheme in
+                                    selectedTheme = newTheme
+                                    #if os(iOS)
+                                    isTextEditorFocused = false
+                                    #endif
+                                }
                             ),
                             intentionText: intentionText,
                             modelContext: modelContext,
@@ -169,6 +190,7 @@ struct NewIntentionView: View {
                     Button(action: {
                         #if os(iOS)
                         HapticFeedback.light()
+                        isTextEditorFocused = false
                         #endif
                         showingFontPicker.toggle()
                     }) {
@@ -191,8 +213,19 @@ struct NewIntentionView: View {
                     }
                     
                     if showingFontPicker {
-                        FontPickerView(selectedFont: $selectedFont, themeManager: themeManager)
-                            .padding(.vertical, 8)
+                        FontPickerView(
+                            selectedFont: Binding(
+                                get: { selectedFont },
+                                set: { newFont in
+                                    selectedFont = newFont
+                                    #if os(iOS)
+                                    isTextEditorFocused = false
+                                    #endif
+                                }
+                            ),
+                            themeManager: themeManager
+                        )
+                        .padding(.vertical, 8)
                     }
                 } header: {
                     ThemedSectionHeader(text: "Customization", themeManager: themeManager)
@@ -245,6 +278,15 @@ struct NewIntentionView: View {
             }
             .onAppear {
                 selectedDate = defaultDateForScope
+                #if os(iOS)
+                // Focus the text editor when view appears and text is empty
+                if intentionText.isEmpty {
+                    // Use a small delay to ensure the view is fully rendered
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        isTextEditorFocused = true
+                    }
+                }
+                #endif
             }
         }
     }

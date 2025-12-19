@@ -13,27 +13,30 @@ struct LargeWidgetView: View {
     var entry: IntentionWidgetProvider.Entry
     
     private var placeholderText: String {
-        let frequency = WidgetDataService.shared.getDefaultIntentionFrequency()
-        switch frequency {
-        case "daily":
+        let userState = WidgetDataService.shared.getUserState()
+        
+        // If we have user state, use it
+        if let state = userState {
+            // First time user
+            if !state.hasSetIntentionsBefore {
+                return String(localized: "Set your first intention")
+            }
+            
+            // User has set intentions before - suggest today
+            // Check if hasn't set monthly and it's been 10+ days
+            if !state.hasSetMonthlyBefore, let days = state.daysSinceLastIntention, days >= 10 {
+                return String(localized: "Try an intention pack to stay focused")
+            }
             return String(localized: "Set your intention for today")
-        case "weekly":
-            return String(localized: "Set your intention for this week")
-        case "monthly":
-            return String(localized: "Set your intention for this month")
-        default:
-            return String(localized: "Set your intention")
         }
+        
+        // No user state available - likely first time user or state not synced yet
+        // Default to "Set your first intention" as it's the most helpful message
+        return String(localized: "Set your first intention")
     }
     
     var body: some View {
-        ZStack {
-            // Beautiful gradient background
-            WidgetTheme.gradient(for: entry.theme)
-            
-            // Subtle overlay for depth
-            WidgetTheme.overlayGradient()
-            
+        Group {
             if let intention = entry.intention {
                 VStack(alignment: .leading, spacing: 0) {
                     // Scope badge at top
@@ -52,8 +55,9 @@ struct LargeWidgetView: View {
                             .font(.system(size: 26, weight: .semibold, design: .rounded))
                             .foregroundColor(entry.theme.map { WidgetTheme.color(from: $0.textColor) } ?? .white)
                             .multilineTextAlignment(.leading)
-                            .lineLimit(6)
+                            .lineLimit(nil)
                             .lineSpacing(6)
+                            .fixedSize(horizontal: false, vertical: true)
                         
                         // Quote (if available) - styled elegantly
                         if let quote = intention.quote, !quote.isEmpty {
@@ -61,8 +65,9 @@ struct LargeWidgetView: View {
                                 .font(.system(size: 15, weight: .regular, design: .rounded))
                                 .italic()
                                 .foregroundColor(entry.theme?.accentColor.map { WidgetTheme.color(from: $0).opacity(0.9) } ?? .white.opacity(0.8))
-                                .lineLimit(2)
+                                .lineLimit(nil)
                                 .padding(.top, 4)
+                                .fixedSize(horizontal: false, vertical: true)
                         }
                     }
                     .padding(.horizontal, 20)
@@ -84,7 +89,7 @@ struct LargeWidgetView: View {
             } else {
                 // Empty state - elegant and inviting with contextual placeholder
                 VStack(spacing: 16) {
-                    Image(systemName: "sparkles")
+                    Image(systemName: "target")
                         .font(.system(size: 48, weight: .light))
                         .foregroundColor(.white.opacity(0.7))
                     
@@ -102,8 +107,18 @@ struct LargeWidgetView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
-        .widgetURL(entry.intention.flatMap { URL(string: "dailyintentions://intention/\($0.id.uuidString)") })
-        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .widgetURL(entry.intention != nil 
+            ? URL(string: "dailyintentions://intention/\(entry.intention!.id.uuidString)")
+            : URL(string: "dailyintentions://new"))
+        .containerBackground(for: .widget) {
+            ZStack {
+                // Beautiful gradient background
+                WidgetTheme.gradient(for: entry.theme)
+                
+                // Subtle overlay for depth
+                WidgetTheme.overlayGradient()
+            }
+        }
     }
     
     @ViewBuilder

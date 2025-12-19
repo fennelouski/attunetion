@@ -20,7 +20,7 @@ struct AboutView: View {
                 ScrollView {
                     VStack(spacing: 32) {
                         // App icon placeholder
-                        Image(systemName: "sparkles")
+                        Image(systemName: "target")
                             .font(.system(size: 72, weight: .ultraLight))
                             .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                             .padding(.top, 20)

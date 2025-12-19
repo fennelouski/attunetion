@@ -15,12 +15,17 @@ struct IntentionsListView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var themeManager: AppThemeManager
+    @Binding var pendingURL: URL?
     @State private var viewModel: IntentionsViewModel!
     @State private var showingNewIntention = false
     @State private var showingGuide = false
     @State private var sortOrder: SortOrder = .newestFirst
     @State private var isSearchBarVisible = false
     @State private var buttonWidth: CGFloat = 0
+    
+    init(pendingURL: Binding<URL?> = .constant(nil)) {
+        self._pendingURL = pendingURL
+    }
     
     private var verticalPadding: CGFloat {
         #if os(iOS)
@@ -339,11 +344,9 @@ struct IntentionsListView: View {
                                             }
                                             .buttonStyle(.plain)
                                             #if os(iOS)
-                                            .simultaneousGesture(
-                                                TapGesture().onEnded {
-                                                    HapticFeedback.light()
-                                                }
-                                            )
+                                            .onTapGesture {
+                                                HapticFeedback.light()
+                                            }
                                             #endif
                                         }
                                         
@@ -405,11 +408,9 @@ struct IntentionsListView: View {
                                                     }
                                                     .buttonStyle(.plain)
                                                     #if os(iOS)
-                                                    .simultaneousGesture(
-                                                        TapGesture().onEnded {
-                                                            HapticFeedback.light()
-                                                        }
-                                                    )
+                                                    .onTapGesture {
+                                                        HapticFeedback.light()
+                                                    }
                                                     #endif
                                                 }
                                             }
@@ -550,9 +551,21 @@ struct IntentionsListView: View {
                             }
                         }
                     }
+                    .onChange(of: pendingURL) { oldURL, newURL in
+                        // Handle URL deep link
+                        if newURL != nil {
+                            showingNewIntention = true
+                            pendingURL = nil // Clear after handling
+                        }
+                    }
                     .onAppear {
                         if viewModel == nil {
                             viewModel = IntentionsViewModel(modelContext: modelContext)
+                        }
+                        // Handle pending URL on appear
+                        if pendingURL != nil {
+                            showingNewIntention = true
+                            pendingURL = nil
                         }
                     }
                 }
@@ -617,7 +630,7 @@ struct CurrentIntentionCard: View {
                 
                 if intention.aiGenerated {
                     HStack(spacing: 4) {
-                        Image(systemName: "sparkles")
+                        Image(systemName: "target")
                         Text(String(localized: "AI"))
                     }
                     .font(.system(size: 11, weight: .medium, design: .default))

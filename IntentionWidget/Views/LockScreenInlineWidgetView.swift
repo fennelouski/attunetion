@@ -19,11 +19,12 @@ struct LockScreenInlineWidgetView: View {
                     .font(.system(size: 10))
                 Text(intention.text)
                     .font(.system(size: 12, weight: .medium))
-                    .lineLimit(1)
+                    .lineLimit(nil)
+                    .fixedSize(horizontal: false, vertical: true)
             }
         } else {
             HStack(spacing: 4) {
-                Image(systemName: "sparkles")
+                Image(systemName: "target")
                     .font(.system(size: 10))
                 Text(String(localized: "No intention set"))
                     .font(.system(size: 12, weight: .medium))
