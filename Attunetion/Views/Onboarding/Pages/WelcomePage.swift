@@ -144,95 +144,21 @@ struct WelcomePage: View {
                     
                     Spacer()
                     
-                    // Action buttons - TESTING 5 DIFFERENT APPROACHES
-                    VStack(spacing: 12) {
-                        // Button 1: Explicit frame width constraint
-                        Button(action: {}) {
-                            Text("1: Frame Width")
-                                .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 24)
-                                .frame(height: 44)
-                                .frame(width: 200)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .fill(Color.red)
-                                )
-                        }
-                        .buttonStyle(.plain)
-                        
-                        // Button 2: HStack with Spacers
+                    // Action buttons - macOS optimized
+                    VStack(spacing: buttonSpacing) {
                         HStack {
-                            Spacer()
-                            Button(action: {}) {
-                                Text("2: HStack Spacers")
-                                    .font(.system(size: 16, weight: .semibold))
-                                    .foregroundColor(.white)
-                                    .padding(.horizontal, 24)
-                                    .frame(height: 44)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .fill(Color.blue)
-                                    )
+                            Spacer(minLength: buttonHorizontalPadding)
+                            PrimaryButton("Get Started", themeManager: themeManager) {
+                                #if os(iOS)
+                                HapticFeedback.medium()
+                                #endif
+                                onContinue()
                             }
-                            .buttonStyle(.plain)
-                            Spacer()
+                            .opacity(contentAppeared ? 1.0 : 0.0)
+                            .offset(y: contentAppeared ? 0 : 20)
+                            .animation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.5), value: contentAppeared)
+                            Spacer(minLength: buttonHorizontalPadding)
                         }
-                        
-                        // Button 3: LayoutPriority approach
-                        Button(action: {}) {
-                            Text("3: LayoutPriority")
-                                .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 24)
-                                .frame(height: 44)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .fill(Color.green)
-                                )
-                        }
-                        .buttonStyle(.plain)
-                        .layoutPriority(1)
-                        
-                        // Button 4: FixedSize on Text before padding
-                        Button(action: {}) {
-                            Text("4: FixedSize Text")
-                                .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(.white)
-                                .fixedSize(horizontal: true, vertical: false)
-                                .padding(.horizontal, 24)
-                                .frame(height: 44)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .fill(Color.orange)
-                                )
-                        }
-                        .buttonStyle(.plain)
-                        
-                        // Button 5: Background applied differently
-                        Button(action: {}) {
-                            Text("5: Background Order")
-                                .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 24)
-                                .frame(height: 44)
-                        }
-                        .buttonStyle(.plain)
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color.purple)
-                        )
-                        
-                        // Original button for comparison
-                        PrimaryButton("Get Started", themeManager: themeManager) {
-                            #if os(iOS)
-                            HapticFeedback.medium()
-                            #endif
-                            onContinue()
-                        }
-                        .opacity(contentAppeared ? 1.0 : 0.0)
-                        .offset(y: contentAppeared ? 0 : 20)
-                        .animation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.5), value: contentAppeared)
                         
                         #if os(macOS)
                         // On macOS, make skip button less prominent
@@ -252,7 +178,6 @@ struct WelcomePage: View {
                             .animation(.easeOut(duration: 0.4).delay(0.6), value: contentAppeared)
                         #endif
                     }
-                    .padding(.horizontal, buttonHorizontalPadding)
                     .padding(.bottom, skipButtonBottomPadding)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
