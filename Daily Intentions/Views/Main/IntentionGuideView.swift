@@ -28,160 +28,123 @@ struct IntentionGuideView: View {
         _viewModel = State(initialValue: IntentionsViewModel(modelContext: modelContext))
     }
 
-    private var steps: [GuideStep] {
-        [
-            GuideStep(
-                title: String(localized: "What Makes a Good Intention?"),
-                description: String(localized: "Intentions are personal commitments that guide your actions. They work best when they're:\n\n  • Specific and actionable\n  • Positive and meaningful to you\n  • Realistic for the timeframe\n  • Focused on what you can control"),
-                icon: "lightbulb.fill",
-                showExamples: true
-            ),
-            GuideStep(
-                title: String(localized: "Set Your Monthly Intention"),
-                description: String(localized: "Think big picture. What do you want to focus on this month?"),
-                icon: "calendar",
-                scope: .month,
-                placeholder: String(localized: "e.g., Build healthier habits")
-            ),
-            GuideStep(
-                title: String(localized: "Set Your Weekly Intention"),
-                description: String(localized: "Break down your monthly intention into weekly focus."),
-                icon: "calendar.badge.clock",
-                scope: .week,
-                placeholder: String(localized: "e.g., Move my body regularly")
-            ),
-            GuideStep(
-                title: String(localized: "Set Your Daily Intention"),
-                description: String(localized: "Make it present and meaningful today."),
-                icon: "sun.max.fill",
-                scope: .day,
-                placeholder: String(localized: "e.g., Move my body")
-            ),
-            GuideStep(
-                title: String(localized: "You're All Set!"),
-                description: String(localized: "You've created your first intentions! You can always add more or edit existing ones."),
-                icon: "checkmark.circle.fill",
-                isComplete: true
-            )
-        ]
-    }
-
-    private var currentGuideStep: GuideStep {
-        steps[currentStep]
-    }
-
-    private var progress: Double {
-        Double(currentStep + 1) / Double(steps.count)
-    }
-
-    private var goodExamples: [String] {
-        [
-            String(localized: "Practice gratitude daily"),
-            String(localized: "Move my body regularly"),
-            String(localized: "Connect with friends and family"),
-            String(localized: "Focus on what matters most")
-        ]
-    }
-
-    private var badExamples: [String] {
-        [
-            String(localized: "Be happy"),
-            String(localized: "Work harder"),
-            String(localized: "Be perfect"),
-            String(localized: "Do more")
-        ]
-    }
+    private let steps: [GuideStep] = [
+        GuideStep(
+            title: "What is an intention?",
+            description: "An intention is a clear statement of what you want to focus on and achieve. It's different from a goal - it's about how you want to show up in your life.",
+            icon: "lightbulb.fill"
+        ),
+        GuideStep(
+            title: "Monthly Intentions",
+            description: "Set your big-picture focus for the month. This guides your overall direction and priorities.",
+            icon: "calendar",
+            scope: .month,
+            placeholder: "Focus on personal growth this month...",
+            showExamples: true
+        ),
+        GuideStep(
+            title: "Weekly Intentions",
+            description: "Break down your monthly focus into weekly actions. This keeps you aligned with your bigger goals.",
+            icon: "calendar.badge.clock",
+            scope: .week,
+            placeholder: "This week I'll prioritize...",
+            showExamples: true
+        ),
+        GuideStep(
+            title: "Daily Intentions",
+            description: "Set your focus for today. This is your daily commitment to showing up in alignment with your values.",
+            icon: "sun.max.fill",
+            scope: .day,
+            placeholder: "Today I will...",
+            showExamples: true
+        ),
+        GuideStep(
+            title: "Review Your Intentions",
+            description: "Take a moment to review what you've created. These intentions will guide your daily choices and actions.",
+            icon: "checkmark.circle.fill"
+        )
+    ]
 
     var body: some View {
         NavigationStack {
-            ZStack {
-                AppThemeManager.shared.backgroundColor(for: colorScheme)
-                    .ignoresSafeArea()
-
-                VStack(spacing: 20) {
-                    // Progress bar
-                    GeometryReader { geometry in
-                        ZStack(alignment: .leading) {
-                            Rectangle()
-                                .fill(AppThemeManager.shared.secondaryTextColor(for: colorScheme).opacity(0.2))
-                            Rectangle()
-                                .fill(AppThemeManager.shared.accentColor(for: colorScheme))
-                                .frame(width: geometry.size.width * progress)
-                        }
+            VStack(spacing: 0) {
+                // Progress indicator
+                HStack(spacing: 8) {
+                    ForEach(0..<steps.count, id: \.self) { index in
+                        Circle()
+                            .fill(index <= currentStep ? AppThemeManager.shared.accentColor(for: colorScheme) : AppThemeManager.shared.secondaryTextColor(for: colorScheme).opacity(0.3))
+                            .frame(width: 8, height: 8)
+                            .scaleEffect(index == currentStep ? 1.2 : 1.0)
+                            .animation(.spring(), value: currentStep)
                     }
-                    .frame(height: 4)
+                }
+                .padding(.top, 20)
+                .padding(.horizontal, 20)
 
-                    ScrollView {
-                        VStack(spacing: 32) {
-                            // Icon and title
+                // Content
+                ScrollView {
+                    VStack(spacing: 24) {
+                        let step = steps[currentStep]
+
+                        // Icon
+                        ZStack {
+                            Circle()
+                                .fill(AppThemeManager.shared.secondaryButtonBackground(for: colorScheme))
+                                .frame(width: 80, height: 80)
+
+                            Image(systemName: step.icon)
+                                .font(.system(size: 32, weight: .medium))
+                                .foregroundColor(AppThemeManager.shared.accentColor(for: colorScheme))
+                        }
+                        .padding(.top, 20)
+
+                        // Title
+                        Text(step.title)
+                            .font(.system(size: 24, weight: .bold, design: .default))
+                            .foregroundColor(AppThemeManager.shared.primaryTextColor(for: colorScheme))
+                            .multilineTextAlignment(.center)
+
+                        // Description
+                        Text(step.description)
+                            .font(.system(size: 16, weight: .regular, design: .default))
+                            .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
+                            .multilineTextAlignment(.center)
+                            .lineSpacing(4)
+
+                        // Input section
+                        if let scope = step.scope {
                             VStack(spacing: 16) {
-                                Image(systemName: currentGuideStep.icon)
-                                    .font(.system(size: 48, weight: .ultraLight))
-                                    .foregroundColor(AppThemeManager.shared.accentColor(for: colorScheme))
-                                    .frame(width: 48, height: 48)
+                                // Text input
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text("Your \(scope.rawValue) intention:")
+                                        .font(.system(size: 16, weight: .medium, design: .default))
+                                        .foregroundColor(AppThemeManager.shared.primaryTextColor(for: colorScheme))
 
-                                Text(currentGuideStep.title)
-                                    .font(.system(size: 24, weight: .light))
-                                    .foregroundColor(AppThemeManager.shared.primaryTextColor(for: colorScheme))
-                                    .multilineTextAlignment(.center)
+                                    TextEditor(text: bindingForScope(scope))
+                                        .font(.system(size: 16))
+                                        .foregroundColor(AppThemeManager.shared.primaryTextColor(for: colorScheme))
+                                        .frame(height: 100)
+                                        .padding(12)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .fill(AppThemeManager.shared.secondaryButtonBackground(for: colorScheme))
+                                        )
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .stroke(AppThemeManager.shared.accentColor(for: colorScheme).opacity(0.3), lineWidth: 1)
+                                        )
 
-                                Text(currentGuideStep.description)
-                                    .font(.system(size: 16, weight: .regular))
-                                    .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
-                                    .multilineTextAlignment(.center)
-                                    .lineSpacing(4)
-                                    .padding(.horizontal, 20)
-                            }
-
-                            // Examples (for step 0)
-                            if currentStep == 0 && currentGuideStep.showExamples {
-                                VStack(alignment: .leading, spacing: 16) {
-                                    VStack(alignment: .leading, spacing: 8) {
-                                        HStack {
-                                            Image(systemName: "checkmark.circle")
-                                                .foregroundColor(.green)
-                                            Text("Good Examples")
-                                                .font(.system(size: 16, weight: .semibold))
-                                                .foregroundColor(AppThemeManager.shared.primaryTextColor(for: colorScheme))
-                                        }
-                                        ForEach(goodExamples, id: \.self) { example in
-                                            Text("• \(example)")
-                                                .font(.system(size: 14))
-                                                .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
-                                        }
-                                    }
-
-                                    VStack(alignment: .leading, spacing: 8) {
-                                        HStack {
-                                            Image(systemName: "xmark.circle")
-                                                .foregroundColor(.red)
-                                            Text("Too Vague")
-                                                .font(.system(size: 16, weight: .semibold))
-                                                .foregroundColor(AppThemeManager.shared.primaryTextColor(for: colorScheme))
-                                        }
-                                        ForEach(badExamples, id: \.self) { example in
-                                            Text("• \(example)")
-                                                .font(.system(size: 14))
-                                                .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
-                                        }
+                                    if let placeholder = step.placeholder, bindingForScope(scope).wrappedValue.isEmpty {
+                                        Text(placeholder)
+                                            .font(.system(size: 16))
+                                            .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme).opacity(0.6))
+                                            .padding(.horizontal, 12)
+                                            .padding(.top, -76)
                                     }
                                 }
-                                .padding(.horizontal, 20)
-                            }
 
-                            // Intention input (for steps 1-3)
-                            if let scope = currentGuideStep.scope, currentStep >= 1 && currentStep <= 3 {
-                                VStack(spacing: 16) {
-                                    TextField(
-                                        currentGuideStep.placeholder ?? "Enter your intention...",
-                                        text: bindingForScope(scope),
-                                        axis: .vertical
-                                    )
-                                    .textFieldStyle(.roundedBorder)
-                                    .lineLimit(3...5)
-                                    .padding(.horizontal, 20)
-
-                                    // Quick suggestions
+                                // Quick suggestions
+                                if step.showExamples {
                                     QuickIdeasSection(
                                         colorScheme: colorScheme,
                                         scope: scope,
@@ -203,83 +166,59 @@ struct IntentionGuideView: View {
                                     .padding(.horizontal, 20)
                                 }
                             }
-
-                            // Completion summary (for step 4)
-                            if currentStep == 4 {
-                                VStack(spacing: 16) {
-                                    if !monthlyIntention.isEmpty || !weeklyIntention.isEmpty || !dailyIntention.isEmpty {
-                                        Text("Your intentions:")
-                                            .font(.system(size: 18, weight: .semibold))
-                                            .foregroundColor(AppThemeManager.shared.primaryTextColor(for: colorScheme))
-
-                                        VStack(spacing: 12) {
-                                            if !monthlyIntention.isEmpty {
-                                                IntentionSummaryRow(scope: .month, text: monthlyIntention)
-                                            }
-                                            if !weeklyIntention.isEmpty {
-                                                IntentionSummaryRow(scope: .week, text: weeklyIntention)
-                                            }
-                                            if !dailyIntention.isEmpty {
-                                                IntentionSummaryRow(scope: .day, text: dailyIntention)
-                                            }
-                                        }
-                                    }
-                                }
-                                .padding(.horizontal, 20)
-                            }
-
-                            Spacer()
+                            .padding(.horizontal, 20)
                         }
-                        .padding(.vertical, 20)
-                    }
 
-                    // Bottom buttons
-                    VStack(spacing: 16) {
-                        if currentStep < steps.count - 1 {
-                            HStack(spacing: 12) {
-                                if currentStep > 0 {
-                                    SecondaryButton("Back") {
-                                        handleBack()
-                                    }
-                                }
-
-                                PrimaryButton(
-                                    currentStep == 0 ? "Get Started" : "Continue"
-                                ) {
-                                    handleContinue()
+                        // Completion summary (for step 4)
+                        if currentStep == 4 {
+                            VStack(spacing: 16) {
+                                if !monthlyIntention.isEmpty || !weeklyIntention.isEmpty || !dailyIntention.isEmpty {
+                                    IntentionSummaryRow(scope: .month, text: monthlyIntention)
+                                    IntentionSummaryRow(scope: .week, text: weeklyIntention)
+                                    IntentionSummaryRow(scope: .day, text: dailyIntention)
                                 }
                             }
                             .padding(.horizontal, 20)
-                        } else {
-                            HStack(spacing: 12) {
+                        }
+                    }
+                    .padding(.vertical, 20)
+                }
+
+                // Bottom buttons
+                VStack(spacing: 16) {
+                    if currentStep < steps.count - 1 {
+                        HStack(spacing: 12) {
+                            if currentStep > 0 {
                                 SecondaryButton("Back") {
                                     handleBack()
                                 }
-
-                                let hasIntentions = !monthlyIntention.isEmpty || !weeklyIntention.isEmpty || !dailyIntention.isEmpty
-
-                                PrimaryButton(
-                                    hasIntentions ? "Create Intentions" : "Done"
-                                ) {
-                                    if hasIntentions {
-                                        createAllIntentions()
-                                    } else {
-                                        dismiss()
-                                    }
-                                }
                             }
-                            .padding(.horizontal, 20)
-                        }
-                    }
-                    .padding(.vertical, 16)
 
-                    // Page indicator
-                    PageIndicator(
-                        currentPage: currentStep,
-                        pageCount: steps.count
-                    )
-                    .padding(.bottom, 8)
+                            PrimaryButton(
+                                currentStep == 0 ? "Get Started" : "Continue"
+                            ) {
+                                handleContinue()
+                            }
+                        }
+                        .padding(.horizontal, 20)
+                    } else {
+                        HStack(spacing: 12) {
+                            SecondaryButton("Back") {
+                                handleBack()
+                            }
+
+                            let hasIntentions = !monthlyIntention.isEmpty || !weeklyIntention.isEmpty || !dailyIntention.isEmpty
+
+                            PrimaryButton(
+                                hasIntentions ? "Create Intentions" : "Done"
+                            ) {
+                                createAllIntentions()
+                            }
+                        }
+                        .padding(.horizontal, 20)
+                    }
                 }
+                .padding(.bottom, 20)
             }
             .navigationTitle("Getting Started")
             #if os(iOS)
@@ -299,6 +238,76 @@ struct IntentionGuideView: View {
                     initializeQuickIdeasPages()
                 }
             }
+        }
+    }
+
+    private func handleContinue() {
+        if currentStep < steps.count - 1 {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                currentStep += 1
+            }
+        }
+    }
+
+    private func handleBack() {
+        if currentStep > 0 {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                currentStep -= 1
+            }
+        }
+    }
+
+    private func createAllIntentions() {
+        let calendar = Calendar.current
+        let today = Date()
+
+        if !monthlyIntention.isEmpty {
+            let monthStart = calendar.date(from: calendar.dateComponents([.year, .month], from: today)) ?? today
+            let intention = Intention(
+                text: monthlyIntention.trimmingCharacters(in: .whitespacesAndNewlines),
+                scope: .month,
+                date: monthStart
+            )
+            _ = try? viewModel.addIntention(intention)
+        }
+
+        if !weeklyIntention.isEmpty {
+            let weekStart = calendar.startOfDay(for: today)
+            let intention = Intention(
+                text: weeklyIntention.trimmingCharacters(in: .whitespacesAndNewlines),
+                scope: .week,
+                date: weekStart
+            )
+            _ = try? viewModel.addIntention(intention)
+        }
+
+        if !dailyIntention.isEmpty {
+            let intention = Intention(
+                text: dailyIntention.trimmingCharacters(in: .whitespacesAndNewlines),
+                scope: .day,
+                date: today
+            )
+            _ = try? viewModel.addIntention(intention)
+        }
+
+        dismiss()
+    }
+
+    private func bindingForScope(_ scope: IntentionScope) -> Binding<String> {
+        switch scope {
+        case .month: return $monthlyIntention
+        case .week: return $weeklyIntention
+        case .day: return $dailyIntention
+        }
+    }
+
+    private func setTextForScope(_ scope: IntentionScope, _ text: String) {
+        switch scope {
+        case .month: monthlyIntention = text
+        case .week: weeklyIntention = text
+        case .day: dailyIntention = text
+        }
+    }
 
     private func suggestionsForScope(_ scope: IntentionScope) -> [String] {
         switch scope {
@@ -462,7 +471,7 @@ struct IntentionGuideView: View {
                 "Be present today"
             ]
         }
-        }
+    }
 
     private func initializeQuickIdeasPages() {
         let allSuggestions = [
@@ -498,75 +507,7 @@ struct IntentionGuideView: View {
         }
 
         quickIdeasPages = pagesDict
-        }
-
-    private func handleContinue() {
-            if currentStep < steps.count - 1 {
-                withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
-                    currentStep += 1
-                }
-            }
-        }
-
-    private func handleBack() {
-            if currentStep > 0 {
-                withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
-                    currentStep -= 1
-                }
-            }
-        }
-
-    private func createAllIntentions() {
-            let calendar = Calendar.current
-            let today = Date()
-
-            if !monthlyIntention.isEmpty {
-                let monthStart = calendar.date(from: calendar.dateComponents([.year, .month], from: today)) ?? today
-                let intention = Intention(
-                    text: monthlyIntention.trimmingCharacters(in: .whitespacesAndNewlines),
-                    scope: .month,
-                    date: monthStart
-                )
-                _ = try? viewModel.addIntention(intention)
-            }
-
-            if !weeklyIntention.isEmpty {
-                let weekStart = calendar.startOfDay(for: today)
-                let intention = Intention(
-                    text: weeklyIntention.trimmingCharacters(in: .whitespacesAndNewlines),
-                    scope: .week,
-                    date: weekStart
-                )
-                _ = try? viewModel.addIntention(intention)
-            }
-
-            if !dailyIntention.isEmpty {
-                let intention = Intention(
-                    text: dailyIntention.trimmingCharacters(in: .whitespacesAndNewlines),
-                    scope: .day,
-                    date: today
-                )
-                _ = try? viewModel.addIntention(intention)
-            }
-
-            dismiss()
-        }
-
-    private func bindingForScope(_ scope: IntentionScope) -> Binding<String> {
-            switch scope {
-            case .month: return $monthlyIntention
-            case .week: return $weeklyIntention
-            case .day: return $dailyIntention
-            }
-        }
-
-    private func setTextForScope(_ scope: IntentionScope, _ text: String) {
-            switch scope {
-            case .month: monthlyIntention = text
-            case .week: weeklyIntention = text
-            case .day: dailyIntention = text
-            }
-        }
+    }
 }
 
 struct GuideStep {
@@ -592,28 +533,42 @@ struct IntentionSummaryRow: View {
         }
     }
 
+    private var scopeColor: Color {
+        switch scope {
+        case .month: return .blue
+        case .week: return .green
+        case .day: return .orange
+        }
+    }
+
     var body: some View {
-        HStack(spacing: 12) {
-            Image(systemName: scopeIcon)
-                .font(.system(size: 20, weight: .medium))
-                .foregroundColor(AppThemeManager.shared.accentColor(for: colorScheme))
-                .frame(width: 24)
+        HStack(alignment: .top, spacing: 12) {
+            ZStack {
+                Circle()
+                    .fill(scopeColor.opacity(0.1))
+                    .frame(width: 32, height: 32)
+
+                Image(systemName: scopeIcon)
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundColor(scopeColor)
+            }
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(scope.rawValue.capitalized)
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
+                    .font(.system(size: 14, weight: .medium, design: .default))
+                    .foregroundColor(AppThemeManager.shared.primaryTextColor(for: colorScheme))
 
                 Text(text)
-                    .font(.system(size: 15, weight: .regular))
-                    .foregroundColor(AppThemeManager.shared.primaryTextColor(for: colorScheme))
+                    .font(.system(size: 16, weight: .regular, design: .default))
+                    .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
+                    .lineSpacing(2)
             }
 
             Spacer()
         }
-        .padding(12)
+        .padding(16)
         .background(
-            RoundedRectangle(cornerRadius: 8)
+            RoundedRectangle(cornerRadius: 12)
                 .fill(AppThemeManager.shared.secondaryButtonBackground(for: colorScheme))
         )
     }
