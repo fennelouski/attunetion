@@ -43,10 +43,14 @@ struct IntentionGuideView: View {
     @State private var showingAIGenerator = false
     @State private var showingPackPreview: IntentionPack? = nil
     
-    init(modelContext: ModelContext) {
+    // Optional callback when intentions are created through the guide
+    var onIntentionsCreated: (() -> Void)? = nil
+    
+    init(modelContext: ModelContext, onIntentionsCreated: (() -> Void)? = nil) {
         _viewModel = State(initialValue: IntentionsViewModel(modelContext: modelContext))
         _quickIdeasPages = State(initialValue: [:])
         _quickIdeasPageIndex = State(initialValue: [.month: 0, .week: 0, .day: 0])
+        self.onIntentionsCreated = onIntentionsCreated
     }
     
     private let lightbulbIcons = ["lightbulb", "lightbulb.min", "lightbulb.max", "lightbulb.max.fill", "lightbulb.min.fill", "lightbulb.fill"]
@@ -546,6 +550,7 @@ struct IntentionGuideView: View {
         
         let calendar = Calendar.current
         let today = Date()
+        var createdAnyIntention = false
         
         // Create intentions from pack if selected
         if let pack = selectedIntentionPack {
@@ -558,6 +563,7 @@ struct IntentionGuideView: View {
                     aiGenerated: false
                 )
                 _ = try? viewModel.addIntention(intention)
+                createdAnyIntention = true
             }
             
             if !pack.weekly.isEmpty {
@@ -569,6 +575,7 @@ struct IntentionGuideView: View {
                     aiGenerated: false
                 )
                 _ = try? viewModel.addIntention(intention)
+                createdAnyIntention = true
             }
             
             if !pack.daily.isEmpty {
@@ -579,6 +586,7 @@ struct IntentionGuideView: View {
                     aiGenerated: false
                 )
                 _ = try? viewModel.addIntention(intention)
+                createdAnyIntention = true
             }
         } else {
             // Create user-entered intentions
@@ -591,6 +599,7 @@ struct IntentionGuideView: View {
                     aiGenerated: false
                 )
                 _ = try? viewModel.addIntention(intention)
+                createdAnyIntention = true
             }
             
             if !weeklyIntention.isEmpty {
@@ -602,6 +611,7 @@ struct IntentionGuideView: View {
                     aiGenerated: false
                 )
                 _ = try? viewModel.addIntention(intention)
+                createdAnyIntention = true
             }
             
             if !dailyIntention.isEmpty {
@@ -612,10 +622,17 @@ struct IntentionGuideView: View {
                     aiGenerated: false
                 )
                 _ = try? viewModel.addIntention(intention)
+                createdAnyIntention = true
             }
         }
         
-        dismiss()
+        // If intentions were created and we have a callback, call it instead of just dismissing
+        // This allows the parent view (NewIntentionView) to also dismiss
+        if createdAnyIntention, let onIntentionsCreated = onIntentionsCreated {
+            onIntentionsCreated()
+        } else {
+            dismiss()
+        }
     }
     
     private func bindingForScope(_ scope: IntentionScope) -> Binding<String> {

@@ -86,7 +86,22 @@ struct AttunetionApp: App {
                     }
                     showOnboarding = false
                     #else
-                    showOnboarding = !OnboardingManager.shared.hasCompletedOnboarding
+                    // Set model context for OnboardingManager
+                    OnboardingManager.shared.setModelContext(sharedModelContainer.mainContext)
+                    
+                    // Check if user has existing intentions - if so, skip onboarding
+                    let context = sharedModelContainer.mainContext
+                    let intentionRepo = IntentionRepository(modelContext: context)
+                    let existingIntentions = intentionRepo.getAll()
+                    let hasIntentions = !existingIntentions.isEmpty
+                    
+                    // If user has intentions, automatically complete onboarding
+                    if hasIntentions && !OnboardingManager.shared.hasCompletedOnboarding {
+                        OnboardingManager.shared.completeOnboarding()
+                    }
+                    
+                    // Only show onboarding if not completed AND no existing intentions
+                    showOnboarding = !OnboardingManager.shared.hasCompletedOnboarding && !hasIntentions
                     #endif
                     
                     // Set model context on notification handler once app is ready

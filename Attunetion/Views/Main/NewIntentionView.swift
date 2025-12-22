@@ -274,7 +274,12 @@ struct NewIntentionView: View {
                 Text(validationMessage)
             }
             .sheet(isPresented: $showingGuide) {
-                IntentionGuideView(modelContext: modelContext)
+                IntentionGuideView(modelContext: modelContext) {
+                    // When intentions are created through the guide, dismiss both the guide and this view
+                    // This takes the user back to the intentions list showing their newly created intentions
+                    showingGuide = false
+                    dismiss()
+                }
             }
             .onAppear {
                 selectedDate = defaultDateForScope
