@@ -1,6 +1,6 @@
 //
 //  WelcomePage.swift
-//  Attunetion
+//  Daily Intentions
 //
 //  Created for onboarding experience
 //
@@ -34,8 +34,8 @@ struct WelcomePage: View {
                                 .fill(
                                     RadialGradient(
                                         colors: [
-                                            Theme.glow,
-                                            Theme.primary.opacity(0.0)
+                                            AppThemeManager.shared.accentColor(for: colorScheme).opacity(0.3),
+                                            AppThemeManager.shared.accentColor(for: colorScheme).opacity(0.0)
                                         ],
                                         center: .center,
                                         startRadius: 20,
@@ -54,26 +54,26 @@ struct WelcomePage: View {
                             // Icon
                             Image(systemName: "sparkles")
                                 .font(.system(size: 72, weight: .ultraLight))
-                                .foregroundColor(Theme.primary)
+                                .foregroundColor(AppThemeManager.shared.accentColor(for: colorScheme))
                                 .symbolEffect(.pulse, options: .repeating.speed(0.5))
                         }
 
                         // Title and description
                         VStack(spacing: 20) {
-                            Text("Welcome to Attunetion")
+                            Text("Welcome to Daily Intentions")
                                 .font(.system(size: 42, weight: .ultraLight, design: .default))
-                                .foregroundColor(Theme.textPrimary)
+                                .foregroundColor(AppThemeManager.shared.primaryTextColor(for: colorScheme))
                                 .tracking(-0.5)
 
                             VStack(spacing: 12) {
                                 Text("Set intentions for your day, week, or month.")
                                     .font(.system(size: 20, weight: .light, design: .default))
-                                    .foregroundColor(Theme.textPrimary)
+                                    .foregroundColor(AppThemeManager.shared.primaryTextColor(for: colorScheme))
                                     .opacity(0.9)
 
                                 Text("Stay focused on what matters most.")
                                     .font(.system(size: 18, weight: .light, design: .default))
-                                    .foregroundColor(Theme.textSecondary)
+                                    .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
                                     .opacity(0.8)
                             }
                         }
@@ -88,29 +88,13 @@ struct WelcomePage: View {
                     VStack(spacing: 16) {
                         HStack {
                             Spacer(minLength: 32)
-                            Button {
-                                onContinue()
-                            } label: {
-                                Text("Get Started")
-                                    .font(.system(size: 18, weight: .semibold))
-                                    .foregroundColor(Theme.buttonText)
-                                    .frame(maxWidth: 400)
-                                    .padding(.vertical, 16)
-                                    .padding(.horizontal, 40)
-                                    .background(Theme.buttonBackground)
-                                    .cornerRadius(12)
-                            }
+                            PrimaryButton("Get Started", action: onContinue)
+                                .frame(maxWidth: 400)
                             Spacer(minLength: 32)
                         }
 
-                        Button {
-                            onSkip()
-                        } label: {
-                            Text("Skip for now")
-                                .font(.system(size: 15, weight: .regular))
-                                .foregroundColor(Theme.textSecondary)
-                        }
-                        .padding(.top, 8)
+                        TextButton(title: "Skip for now", action: onSkip)
+                            .padding(.top, 8)
                     }
                     .padding(.bottom, 60)
                 }

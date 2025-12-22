@@ -10,8 +10,13 @@ import SwiftData
 import UserNotifications
 
 @main
-struct AttunetionApp: App {
+struct DailyIntentionsApp: App {
     @State private var showOnboarding = true
+
+    init() {
+        // Check if onboarding should be shown
+        showOnboarding = !OnboardingManager.shared.hasCompletedOnboarding
+    }
 
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -42,13 +47,13 @@ struct AttunetionApp: App {
 
     var body: some Scene {
         WindowGroup {
-            IntentionsListView()
-                .sheet(isPresented: $showOnboarding) {
-                    WelcomePage(
-                        onContinue: { showOnboarding = false },
-                        onSkip: { showOnboarding = false }
-                    )
+            if showOnboarding {
+                OnboardingContainerView { [self] in
+                    showOnboarding = false
                 }
+            } else {
+                IntentionsListView()
+            }
         }
         .modelContainer(sharedModelContainer)
     }

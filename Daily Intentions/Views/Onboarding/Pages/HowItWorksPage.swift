@@ -81,7 +81,7 @@ struct HowItWorksPage: View {
                     VStack(spacing: 20) {
                         PrimaryButton("Continue", action: onContinue)
 
-                        TextButton("Skip", action: onSkip)
+                        TextButton(title: "Skip", action: onSkip)
                             .padding(.top, 4)
                     }
                     .padding(.horizontal, 40)

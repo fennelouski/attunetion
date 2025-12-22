@@ -59,7 +59,7 @@ struct NotificationPermissionPage: View {
                             requestNotificationPermission()
                         }
 
-                        TextButton("Maybe Later", action: onContinue)
+                        TextButton(title: "Maybe Later", action: onContinue)
                             .padding(.top, 4)
                     }
                     .padding(.horizontal, 40)
