@@ -61,7 +61,7 @@ struct IntentionDetailView: View {
         ZStack {
             AppBackground(themeManager: themeManager)
             
-            ScrollView {
+            FadedScrollView(themeManager: themeManager) {
             VStack(alignment: .leading, spacing: 24) {
                 // Main intention card
                 VStack(alignment: .leading, spacing: 16) {

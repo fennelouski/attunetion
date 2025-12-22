@@ -56,6 +56,7 @@ struct FirstIntentionPage: View {
                                 .textFieldStyle(.roundedBorder)
                                 #endif
                                 .lineLimit(3...5)
+                                .multilineTextAlignment(.leading)
                                 .onChange(of: intentionText) { oldValue, newValue in
                                     showingSuggestions = newValue.isEmpty
                                 }

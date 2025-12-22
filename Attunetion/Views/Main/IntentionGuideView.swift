@@ -245,6 +245,7 @@ struct IntentionGuideView: View {
                                     .textFieldStyle(.roundedBorder)
                                     #endif
                                     .lineLimit(3...5)
+                                    .multilineTextAlignment(.leading)
                                     .tint(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                                     .padding(.horizontal, 40)
                                     

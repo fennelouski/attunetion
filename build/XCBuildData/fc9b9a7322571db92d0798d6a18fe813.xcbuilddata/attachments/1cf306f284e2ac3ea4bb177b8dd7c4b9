@@ -1,0 +1,139 @@
+{
+  "" : {
+    "diagnostics" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidget-primary.dia",
+    "emit-module-dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidget-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidget-primary-emit-module.dia",
+    "pch" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidget-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidget-primary.swiftdeps"
+  },
+  "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/IntentionWidget/IntentionWidget.swift" : {
+    "const-values" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidget.swiftconstvalues",
+    "dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidget.d",
+    "diagnostics" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidget.dia",
+    "index-unit-output-path" : "/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidget.o",
+    "llvm-bc" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidget.bc",
+    "object" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidget.o",
+    "swift-dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidget.swiftdeps",
+    "swiftmodule" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidget~partial.swiftmodule"
+  },
+  "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/IntentionWidget/IntentionWidgetEntry.swift" : {
+    "const-values" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetEntry.swiftconstvalues",
+    "dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetEntry.d",
+    "diagnostics" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetEntry.dia",
+    "index-unit-output-path" : "/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetEntry.o",
+    "llvm-bc" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetEntry.bc",
+    "object" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetEntry.o",
+    "swift-dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetEntry.swiftdeps",
+    "swiftmodule" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetEntry~partial.swiftmodule"
+  },
+  "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/IntentionWidget/IntentionWidgetProvider.swift" : {
+    "const-values" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetProvider.swiftconstvalues",
+    "dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetProvider.d",
+    "diagnostics" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetProvider.dia",
+    "index-unit-output-path" : "/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetProvider.o",
+    "llvm-bc" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetProvider.bc",
+    "object" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetProvider.o",
+    "swift-dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetProvider.swiftdeps",
+    "swiftmodule" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetProvider~partial.swiftmodule"
+  },
+  "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/IntentionWidget/Views/IntentionWidgetView.swift" : {
+    "const-values" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetView.swiftconstvalues",
+    "dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetView.d",
+    "diagnostics" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetView.dia",
+    "index-unit-output-path" : "/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetView.o",
+    "llvm-bc" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetView.bc",
+    "object" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetView.o",
+    "swift-dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetView.swiftdeps",
+    "swiftmodule" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/IntentionWidgetView~partial.swiftmodule"
+  },
+  "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/IntentionWidget/Views/LargeWidgetView.swift" : {
+    "const-values" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LargeWidgetView.swiftconstvalues",
+    "dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LargeWidgetView.d",
+    "diagnostics" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LargeWidgetView.dia",
+    "index-unit-output-path" : "/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LargeWidgetView.o",
+    "llvm-bc" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LargeWidgetView.bc",
+    "object" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LargeWidgetView.o",
+    "swift-dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LargeWidgetView.swiftdeps",
+    "swiftmodule" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LargeWidgetView~partial.swiftmodule"
+  },
+  "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/IntentionWidget/Views/LockScreenCircularWidgetView.swift" : {
+    "const-values" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenCircularWidgetView.swiftconstvalues",
+    "dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenCircularWidgetView.d",
+    "diagnostics" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenCircularWidgetView.dia",
+    "index-unit-output-path" : "/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenCircularWidgetView.o",
+    "llvm-bc" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenCircularWidgetView.bc",
+    "object" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenCircularWidgetView.o",
+    "swift-dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenCircularWidgetView.swiftdeps",
+    "swiftmodule" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenCircularWidgetView~partial.swiftmodule"
+  },
+  "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/IntentionWidget/Views/LockScreenInlineWidgetView.swift" : {
+    "const-values" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenInlineWidgetView.swiftconstvalues",
+    "dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenInlineWidgetView.d",
+    "diagnostics" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenInlineWidgetView.dia",
+    "index-unit-output-path" : "/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenInlineWidgetView.o",
+    "llvm-bc" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenInlineWidgetView.bc",
+    "object" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenInlineWidgetView.o",
+    "swift-dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenInlineWidgetView.swiftdeps",
+    "swiftmodule" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenInlineWidgetView~partial.swiftmodule"
+  },
+  "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/IntentionWidget/Views/LockScreenRectangularWidgetView.swift" : {
+    "const-values" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenRectangularWidgetView.swiftconstvalues",
+    "dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenRectangularWidgetView.d",
+    "diagnostics" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenRectangularWidgetView.dia",
+    "index-unit-output-path" : "/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenRectangularWidgetView.o",
+    "llvm-bc" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenRectangularWidgetView.bc",
+    "object" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenRectangularWidgetView.o",
+    "swift-dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenRectangularWidgetView.swiftdeps",
+    "swiftmodule" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/LockScreenRectangularWidgetView~partial.swiftmodule"
+  },
+  "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/IntentionWidget/Views/MediumWidgetView.swift" : {
+    "const-values" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/MediumWidgetView.swiftconstvalues",
+    "dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/MediumWidgetView.d",
+    "diagnostics" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/MediumWidgetView.dia",
+    "index-unit-output-path" : "/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/MediumWidgetView.o",
+    "llvm-bc" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/MediumWidgetView.bc",
+    "object" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/MediumWidgetView.o",
+    "swift-dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/MediumWidgetView.swiftdeps",
+    "swiftmodule" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/MediumWidgetView~partial.swiftmodule"
+  },
+  "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/IntentionWidget/Views/SmallWidgetView.swift" : {
+    "const-values" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/SmallWidgetView.swiftconstvalues",
+    "dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/SmallWidgetView.d",
+    "diagnostics" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/SmallWidgetView.dia",
+    "index-unit-output-path" : "/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/SmallWidgetView.o",
+    "llvm-bc" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/SmallWidgetView.bc",
+    "object" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/SmallWidgetView.o",
+    "swift-dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/SmallWidgetView.swiftdeps",
+    "swiftmodule" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/SmallWidgetView~partial.swiftmodule"
+  },
+  "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/IntentionWidget/Views/SpatialPosterWidgetView.swift" : {
+    "const-values" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/SpatialPosterWidgetView.swiftconstvalues",
+    "dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/SpatialPosterWidgetView.d",
+    "diagnostics" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/SpatialPosterWidgetView.dia",
+    "index-unit-output-path" : "/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/SpatialPosterWidgetView.o",
+    "llvm-bc" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/SpatialPosterWidgetView.bc",
+    "object" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/SpatialPosterWidgetView.o",
+    "swift-dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/SpatialPosterWidgetView.swiftdeps",
+    "swiftmodule" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/SpatialPosterWidgetView~partial.swiftmodule"
+  },
+  "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/IntentionWidget/WidgetDataService.swift" : {
+    "const-values" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/WidgetDataService.swiftconstvalues",
+    "dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/WidgetDataService.d",
+    "diagnostics" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/WidgetDataService.dia",
+    "index-unit-output-path" : "/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/WidgetDataService.o",
+    "llvm-bc" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/WidgetDataService.bc",
+    "object" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/WidgetDataService.o",
+    "swift-dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/WidgetDataService.swiftdeps",
+    "swiftmodule" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/WidgetDataService~partial.swiftmodule"
+  },
+  "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/IntentionWidget/WidgetTheme.swift" : {
+    "const-values" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/WidgetTheme.swiftconstvalues",
+    "dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/WidgetTheme.d",
+    "diagnostics" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/WidgetTheme.dia",
+    "index-unit-output-path" : "/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/WidgetTheme.o",
+    "llvm-bc" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/WidgetTheme.bc",
+    "object" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/WidgetTheme.o",
+    "swift-dependencies" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/WidgetTheme.swiftdeps",
+    "swiftmodule" : "/Users/nathanfennel/Library/Mobile Documents/com~apple~CloudDocs/Xcode Projects/Daily Intentions/build/Daily Intentions.build/Debug/IntentionWidget.build/Objects-normal/x86_64/WidgetTheme~partial.swiftmodule"
+  }
+}

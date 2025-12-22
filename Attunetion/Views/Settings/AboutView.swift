@@ -17,7 +17,7 @@ struct AboutView: View {
             ZStack {
                 AppBackground(themeManager: themeManager)
                 
-                ScrollView {
+                FadedScrollView(themeManager: themeManager) {
                     VStack(spacing: 32) {
                         // App icon placeholder
                         Image(systemName: "target")
