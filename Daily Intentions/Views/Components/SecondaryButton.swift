@@ -21,11 +21,11 @@ struct SecondaryButton: View {
         Button(action: action) {
             Text(title)
                 .font(.system(size: 16, weight: .medium, design: .default))
+                .background(AppThemeManager.shared.secondaryButtonBackground(for: colorScheme))
                 .foregroundColor(AppThemeManager.shared.accentColor(for: colorScheme))
                 .padding(.vertical, 12)
                 .padding(.horizontal, 24)
                 .frame(maxWidth: .infinity)
-                .background(AppThemeManager.shared.secondaryButtonBackground(for: colorScheme))
                 .cornerRadius(8)
         }
         .buttonStyle(.plain)

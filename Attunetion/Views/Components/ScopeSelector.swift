@@ -78,25 +78,18 @@ struct ScopeSelector: View {
             }) {
                 Text("All")
                     .font(.system(size: buttonFontSize, weight: selectedScope == nil ? .semibold : .regular, design: fontDesign))
-                    .foregroundColor(
-                        selectedScope == nil
-                            ? themeManager.buttonTextColor(for: colorScheme).toSwiftUIColor()
-                            : themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor()
-                    )
-                    .padding(.horizontal, buttonHorizontalPadding)
-                    .padding(.vertical, buttonVerticalPadding)
-                    .background(
-                        RoundedRectangle(cornerRadius: buttonCornerRadius, style: .continuous)
-                            .fill(
-                                selectedScope == nil
-                                    ? themeManager.buttonBackgroundColor(for: colorScheme).toSwiftUIColor()
-                                    : (colorScheme == .dark
-                                        ? themeManager.currentTheme.darkSecondaryButtonBackground.toSwiftUIColor().opacity(0.4)
-                                        : Color.white.opacity(0.5))
-                            )
-                    )
+                    .frame(maxWidth: .infinity)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(selectedScope == nil ? .borderedProminent : .bordered)
+            .controlSize(.regular)
+            .tint(selectedScope == nil 
+                ? themeManager.buttonBackgroundColor(for: colorScheme).toSwiftUIColor()
+                : (colorScheme == .dark
+                    ? themeManager.currentTheme.darkSecondaryButtonBackground.toSwiftUIColor()
+                    : Color.white))
+            .foregroundColor(selectedScope == nil
+                ? themeManager.buttonTextColor(for: colorScheme).toSwiftUIColor()
+                : themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
             
             // Scope buttons (only show available scopes)
             ForEach(availableScopes, id: \.self) { scope in
@@ -105,25 +98,18 @@ struct ScopeSelector: View {
                 }) {
                     Text(scope.rawValue.capitalized)
                         .font(.system(size: buttonFontSize, weight: selectedScope == scope ? .semibold : .regular, design: fontDesign))
-                        .foregroundColor(
-                            selectedScope == scope
-                                ? themeManager.buttonTextColor(for: colorScheme).toSwiftUIColor()
-                                : themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor()
-                        )
-                        .padding(.horizontal, buttonHorizontalPadding)
-                        .padding(.vertical, buttonVerticalPadding)
-                        .background(
-                            RoundedRectangle(cornerRadius: buttonCornerRadius, style: .continuous)
-                                .fill(
-                                    selectedScope == scope
-                                        ? themeManager.buttonBackgroundColor(for: colorScheme).toSwiftUIColor()
-                                        : (colorScheme == .dark
-                                            ? themeManager.currentTheme.darkSecondaryButtonBackground.toSwiftUIColor().opacity(0.4)
-                                            : Color.white.opacity(0.5))
-                                )
-                        )
+                        .frame(maxWidth: .infinity)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(selectedScope == scope ? .borderedProminent : .bordered)
+                .controlSize(.regular)
+                .tint(selectedScope == scope
+                    ? themeManager.buttonBackgroundColor(for: colorScheme).toSwiftUIColor()
+                    : (colorScheme == .dark
+                        ? themeManager.currentTheme.darkSecondaryButtonBackground.toSwiftUIColor()
+                        : Color.white))
+                .foregroundColor(selectedScope == scope
+                    ? themeManager.buttonTextColor(for: colorScheme).toSwiftUIColor()
+                    : themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
             }
         }
     }

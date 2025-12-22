@@ -15,13 +15,96 @@ struct IntentionDetailView: View {
 
     let intention: Intention
     @State private var showingEdit = false
-    @State private var showingDeleteAlert = false
 
     private var dateString: String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter.string(from: intention.date)
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: Date())
+        
+        if intention.scope == .month {
+            let intentionYear = calendar.component(.year, from: intention.date)
+            let intentionMonth = calendar.component(.month, from: intention.date)
+            
+            // Show year if: not current year OR January OR December
+            let shouldShowYear = intentionYear != currentYear || intentionMonth == 1 || intentionMonth == 12
+            
+            let formatter = DateFormatter()
+            if shouldShowYear {
+                formatter.dateFormat = "MMMM yyyy"
+            } else {
+                formatter.dateFormat = "MMMM"
+            }
+            return formatter.string(from: intention.date)
+        } else if intention.scope == .week {
+            // Get the week interval (start and end dates)
+            guard let weekInterval = calendar.dateInterval(of: .weekOfYear, for: intention.date) else {
+                // Fallback to single date if we can't get week interval
+                let formatter = DateFormatter()
+                formatter.dateStyle = .long
+                formatter.timeStyle = .none
+                return formatter.string(from: intention.date)
+            }
+            
+            let weekStart = weekInterval.start
+            let weekEnd = calendar.date(byAdding: .day, value: -1, to: weekInterval.end) ?? weekInterval.end
+            
+            let startYear = calendar.component(.year, from: weekStart)
+            let startMonth = calendar.component(.month, from: weekStart)
+            
+            let endYear = calendar.component(.year, from: weekEnd)
+            let endMonth = calendar.component(.month, from: weekEnd)
+            
+            let sameMonth = startMonth == endMonth
+            let sameYear = startYear == endYear
+            
+            // Determine if we should show year based on rules
+            let shouldShowYear = !sameYear || startYear != currentYear || startMonth == 1 || startMonth == 12 || endMonth == 1 || endMonth == 12
+            
+            let formatter = DateFormatter()
+            
+            if !sameYear {
+                // Different years: show full dates with years
+                formatter.dateFormat = "MMMM d, yyyy"
+                let startStr = formatter.string(from: weekStart)
+                formatter.dateFormat = "MMMM d, yyyy"
+                let endStr = formatter.string(from: weekEnd)
+                return "\(startStr) – \(endStr)"
+            } else if !sameMonth {
+                // Different months, same year
+                if shouldShowYear {
+                    formatter.dateFormat = "MMMM d"
+                    let startStr = formatter.string(from: weekStart)
+                    formatter.dateFormat = "MMMM d, yyyy"
+                    let endStr = formatter.string(from: weekEnd)
+                    return "\(startStr) – \(endStr)"
+                } else {
+                    formatter.dateFormat = "MMMM d"
+                    let startStr = formatter.string(from: weekStart)
+                    formatter.dateFormat = "MMMM d"
+                    let endStr = formatter.string(from: weekEnd)
+                    return "\(startStr) – \(endStr)"
+                }
+            } else {
+                // Same month, same year
+                formatter.dateFormat = "MMMM d"
+                let startStr = formatter.string(from: weekStart)
+                
+                if shouldShowYear {
+                    formatter.dateFormat = "d, yyyy"
+                    let endStr = formatter.string(from: weekEnd)
+                    return "\(startStr) – \(endStr)"
+                } else {
+                    formatter.dateFormat = "d"
+                    let endStr = formatter.string(from: weekEnd)
+                    return "\(startStr) – \(endStr)"
+                }
+            }
+        } else {
+            // Day scope
+            let formatter = DateFormatter()
+            formatter.dateStyle = .long
+            formatter.timeStyle = .none
+            return formatter.string(from: intention.date)
+        }
     }
 
     private var scopeColor: Color {
@@ -74,16 +157,6 @@ struct IntentionDetailView: View {
                                 )
                         )
 
-                        // Actions
-                        VStack(spacing: 12) {
-                            PrimaryButton("Edit Intention", action: {
-                                showingEdit = true
-                            })
-
-                            SecondaryButton("Delete Intention", action: {
-                                showingDeleteAlert = true
-                            })
-                        }
                     }
                     .padding()
                 }
@@ -93,9 +166,9 @@ struct IntentionDetailView: View {
             .navigationBarTitleDisplayMode(.inline)
             #endif
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Back") {
-                        dismiss()
+                ToolbarItem(placement: .primaryAction) {
+                    Button("Edit") {
+                        showingEdit = true
                     }
                     .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
                 }
@@ -103,24 +176,30 @@ struct IntentionDetailView: View {
             .sheet(isPresented: $showingEdit) {
                 EditIntentionView(intention: intention)
             }
-            .alert("Delete Intention", isPresented: $showingDeleteAlert) {
-                Button("Cancel", role: .cancel) {}
-                Button("Delete", role: .destructive) {
-                    deleteIntention()
+            .onChange(of: showingEdit) { oldValue, newValue in
+                // When edit sheet is dismissed, check if intention was deleted
+                if oldValue && !newValue {
+                    checkIfIntentionStillExists()
                 }
-            } message: {
-                Text("Are you sure you want to delete this intention? This action cannot be undone.")
             }
         }
     }
-
-    private func deleteIntention() {
-        modelContext.delete(intention)
-        do {
-            try modelContext.save()
+    
+    private func checkIfIntentionStillExists() {
+        // Extract the UUID first to avoid predicate closure capture issues
+        let intentionId = intention.id
+        
+        // Try to fetch the intention by its ID to see if it still exists
+        let descriptor = FetchDescriptor<Intention>(
+            predicate: #Predicate<Intention> { $0.id == intentionId }
+        )
+        
+        if let _ = try? modelContext.fetch(descriptor).first {
+            // Intention still exists, do nothing
+            return
+        } else {
+            // Intention was deleted, dismiss the detail view
             dismiss()
-        } catch {
-            print("Error deleting intention: \(error)")
         }
     }
 }
@@ -135,6 +214,7 @@ struct EditIntentionView: View {
     @State private var text: String
     @State private var scope: IntentionScope
     @State private var date: Date
+    @State private var showingDeleteAlert = false
 
     init(intention: Intention) {
         self.intention = intention
@@ -163,6 +243,20 @@ struct EditIntentionView: View {
                 Section("Date") {
                     DatePicker("Date", selection: $date, displayedComponents: .date)
                 }
+                
+                Section {
+                    Button(action: {
+                        showingDeleteAlert = true
+                    }) {
+                        HStack {
+                            Spacer()
+                            Text("Delete Intention")
+                                .font(.system(size: 16, weight: .medium, design: .default))
+                                .foregroundColor(.red)
+                            Spacer()
+                        }
+                    }
+                }
             }
             .navigationTitle("Edit Intention")
             #if os(iOS)
@@ -180,13 +274,20 @@ struct EditIntentionView: View {
                     Button("Save") {
                         saveChanges()
                     }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.regular)
+                    .tint(AppThemeManager.shared.accentColor(for: colorScheme))
                     .foregroundColor(AppThemeManager.shared.buttonTextColor(for: colorScheme))
-                    .padding(.vertical, 12)
-                    .padding(.horizontal, 24)
-                    .background(AppThemeManager.shared.accentColor(for: colorScheme))
-                    .cornerRadius(8)
                     .disabled(text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
+            }
+            .alert("Delete Intention", isPresented: $showingDeleteAlert) {
+                Button("Cancel", role: .cancel) {}
+                Button("Delete", role: .destructive) {
+                    deleteIntention()
+                }
+            } message: {
+                Text("Are you sure you want to delete this intention? This action cannot be undone.")
             }
         }
     }
@@ -203,11 +304,20 @@ struct EditIntentionView: View {
             print("Error saving changes: \(error)")
         }
     }
+    
+    private func deleteIntention() {
+        modelContext.delete(intention)
+        do {
+            try modelContext.save()
+            dismiss()
+        } catch {
+            print("Error deleting intention: \(error)")
+        }
+    }
 }
 
 #Preview {
     let container = try! ModelContainer(for: Intention.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    let context = container.mainContext
     let intention = Intention(text: "Focus on health and wellness", scope: .week, date: Date())
 
     NavigationStack {

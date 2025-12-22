@@ -21,11 +21,11 @@ struct PrimaryButton: View {
         Button(action: action) {
             Text(title)
                 .font(.system(size: 16, weight: .semibold, design: .default))
+                .background(AppThemeManager.shared.accentColor(for: colorScheme))
                 .foregroundColor(AppThemeManager.shared.buttonTextColor(for: colorScheme))
                 .padding(.vertical, 12)
                 .padding(.horizontal, 24)
                 .frame(maxWidth: .infinity)
-                .background(AppThemeManager.shared.accentColor(for: colorScheme))
                 .cornerRadius(8)
         }
         .buttonStyle(.plain)

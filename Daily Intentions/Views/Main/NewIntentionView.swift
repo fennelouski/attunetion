@@ -60,17 +60,17 @@ struct NewIntentionView: View {
                     }
                     .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
                 }
-
+                
                 ToolbarItem(placement: .confirmationAction) {
-                        Button("Save") {
-                            saveIntention()
-                        }
-                        .foregroundColor(AppThemeManager.shared.buttonTextColor(for: colorScheme))
-                        .padding(.vertical, 12)
-                        .padding(.horizontal, 24)
-                        .background(AppThemeManager.shared.accentColor(for: colorScheme))
-                        .cornerRadius(8)
-                        .disabled(text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                    Button("Save") {
+                        saveIntention()
+                    }
+                    .background(AppThemeManager.shared.accentColor(for: colorScheme))
+                    .foregroundColor(AppThemeManager.shared.buttonTextColor(for: colorScheme))
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 24)
+                    .cornerRadius(8)
+                    .disabled(text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
             }
             .sheet(isPresented: $showingGuide) {

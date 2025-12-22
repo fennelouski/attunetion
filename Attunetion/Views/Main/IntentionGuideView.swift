@@ -1195,15 +1195,11 @@ struct QuickIdeasSection: View {
                     }) {
                         Text(suggestion)
                             .font(.system(size: 13, weight: .regular, design: .default))
-                            .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 8)
-                            .background(
-                                Capsule()
-                                    .fill(themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.1))
-                            )
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                    .tint(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                    .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                 }
             }
             .offset(x: dragOffset)
@@ -1557,15 +1553,12 @@ struct CompletionStepContent: View {
                                 Text(String(localized: "Or tell us about yourself and we'll create custom intentions"))
                                     .font(.system(size: 15, weight: .medium, design: .default))
                             }
-                            .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
-                            .padding(.vertical, 14)
-                            .padding(.horizontal, 20)
                             .frame(maxWidth: .infinity)
-                            .background(
-                                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                    .fill(themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.1))
-                            )
                         }
+                        .buttonStyle(.bordered)
+                        .controlSize(.regular)
+                        .tint(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                        .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                     }
                 }
             }

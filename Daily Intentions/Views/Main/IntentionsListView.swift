@@ -29,9 +29,9 @@ struct IntentionsListView: View {
                                 showingNewIntention = true
                             }
                             .font(.headline)
+                            .background(AppThemeManager.shared.accentColor(for: colorScheme))
                             .foregroundColor(AppThemeManager.shared.buttonTextColor(for: colorScheme))
                             .padding()
-                            .background(AppThemeManager.shared.accentColor(for: colorScheme))
                             .cornerRadius(12)
                         }
                         .padding()
@@ -62,7 +62,7 @@ struct IntentionsListView: View {
                     }
                 }
             }
-            .navigationTitle("Daily Intentions")
+            .navigationTitle("My Intentions")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: { showingNewIntention = true }) {

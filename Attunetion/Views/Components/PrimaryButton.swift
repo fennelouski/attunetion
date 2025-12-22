@@ -96,24 +96,14 @@ struct PrimaryButton: View {
         }) {
             Text(title)
                 .font(.system(size: fontSize, weight: .semibold, design: fontDesign))
-                .foregroundColor(themeManager.buttonTextColor(for: colorScheme).toSwiftUIColor())
                 .multilineTextAlignment(.center)
                 .lineLimit(nil)
-                .padding(.horizontal, horizontalPadding)
-                .frame(minHeight: buttonHeight)
-                .background(
-                    RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                        .fill(themeManager.buttonBackgroundColor(for: colorScheme).toSwiftUIColor())
-                )
-                .shadow(
-                    color: shadowRadius > 0 ? themeManager.buttonBackgroundColor(for: colorScheme).toSwiftUIColor().opacity(0.3) : .clear,
-                    radius: shadowRadius,
-                    x: 0,
-                    y: shadowY
-                )
+                .frame(maxWidth: .infinity)
         }
-        .buttonStyle(.plain)
-        .contentShape(Rectangle())
+        .buttonStyle(.borderedProminent)
+        .controlSize(.large)
+        .tint(themeManager.buttonBackgroundColor(for: colorScheme).toSwiftUIColor())
+        .foregroundColor(themeManager.buttonTextColor(for: colorScheme).toSwiftUIColor())
     }
 }
 
@@ -135,19 +125,15 @@ struct SecondaryButton: View {
         Button(action: action) {
             Text(title)
                 .font(.system(size: 16, weight: .medium, design: .default))
-                .foregroundColor(themeManager.secondaryButtonTextColor(for: colorScheme).toSwiftUIColor())
                 .fixedSize(horizontal: false, vertical: true)
                 .multilineTextAlignment(.center)
                 .lineLimit(nil)
-                .padding(.horizontal, 24)
-                .frame(minHeight: 44)
-                .background(
-                    RoundedRectangle(cornerRadius: 12, style: .continuous)
-                        .fill(themeManager.secondaryButtonBackgroundColor(for: colorScheme).toSwiftUIColor())
-                )
+                .frame(maxWidth: .infinity)
         }
-        .buttonStyle(.plain)
-        .contentShape(Rectangle())
+        .buttonStyle(.bordered)
+        .controlSize(.large)
+        .tint(themeManager.secondaryButtonBackgroundColor(for: colorScheme).toSwiftUIColor())
+        .foregroundColor(themeManager.secondaryButtonTextColor(for: colorScheme).toSwiftUIColor())
     }
 }
 

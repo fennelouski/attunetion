@@ -97,29 +97,11 @@ struct ExampleIntentionCard: View {
                     .lineSpacing(2)
             }
             .padding(16)
-            .background(
-                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .fill(
-                        colorScheme == .dark
-                            ? themeManager.currentTheme.darkSecondaryButtonBackground.toSwiftUIColor().opacity(0.4)
-                            : themeManager.currentTheme.lightSecondaryButtonBackground.toSwiftUIColor().opacity(0.6)
-                    )
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .stroke(
-                        themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.1),
-                        lineWidth: 1
-                    )
-            )
-            .shadow(
-                color: themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.05),
-                radius: 6,
-                x: 0,
-                y: 2
-            )
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.bordered)
+        .tint(colorScheme == .dark
+            ? themeManager.currentTheme.darkSecondaryButtonBackground.toSwiftUIColor()
+            : themeManager.currentTheme.lightSecondaryButtonBackground.toSwiftUIColor())
     }
 }
 

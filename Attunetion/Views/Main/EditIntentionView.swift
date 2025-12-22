@@ -208,6 +208,7 @@ struct EditIntentionView: View {
                     Button("Cancel") {
                         dismiss()
                     }
+                    .buttonStyle(.bordered)
                     .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                 }
                 ToolbarItem(placement: .confirmationAction) {
@@ -217,8 +218,11 @@ struct EditIntentionView: View {
                         #endif
                         saveIntention()
                     }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.regular)
+                    .tint(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                    .foregroundColor(themeManager.buttonTextColor(for: colorScheme).toSwiftUIColor())
                     .disabled(intentionText.trimmingCharacters(in: .whitespacesAndNewlines).count < 3)
-                    .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                 }
             }
             .alert("Validation Error", isPresented: $showingValidationAlert) {
