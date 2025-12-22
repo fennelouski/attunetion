@@ -11,7 +11,7 @@ struct AppThemePickerView: View {
             ZStack {
                 AppBackground(themeManager: themeManager)
 
-                ScrollView {
+                FadedScrollView(themeManager: themeManager) {
                     VStack(spacing: 24) {
                         // Title
                         Text("Choose App Theme")

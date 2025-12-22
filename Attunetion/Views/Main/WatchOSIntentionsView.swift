@@ -158,7 +158,7 @@ struct IntentionCardView: View {
     }
     
     var body: some View {
-        ScrollView {
+        FadedScrollView(themeManager: themeManager) {
             VStack(spacing: WatchOSSpacing.large) {
                 // Scope badge
                 HStack {

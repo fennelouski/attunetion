@@ -330,7 +330,7 @@ struct IntentionsListView: View {
                                 }
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                             } else {
-                                ScrollView {
+                                FadedScrollView(themeManager: themeManager) {
                                     VStack(spacing: vStackSpacing) {
                                         // Current intention card
                                         if let current = viewModel.currentIntention {

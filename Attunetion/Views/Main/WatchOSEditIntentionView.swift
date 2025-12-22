@@ -61,7 +61,7 @@ struct WatchOSEditIntentionView: View {
                 AppBackground(themeManager: themeManager)
                     .ignoresSafeArea()
                 
-                ScrollView {
+                FadedScrollView(themeManager: themeManager) {
                     VStack(spacing: WatchOSSpacing.large) {
                         // Header
                         VStack(spacing: WatchOSSpacing.small) {

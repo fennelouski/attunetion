@@ -20,7 +20,7 @@ struct LegalConsentView: View {
             ZStack {
                 AppBackground(themeManager: themeManager)
 
-                ScrollView {
+                FadedScrollView(themeManager: themeManager) {
                     VStack(alignment: .leading, spacing: 24) {
                         // Header
                         VStack(alignment: .leading, spacing: 12) {

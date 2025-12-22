@@ -155,7 +155,7 @@ struct IntentionGuideView: View {
                     
                     // Content with gradient fade
                     ZStack {
-                        ScrollView {
+                        FadedScrollView(themeManager: themeManager) {
                             VStack(spacing: 32) {
                             // Icon and title
                             VStack(spacing: 16) {
@@ -1680,7 +1680,7 @@ struct AIIntentionGeneratorView: View {
             ZStack {
                 AppBackground(themeManager: themeManager)
                 
-                ScrollView {
+                FadedScrollView(themeManager: themeManager) {
                     VStack(spacing: 24) {
                         Image(systemName: "target")
                             .font(.system(size: 48, weight: .ultraLight))
@@ -1799,7 +1799,7 @@ struct IntentionPackPreviewView: View {
             ZStack {
                 AppBackground(themeManager: themeManager)
                 
-                ScrollView {
+                FadedScrollView(themeManager: themeManager) {
                     VStack(spacing: 24) {
                         Text(String(localized: "Preview"))
                             .font(.system(size: 20, weight: .light, design: .default))
