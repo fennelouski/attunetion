@@ -15,6 +15,8 @@ struct WelcomePage: View {
     let onContinue: () -> Void
     let onSkip: () -> Void
     
+    @StateObject private var animationSpeedManager = AnimationSpeedManager.shared
+    
     @State private var sparkleAnimation = false
     @State private var contentAppeared = false
     
@@ -49,7 +51,7 @@ struct WelcomePage: View {
                                 .blur(radius: 40)
                                 .opacity(sparkleAnimation ? 0.7 : 0.5)
                                 .animation(
-                                    Animation.easeInOut(duration: 2.5)
+                                    Animation.easeInOut(duration: animationSpeedManager.currentSpeed.duration(for: 2.5))
                                         .repeatForever(autoreverses: true),
                                     value: sparkleAnimation
                                 )
@@ -58,10 +60,10 @@ struct WelcomePage: View {
                             Image(systemName: "target")
                                 .font(.system(size: iconFontSize, weight: .ultraLight))
                                 .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
-                                .symbolEffect(.pulse, options: .repeating.speed(0.4))
+                                .symbolEffect(.pulse, options: .repeating.speed(animationSpeedManager.currentSpeed.symbolEffectSpeed(for: 0.4)))
                                 .opacity(contentAppeared ? 1.0 : 0.0)
                                 .scaleEffect(contentAppeared ? 1.0 : 0.8)
-                                .animation(.spring(response: 0.6, dampingFraction: 0.7).delay(0.2), value: contentAppeared)
+                                .animation(animationSpeedManager.spring(response: 0.6, dampingFraction: 0.7).delay(0.2), value: contentAppeared)
                         }
                         .frame(height: iconSize)
                         
@@ -76,7 +78,7 @@ struct WelcomePage: View {
                                 .lineLimit(nil)
                                 .opacity(contentAppeared ? 1.0 : 0.0)
                                 .offset(y: contentAppeared ? 0 : 10)
-                                .animation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.3), value: contentAppeared)
+                                .animation(animationSpeedManager.spring(response: 0.6, dampingFraction: 0.8).delay(0.3), value: contentAppeared)
                             
                             VStack(spacing: 16) {
                                 Text(String(localized: "Set intentions for your day, week, or month."))
@@ -99,7 +101,7 @@ struct WelcomePage: View {
                             }
                             .opacity(contentAppeared ? 1.0 : 0.0)
                             .offset(y: contentAppeared ? 0 : 10)
-                            .animation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.4), value: contentAppeared)
+                            .animation(animationSpeedManager.spring(response: 0.6, dampingFraction: 0.8).delay(0.4), value: contentAppeared)
                         }
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, cardHorizontalPadding)
@@ -136,7 +138,7 @@ struct WelcomePage: View {
                         }
                         .opacity(contentAppeared ? 1.0 : 0.0)
                         .scaleEffect(contentAppeared ? 1.0 : 0.95)
-                        .animation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.35), value: contentAppeared)
+                        .animation(animationSpeedManager.spring(response: 0.6, dampingFraction: 0.8).delay(0.35), value: contentAppeared)
                     }
                     .padding(.horizontal, contentHorizontalPadding)
                     
@@ -156,7 +158,7 @@ struct WelcomePage: View {
                             }
                             .opacity(contentAppeared ? 1.0 : 0.0)
                             .offset(y: contentAppeared ? 0 : 20)
-                            .animation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.5), value: contentAppeared)
+                            .animation(animationSpeedManager.spring(response: 0.6, dampingFraction: 0.8).delay(0.5), value: contentAppeared)
                             Spacer(minLength: buttonHorizontalPadding)
                         }
                         
@@ -171,11 +173,11 @@ struct WelcomePage: View {
                         }
                         .buttonStyle(.plain)
                         .opacity(contentAppeared ? 1.0 : 0.0)
-                        .animation(.easeOut(duration: 0.4).delay(0.6), value: contentAppeared)
+                        .animation(animationSpeedManager.easeOut(duration: 0.4).delay(0.6), value: contentAppeared)
                         #else
                         TextButton("Skip", themeManager: themeManager, action: onSkip)
                             .opacity(contentAppeared ? 1.0 : 0.0)
-                            .animation(.easeOut(duration: 0.4).delay(0.6), value: contentAppeared)
+                            .animation(animationSpeedManager.easeOut(duration: 0.4).delay(0.6), value: contentAppeared)
                         #endif
                     }
                     .padding(.bottom, skipButtonBottomPadding)
@@ -185,7 +187,7 @@ struct WelcomePage: View {
         }
         .onAppear {
             sparkleAnimation = true
-            withAnimation {
+            animationSpeedManager.withAnimation {
                 contentAppeared = true
             }
         }

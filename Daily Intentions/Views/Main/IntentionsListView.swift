@@ -37,25 +37,28 @@ struct IntentionsListView: View {
                         .padding()
                     } else {
                         List(intentions) { intention in
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text(intention.text)
-                                    .font(.headline)
-                                    .foregroundColor(AppThemeManager.shared.primaryTextColor(for: colorScheme))
+                            NavigationLink(destination: IntentionDetailView(intention: intention)) {
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text(intention.text)
+                                        .font(.headline)
+                                        .foregroundColor(AppThemeManager.shared.primaryTextColor(for: colorScheme))
 
-                                HStack {
-                                    Text(intention.scope.rawValue.capitalized)
-                                        .font(.subheadline)
-                                        .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
+                                    HStack {
+                                        Text(intention.scope.rawValue.capitalized)
+                                            .font(.subheadline)
+                                            .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
 
-                                    Spacer()
+                                        Spacer()
 
-                                    Text(intention.date, style: .date)
-                                        .font(.caption)
-                                        .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
+                                        Text(intention.date, style: .date)
+                                            .font(.caption)
+                                            .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
+                                    }
                                 }
+                                .padding(.vertical, 8)
                             }
-                            .padding(.vertical, 8)
                         }
+                        .listStyle(.plain)
                     }
                 }
             }

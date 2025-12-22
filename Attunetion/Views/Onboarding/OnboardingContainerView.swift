@@ -17,6 +17,7 @@ struct OnboardingContainerView: View {
     @State private var currentPage = 0
     @Environment(\.dismiss) private var dismiss
     @StateObject private var themeManager: AppThemeManager
+    @StateObject private var animationSpeedManager = AnimationSpeedManager.shared
     
     var onComplete: (() -> Void)?
     
@@ -124,7 +125,7 @@ struct OnboardingContainerView: View {
             #else
             .tabViewStyle(.page)
             #endif
-            .animation(.easeInOut(duration: 0.3), value: currentPage)
+            .animation(animationSpeedManager.easeInOut(duration: 0.3), value: currentPage)
             #if os(iOS) || os(watchOS)
             .highPriorityGesture(
                 DragGesture(minimumDistance: 30)
@@ -194,7 +195,7 @@ struct OnboardingContainerView: View {
         
         // Maximum page index is 5 (FirstIntentionPage)
         if nextPageIndex <= 5 {
-            withAnimation(.easeInOut(duration: 0.3)) {
+            animationSpeedManager.withAnimation(0.3) {
                 currentPage = nextPageIndex
             }
         } else {
@@ -212,7 +213,7 @@ struct OnboardingContainerView: View {
         
         // Minimum page index is 0 (WelcomePage)
         if previousPageIndex >= 0 {
-            withAnimation(.easeInOut(duration: 0.3)) {
+            animationSpeedManager.withAnimation(0.3) {
                 currentPage = previousPageIndex
             }
         }

@@ -11,6 +11,7 @@ import SwiftUI
 struct OnboardingPageIndicator: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var themeManager: AppThemeManager
+    @StateObject private var animationSpeedManager = AnimationSpeedManager.shared
     
     let currentPage: Int
     let pageCount: Int
@@ -35,7 +36,7 @@ struct OnboardingPageIndicator: View {
                         height: 8
                     )
                     .animation(
-                        .spring(response: 0.4, dampingFraction: 0.7),
+                        animationSpeedManager.spring(response: 0.4, dampingFraction: 0.7),
                         value: currentPage
                     )
                     .overlay {

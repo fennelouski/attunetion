@@ -17,6 +17,7 @@ struct IntentionGuideView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var themeManager: AppThemeManager
+    @StateObject private var animationSpeedManager = AnimationSpeedManager.shared
     
     @State private var viewModel: IntentionsViewModel
     
@@ -465,7 +466,7 @@ struct IntentionGuideView: View {
                         // Then add a pause before changing
                         try? await Task.sleep(nanoseconds: 9_600_000_000) // 9.6 seconds total (slowed by 4x)
                         if currentStep == 0 {
-                            withAnimation(.easeInOut(duration: 0.3)) {
+                            animationSpeedManager.withAnimation(0.3) {
                                 lightbulbIconIndex = (lightbulbIconIndex + 1) % lightbulbIcons.count
                             }
                         }
@@ -476,7 +477,7 @@ struct IntentionGuideView: View {
                     while currentStep == 1 {
                         try? await Task.sleep(nanoseconds: 9_600_000_000) // 9.6 seconds total (slowed by 4x)
                         if currentStep == 1 {
-                            withAnimation(.easeInOut(duration: 0.3)) {
+                            animationSpeedManager.withAnimation(0.3) {
                                 calendarIconIndex = (calendarIconIndex + 1) % 2
                             }
                         }
@@ -487,7 +488,7 @@ struct IntentionGuideView: View {
                     while currentStep == 2 {
                         try? await Task.sleep(nanoseconds: 9_600_000_000) // 9.6 seconds total (slowed by 4x)
                         if currentStep == 2 {
-                            withAnimation(.easeInOut(duration: 0.3)) {
+                            animationSpeedManager.withAnimation(0.3) {
                                 weeklyIconIndex = (weeklyIconIndex + 1) % weeklyIcons.count
                             }
                         }
@@ -498,7 +499,7 @@ struct IntentionGuideView: View {
                     while currentStep == 3 {
                         try? await Task.sleep(nanoseconds: 9_600_000_000) // 9.6 seconds total (slowed by 4x)
                         if currentStep == 3 {
-                            withAnimation(.easeInOut(duration: 0.3)) {
+                            animationSpeedManager.withAnimation(0.3) {
                                 dailyIconIndex = (dailyIconIndex + 1) % 2
                             }
                         }
@@ -525,7 +526,7 @@ struct IntentionGuideView: View {
         #endif
         
         if currentStep < steps.count - 1 {
-            withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+            animationSpeedManager.withSpringAnimation(response: 0.3, dampingFraction: 0.8) {
                 currentStep += 1
             }
         }
@@ -537,7 +538,7 @@ struct IntentionGuideView: View {
         #endif
         
         if currentStep > 0 {
-            withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+            animationSpeedManager.withSpringAnimation(response: 0.3, dampingFraction: 0.8) {
                 currentStep -= 1
             }
         }
@@ -875,6 +876,7 @@ struct AnimatedWeeklyIcon: View {
     let icon: String
     @ObservedObject var themeManager: AppThemeManager
     let colorScheme: ColorScheme
+    @StateObject private var animationSpeedManager = AnimationSpeedManager.shared
     @State private var isPulsing = false
     
     private var primaryColor: Color {
@@ -900,7 +902,7 @@ struct AnimatedWeeklyIcon: View {
                 tertiaryColor
             )
             .font(.system(size: 64, weight: .ultraLight))
-            .symbolEffect(.pulse, options: .repeat(2).speed(0.8), value: isPulsing)
+            .symbolEffect(.pulse, options: .repeat(2).speed(animationSpeedManager.currentSpeed.symbolEffectSpeed(for: 0.8)), value: isPulsing)
             .frame(width: 64, height: 64) // Fixed size to prevent content shift
             .id(iconIndex) // Force view update on icon change
             .onAppear {
@@ -925,6 +927,7 @@ struct AnimatedDailyIcon: View {
     let iconIndex: Int
     @ObservedObject var themeManager: AppThemeManager
     let colorScheme: ColorScheme
+    @StateObject private var animationSpeedManager = AnimationSpeedManager.shared
     @State private var isPulsing = false
     
     private var iconName: String {
@@ -954,7 +957,7 @@ struct AnimatedDailyIcon: View {
                 tertiaryColor
             )
             .font(.system(size: 64, weight: .ultraLight))
-            .symbolEffect(.pulse, options: .repeat(2).speed(0.8), value: isPulsing)
+            .symbolEffect(.pulse, options: .repeat(2).speed(animationSpeedManager.currentSpeed.symbolEffectSpeed(for: 0.8)), value: isPulsing)
             .frame(width: 64, height: 64) // Fixed size to prevent content shift
             .id(iconIndex) // Force view update on icon change
             .onAppear {
@@ -979,6 +982,7 @@ struct AnimatedCalendarIcon: View {
     let iconIndex: Int
     @ObservedObject var themeManager: AppThemeManager
     let colorScheme: ColorScheme
+    @StateObject private var animationSpeedManager = AnimationSpeedManager.shared
     @State private var isPulsing = false
     
     private var currentDay: Int {
@@ -1012,7 +1016,7 @@ struct AnimatedCalendarIcon: View {
                 tertiaryColor
             )
             .font(.system(size: 64, weight: .ultraLight))
-            .symbolEffect(.pulse, options: .repeat(2).speed(0.8), value: isPulsing)
+            .symbolEffect(.pulse, options: .repeat(2).speed(animationSpeedManager.currentSpeed.symbolEffectSpeed(for: 0.8)), value: isPulsing)
             .frame(width: 64, height: 64) // Fixed size to prevent content shift
             .id(iconIndex) // Force view update on icon change
             .onAppear {
@@ -1038,6 +1042,7 @@ struct AnimatedLightbulbIcon: View {
     let icon: String
     @ObservedObject var themeManager: AppThemeManager
     let colorScheme: ColorScheme
+    @StateObject private var animationSpeedManager = AnimationSpeedManager.shared
     @State private var isPulsing = false
     
     private var primaryColor: Color {
@@ -1066,7 +1071,7 @@ struct AnimatedLightbulbIcon: View {
                 tertiaryColor
             )
             .font(.system(size: 64, weight: .ultraLight))
-            .symbolEffect(.pulse, options: .repeat(2).speed(0.8), value: isPulsing)
+            .symbolEffect(.pulse, options: .repeat(2).speed(animationSpeedManager.currentSpeed.symbolEffectSpeed(for: 0.8)), value: isPulsing)
             .frame(width: 64, height: 64) // Fixed size to prevent content shift
             .id(iconIndex) // Force view update on icon change
             .onAppear {
@@ -1111,7 +1116,7 @@ struct QuickIdeasSection: View {
             // Centered layout for macOS
             HStack {
                 Button(action: {
-                    withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                    animationSpeedManager.withSpringAnimation(response: 0.3, dampingFraction: 0.8) {
                         navigateToPrevious()
                     }
                 }) {
@@ -1131,7 +1136,7 @@ struct QuickIdeasSection: View {
                 Spacer()
                 
                 Button(action: {
-                    withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                    animationSpeedManager.withSpringAnimation(response: 0.3, dampingFraction: 0.8) {
                         navigateToNext()
                     }
                 }) {
@@ -1146,7 +1151,7 @@ struct QuickIdeasSection: View {
             // Original layout for iOS
             HStack {
                 Button(action: {
-                    withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                    animationSpeedManager.withSpringAnimation(response: 0.3, dampingFraction: 0.8) {
                         navigateToPrevious()
                     }
                     HapticFeedback.light()
@@ -1165,7 +1170,7 @@ struct QuickIdeasSection: View {
                 Spacer()
                 
                 Button(action: {
-                    withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                    animationSpeedManager.withSpringAnimation(response: 0.3, dampingFraction: 0.8) {
                         navigateToNext()
                     }
                     HapticFeedback.light()
@@ -1216,7 +1221,7 @@ struct QuickIdeasSection: View {
                         if abs(value.translation.width) > threshold {
                             if value.translation.width > 0 {
                                 // Swipe right - go to previous
-                                withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                                animationSpeedManager.withSpringAnimation(response: 0.3, dampingFraction: 0.8) {
                                     navigateToPrevious()
                                 }
                                 #if os(iOS)
@@ -1224,7 +1229,7 @@ struct QuickIdeasSection: View {
                                 #endif
                             } else {
                                 // Swipe left - go to next
-                                withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                                animationSpeedManager.withSpringAnimation(response: 0.3, dampingFraction: 0.8) {
                                     navigateToNext()
                                 }
                                 #if os(iOS)
@@ -1233,7 +1238,7 @@ struct QuickIdeasSection: View {
                             }
                         }
                         
-                        withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                        animationSpeedManager.withSpringAnimation(response: 0.3, dampingFraction: 0.8) {
                             dragOffset = 0
                         }
                     }
@@ -1349,7 +1354,7 @@ struct InteractiveExampleCard: View {
                         }
                     }
                     
-                    withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                    animationSpeedManager.withSpringAnimation(response: 0.3, dampingFraction: 0.8) {
                         dragOffset = 0
                     }
                 }

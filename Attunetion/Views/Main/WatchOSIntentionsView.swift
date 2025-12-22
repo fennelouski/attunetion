@@ -15,6 +15,7 @@ struct WatchOSIntentionsView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var themeManager: AppThemeManager
+    @StateObject private var animationSpeedManager = AnimationSpeedManager.shared
     
     @State private var viewModel: IntentionsViewModel!
     @State private var selectedTab: Int = 0
@@ -48,7 +49,7 @@ struct WatchOSIntentionsView: View {
                         }
                     }
                     .tabViewStyle(.page(indexDisplayMode: .always))
-                    .animation(.easeInOut(duration: 0.25), value: selectedTab)
+                    .animation(animationSpeedManager.easeInOut(duration: 0.25), value: selectedTab)
                     .onChange(of: selectedTab) { oldValue, newValue in
                         // Haptic feedback when swiping between tabs
                         WKInterfaceDevice.current().play(.click)
@@ -279,7 +280,7 @@ struct IntentionCardView: View {
             loadIntention()
         }
         .onChange(of: viewModel.intentions) { _, _ in
-            withAnimation(.easeInOut(duration: 0.2)) {
+            animationSpeedManager.withAnimation(0.2) {
                 loadIntention()
             }
         }

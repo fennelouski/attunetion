@@ -15,6 +15,7 @@ struct IntentionsListView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var themeManager: AppThemeManager
+    @StateObject private var animationSpeedManager = AnimationSpeedManager.shared
     @Binding var pendingURL: URL?
     @State private var viewModel: IntentionsViewModel!
     @State private var showingNewIntention = false
@@ -469,7 +470,7 @@ struct IntentionsListView: View {
                             ToolbarItem(placement: .navigationBarLeading) {
                                 Button(action: {
                                     HapticFeedback.light()
-                                    withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                                    animationSpeedManager.withSpringAnimation(response: 0.3, dampingFraction: 0.8) {
                                         isSearchBarVisible.toggle()
                                         if !isSearchBarVisible {
                                             // Clear search when hiding
@@ -486,7 +487,7 @@ struct IntentionsListView: View {
                             #else
                             ToolbarItem(placement: .automatic) {
                                 Button(action: {
-                                    withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                                    animationSpeedManager.withSpringAnimation(response: 0.3, dampingFraction: 0.8) {
                                         isSearchBarVisible.toggle()
                                         if !isSearchBarVisible {
                                             // Clear search when hiding

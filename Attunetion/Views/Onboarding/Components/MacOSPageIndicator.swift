@@ -14,6 +14,7 @@ import AppKit
 struct MacOSPageIndicator: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var themeManager: AppThemeManager
+    @StateObject private var animationSpeedManager = AnimationSpeedManager.shared
     
     let currentPage: Int
     let pageCount: Int
@@ -47,7 +48,7 @@ struct MacOSPageIndicator: View {
                             themeManager.accentColor(for: colorScheme).toSwiftUIColor()
                         )
                         .frame(width: geometry.size.width * progress)
-                        .animation(.easeInOut(duration: 0.3), value: currentPage)
+                        .animation(animationSpeedManager.easeInOut(duration: 0.3), value: currentPage)
                 }
             }
             .frame(height: 3)
