@@ -15,6 +15,9 @@ struct IntentionDetailView: View {
 
     let intention: Intention
     @State private var showingEdit = false
+    
+    /// Daily Intentions does not store theme per intention; no custom theme for detail.
+    private var theme: IntentionTheme? { nil }
 
     private var dateString: String {
         let calendar = Calendar.current
@@ -117,48 +120,126 @@ struct IntentionDetailView: View {
 
     var body: some View {
         NavigationStack {
-            ZStack {
-                AppThemeManager.shared.backgroundColor(for: colorScheme)
-                    .ignoresSafeArea()
-
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 24) {
-                        // Main intention card
-                        VStack(alignment: .leading, spacing: 16) {
-                            HStack {
-                                Text(intention.scope.rawValue.capitalized)
-                                    .font(.system(size: 11, weight: .semibold, design: .default))
-                                    .foregroundColor(AppThemeManager.shared.buttonTextColor(for: colorScheme))
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 6)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                            .fill(scopeColor)
-                                    )
+            GeometryReader { geometry in
+                ZStack {
+                    AppThemeManager.shared.backgroundColor(for: colorScheme)
+                        .ignoresSafeArea()
+                    
+                    // Ticker labels at top and bottom
+                    VStack {
+                        TickerLabel(
+                            text: intention.text,
+                            blurRadius: .random(in: 5...10),
+                            colorScheme: colorScheme,
+                            direction: .rightToLeft // Top goes right to left
+                        )
+                        
+                        Spacer()
+                        
+                        TickerLabel(
+                            text: intention.text,
+                            blurRadius: .random(in: 5...10),
+                            colorScheme: colorScheme,
+                            direction: .leftToRight // Bottom goes left to right
+                        )
+                    }
+                    .padding(.horizontal, 0)
+                    .padding(.top, 100)
+                    .padding(.bottom, 100)
+                    
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 24) {
+                            // Main intention card
+                            GeometryReader { cardGeometry in
+                                ZStack {
+                                    // Card background: theme image or gradient, or clear
+                                    if let theme = theme, theme.hasBackgroundImage, let urlString = theme.backgroundImageURL, let url = URL(string: urlString) {
+                                        ZStack {
+                                            AsyncImage(url: url) { phase in
+                                                switch phase {
+                                                case .success(let image):
+                                                    image
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fill)
+                                                case .failure, .empty:
+                                                    RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                                        .fill(
+                                                            LinearGradient(
+                                                                colors: [theme.backgroundColorValue, theme.accentColorValue],
+                                                                startPoint: .topLeading,
+                                                                endPoint: .bottomTrailing
+                                                            )
+                                                        )
+                                                @unknown default:
+                                                    RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                                        .fill(theme.backgroundColorValue)
+                                                }
+                                            }
+                                            Color.black.opacity(0.35)
+                                        }
+                                        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                                    } else if let theme = theme {
+                                        RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                            .fill(
+                                                LinearGradient(
+                                                    colors: [theme.backgroundColorValue, theme.accentColorValue],
+                                                    startPoint: .topLeading,
+                                                    endPoint: .bottomTrailing
+                                                )
+                                            )
+                                    } else {
+                                        RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                            .fill(Color.clear)
+                                    }
+                                    
+                                    // Content on top
+                                    VStack(alignment: .leading, spacing: 16) {
+                                        HStack {
+                                            Text(intention.scope.rawValue.capitalized)
+                                                .font(.system(size: 11, weight: .semibold, design: .default))
+                                                .foregroundColor(theme?.textColorValue ?? AppThemeManager.shared.buttonTextColor(for: colorScheme))
+                                                .padding(.horizontal, 10)
+                                                .padding(.vertical, 6)
+                                                .background(
+                                                    RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                                        .fill(scopeColor)
+                                                )
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                        // Intention text
+                                        Text(intention.text)
+                                            .font(.system(size: 34, weight: .light, design: .default))
+                                            .foregroundColor(theme?.textColorValue ?? AppThemeManager.shared.primaryTextColor(for: colorScheme))
+                                            .lineSpacing(4)
+                                        
+                                        Spacer()
+                                        
+                                        Text(dateString)
+                                            .font(.system(size: 15, weight: .regular, design: .default))
+                                            .foregroundColor(theme?.textColorValue.opacity(0.9) ?? AppThemeManager.shared.secondaryTextColor(for: colorScheme))
+                                        
+                                        if let theme = theme, theme.hasBackgroundImage, let attribution = theme.attributionText, !attribution.isEmpty {
+                                            if let attrURL = theme.attributionURL, let linkURL = URL(string: attrURL) {
+                                                Link(attribution, destination: linkURL)
+                                                    .font(.system(size: 10, weight: .regular, design: .default))
+                                                    .foregroundColor(theme.textColorValue.opacity(0.9))
+                                            } else {
+                                                Text(attribution)
+                                                    .font(.system(size: 10, weight: .regular, design: .default))
+                                                    .foregroundColor(theme.textColorValue.opacity(0.9))
+                                            }
+                                        }
+                                    }
+                                    .padding()
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                                }
                             }
-
-                            Text(intention.text)
-                                .font(.system(size: 34, weight: .light, design: .default))
-                                .foregroundColor(AppThemeManager.shared.primaryTextColor(for: colorScheme))
-                                .lineSpacing(4)
-
-                            Text(dateString)
-                                .font(.system(size: 15, weight: .regular, design: .default))
-                                .foregroundColor(AppThemeManager.shared.secondaryTextColor(for: colorScheme))
+                            .frame(height: 300)
                         }
                         .padding()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(
-                            RoundedRectangle(cornerRadius: 16, style: .continuous)
-                                .fill(
-                                    colorScheme == .dark
-                                        ? AppThemeManager.shared.secondaryButtonBackground(for: colorScheme).opacity(0.4)
-                                        : Color.white.opacity(0.6)
-                                )
-                        )
-
                     }
-                    .padding()
                 }
             }
             .navigationTitle("Intention")
@@ -299,6 +380,9 @@ struct EditIntentionView: View {
 
         do {
             try modelContext.save()
+            Task { @MainActor in
+                WidgetSyncService.syncWidget(modelContext: modelContext, currentIntention: intention)
+            }
             dismiss()
         } catch {
             print("Error saving changes: \(error)")
@@ -309,6 +393,9 @@ struct EditIntentionView: View {
         modelContext.delete(intention)
         do {
             try modelContext.save()
+            Task { @MainActor in
+                WidgetSyncService.syncWidget(modelContext: modelContext, currentIntention: nil)
+            }
             dismiss()
         } catch {
             print("Error deleting intention: \(error)")
@@ -316,12 +403,48 @@ struct EditIntentionView: View {
     }
 }
 
-#Preview {
-    let container = try! ModelContainer(for: Intention.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    let intention = Intention(text: "Focus on health and wellness", scope: .week, date: Date())
+// MARK: - Ticker Label
 
-    NavigationStack {
-        IntentionDetailView(intention: intention)
+enum TickerDirection {
+    case leftToRight
+    case rightToLeft
+}
+
+// Overlay view for word-by-word underlines
+struct WordUnderlineOverlay: View {
+    let words: [String]
+    let underlinedIndex: Int?
+    let color: Color
+    
+    var body: some View {
+        GeometryReader { geometry in
+            if let index = underlinedIndex, index < words.count {
+                // Create a visual underline effect
+                VStack {
+                    Spacer()
+                    Rectangle()
+                        .frame(height: 2)
+                        .foregroundColor(color.opacity(0.7))
+                        .frame(width: estimateWordWidth(words[index]))
+                        .transition(.opacity.combined(with: .scale))
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .offset(x: estimateWordPosition(index: index))
+            }
+        }
     }
-    .modelContainer(container)
+    
+    private func estimateWordWidth(_ word: String) -> CGFloat {
+        // Rough estimate: 18 pixels per character for light font at size 34
+        return CGFloat(word.count) * 18
+    }
+    
+    private func estimateWordPosition(index: Int) -> CGFloat {
+        // Estimate cumulative position of words before this one
+        var position: CGFloat = 0
+        for i in 0..<index {
+            position += estimateWordWidth(words[i]) + 8 // 8px spacing
+        }
+        return position
+    }
 }

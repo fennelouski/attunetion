@@ -25,6 +25,8 @@ final class Intention {
     var createdAt: Date
     var updatedAt: Date
     var themeId: UUID?
+    /// When the current theme was last set (for 7-day stability → curated submission).
+    var themeSetAt: Date?
     var customFont: String?
     var aiGenerated: Bool
     var aiRephrased: Bool
@@ -38,6 +40,7 @@ final class Intention {
         createdAt: Date = Date(),
         updatedAt: Date = Date(),
         themeId: UUID? = nil,
+        themeSetAt: Date? = nil,
         customFont: String? = nil,
         aiGenerated: Bool = false,
         aiRephrased: Bool = false,
@@ -50,6 +53,7 @@ final class Intention {
         self.createdAt = createdAt
         self.updatedAt = updatedAt
         self.themeId = themeId
+        self.themeSetAt = themeSetAt
         self.customFont = customFont
         self.aiGenerated = aiGenerated
         self.aiRephrased = aiRephrased

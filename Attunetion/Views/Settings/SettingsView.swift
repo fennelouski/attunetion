@@ -29,6 +29,8 @@ struct SettingsView: View {
     @State private var notificationAuthorizationStatus: UNAuthorizationStatus = .notDetermined
     @State private var isRequestingPermission = false
     @State private var showPermissionAlert = false
+    @State private var unsplashUnlockKeyInput: String = ""
+    @State private var unsplashKeySavedMessage: String? = nil
     
     private var preferences: UserPreferences? {
         preferencesQuery.first
@@ -44,310 +46,18 @@ struct SettingsView: View {
                 AppBackground(themeManager: themeManager)
                 
                 List {
-                    Section {
-                        // App Theme picker
-                        Button(action: {
-                            #if os(iOS)
-                            HapticFeedback.light()
-                            #endif
-                            showingAppThemePicker = true
-                        }) {
-                            HStack {
-                                Text("App Theme")
-                                    .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                                Spacer()
-                                Text(themeManager.currentTheme.name)
-                                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                                Image(systemName: "chevron.right")
-                                    .font(.caption)
-                                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                            }
-                        }
-                        
-                        // Default theme picker (for intention themes)
-                        NavigationLink(destination: DefaultThemePickerView(selectedTheme: $defaultTheme)) {
-                            HStack {
-                                Text("Default Intention Theme")
-                                    .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                                Spacer()
-                                if let theme = defaultTheme {
-                                    Text(theme.name)
-                                        .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                                } else {
-                                    Text("None")
-                                        .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                                }
-                            }
-                        }
-                        
-                        // Default font picker
-                        NavigationLink(destination: DefaultFontPickerView(selectedFont: $defaultFont)) {
-                            HStack {
-                                Text("Default Font")
-                                    .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                                Spacer()
-                                if let fontId = defaultFont,
-                                   let fontOption = FontOption.all.first(where: { $0.id == fontId }) {
-                                    Text(fontOption.name)
-                                        .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                                } else {
-                                    Text("System Default")
-                                        .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                                }
-                            }
-                        }
-                    } header: {
-                        ThemedSectionHeader(text: "Appearance", themeManager: themeManager)
+                    appearanceSection
+                    widgetSection
+                    photoThemesSection
+                    intentionsSection
+                    notificationsLinkSection
+                    suggestionsSection
+                    aboutSection
+                    helpSection
+                    // Permissions Section - only show if not authorized, and at the bottom
+                    if notificationAuthorizationStatus != .authorized {
+                        permissionsSection
                     }
-                
-                Section {
-                    // Widget appearance
-                    NavigationLink(destination: WidgetAppearanceView()) {
-                        HStack {
-                            Image(systemName: "square.grid.2x2")
-                                .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
-                                .frame(width: 24)
-                            Text("Widget Appearance")
-                                .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .font(.caption)
-                                .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                        }
-                    }
-                } header: {
-                    ThemedSectionHeader(text: "Widget", themeManager: themeManager)
-                }
-                
-                Section {
-                    // Default intention frequency
-                    Picker(selection: Binding(
-                        get: {
-                            preferences?.intentionFrequency ?? .monthly
-                        },
-                        set: { newFrequency in
-                            if let prefs = preferences {
-                                prefs.intentionFrequency = newFrequency
-                                // Sync to widget
-                                WidgetDataService.shared.updateIntentionFrequency(newFrequency.rawValue)
-                                try? UserPreferencesRepository(modelContext: modelContext).update(prefs)
-                            }
-                        }
-                    )) {
-                        ForEach(IntentionFrequency.allCases, id: \.self) { frequency in
-                            HStack {
-                                Text(frequency.displayName)
-                                Spacer()
-                                Text(frequency.description)
-                                    .font(.caption)
-                                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                            }
-                            .tag(frequency)
-                        }
-                    } label: {
-                        HStack {
-                            Image(systemName: "calendar.badge.clock")
-                                .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
-                                .frame(width: 24)
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text("Intention Frequency")
-                                    .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                                Text("How often you want to set intentions")
-                                    .font(.caption)
-                                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                            }
-                        }
-                    }
-                } header: {
-                    ThemedSectionHeader(text: "Intentions", themeManager: themeManager)
-                } footer: {
-                    ThemedSectionFooter(text: "Choose how often you'd like to set new intentions. This helps personalize your widget's placeholder text.", themeManager: themeManager)
-                }
-                
-                Section {
-                    // Notification settings
-                    NavigationLink(destination: NotificationSettingsView()) {
-                        HStack {
-                            Text("Reminders")
-                                .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                            Spacer()
-                            
-                            // Show summary when notifications are enabled
-                            if notificationAuthorizationStatus == .authorized {
-                                VStack(alignment: .trailing, spacing: 4) {
-                                    Text(notificationSettings.frequency.displayName)
-                                        .font(.caption)
-                                        .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                                    
-                                    if !notificationSettings.enabledTypes.isEmpty {
-                                        Text("\(notificationSettings.enabledTypes.count) type\(notificationSettings.enabledTypes.count == 1 ? "" : "s")")
-                                            .font(.caption2)
-                                            .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                                            .opacity(0.7)
-                                    }
-                                }
-                            }
-                            
-                            Image(systemName: "chevron.right")
-                                .font(.caption)
-                                .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                        }
-                    }
-                } header: {
-                    ThemedSectionHeader(text: "Notifications", themeManager: themeManager)
-                } footer: {
-                    if notificationAuthorizationStatus == .authorized {
-                        ThemedSectionFooter(text: "Configure how often and what types of reminders you receive.", themeManager: themeManager)
-                    }
-                }
-                
-                Section {
-                    NavigationLink(destination: UserProfileView(modelContext: modelContext)) {
-                        HStack {
-                            Image(systemName: "person.circle.fill")
-                                .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
-                                .frame(width: 24)
-                            
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text("Suggested Intentions")
-                                    .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                                Text("Get personalized suggestions for your intentions")
-                                    .font(.caption)
-                                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                            }
-                            
-                            Spacer()
-                        }
-                    }
-                } header: {
-                    ThemedSectionHeader(text: "Suggestions", themeManager: themeManager)
-                }
-                
-                Section {
-                    Button(action: {
-                        #if os(iOS)
-                        HapticFeedback.light()
-                        #endif
-                        showingAbout = true
-                    }) {
-                        HStack {
-                            Text("About")
-                                .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .font(.caption)
-                                .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                        }
-                    }
-                    
-                    // Legal documents
-                    let baseURL = APIClient.shared.baseURL.isEmpty ? "https://your-project.vercel.app" : APIClient.shared.baseURL
-                    
-                    if let privacyURL = URL(string: "\(baseURL)/legal/privacy-policy.html") {
-                        Link(destination: privacyURL) {
-                            HStack {
-                                Text("Privacy Policy")
-                                    .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                                Spacer()
-                                Image(systemName: "arrow.up.right.square")
-                                    .font(.caption)
-                                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                            }
-                        }
-                    }
-                    
-                    if let eulaURL = URL(string: "\(baseURL)/legal/eula.html") {
-                        Link(destination: eulaURL) {
-                            HStack {
-                                Text("End User License Agreement")
-                                    .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                                Spacer()
-                                Image(systemName: "arrow.up.right.square")
-                                    .font(.caption)
-                                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                            }
-                        }
-                    }
-                    
-                    if let termsURL = URL(string: "\(baseURL)/legal/terms-of-service.html") {
-                        Link(destination: termsURL) {
-                            HStack {
-                                Text("Terms of Service")
-                                    .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                                Spacer()
-                                Image(systemName: "arrow.up.right.square")
-                                    .font(.caption)
-                                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                            }
-                        }
-                    }
-                    
-                    // Delete all data
-                    Button(action: {
-                        #if os(iOS)
-                        HapticFeedback.light()
-                        #endif
-                        showDeleteDataAlert = true
-                    }) {
-                        HStack {
-                            Image(systemName: "trash")
-                                .foregroundColor(.red)
-                                .frame(width: 24)
-                            Text("Delete All Data")
-                                .foregroundColor(.red)
-                            Spacer()
-                        }
-                    }
-                    
-                    // Export data (placeholder for future)
-                    Button(action: {
-                        // TODO: Implement export
-                    }) {
-                        Text("Export Data")
-                            .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.6))
-                    }
-                    .disabled(true)
-                } header: {
-                    ThemedSectionHeader(text: "About", themeManager: themeManager)
-                }
-                
-                Section {
-                    Button(action: {
-                        #if os(iOS)
-                        HapticFeedback.light()
-                        #endif
-                        showingOnboarding = true
-                    }) {
-                        HStack {
-                            Image(systemName: "questionmark.circle.fill")
-                                .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
-                                .frame(width: 24)
-                            
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text("Show Onboarding")
-                                    .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                                Text("Learn how to use the app and get inspiration")
-                                    .font(.caption)
-                                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                            }
-                            
-                            Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .font(.caption)
-                                .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                        }
-                    }
-                } header: {
-                    Text(String(localized: "Help"))
-                } footer: {
-                    Text(String(localized: "Walk through the onboarding flow again to learn about features and get ideas for how to use the app."))
-                }
-                
-                // Permissions Section - only show if not authorized, and at the bottom
-                if notificationAuthorizationStatus != .authorized {
-                    permissionsSection
-                }
                 }
                 .scrollContentBackground(.hidden)
             }
@@ -408,6 +118,328 @@ struct SettingsView: View {
             } message: {
                 Text("This will permanently delete all your intentions, themes, preferences, and profile information. This action cannot be undone. Your data is stored locally and synced via iCloud, so it will be removed from all your devices.")
             }
+        }
+    }
+    
+    // MARK: - Appearance Section
+    
+    private var appearanceSection: some View {
+        Section {
+            Button(action: {
+                #if os(iOS)
+                HapticFeedback.light()
+                #endif
+                showingAppThemePicker = true
+            }) {
+                HStack {
+                    Text("App Theme")
+                        .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                    Spacer()
+                    Text(themeManager.currentTheme.name)
+                        .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                    Image(systemName: "chevron.right")
+                        .font(.caption)
+                        .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                }
+            }
+            NavigationLink(destination: DefaultThemePickerView(selectedTheme: $defaultTheme)) {
+                HStack {
+                    Text("Default Intention Theme")
+                        .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                    Spacer()
+                    if let theme = defaultTheme {
+                        Text(theme.name)
+                            .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                    } else {
+                        Text("None")
+                            .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                    }
+                }
+            }
+            NavigationLink(destination: DefaultFontPickerView(selectedFont: $defaultFont)) {
+                HStack {
+                    Text("Default Font")
+                        .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                    Spacer()
+                    if let fontId = defaultFont,
+                       let fontOption = FontOption.all.first(where: { $0.id == fontId }) {
+                        Text(fontOption.name)
+                            .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                    } else {
+                        Text("System Default")
+                            .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                    }
+                }
+            }
+        } header: {
+            ThemedSectionHeader(text: "Appearance", themeManager: themeManager)
+        }
+    }
+    
+    private var widgetSection: some View {
+        Section {
+            NavigationLink(destination: WidgetAppearanceView()) {
+                HStack {
+                    Image(systemName: "square.grid.2x2")
+                        .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                        .frame(width: 24)
+                    Text("Widget Appearance")
+                        .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.caption)
+                        .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                }
+            }
+        } header: {
+            ThemedSectionHeader(text: "Widget", themeManager: themeManager)
+        }
+    }
+    
+    private var photoThemesSection: some View {
+        Section {
+            SecureField("Unsplash unlock key", text: $unsplashUnlockKeyInput)
+                .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                #if os(iOS)
+                .autocapitalization(.none)
+                .autocorrectionDisabled()
+                #endif
+            if let msg = unsplashKeySavedMessage {
+                Text(msg)
+                    .font(.caption)
+                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+            }
+            Button(action: {
+                APIClient.shared.unsplashUnlockKey = unsplashUnlockKeyInput.isEmpty ? nil : unsplashUnlockKeyInput
+                unsplashKeySavedMessage = unsplashUnlockKeyInput.isEmpty ? "Key cleared." : "Key saved. You have unlimited photo themes and can submit stable photos to the shared library."
+                unsplashUnlockKeyInput = ""
+                #if os(iOS)
+                HapticFeedback.light()
+                #endif
+            }) {
+                Text(unsplashUnlockKeyInput.isEmpty ? "Clear saved key" : "Save key")
+                    .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+            }
+            .disabled(unsplashUnlockKeyInput.isEmpty && APIClient.shared.unsplashUnlockKey == nil)
+        } header: {
+            ThemedSectionHeader(text: "Photo themes", themeManager: themeManager)
+        } footer: {
+            ThemedSectionFooter(text: "If you have an unlock key, you get unlimited Unsplash photo themes and can submit photos you've used for 7+ days to the shared library for all users. Leave blank to clear.", themeManager: themeManager)
+        }
+    }
+    
+    private var intentionsSection: some View {
+        Section {
+            Picker(selection: Binding(
+                get: { preferences?.intentionFrequency ?? .monthly },
+                set: { newFrequency in
+                    if let prefs = preferences {
+                        prefs.intentionFrequency = newFrequency
+                        WidgetDataService.shared.updateIntentionFrequency(newFrequency.rawValue)
+                        try? UserPreferencesRepository(modelContext: modelContext).update(prefs)
+                    }
+                }
+            )) {
+                ForEach(IntentionFrequency.allCases, id: \.self) { frequency in
+                    HStack {
+                        Text(frequency.displayName)
+                        Spacer()
+                        Text(frequency.description)
+                            .font(.caption)
+                            .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                    }
+                    .tag(frequency)
+                }
+            } label: {
+                HStack {
+                    Image(systemName: "calendar.badge.clock")
+                        .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                        .frame(width: 24)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Intention Frequency")
+                            .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                        Text("How often you want to set intentions")
+                            .font(.caption)
+                            .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                    }
+                }
+            }
+        } header: {
+            ThemedSectionHeader(text: "Intentions", themeManager: themeManager)
+        } footer: {
+            ThemedSectionFooter(text: "Choose how often you'd like to set new intentions. This helps personalize your widget's placeholder text.", themeManager: themeManager)
+        }
+    }
+    
+    private var notificationsLinkSection: some View {
+        Section {
+            NavigationLink(destination: NotificationSettingsView()) {
+                HStack {
+                    Text("Reminders")
+                        .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                    Spacer()
+                    if notificationAuthorizationStatus == .authorized {
+                        VStack(alignment: .trailing, spacing: 4) {
+                            Text(notificationSettings.frequency.displayName)
+                                .font(.caption)
+                                .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                            if !notificationSettings.enabledTypes.isEmpty {
+                                Text("\(notificationSettings.enabledTypes.count) type\(notificationSettings.enabledTypes.count == 1 ? "" : "s")")
+                                    .font(.caption2)
+                                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                                    .opacity(0.7)
+                            }
+                        }
+                    }
+                    Image(systemName: "chevron.right")
+                        .font(.caption)
+                        .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                }
+            }
+        } header: {
+            ThemedSectionHeader(text: "Notifications", themeManager: themeManager)
+        } footer: {
+            if notificationAuthorizationStatus == .authorized {
+                ThemedSectionFooter(text: "Configure how often and what types of reminders you receive.", themeManager: themeManager)
+            }
+        }
+    }
+    
+    private var suggestionsSection: some View {
+        Section {
+            NavigationLink(destination: UserProfileView(modelContext: modelContext)) {
+                HStack {
+                    Image(systemName: "person.circle.fill")
+                        .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                        .frame(width: 24)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Suggested Intentions")
+                            .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                        Text("Get personalized suggestions for your intentions")
+                            .font(.caption)
+                            .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                    }
+                    Spacer()
+                }
+            }
+        } header: {
+            ThemedSectionHeader(text: "Suggestions", themeManager: themeManager)
+        }
+    }
+    
+    private var aboutSection: some View {
+        Section {
+            Button(action: {
+                #if os(iOS)
+                HapticFeedback.light()
+                #endif
+                showingAbout = true
+            }) {
+                HStack {
+                    Text("About")
+                        .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.caption)
+                        .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                }
+            }
+            legalLinks
+            Button(action: {
+                #if os(iOS)
+                HapticFeedback.light()
+                #endif
+                showDeleteDataAlert = true
+            }) {
+                HStack {
+                    Image(systemName: "trash")
+                        .foregroundColor(.red)
+                        .frame(width: 24)
+                    Text("Delete All Data")
+                        .foregroundColor(.red)
+                    Spacer()
+                }
+            }
+            Button(action: {}) {
+                Text("Export Data")
+                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.6))
+            }
+            .disabled(true)
+        } header: {
+            ThemedSectionHeader(text: "About", themeManager: themeManager)
+        }
+    }
+    
+    @ViewBuilder
+    private var legalLinks: some View {
+        let baseURL = APIClient.shared.baseURL.isEmpty ? "https://your-project.vercel.app" : APIClient.shared.baseURL
+        if let privacyURL = URL(string: "\(baseURL)/legal/privacy-policy.html") {
+            Link(destination: privacyURL) {
+                HStack {
+                    Text("Privacy Policy")
+                        .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                    Spacer()
+                    Image(systemName: "arrow.up.right.square")
+                        .font(.caption)
+                        .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                }
+            }
+        }
+        if let eulaURL = URL(string: "\(baseURL)/legal/eula.html") {
+            Link(destination: eulaURL) {
+                HStack {
+                    Text("End User License Agreement")
+                        .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                    Spacer()
+                    Image(systemName: "arrow.up.right.square")
+                        .font(.caption)
+                        .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                }
+            }
+        }
+        if let termsURL = URL(string: "\(baseURL)/legal/terms-of-service.html") {
+            Link(destination: termsURL) {
+                HStack {
+                    Text("Terms of Service")
+                        .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                    Spacer()
+                    Image(systemName: "arrow.up.right.square")
+                        .font(.caption)
+                        .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                }
+            }
+        }
+    }
+    
+    private var helpSection: some View {
+        Section {
+            Button(action: {
+                #if os(iOS)
+                HapticFeedback.light()
+                #endif
+                showingOnboarding = true
+            }) {
+                HStack {
+                    Image(systemName: "questionmark.circle.fill")
+                        .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                        .frame(width: 24)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Show Onboarding")
+                            .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                        Text("Learn how to use the app and get inspiration")
+                            .font(.caption)
+                            .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                    }
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.caption)
+                        .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                }
+            }
+        } header: {
+            Text(String(localized: "Help"))
+        } footer: {
+            Text(String(localized: "Walk through the onboarding flow again to learn about features and get ideas for how to use the app."))
         }
     }
     

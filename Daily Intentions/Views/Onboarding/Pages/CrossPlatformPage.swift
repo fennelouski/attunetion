@@ -130,3 +130,4 @@ private struct DeviceIcon: View {
         onSkip: { print("Skip") }
     )
 }
+

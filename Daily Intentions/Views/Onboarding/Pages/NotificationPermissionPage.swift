@@ -97,3 +97,4 @@ struct NotificationPermissionPage: View {
         onSkip: { print("Skip") }
     )
 }
+

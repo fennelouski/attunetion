@@ -118,7 +118,32 @@ struct IntentionDetailView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(
                     Group {
-                        if let theme = theme {
+                        if let theme = theme, theme.hasBackgroundImage, let urlString = theme.backgroundImageURL, let url = URL(string: urlString) {
+                            ZStack {
+                                AsyncImage(url: url) { phase in
+                                    switch phase {
+                                    case .success(let image):
+                                        image
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                    case .failure, .empty:
+                                        LinearGradient(
+                                            gradient: Gradient(colors: [theme.backgroundColorValue, theme.accentColorValue]),
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        )
+                                    @unknown default:
+                                        LinearGradient(
+                                            gradient: Gradient(colors: [theme.backgroundColorValue, theme.accentColorValue]),
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        )
+                                    }
+                                }
+                                Color.black.opacity(0.35)
+                            }
+                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                        } else if let theme = theme {
                             LinearGradient(
                                 gradient: Gradient(colors: [theme.backgroundColorValue, theme.accentColorValue]),
                                 startPoint: .topLeading,
@@ -132,6 +157,29 @@ struct IntentionDetailView: View {
                     }
                 )
                 .cornerRadius(16)
+                .overlay(
+                    Group {
+                        if let theme = theme, theme.hasBackgroundImage, let attribution = theme.attributionText, !attribution.isEmpty {
+                            VStack {
+                                Spacer()
+                                HStack {
+                                    if let attrURL = theme.attributionURL, let linkURL = URL(string: attrURL) {
+                                        Link(attribution, destination: linkURL)
+                                            .font(.system(size: 10, weight: .regular, design: .default))
+                                            .foregroundColor(theme.textColorValue.opacity(0.9))
+                                    } else {
+                                        Text(attribution)
+                                            .font(.system(size: 10, weight: .regular, design: .default))
+                                            .foregroundColor(theme.textColorValue.opacity(0.9))
+                                    }
+                                }
+                                .padding(.horizontal, 12)
+                                .padding(.bottom, 8)
+                            }
+                        }
+                    },
+                    alignment: .bottom
+                )
                 
                 // Metadata section
                 VStack(alignment: .leading, spacing: 16) {

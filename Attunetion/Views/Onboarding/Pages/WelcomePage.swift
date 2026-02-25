@@ -60,7 +60,7 @@ struct WelcomePage: View {
                             Image(systemName: "target")
                                 .font(.system(size: iconFontSize, weight: .ultraLight))
                                 .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
-                                .symbolEffect(.pulse, options: .repeating.speed(animationSpeedManager.currentSpeed.symbolEffectSpeed(for: 0.4)))
+                                .symbolEffect(.pulse, options: .repeating.speed(animationSpeedManager.symbolEffectSpeed(for: 0.4)))
                                 .opacity(contentAppeared ? 1.0 : 0.0)
                                 .scaleEffect(contentAppeared ? 1.0 : 0.8)
                                 .animation(animationSpeedManager.spring(response: 0.6, dampingFraction: 0.7).delay(0.2), value: contentAppeared)

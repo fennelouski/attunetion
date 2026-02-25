@@ -105,65 +105,47 @@ extension WidgetDataService {
             )
             print("WidgetDataService: Created IntentionData object: id=\(intentionData.id), text='\(intentionData.text)', scope=\(intentionData.scope)")
             
-            // Get theme based on preference
+            // Get theme: prefer intention's theme when set (consistent with list/detail), then preference or app theme
             var themeData: ThemeData? = nil
             
-            // Check if user wants to use a preset widget theme
-            if let preference = widgetThemePreference {
-                switch preference {
-                case "ocean":
-                    themeData = WidgetTheme.ocean
-                case "sunset":
-                    themeData = WidgetTheme.sunset
-                case "forest":
-                    themeData = WidgetTheme.forest
-                case "minimal":
-                    themeData = WidgetTheme.minimal
-                case "midnight":
-                    themeData = WidgetTheme.midnight
-                case "use_intention":
-                    // Use intention's theme
-                    if let themeId = intention.themeId,
-                       let theme = themeRepository.getTheme(byId: themeId) {
-                        themeData = ThemeData(
-                            backgroundColor: theme.backgroundColor,
-                            textColor: theme.textColor,
-                            accentColor: theme.accentColor,
-                            fontName: theme.fontName
-                        )
-                    }
-                default:
-                    // Fall back to intention's theme
-                    if let themeId = intention.themeId,
-                       let theme = themeRepository.getTheme(byId: themeId) {
-                        themeData = ThemeData(
-                            backgroundColor: theme.backgroundColor,
-                            textColor: theme.textColor,
-                            accentColor: theme.accentColor,
-                            fontName: theme.fontName
-                        )
+            // 1. Use intention's theme when the intention has one
+            if let themeId = intention.themeId,
+               let theme = themeRepository.getTheme(byId: themeId) {
+                themeData = ThemeData(
+                    backgroundColor: theme.backgroundColor,
+                    textColor: theme.textColor,
+                    accentColor: theme.accentColor,
+                    fontName: theme.fontName
+                )
+            }
+            
+            // 2. No intention theme - use widget preference or app theme
+            if themeData == nil {
+                if let preference = widgetThemePreference {
+                    switch preference {
+                    case "ocean":
+                        themeData = WidgetTheme.ocean
+                    case "sunset":
+                        themeData = WidgetTheme.sunset
+                    case "forest":
+                        themeData = WidgetTheme.forest
+                    case "minimal":
+                        themeData = WidgetTheme.minimal
+                    case "midnight":
+                        themeData = WidgetTheme.midnight
+                    case "use_intention":
+                        break // already tried intention theme above
+                    default:
+                        break
                     }
                 }
-            } else {
-                // No widget theme preference set - use app theme
-                if let appTheme = appTheme {
+                if themeData == nil, let appTheme = appTheme {
                     themeData = ThemeData(
                         backgroundColor: appTheme.lightBackground.hex ?? "#FAF9F6",
                         textColor: appTheme.lightPrimaryText.hex ?? "#1A1A1A",
                         accentColor: appTheme.lightAccent.hex,
                         fontName: nil
                     )
-                } else {
-                    // Fall back to intention's theme if no app theme
-                    if let themeId = intention.themeId,
-                       let theme = themeRepository.getTheme(byId: themeId) {
-                        themeData = ThemeData(
-                            backgroundColor: theme.backgroundColor,
-                            textColor: theme.textColor,
-                            accentColor: theme.accentColor,
-                            fontName: theme.fontName
-                        )
-                    }
                 }
             }
             

@@ -74,3 +74,4 @@ struct MacOSPageIndicator: View {
     .frame(width: 800)
     .background(AppBackground())
 }
+

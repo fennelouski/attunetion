@@ -902,7 +902,7 @@ struct AnimatedWeeklyIcon: View {
                 tertiaryColor
             )
             .font(.system(size: 64, weight: .ultraLight))
-            .symbolEffect(.pulse, options: .repeat(2).speed(animationSpeedManager.currentSpeed.symbolEffectSpeed(for: 0.8)), value: isPulsing)
+            .symbolEffect(.pulse, options: .repeat(2).speed(animationSpeedManager.symbolEffectSpeed(for: 0.8)), value: isPulsing)
             .frame(width: 64, height: 64) // Fixed size to prevent content shift
             .id(iconIndex) // Force view update on icon change
             .onAppear {
@@ -957,7 +957,7 @@ struct AnimatedDailyIcon: View {
                 tertiaryColor
             )
             .font(.system(size: 64, weight: .ultraLight))
-            .symbolEffect(.pulse, options: .repeat(2).speed(animationSpeedManager.currentSpeed.symbolEffectSpeed(for: 0.8)), value: isPulsing)
+            .symbolEffect(.pulse, options: .repeat(2).speed(animationSpeedManager.symbolEffectSpeed(for: 0.8)), value: isPulsing)
             .frame(width: 64, height: 64) // Fixed size to prevent content shift
             .id(iconIndex) // Force view update on icon change
             .onAppear {
@@ -1016,7 +1016,7 @@ struct AnimatedCalendarIcon: View {
                 tertiaryColor
             )
             .font(.system(size: 64, weight: .ultraLight))
-            .symbolEffect(.pulse, options: .repeat(2).speed(animationSpeedManager.currentSpeed.symbolEffectSpeed(for: 0.8)), value: isPulsing)
+            .symbolEffect(.pulse, options: .repeat(2).speed(animationSpeedManager.symbolEffectSpeed(for: 0.8)), value: isPulsing)
             .frame(width: 64, height: 64) // Fixed size to prevent content shift
             .id(iconIndex) // Force view update on icon change
             .onAppear {
@@ -1071,7 +1071,7 @@ struct AnimatedLightbulbIcon: View {
                 tertiaryColor
             )
             .font(.system(size: 64, weight: .ultraLight))
-            .symbolEffect(.pulse, options: .repeat(2).speed(animationSpeedManager.currentSpeed.symbolEffectSpeed(for: 0.8)), value: isPulsing)
+            .symbolEffect(.pulse, options: .repeat(2).speed(animationSpeedManager.symbolEffectSpeed(for: 0.8)), value: isPulsing)
             .frame(width: 64, height: 64) // Fixed size to prevent content shift
             .id(iconIndex) // Force view update on icon change
             .onAppear {
@@ -1099,7 +1099,8 @@ struct QuickIdeasSection: View {
     @Binding var pageIndex: Int
     @Binding var pages: [[String]]
     let onSelect: (String) -> Void
-    
+
+    @StateObject private var animationSpeedManager = AnimationSpeedManager.shared
     @State private var dragOffset: CGFloat = 0
     @State private var isDragging = false
     
@@ -1273,7 +1274,8 @@ struct InteractiveExampleCard: View {
     @Binding var currentIndex: Int
     @Binding var lastTapTime: Date?
     let isGood: Bool
-    
+
+    @StateObject private var animationSpeedManager = AnimationSpeedManager.shared
     @State private var dragOffset: CGFloat = 0
     @State private var isDragging = false
     @State private var tapTask: Task<Void, Never>?

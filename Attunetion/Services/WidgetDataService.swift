@@ -101,8 +101,7 @@ class WidgetDataService {
             print("WidgetDataService: App Group identifier: \(appGroupIdentifier)")
             
             // Try to diagnose the issue
-            let standardDefaults = UserDefaults.standard
-            print("WidgetDataService: Standard UserDefaults accessible: \(standardDefaults != nil)")
+            print("WidgetDataService: Standard UserDefaults accessible: true")
             
             return
         }

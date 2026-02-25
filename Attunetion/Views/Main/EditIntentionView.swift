@@ -123,10 +123,11 @@ struct EditIntentionView: View {
                             ),
                             intentionText: intentionText,
                             modelContext: modelContext,
-                            themeManager: themeManager
-                        ) {
-                            await generateAITheme()
-                        }
+                            themeManager: themeManager,
+                            onAIGenerate: { await generateAITheme() },
+                            maxUnsplashThemes: 5,
+                            currentUnsplashThemeCount: viewModel.unsplashThemeUsageCount()
+                        )
                         .padding(.vertical, 8)
                     }
                     
@@ -287,11 +288,12 @@ struct EditIntentionView: View {
             return
         }
         
-        // Update intention
+        // Update intention (themeSetAt when theme is set/changed, for 7-day stability → curated)
         intention.text = trimmedText
         intention.scope = selectedScope
         intention.date = selectedDate
         intention.themeId = selectedTheme?.id
+        intention.themeSetAt = selectedTheme != nil ? Date() : nil
         intention.customFont = selectedFont
         
         do {

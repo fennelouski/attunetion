@@ -93,16 +93,42 @@ class APIClient {
     
     // MARK: - Request Helpers
     
+    /// Stable user/device ID for backend (rate limits, privileged Unsplash access). Persisted in UserDefaults.
+    var userId: String {
+        let key = "APIClientUserId"
+        if let existing = UserDefaults.standard.string(forKey: key), !existing.isEmpty {
+            return existing
+        }
+        let newId = UUID().uuidString
+        UserDefaults.standard.set(newId, forKey: key)
+        return newId
+    }
+    
+    /// Unsplash unlock key (entered in Settings). When valid, user gets unlimited Unsplash access and can submit stable photos to curated.
+    var unsplashUnlockKey: String? {
+        get { UserDefaults.standard.string(forKey: "UnsplashUnlockKey") }
+        set { UserDefaults.standard.set(newValue, forKey: "UnsplashUnlockKey") }
+    }
+    
     private func makeRequest<T: Decodable>(
         endpoint: String,
         method: String = "POST",
-        body: Encodable? = nil
+        body: Encodable? = nil,
+        queryItems: [URLQueryItem]? = nil,
+        includeUserId: Bool = false
     ) async throws -> T {
         guard !baseURL.isEmpty else {
             throw APIError.noBaseURL
         }
         
-        guard let url = URL(string: "\(baseURL)/api/\(endpoint)") else {
+        var urlString = "\(baseURL)/api/\(endpoint)"
+        if let queryItems = queryItems, !queryItems.isEmpty {
+            var components = URLComponents(string: urlString)
+            components?.queryItems = queryItems
+            urlString = components?.url?.absoluteString ?? urlString
+        }
+        
+        guard let url = URL(string: urlString) else {
             throw APIError.invalidURL
         }
         
@@ -114,9 +140,15 @@ class APIClient {
         if let apiKey = apiKey {
             request.setValue(apiKey, forHTTPHeaderField: "X-API-Key")
         }
+        if includeUserId {
+            request.setValue(userId, forHTTPHeaderField: "X-User-Id")
+        }
+        if let key = unsplashUnlockKey, !key.isEmpty {
+            request.setValue(key, forHTTPHeaderField: "X-Unsplash-Unlock-Key")
+        }
         
-        // Add request body if provided
-        if let body = body {
+        // Add request body if provided (skip for GET)
+        if method != "GET", let body = body {
             let encoder = JSONEncoder()
             request.httpBody = try encoder.encode(body)
         }
@@ -240,6 +272,104 @@ class APIClient {
         return response.intention
     }
     
+    // MARK: - Images (Unsplash / curated)
+    
+    /// Get Unsplash access (canSearch, unlimitedThemes). Send X-User-Id and optionally X-Unsplash-Unlock-Key.
+    func fetchImagesAccess() async throws -> ImagesAccessResponse {
+        try await makeRequest(
+            endpoint: "images/access",
+            method: "GET",
+            includeUserId: true
+        )
+    }
+    
+    /// Fetch curated photos (approved for all users). Optional theme filter for suggested-theme matching.
+    func fetchCuratedPhotos(page: Int = 1, perPage: Int = 20, theme: String? = nil) async throws -> CuratedPhotosResponse {
+        var items = [
+            URLQueryItem(name: "page", value: "\(page)"),
+            URLQueryItem(name: "per_page", value: "\(perPage)")
+        ]
+        if let theme = theme, !theme.isEmpty {
+            items.append(URLQueryItem(name: "theme", value: theme))
+        }
+        struct Response: Decodable {
+            let photos: [CuratedPhoto]
+            let total: Int
+            let page: Int
+            let per_page: Int
+            let total_pages: Int
+        }
+        let response: Response = try await makeRequest(
+            endpoint: "images/curated",
+            method: "GET",
+            queryItems: items,
+            includeUserId: true
+        )
+        return CuratedPhotosResponse(
+            photos: response.photos,
+            total: response.total,
+            page: response.page,
+            per_page: response.per_page,
+            total_pages: response.total_pages
+        )
+    }
+    
+    /// Search Unsplash (privileged users only). Returns 403 for non-privileged.
+    func searchUnsplashPhotos(query: String, page: Int = 1, perPage: Int = 10) async throws -> UnsplashSearchResponse {
+        try await makeRequest(
+            endpoint: "images/search",
+            method: "GET",
+            queryItems: [
+                URLQueryItem(name: "q", value: query),
+                URLQueryItem(name: "page", value: "\(page)"),
+                URLQueryItem(name: "per_page", value: "\(perPage)")
+            ],
+            includeUserId: true
+        )
+    }
+    
+    /// Trigger Unsplash download event when user selects a photo as theme. Requires X-User-Id.
+    func triggerUnsplashDownload(unsplashPhotoId: String, downloadLocation: String) async throws {
+        struct Request: Encodable {
+            let unsplashPhotoId: String
+            let download_location: String
+        }
+        struct Response: Decodable {
+            let ok: Bool
+        }
+        let _: Response = try await makeRequest(
+            endpoint: "images/trigger-download",
+            method: "POST",
+            body: Request(unsplashPhotoId: unsplashPhotoId, download_location: downloadLocation),
+            includeUserId: true
+        )
+    }
+    
+    /// Submit photos that have been stable (unchanged) 7+ days for curation. Requires valid unlock key.
+    func submitStablePhotosForCuration(_ photos: [FromStablePhotoItem]) async throws {
+        struct Request: Encodable {
+            let photos: [FromStablePhotoItem]
+        }
+        struct Response: Decodable {
+            let added: Int
+            let skipped: Int
+        }
+        let _: Response = try await makeRequest(
+            endpoint: "images/curated/from-stable",
+            method: "POST",
+            body: Request(photos: photos),
+            includeUserId: true
+        )
+    }
+    
+    /// URL for image proxy (backend caches Unsplash image by id).
+    func imageProxyURL(photoId: String) -> URL? {
+        guard !baseURL.isEmpty else { return nil }
+        var components = URLComponents(string: "\(baseURL)/api/images/proxy")
+        components?.queryItems = [URLQueryItem(name: "id", value: photoId)]
+        return components?.url
+    }
+    
     /// Check if backend is available
     func checkHealth() async throws -> Bool {
         struct Response: Decodable {
@@ -322,6 +452,80 @@ struct WeeklyIntentionsResponse: Codable {
     let intentions: [WeeklyIntention]
     let weekStartDate: String
     let weekEndDate: String
+}
+
+// MARK: - Images / Unsplash
+
+struct ImagesAccessResponse: Codable {
+    let canSearch: Bool
+    let unlimitedThemes: Bool
+}
+
+struct FromStablePhotoItem: Codable {
+    let unsplash_photo_id: String
+    let image_url: String
+    let attribution_text: String
+    let attribution_url: String
+    let download_location: String
+    let color: String?
+}
+
+struct CuratedPhoto: Codable {
+    let id: String
+    let unsplash_photo_id: String
+    let image_url: String
+    let attribution_text: String
+    let attribution_url: String
+    let download_location: String
+    let approved_at: String
+    let created_at: String
+    let suggested_theme_name: String?
+}
+
+struct CuratedPhotosResponse {
+    let photos: [CuratedPhoto]
+    let total: Int
+    let page: Int
+    let per_page: Int
+    let total_pages: Int
+}
+
+struct UnsplashPhotoSummary: Codable {
+    let id: String
+    let urls: UnsplashPhotoUrls?
+    let links: UnsplashPhotoLinks?
+    let user: UnsplashPhotoUser?
+    let attributionText: String?
+    let attributionUrl: String?
+}
+
+struct UnsplashPhotoUrls: Codable {
+    let raw: String?
+    let full: String?
+    let regular: String
+    let small: String
+    let thumb: String
+}
+
+struct UnsplashPhotoLinks: Codable {
+    let download_location: String
+    let html: String?
+}
+
+struct UnsplashPhotoUser: Codable {
+    let name: String?
+    let username: String?
+    let links: UnsplashUserLinks?
+}
+
+struct UnsplashUserLinks: Codable {
+    let html: String?
+}
+
+struct UnsplashSearchResponse: Codable {
+    let total: Int
+    let total_pages: Int
+    let results: [UnsplashPhotoSummary]
 }
 
 

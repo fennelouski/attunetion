@@ -90,6 +90,9 @@ struct NewIntentionView: View {
 
         do {
             try modelContext.save()
+            Task { @MainActor in
+                WidgetSyncService.syncWidget(modelContext: modelContext, currentIntention: intention)
+            }
             dismiss()
         } catch {
             print("Error saving intention: \(error)")

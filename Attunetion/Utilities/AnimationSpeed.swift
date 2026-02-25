@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 /// Enum representing different animation speeds
 enum AnimationSpeed: String, CaseIterable {

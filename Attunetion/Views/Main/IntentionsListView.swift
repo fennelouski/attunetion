@@ -403,7 +403,8 @@ struct IntentionsListView: View {
                                                     NavigationLink(value: intention.id) {
                                                         IntentionRowView(
                                                             intention: intention,
-                                                            themeManager: themeManager
+                                                            themeManager: themeManager,
+                                                            intentionTheme: viewModel.getTheme(for: intention)
                                                         )
                                                         .padding(.horizontal, cardHorizontalPadding)
                                                     }
@@ -600,11 +601,18 @@ struct CurrentIntentionCard: View {
     }
     
     private var scopeColor: Color {
+        if let theme = theme {
+            return theme.accentColorValue
+        }
         switch intention.scope {
         case .day: return themeManager.accentColor(for: colorScheme).toSwiftUIColor()
         case .week: return themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.8)
         case .month: return themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.6)
         }
+    }
+
+    private var accentColor: Color {
+        theme?.accentColorValue ?? themeManager.accentColor(for: colorScheme).toSwiftUIColor()
     }
     
     private var dateString: String {
@@ -635,12 +643,12 @@ struct CurrentIntentionCard: View {
                         Text(String(localized: "AI"))
                     }
                     .font(.system(size: 11, weight: .medium, design: .default))
-                    .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                    .foregroundColor(accentColor)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 5)
                     .background(
                         Capsule()
-                            .fill(themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.15))
+                            .fill(accentColor.opacity(0.15))
                     )
                 }
             }

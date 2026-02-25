@@ -130,6 +130,9 @@ struct FirstIntentionPage: View {
             do {
                 modelContext.insert(intention)
                 try modelContext.save()
+                Task { @MainActor in
+                    WidgetSyncService.syncWidget(modelContext: modelContext, currentIntention: intention)
+                }
             } catch {
                 print("Error creating first intention: \(error)")
                 // Continue with onboarding even if intention creation fails
@@ -146,3 +149,4 @@ struct FirstIntentionPage: View {
     FirstIntentionPage(onComplete: { print("Complete") })
         .modelContainer(for: Intention.self, inMemory: true)
 }
+

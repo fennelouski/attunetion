@@ -179,10 +179,11 @@ struct NewIntentionView: View {
                             ),
                             intentionText: intentionText,
                             modelContext: modelContext,
-                            themeManager: themeManager
-                        ) {
-                            await generateAITheme()
-                        }
+                            themeManager: themeManager,
+                            onAIGenerate: { await generateAITheme() },
+                            maxUnsplashThemes: 5,
+                            currentUnsplashThemeCount: viewModel.unsplashThemeUsageCount()
+                        )
                         .padding(.vertical, 8)
                     }
                     
@@ -317,12 +318,13 @@ struct NewIntentionView: View {
             return
         }
         
-        // Create new intention
+        // Create new intention (themeSetAt marks when theme was set, for 7-day stability → curated)
         let newIntention = Intention(
             text: trimmedText,
             scope: selectedScope,
             date: selectedDate,
             themeId: selectedTheme?.id,
+            themeSetAt: selectedTheme != nil ? Date() : nil,
             customFont: selectedFont,
             aiGenerated: false
         )
