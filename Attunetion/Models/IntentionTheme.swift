@@ -9,61 +9,8 @@ import Foundation
 import SwiftData
 import SwiftUI
 
-/// Model representing a visual theme for intentions
-@Model
-final class IntentionTheme {
-    var id: UUID
-    var name: String
-    var backgroundColor: String // Hex color string
-    var textColor: String // Hex color string
-    var accentColor: String? // Hex color string, optional
-    var fontName: String?
-    var isPreset: Bool
-    var isAIGenerated: Bool
-    var createdAt: Date
-    var themeDescription: String?
-    
-    // Optional Unsplash (or proxy) background image
-    var backgroundImageURL: String?
-    var unsplashPhotoId: String?
-    var unsplashDownloadLocation: String?
-    var attributionText: String?
-    var attributionURL: String?
-    
-    init(
-        id: UUID = UUID(),
-        name: String,
-        backgroundColor: String,
-        textColor: String,
-        accentColor: String? = nil,
-        fontName: String? = nil,
-        isPreset: Bool = false,
-        isAIGenerated: Bool = false,
-        createdAt: Date = Date(),
-        themeDescription: String? = nil,
-        backgroundImageURL: String? = nil,
-        unsplashPhotoId: String? = nil,
-        unsplashDownloadLocation: String? = nil,
-        attributionText: String? = nil,
-        attributionURL: String? = nil
-    ) {
-        self.id = id
-        self.name = name
-        self.backgroundColor = backgroundColor
-        self.textColor = textColor
-        self.accentColor = accentColor
-        self.fontName = fontName
-        self.isPreset = isPreset
-        self.isAIGenerated = isAIGenerated
-        self.createdAt = createdAt
-        self.themeDescription = themeDescription
-        self.backgroundImageURL = backgroundImageURL
-        self.unsplashPhotoId = unsplashPhotoId
-        self.unsplashDownloadLocation = unsplashDownloadLocation
-        self.attributionText = attributionText
-        self.attributionURL = attributionURL
-    }
-}
+/// Model representing a visual theme for intentions (versioned schema V1)
+typealias IntentionTheme = AttunetionSchemaV1.IntentionTheme
 
 // MARK: - SwiftUI Color Conversion
 

@@ -20,43 +20,6 @@ struct WatchOSSpacing {
     static let minimumTouchTarget: CGFloat = 44
 }
 
-/// Platform-specific padding helper (includes watchOS)
-struct PlatformPadding {
-    static func horizontal() -> CGFloat {
-        #if os(watchOS)
-        return 8
-        #elseif os(iOS)
-        return 20
-        #elseif os(macOS)
-        return 24
-        #else
-        return 16
-        #endif
-    }
-    
-    static func vertical() -> CGFloat {
-        #if os(watchOS)
-        return 8
-        #elseif os(iOS)
-        return 16
-        #elseif os(macOS)
-        return 20
-        #else
-        return 12
-        #endif
-    }
-    
-    static func safeAreaTop() -> CGFloat {
-        #if os(watchOS)
-        return 4
-        #elseif os(iOS)
-        return 8
-        #else
-        return 0
-        #endif
-    }
-}
-
 /// watchOS-specific font sizes
 struct WatchOSFonts {
     static let title: Font = .system(size: 20, weight: .semibold, design: .rounded)

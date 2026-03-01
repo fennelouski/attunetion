@@ -106,7 +106,7 @@ struct WatchOSIntentionsView: View {
     }
     
     private func getCurrentIntention(for scope: IntentionScope) -> Intention? {
-        guard let viewModel = viewModel else { return nil }
+        guard viewModel != nil else { return nil }
         let repository = IntentionRepository(modelContext: modelContext)
         let today = Date()
         return repository.getIntention(for: today, scope: scope)
@@ -213,7 +213,7 @@ struct IntentionCardView: View {
                                 RoundedRectangle(cornerRadius: 12, style: .continuous)
                                     .fill(
                                         LinearGradient(
-                                            gradient: Gradient(colors: [theme.backgroundColorValue, theme.accentColorValue ?? theme.backgroundColorValue]),
+                                            gradient: Gradient(colors: [theme.backgroundColorValue, theme.accentColorValue]),
                                             startPoint: .topLeading,
                                             endPoint: .bottomTrailing
                                         )
@@ -280,7 +280,7 @@ struct IntentionCardView: View {
             loadIntention()
         }
         .onChange(of: viewModel.intentions) { _, _ in
-            animationSpeedManager.withAnimation(0.2) {
+            withAnimation(.easeInOut(duration: 0.2)) {
                 loadIntention()
             }
         }

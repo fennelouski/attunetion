@@ -107,7 +107,14 @@ struct IntentionFeedbackView: View {
                                 Text("Optional: Tell us more (up to 100 characters)")
                                     .font(.subheadline)
                                     .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                                
+                                #if os(watchOS)
+                                TextField("Comments", text: $feedbackText)
+                                    .onChange(of: feedbackText) { oldValue, newValue in
+                                        if newValue.count > 100 {
+                                            feedbackText = String(newValue.prefix(100))
+                                        }
+                                    }
+                                #else
                                 TextEditor(text: $feedbackText)
                                     .frame(minHeight: 80)
                                     .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
@@ -129,7 +136,7 @@ struct IntentionFeedbackView: View {
                                             feedbackText = String(newValue.prefix(100))
                                         }
                                     }
-                                
+                                #endif
                                 HStack {
                                     Spacer()
                                     Text("\(feedbackText.count)/100")

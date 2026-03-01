@@ -208,41 +208,10 @@ enum IntentionFrequency: String, Codable, CaseIterable {
     }
 }
 
-/// Model representing user preferences (singleton - should only have one instance)
-@Model
-final class UserPreferences {
-    var id: UUID
-    var onboardingCompleted: Bool
-    var defaultThemeId: UUID?
-    var appThemeId: String? // App-wide UI theme ID (stored as string for CloudKit compatibility)
-    var defaultFont: String?
-    var defaultIntentionFrequency: String // Store as string for CloudKit compatibility (monthly/weekly/daily)
-    var widgetThemeId: String? // Widget appearance theme ID (nil = use intention's theme)
-    
-    // Store NotificationSettings as JSON string for CloudKit compatibility
-    @Attribute(.externalStorage) var notificationSettingsData: Data?
-    
-    init(
-        id: UUID = UUID(),
-        onboardingCompleted: Bool = false,
-        defaultThemeId: UUID? = nil,
-        appThemeId: String? = nil,
-        defaultFont: String? = nil,
-        defaultIntentionFrequency: IntentionFrequency = .monthly,
-        widgetThemeId: String? = nil,
-        notificationSettings: NotificationSettings = NotificationSettings()
-    ) {
-        self.id = id
-        self.onboardingCompleted = onboardingCompleted
-        self.defaultThemeId = defaultThemeId
-        self.appThemeId = appThemeId
-        self.defaultFont = defaultFont
-        self.defaultIntentionFrequency = defaultIntentionFrequency.rawValue
-        self.widgetThemeId = widgetThemeId
-        // Encode synchronously - NotificationSettings is a plain struct, so encoding is safe
-        self.notificationSettingsData = Self.encodeNotificationSettings(notificationSettings)
-    }
-    
+/// Model representing user preferences (singleton - should only have one instance) (versioned schema V1)
+typealias UserPreferences = AttunetionSchemaV1.UserPreferences
+
+extension UserPreferences {
     /// Convenience property to get/set intention frequency
     var intentionFrequency: IntentionFrequency {
         get {
@@ -252,7 +221,7 @@ final class UserPreferences {
             defaultIntentionFrequency = newValue.rawValue
         }
     }
-    
+
     /// Convenience property to get/set notification settings
     var notificationSettings: NotificationSettings {
         get {
@@ -265,7 +234,7 @@ final class UserPreferences {
             notificationSettingsData = Self.encodeNotificationSettings(newValue)
         }
     }
-    
+
     /// Nonisolated helper to decode NotificationSettings
     nonisolated private static func decodeNotificationSettings(from data: Data) -> NotificationSettings {
         guard let settings = try? JSONDecoder().decode(NotificationSettings.self, from: data) else {
@@ -273,7 +242,7 @@ final class UserPreferences {
         }
         return settings
     }
-    
+
     /// Nonisolated helper to encode NotificationSettings
     nonisolated private static func encodeNotificationSettings(_ settings: NotificationSettings) -> Data? {
         return try? JSONEncoder().encode(settings)

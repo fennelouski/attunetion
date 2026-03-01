@@ -50,7 +50,11 @@ struct UserProfileView: View {
                             Text(String(localized: "Free-form")).tag(InputMode.freeform)
                             Text(String(localized: "Guided")).tag(InputMode.guided)
                         }
+                        #if os(watchOS)
+                        .pickerStyle(.navigationLink)
+                        #else
                         .pickerStyle(.segmented)
+                        #endif
                         .padding(.vertical, 4)
                         .onChange(of: inputMode) { oldValue, newValue in
                             // Sync data when switching modes
@@ -192,6 +196,10 @@ struct UserProfileView: View {
                 .font(.subheadline)
                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
             
+            #if os(watchOS)
+            TextField(String(localized: "About you"), text: $userInfo)
+                .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+            #else
             TextEditor(text: $userInfo)
                 .frame(minHeight: 150)
                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
@@ -207,6 +215,7 @@ struct UserProfileView: View {
                             lineWidth: 1
                         )
                 )
+            #endif
             
             Text("This information is stored locally on your device and only used when generating suggestions. We don't store it on our servers.")
                 .font(.caption)

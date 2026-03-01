@@ -127,7 +127,7 @@ struct WatchOSEditIntentionView: View {
                                 selection: $selectedDate,
                                 displayedComponents: [.date]
                             )
-                            .datePickerStyle(.compact)
+                            .datePickerStyle(.wheel)
                             .labelsHidden()
                         }
                         .padding(.horizontal, WatchOSSpacing.medium)

@@ -1715,6 +1715,18 @@ struct AIIntentionGeneratorView: View {
                             .multilineTextAlignment(.center)
                             .lineSpacing(4)
                         
+                        #if os(watchOS)
+                        TextField(String(localized: "About you, goals, focus..."), text: $userInfo)
+                            .padding(8)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                    .fill(
+                                        colorScheme == .dark
+                                            ? themeManager.currentTheme.darkSecondaryButtonBackground.toSwiftUIColor().opacity(0.4)
+                                            : Color.white.opacity(0.6)
+                                    )
+                            )
+                        #else
                         TextEditor(text: $userInfo)
                             .frame(minHeight: 120)
                             .padding(8)
@@ -1738,6 +1750,7 @@ struct AIIntentionGeneratorView: View {
                                 },
                                 alignment: .topLeading
                             )
+                        #endif
                         
                         if isGenerating {
                             ProgressView()
