@@ -29,3 +29,4 @@ class OnboardingManager {
         UserDefaults.standard.set(false, forKey: "hasCompletedOnboarding")
     }
 }
+

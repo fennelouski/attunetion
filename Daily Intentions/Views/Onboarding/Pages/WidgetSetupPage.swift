@@ -136,3 +136,4 @@ struct WidgetSetupPage: View {
         onSkip: { print("Skip") }
     )
 }
+
