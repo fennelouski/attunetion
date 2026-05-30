@@ -20,7 +20,7 @@ export async function generateTheme(intentionText: string): Promise<{
   const userPrompt = `Generate a color theme for this intention: "${intentionText}"`;
 
   const response = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
+    model: "gpt-5.4-nano",
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: userPrompt },
@@ -62,7 +62,7 @@ export async function generateQuote(intentionText: string): Promise<{
   const userPrompt = `Find or generate a relevant quote for this intention: "${intentionText}"`;
 
   const response = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
+    model: "gpt-5.4-nano",
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: userPrompt },
@@ -110,7 +110,7 @@ export async function rephraseIntention(
   }
 
   const response = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
+    model: "gpt-5.4-nano",
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: userPrompt },
@@ -157,7 +157,7 @@ export async function generateMonthlyIntention(
   const userPrompt = `Based on these previous monthly intentions:\n${intentionsList}\n\nGenerate a new monthly intention that builds on these themes.`;
 
   const response = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
+    model: "gpt-5.4-nano",
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: userPrompt },
