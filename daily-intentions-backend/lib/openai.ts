@@ -1,9 +1,31 @@
 import OpenAI from "openai";
 
-// Initialize OpenAI client
+/** GPT-5.4 models for Chat Completions (see https://developers.openai.com/api/docs/models/) */
+export const GPT54_NANO = "gpt-5.4-nano";
+export const GPT54_MINI = "gpt-5.4-mini";
+
 export const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
+
+/**
+ * Chat Completions for GPT-5.4 reasoning models.
+ * Uses max_completion_tokens (not max_tokens) and omits temperature (unsupported).
+ */
+export function createGpt54JsonCompletion(options: {
+  model: string;
+  messages: OpenAI.Chat.ChatCompletionMessageParam[];
+  maxCompletionTokens: number;
+  reasoningEffort?: OpenAI.ReasoningEffort | null;
+}) {
+  return openai.chat.completions.create({
+    model: options.model,
+    messages: options.messages,
+    max_completion_tokens: options.maxCompletionTokens,
+    reasoning_effort: options.reasoningEffort ?? "none",
+    response_format: { type: "json_object" },
+  });
+}
 
 /**
  * Generate a color theme for an intention using AI
@@ -19,15 +41,14 @@ export async function generateTheme(intentionText: string): Promise<{
 
   const userPrompt = `Generate a color theme for this intention: "${intentionText}"`;
 
-  const response = await openai.chat.completions.create({
-    model: "gpt-5.4-nano",
+  const response = await createGpt54JsonCompletion({
+    model: GPT54_NANO,
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: userPrompt },
     ],
-    max_tokens: 150,
-    temperature: 0.7,
-    response_format: { type: "json_object" },
+    maxCompletionTokens: 512,
+    reasoningEffort: "none",
   });
 
   const content = response.choices[0]?.message?.content;
@@ -37,8 +58,7 @@ export async function generateTheme(intentionText: string): Promise<{
 
   try {
     const theme = JSON.parse(content);
-    
-    // Validate required fields
+
     if (!theme.backgroundColor || !theme.textColor || !theme.accentColor || !theme.name || !theme.reasoning) {
       throw new Error("Invalid theme response structure");
     }
@@ -61,15 +81,14 @@ export async function generateQuote(intentionText: string): Promise<{
 
   const userPrompt = `Find or generate a relevant quote for this intention: "${intentionText}"`;
 
-  const response = await openai.chat.completions.create({
-    model: "gpt-5.4-nano",
+  const response = await createGpt54JsonCompletion({
+    model: GPT54_NANO,
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: userPrompt },
     ],
-    max_tokens: 100,
-    temperature: 0.8,
-    response_format: { type: "json_object" },
+    maxCompletionTokens: 512,
+    reasoningEffort: "none",
   });
 
   const content = response.choices[0]?.message?.content;
@@ -79,8 +98,7 @@ export async function generateQuote(intentionText: string): Promise<{
 
   try {
     const quote = JSON.parse(content);
-    
-    // Validate required fields
+
     if (!quote.quote || !quote.author || !quote.relevance) {
       throw new Error("Invalid quote response structure");
     }
@@ -104,20 +122,19 @@ export async function rephraseIntention(
   const systemPrompt = `You are a writing assistant. Rephrase the given intention text to make it fresh and inspiring while preserving the core meaning. Remember: intentions are about HOW you want to be or show up, not specific measurable goals. Focus on being/doing rather than achieving/completing. Return ONLY a valid JSON object with these exact keys: rephrasedText (the new phrasing, 5-15 words), and preservedMeaning (boolean). Do not include any markdown formatting or code blocks.`;
 
   let userPrompt = `Rephrase this intention: "${intentionText}"`;
-  
+
   if (previousPhrases.length > 0) {
     userPrompt += `\n\nAvoid repeating these previous phrasings: ${previousPhrases.join(", ")}`;
   }
 
-  const response = await openai.chat.completions.create({
-    model: "gpt-5.4-nano",
+  const response = await createGpt54JsonCompletion({
+    model: GPT54_NANO,
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: userPrompt },
     ],
-    max_tokens: 100,
-    temperature: 0.8,
-    response_format: { type: "json_object" },
+    maxCompletionTokens: 512,
+    reasoningEffort: "none",
   });
 
   const content = response.choices[0]?.message?.content;
@@ -127,8 +144,7 @@ export async function rephraseIntention(
 
   try {
     const result = JSON.parse(content);
-    
-    // Validate required fields
+
     if (!result.rephrasedText || typeof result.preservedMeaning !== "boolean") {
       throw new Error("Invalid rephrase response structure");
     }
@@ -156,15 +172,14 @@ export async function generateMonthlyIntention(
 
   const userPrompt = `Based on these previous monthly intentions:\n${intentionsList}\n\nGenerate a new monthly intention that builds on these themes.`;
 
-  const response = await openai.chat.completions.create({
-    model: "gpt-5.4-nano",
+  const response = await createGpt54JsonCompletion({
+    model: GPT54_NANO,
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: userPrompt },
     ],
-    max_tokens: 150,
-    temperature: 0.7,
-    response_format: { type: "json_object" },
+    maxCompletionTokens: 512,
+    reasoningEffort: "none",
   });
 
   const content = response.choices[0]?.message?.content;
@@ -174,8 +189,7 @@ export async function generateMonthlyIntention(
 
   try {
     const result = JSON.parse(content);
-    
-    // Validate required fields
+
     if (!result.intention || !result.reasoning) {
       throw new Error("Invalid monthly intention response structure");
     }
@@ -185,6 +199,3 @@ export async function generateMonthlyIntention(
     throw new Error(`Failed to parse monthly intention response: ${error}`);
   }
 }
-
-
-

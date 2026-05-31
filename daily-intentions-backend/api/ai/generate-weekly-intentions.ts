@@ -1,11 +1,11 @@
-import OpenAI from "openai";
 import { validateApiKey } from "../../lib/auth";
 import { checkRateLimit, getRateLimitIdentifier } from "../../lib/rateLimit";
 import { handleError, ErrorCodes, createErrorResponse } from "../../lib/errors";
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+import {
+  createGpt54JsonCompletion,
+  GPT54_MINI,
+  GPT54_NANO,
+} from "../../lib/openai";
 
 interface GenerateWeeklyIntentionsRequest {
   userInfo: string;
@@ -146,8 +146,6 @@ async function handleMiniMode(
   weekEnd: Date,
   rateLimit: { remaining: number; resetAt: number; tier: number }
 ): Promise<Response> {
-  const model = "gpt-5.1-mini";
-
     // Build system prompt
     const systemPrompt = `You are a personal growth and mindfulness advisor. Based on information about a user, generate personalized daily, weekly, and monthly intentions for a specific week. 
 
@@ -201,16 +199,14 @@ Rules:
     
     userPrompt += `Generate 7 daily intentions (one for each day), 1 weekly intention, and 1 monthly intention.`;
 
-    // Call OpenAI API
-    const response = await openai.chat.completions.create({
-      model: model,
+    const response = await createGpt54JsonCompletion({
+      model: GPT54_MINI,
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt },
       ],
-      max_tokens: 2000,
-      temperature: 0.8,
-      response_format: { type: "json_object" },
+      maxCompletionTokens: 4096,
+      reasoningEffort: "low",
     });
 
     return processAIResponse(response, body.weekStartDate, weekEnd, rateLimit);
@@ -222,9 +218,6 @@ async function handleNanoMode(
   weekEnd: Date,
   rateLimit: { remaining: number; resetAt: number; tier: number }
 ): Promise<Response> {
-  // Use nano model to rephrase existing intentions
-  const model = "gpt-5.1-nano";
-  
   if (!body.previousIntentions || body.previousIntentions.length === 0) {
     // Fallback to shuffle if no previous intentions
     return handleShuffleMode(body, weekStart, weekEnd, rateLimit);
@@ -242,15 +235,14 @@ async function handleNanoMode(
   const selectedIntentions = body.previousIntentions.slice(0, 9); // Mix of daily/weekly/monthly
   const userPrompt = `Rephrase these intentions for the week starting ${body.weekStartDate}:\n${selectedIntentions.map(i => `- ${i.scope}: ${i.text}`).join('\n')}\n\nGenerate 7 daily intentions, 1 weekly, and 1 monthly.`;
 
-  const response = await openai.chat.completions.create({
-    model: model,
+  const response = await createGpt54JsonCompletion({
+    model: GPT54_NANO,
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: userPrompt },
     ],
-    max_tokens: 1000,
-    temperature: 0.7,
-    response_format: { type: "json_object" },
+    maxCompletionTokens: 2048,
+    reasoningEffort: "none",
   });
 
   return processAIResponse(response, body.weekStartDate, weekEnd, rateLimit);

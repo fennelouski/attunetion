@@ -126,7 +126,29 @@ fi
 test_typescript
 
 echo ""
-echo "6️⃣  Testing Environment Configuration..."
+echo "6️⃣  Testing OpenAI GPT-5.4 API usage..."
+echo "--------------------------------"
+
+# GPT-5.4 reasoning models reject max_tokens and temperature on Chat Completions
+if grep -rE '^\s+(max_tokens|temperature)\s*:' lib/ api/ai/ --include='*.ts' 2>/dev/null; then
+    echo -e "${RED}✗${NC} Found deprecated OpenAI params (max_tokens or temperature) in lib/ or api/ai/"
+    grep -rE '^\s+(max_tokens|temperature)\s*:' lib/ api/ai/ --include='*.ts' 2>/dev/null || true
+    ((TESTS_FAILED++))
+else
+    echo -e "${GREEN}✓${NC} No max_tokens/temperature in OpenAI call sites"
+    ((TESTS_PASSED++))
+fi
+
+if grep -q 'max_completion_tokens' lib/openai.ts; then
+    echo -e "${GREEN}✓${NC} Uses max_completion_tokens helper in lib/openai.ts"
+    ((TESTS_PASSED++))
+else
+    echo -e "${RED}✗${NC} lib/openai.ts missing max_completion_tokens"
+    ((TESTS_FAILED++))
+fi
+
+echo ""
+echo "7️⃣  Testing Environment Configuration..."
 echo "--------------------------------"
 
 # Check for environment variables (optional)
