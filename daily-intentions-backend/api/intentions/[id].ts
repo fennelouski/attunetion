@@ -8,10 +8,8 @@ import {
 } from "../../lib/db";
 import { UpdateIntentionRequest } from "../../types";
 
-export default async function handler(
-  request: Request,
-  context?: { params?: { id?: string } }
-): Promise<Response> {
+export default {
+  async fetch(request: Request): Promise<Response> {
   // Handle CORS preflight
   if (request.method === "OPTIONS") {
     return new Response(null, {
@@ -36,7 +34,7 @@ export default async function handler(
     // Extract ID from URL path or context params
     const url = new URL(request.url);
     const pathParts = url.pathname.split("/");
-    const intentionId = context?.params?.id || pathParts[pathParts.length - 1];
+    const intentionId = pathParts[pathParts.length - 1];
     
     if (!intentionId) {
       return Response.json(
@@ -152,5 +150,6 @@ export default async function handler(
   } catch (error) {
     return handleError(error);
   }
-}
+  },
+};
 

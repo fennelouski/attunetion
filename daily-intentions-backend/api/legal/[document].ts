@@ -4,7 +4,8 @@ const LEGAL_DOCUMENTS: Record<string, string> = {
   'terms-of-service': 'terms-of-service.html',
 };
 
-export default async function handler(request: Request): Promise<Response> {
+export default {
+  async fetch(request: Request): Promise<Response> {
   if (request.method !== "GET") {
     return new Response("Method not allowed", { status: 405 });
   }
@@ -28,7 +29,6 @@ export default async function handler(request: Request): Promise<Response> {
   } catch (error) {
     return new Response("Error serving document", { status: 500 });
   }
-}
-
-
+  },
+};
 

@@ -4,7 +4,8 @@ import { checkRateLimit, getRateLimitIdentifier } from "../../lib/rateLimit";
 import { handleError, ErrorCodes, createErrorResponse } from "../../lib/errors";
 import { GenerateQuoteRequest, QuoteResponse } from "../../types";
 
-export default async function handler(request: Request): Promise<Response> {
+export default {
+  async fetch(request: Request): Promise<Response> {
   // Handle CORS preflight
   if (request.method === "OPTIONS") {
     return new Response(null, {
@@ -84,7 +85,6 @@ export default async function handler(request: Request): Promise<Response> {
   } catch (error) {
     return handleError(error);
   }
-}
-
-
+  },
+};
 

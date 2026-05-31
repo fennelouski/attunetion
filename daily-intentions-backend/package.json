@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "vercel dev",
-    "build": "tsc",
+    "build": "tsc --noEmit",
     "type-check": "tsc --noEmit",
     "verify-openai": "tsx scripts/verify-openai.ts",
     "test": "bash test-backend.sh"

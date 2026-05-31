@@ -1,4 +1,5 @@
-export default async function handler(request: Request): Promise<Response> {
+export default {
+  async fetch(request: Request): Promise<Response> {
   // Handle CORS preflight
   if (request.method === "OPTIONS") {
     return new Response(null, {
@@ -33,7 +34,6 @@ export default async function handler(request: Request): Promise<Response> {
       "Access-Control-Allow-Origin": "*",
     },
   });
-}
-
-
+  },
+};
 
