@@ -23,6 +23,7 @@ struct IntentionsListView: View {
     @State private var sortOrder: SortOrder = .newestFirst
     @State private var isSearchBarVisible = false
     @State private var buttonWidth: CGFloat = 0
+    @AppStorage("intentionListStyle") private var intentionListStyle: IntentionListStyle = .cards
     
     init(pendingURL: Binding<URL?> = .constant(nil)) {
         self._pendingURL = pendingURL
@@ -398,21 +399,31 @@ struct IntentionsListView: View {
                                                     #endif
                                                 }
                                                 .padding(.horizontal, 24)
-                                                
-                                                ForEach(viewModel.pastAndFutureIntentions) { intention in
-                                                    NavigationLink(value: intention.id) {
-                                                        IntentionRowView(
-                                                            intention: intention,
-                                                            themeManager: themeManager
-                                                        )
-                                                        .padding(.horizontal, cardHorizontalPadding)
+
+                                                VStack(spacing: intentionListStyle == .separators ? 0 : vStackSpacing) {
+                                                    ForEach(viewModel.pastAndFutureIntentions) { intention in
+                                                        VStack(spacing: 0) {
+                                                            NavigationLink(value: intention.id) {
+                                                                IntentionRowView(
+                                                                    intention: intention,
+                                                                    themeManager: themeManager,
+                                                                    style: intentionListStyle
+                                                                )
+                                                                .padding(.horizontal, cardHorizontalPadding)
+                                                            }
+                                                            .buttonStyle(.plain)
+                                                            #if os(iOS)
+                                                            .onTapGesture {
+                                                                HapticFeedback.light()
+                                                            }
+                                                            #endif
+
+                                                            if intentionListStyle == .separators && intention.id != viewModel.pastAndFutureIntentions.last?.id {
+                                                                Divider()
+                                                                    .padding(.leading, cardHorizontalPadding + 16)
+                                                            }
+                                                        }
                                                     }
-                                                    .buttonStyle(.plain)
-                                                    #if os(iOS)
-                                                    .onTapGesture {
-                                                        HapticFeedback.light()
-                                                    }
-                                                    #endif
                                                 }
                                             }
                                         }

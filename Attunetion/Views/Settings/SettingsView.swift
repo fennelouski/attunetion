@@ -29,6 +29,7 @@ struct SettingsView: View {
     @State private var notificationAuthorizationStatus: UNAuthorizationStatus = .notDetermined
     @State private var isRequestingPermission = false
     @State private var showPermissionAlert = false
+    @AppStorage("intentionListStyle") private var intentionListStyle: IntentionListStyle = .cards
     
     private var preferences: UserPreferences? {
         preferencesQuery.first
@@ -158,10 +159,30 @@ struct SettingsView: View {
                             }
                         }
                     }
+
+                    // Intentions list display style
+                    Picker(selection: $intentionListStyle) {
+                        ForEach(IntentionListStyle.allCases) { style in
+                            Text(style.displayName).tag(style)
+                        }
+                    } label: {
+                        HStack {
+                            Image(systemName: "list.bullet.rectangle")
+                                .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                                .frame(width: 24)
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("List Style")
+                                    .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                                Text(intentionListStyle.description)
+                                    .font(.caption)
+                                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                            }
+                        }
+                    }
                 } header: {
                     ThemedSectionHeader(text: "Intentions", themeManager: themeManager)
                 } footer: {
-                    ThemedSectionFooter(text: "Choose how often you'd like to set new intentions. This helps personalize your widget's placeholder text.", themeManager: themeManager)
+                    ThemedSectionFooter(text: "Choose how often you'd like to set new intentions and how your intentions list is displayed. This helps personalize your widget's placeholder text.", themeManager: themeManager)
                 }
                 
                 Section {

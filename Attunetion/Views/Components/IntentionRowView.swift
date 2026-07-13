@@ -12,10 +12,12 @@ struct IntentionRowView: View {
     @Environment(\.colorScheme) var colorScheme
     let intention: Intention
     @ObservedObject var themeManager: AppThemeManager
+    let style: IntentionListStyle
 
-    init(intention: Intention, themeManager: AppThemeManager) {
+    init(intention: Intention, themeManager: AppThemeManager, style: IntentionListStyle = .cards) {
         self.intention = intention
         self.themeManager = themeManager
+        self.style = style
     }
 
     private var scopeColor: Color {
@@ -112,19 +114,27 @@ struct IntentionRowView: View {
         .padding(.vertical, 12)
         .padding(.horizontal, 16)
         .background(
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .fill(
-                    colorScheme == .dark
-                        ? themeManager.currentTheme.darkSecondaryButtonBackground.toSwiftUIColor().opacity(0.3)
-                        : Color.white.opacity(0.5)
-                )
+            Group {
+                if style == .cards {
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .fill(
+                            colorScheme == .dark
+                                ? themeManager.currentTheme.darkSecondaryButtonBackground.toSwiftUIColor().opacity(0.3)
+                                : Color.white.opacity(0.5)
+                        )
+                }
+            }
         )
         .overlay(
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .stroke(
-                    themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.1),
-                    lineWidth: 1
-                )
+            Group {
+                if style == .cards {
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .stroke(
+                            themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.1),
+                            lineWidth: 1
+                        )
+                }
+            }
         )
     }
 }
