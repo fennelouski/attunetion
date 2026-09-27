@@ -9,6 +9,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import tarfile
+from urllib.parse import urlsplit
 
 BACKEND = Path(__file__).resolve().parent.parent
 REPO = BACKEND.parent
@@ -20,6 +21,27 @@ CUTOFF = datetime(2026, 10, 22, 7, tzinfo=timezone.utc)
 
 def output(command, **kwargs):
     return subprocess.check_output(command, text=True, **kwargs).strip()
+
+
+def deployment_url(result):
+    # CLI56 emits {status, deployment:{url,...}} in non-interactive mode.
+    # Older interactive CLI versions emitted a single URL line.
+    try:
+        payload = json.loads(result)
+    except json.JSONDecodeError:
+        candidate = result.strip()
+    else:
+        deployment = payload.get('deployment', payload) if isinstance(payload, dict) else {}
+        candidate = deployment.get('url') if isinstance(deployment, dict) else None
+    if not isinstance(candidate, str) or not candidate.strip():
+        raise RuntimeError('Vercel succeeded but did not return a deployment URL; inspect the deployment before recording success.')
+    candidate = candidate.strip()
+    if not candidate.startswith('https://'):
+        candidate = 'https://' + candidate
+    parsed = urlsplit(candidate)
+    if not parsed.hostname or not parsed.hostname.endswith('.vercel.app') or parsed.path not in ('', '/') or parsed.query or parsed.fragment:
+        raise RuntimeError('Unexpected Vercel deployment URL; inspect the deployment before recording success.')
+    return candidate.rstrip('/')
 
 
 def check_release():
@@ -85,7 +107,7 @@ def main():
         subprocess.run(['npm', 'run', 'deploy:aws'], cwd=BACKEND, env=env, check=True)
         result = output([args.vercel_cli, 'deploy', '--prebuilt', '--prod', '--yes', '--meta', f'sourceCommit={revision}', '--env', f'SOURCE_COMMIT={revision}'], cwd=staging, env=env)
         record = {'revision': revision, 'deployedAt': datetime.now(timezone.utc).isoformat(), 'mode': 'parallel',
-                  'vercelDeployment': result.splitlines()[-1], 'aws': json.loads((BACKEND / '.sst/outputs.json').read_text()),
+                  'vercelDeployment': deployment_url(result), 'aws': json.loads((BACKEND / '.sst/outputs.json').read_text()),
                   'verification': 'Required: signed AWS and production Vercel live smoke checks. Deployment alone is not verified parity.'}
         (BACKEND / '.deploy/deployed.json').write_text(json.dumps(record, indent=2) + '\n')
         print(json.dumps(record, indent=2))
