@@ -16,7 +16,8 @@ export default $config({
       runtime: "nodejs24.x",
       url: { authorization: "iam", cors: false },
       timeout: "60 seconds", memory: "256 MB",
-      concurrency: { reserved: 2 },
+      // Account limit10 cannot reserve2 while preserving AWS minimum10 unreserved.
+      // IAM-only operator parity uses the existing shared account cap; no public access.
       logging: { retention: "1 week" },
       environment: {
         OPENAI_API_KEY: key.value,

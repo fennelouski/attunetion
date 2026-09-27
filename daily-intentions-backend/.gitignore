@@ -18,3 +18,5 @@ types/**/*.js
 .sst/
 
 __pycache__/
+
+sst-env.d.ts
