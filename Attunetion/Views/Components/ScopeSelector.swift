@@ -80,7 +80,8 @@ struct ScopeSelector: View {
                     .font(.system(size: buttonFontSize, weight: selectedScope == nil ? .semibold : .regular, design: fontDesign))
                     .frame(maxWidth: .infinity)
             }
-            .buttonStyle(selectedScope == nil ? .borderedProminent : .bordered)
+            .buttonStyle(.borderedProminent)
+            .accessibilityAddTraits(selectedScope == nil ? .isSelected : [])
             .controlSize(.regular)
             .tint(selectedScope == nil 
                 ? themeManager.buttonBackgroundColor(for: colorScheme).toSwiftUIColor()
@@ -100,7 +101,8 @@ struct ScopeSelector: View {
                         .font(.system(size: buttonFontSize, weight: selectedScope == scope ? .semibold : .regular, design: fontDesign))
                         .frame(maxWidth: .infinity)
                 }
-                .buttonStyle(selectedScope == scope ? .borderedProminent : .bordered)
+                .buttonStyle(.borderedProminent)
+                .accessibilityAddTraits(selectedScope == scope ? .isSelected : [])
                 .controlSize(.regular)
                 .tint(selectedScope == scope
                     ? themeManager.buttonBackgroundColor(for: colorScheme).toSwiftUIColor()

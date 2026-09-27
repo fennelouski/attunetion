@@ -70,9 +70,13 @@ class AutoIntentionService {
         let response = try await apiClient.generateWeeklyIntentions(
             userInfo: profile.userInfo,
             weekStartDate: weekStartStartOfDay,
-            previousIntentions: previousIntentions
+            previousIntentions: previousIntentions,
+            modelContext: modelContext
         )
         
+        // Deletion or revocation while awaiting the response must not recreate content.
+        try ConsentManager.shared.requireConsent(modelContext: modelContext)
+
         // Parse dates and create Intention objects
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -114,7 +118,7 @@ class AutoIntentionService {
     func shouldGenerateIntentions() -> Bool {
         let profile = userProfileRepository.getOrCreateProfile()
         
-        guard profile.autoGenerateEnabled else {
+        guard profile.autoGenerateEnabled, profile.hasAcceptedTerms else {
             return false
         }
         

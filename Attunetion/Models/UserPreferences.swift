@@ -211,12 +211,12 @@ enum IntentionFrequency: String, Codable, CaseIterable {
 /// Model representing user preferences (singleton - should only have one instance)
 @Model
 final class UserPreferences {
-    var id: UUID
-    var onboardingCompleted: Bool
+    var id: UUID = UUID()
+    var onboardingCompleted: Bool = false
     var defaultThemeId: UUID?
     var appThemeId: String? // App-wide UI theme ID (stored as string for CloudKit compatibility)
     var defaultFont: String?
-    var defaultIntentionFrequency: String // Store as string for CloudKit compatibility (monthly/weekly/daily)
+    var defaultIntentionFrequency: String = "monthly" // Store as string for CloudKit compatibility (monthly/weekly/daily)
     var widgetThemeId: String? // Widget appearance theme ID (nil = use intention's theme)
     
     // Store NotificationSettings as JSON string for CloudKit compatibility
@@ -279,4 +279,3 @@ final class UserPreferences {
         return try? JSONEncoder().encode(settings)
     }
 }
-

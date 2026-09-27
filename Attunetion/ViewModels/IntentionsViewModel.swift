@@ -157,7 +157,6 @@ class IntentionsViewModel {
     
     /// Sync widget data after changes
     private func syncWidgetData(currentIntention: Intention? = nil) {
-        print("IntentionsViewModel: syncWidgetData called, currentIntention: \(currentIntention?.text ?? "nil")")
         
         // Update widget data from SwiftData
         WidgetDataService.shared.updateWidgetDataFromSwiftData(modelContext: modelContext, currentIntention: currentIntention)

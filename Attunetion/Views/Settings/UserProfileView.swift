@@ -99,6 +99,18 @@ struct UserProfileView: View {
                         }
                         .tint(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
 
+                        if profile.hasAcceptedTerms {
+                            Button("Stop Sharing with AI", role: .destructive) {
+                                autoGenerateEnabled = false
+                                do {
+                                    try ConsentManager.shared.revokeConsent(modelContext: modelContext)
+                                } catch {
+                                    errorMessage = error.localizedDescription
+                                    showError = true
+                                }
+                            }
+                        }
+
                         if !profile.hasAcceptedTerms {
                             HStack {
                                 Image(systemName: "info.circle")
@@ -167,11 +179,13 @@ struct UserProfileView: View {
             .sheet(isPresented: $showConsentDialog) {
                 LegalConsentView(
                     onAccept: {
-                        // User accepted terms
-                        profile.hasAcceptedTerms = true
-                        profile.termsAcceptedDate = Date()
-                        try? userProfileRepository.update(profile)
-                        autoGenerateEnabled = true
+                        do {
+                            try ConsentManager.shared.acceptTerms(modelContext: modelContext)
+                            autoGenerateEnabled = true
+                        } catch {
+                            errorMessage = error.localizedDescription
+                            showError = true
+                        }
                     },
                     onDecline: {
                         // User declined - keep toggle off

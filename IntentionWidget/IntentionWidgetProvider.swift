@@ -26,7 +26,7 @@ struct IntentionWidgetProvider: TimelineProvider {
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<IntentionWidgetEntry>) -> Void) {
-        // For now, use mock data. Later, fetch from App Group UserDefaults
+        // Read the current intention shared by the app.
         let currentDate = Date()
         let intention = getCurrentIntention()
         let theme = getCurrentTheme()
@@ -51,13 +51,7 @@ struct IntentionWidgetProvider: TimelineProvider {
     
     /// Get current intention from App Group
     private func getCurrentIntention() -> IntentionData? {
-        let intention = WidgetDataService.shared.getCurrentIntentionData()
-        if let intention = intention {
-            print("WidgetProvider: Found intention: '\(intention.text)'")
-        } else {
-            print("WidgetProvider: No intention found in UserDefaults")
-        }
-        return intention
+        WidgetDataService.shared.getCurrentIntentionData()
     }
     
     /// Get current theme from App Group

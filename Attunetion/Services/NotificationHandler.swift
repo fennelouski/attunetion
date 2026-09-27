@@ -97,8 +97,7 @@ class NotificationHandler: NSObject, UNUserNotificationCenterDelegate {
     /// Create an intention from notification text input
     private func createIntention(text: String, scope: IntentionScope) async {
         guard let modelContext = modelContext else {
-            print("ModelContext not set - using mock creation")
-            await createMockIntention(text: text, scope: scope)
+            await showErrorNotification()
             return
         }
         
@@ -128,7 +127,6 @@ class NotificationHandler: NSObject, UNUserNotificationCenterDelegate {
         
         do {
             try repository.create(intention)
-            print("Successfully created intention from notification: \(text)")
             
             // Sync widget data after creating intention - pass intention directly
             WidgetDataService.shared.updateWidgetDataFromSwiftData(modelContext: modelContext, currentIntention: intention)
@@ -146,15 +144,6 @@ class NotificationHandler: NSObject, UNUserNotificationCenterDelegate {
             print("Failed to create intention from notification: \(error)")
             await showErrorNotification()
         }
-    }
-    
-    /// Mock intention creation (for testing without full data layer)
-    private func createMockIntention(text: String, scope: IntentionScope) async {
-        print("📝 Mock: Created \(scope.rawValue) intention: \"\(text)\"")
-        print("   In production, this would be saved via IntentionRepository")
-        
-        // Show confirmation notification
-        await showConfirmationNotification(scope: scope)
     }
     
     /// Show confirmation notification after creating intention

@@ -25,6 +25,7 @@ export default {
     status: "ok",
     timestamp: new Date().toISOString(),
     version: "1.0.0",
+    revision: process.env.SOURCE_COMMIT || process.env.VERCEL_GIT_COMMIT_SHA || "unknown",
   };
 
   return new Response(JSON.stringify(response), {

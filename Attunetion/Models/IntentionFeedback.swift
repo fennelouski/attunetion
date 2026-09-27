@@ -11,11 +11,11 @@ import SwiftData
 /// Model representing user feedback on a suggested intention
 @Model
 final class IntentionFeedback {
-    var id: UUID
-    var intentionId: UUID
-    var isApproved: Bool // true for approve, false for disapprove
+    var id: UUID = UUID()
+    var intentionId: UUID = UUID()
+    var isApproved: Bool = false // true for approve, false for disapprove
     var feedbackText: String? // Optional feedback text (max 100 chars)
-    var createdAt: Date
+    var createdAt: Date = Date()
     
     init(
         id: UUID = UUID(),
@@ -31,5 +31,4 @@ final class IntentionFeedback {
         self.createdAt = createdAt
     }
 }
-
 

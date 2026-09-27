@@ -5,14 +5,18 @@
   "description": "Vercel backend API for Daily Intentions app with AI features",
   "main": "index.js",
   "engines": {
-    "node": "20.x"
+    "node": "24.x"
   },
   "scripts": {
     "dev": "vercel dev",
-    "build": "tsc --noEmit",
+    "build": "tsc",
     "type-check": "tsc --noEmit",
     "verify-openai": "tsx scripts/verify-openai.ts",
-    "test": "bash test-backend.sh"
+    "test": "npm run test:unit",
+    "test:unit": "npm run build && node --test tests/*.test.mjs",
+    "test:live": "bash test-backend.sh",
+    "deploy:parallel": "python3 scripts/deploy-parallel.py",
+    "deploy:aws": "sst deploy --stage parallel"
   },
   "keywords": [
     "vercel",
@@ -27,8 +31,9 @@
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
+    "sst": "4.17.1",
     "tsx": "^4.22.3",
     "typescript": "^5.3.3",
-    "vercel": "^33.0.0"
+    "vercel": "56.5.0"
   }
 }

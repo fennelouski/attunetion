@@ -19,17 +19,24 @@ class ConsentManager {
     /// Returns true if accepted, false otherwise
     func hasAcceptedTerms(modelContext: ModelContext) -> Bool {
         let repository = UserProfileRepository(modelContext: modelContext)
-        let profile = repository.getOrCreateProfile()
-        return profile.hasAcceptedTerms
+        return repository.getProfile()?.hasAcceptedTerms == true
     }
 
     /// Mark that user has accepted terms
     func acceptTerms(modelContext: ModelContext) throws {
         let repository = UserProfileRepository(modelContext: modelContext)
         let profile = repository.getOrCreateProfile()
+        let previousConsent = profile.hasAcceptedTerms
+        let previousDate = profile.termsAcceptedDate
         profile.hasAcceptedTerms = true
         profile.termsAcceptedDate = Date()
-        try repository.update(profile)
+        do {
+            try repository.update(profile)
+        } catch {
+            profile.hasAcceptedTerms = previousConsent
+            profile.termsAcceptedDate = previousDate
+            throw error
+        }
     }
 
     /// Revoke user consent (when they disable AI features)
@@ -37,6 +44,7 @@ class ConsentManager {
         let repository = UserProfileRepository(modelContext: modelContext)
         let profile = repository.getOrCreateProfile()
         profile.hasAcceptedTerms = false
+        profile.termsAcceptedDate = nil
         profile.autoGenerateEnabled = false
         try repository.update(profile)
     }

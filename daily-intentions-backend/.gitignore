@@ -9,3 +9,12 @@ api/**/*.js
 lib/**/*.js
 types/**/*.js
 
+
+.test-build/
+.deploy/
+.env.*
+!.env.example
+
+.sst/
+
+__pycache__/

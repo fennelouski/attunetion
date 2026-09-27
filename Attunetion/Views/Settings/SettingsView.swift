@@ -8,6 +8,9 @@
 import SwiftUI
 import SwiftData
 import UserNotifications
+#if canImport(WidgetKit)
+import WidgetKit
+#endif
 #if os(iOS)
 import UIKit
 #elseif os(macOS)
@@ -26,6 +29,7 @@ struct SettingsView: View {
     @State private var showingOnboarding = false
     @State private var showingUserProfile = false
     @State private var showDeleteDataAlert = false
+    @State private var deletionError: String?
     @State private var notificationAuthorizationStatus: UNAuthorizationStatus = .notDetermined
     @State private var isRequestingPermission = false
     @State private var showPermissionAlert = false
@@ -262,9 +266,9 @@ struct SettingsView: View {
                     }
                     
                     // Legal documents
-                    let baseURL = APIClient.shared.baseURL.isEmpty ? "https://your-project.vercel.app" : APIClient.shared.baseURL
+                    let baseURL = APIClient.shared.baseURL
                     
-                    if let privacyURL = URL(string: "\(baseURL)/legal/privacy-policy.html") {
+                    if let privacyURL = URL(string: "https://nathanfennel.com/attunetion/privacy.html") {
                         Link(destination: privacyURL) {
                             HStack {
                                 Text("Privacy Policy")
@@ -314,7 +318,7 @@ struct SettingsView: View {
                             Image(systemName: "trash")
                                 .foregroundColor(.red)
                                 .frame(width: 24)
-                            Text("Delete All Data")
+                            Text("Delete Local Data")
                                 .foregroundColor(.red)
                             Spacer()
                         }
@@ -421,13 +425,21 @@ struct SettingsView: View {
             } message: {
                 Text("To receive reminders, please enable notifications in your device settings.")
             }
-            .alert("Delete All Data", isPresented: $showDeleteDataAlert) {
+            .alert("Delete Local Data", isPresented: $showDeleteDataAlert) {
                 Button("Cancel", role: .cancel) {}
                 Button("Delete", role: .destructive) {
                     deleteAllData()
                 }
             } message: {
-                Text("This will permanently delete all your intentions, themes, preferences, and profile information. This action cannot be undone. Your data is stored locally and synced via iCloud, so it will be removed from all your devices.")
+                Text("This permanently deletes your intentions, custom themes, profile, feedback, and preferences from this device, and clears its widgets and reminders. Bundled themes remain. This cannot be undone and does not delete copies on other devices or information previously sent to the suggestion service.")
+            }
+            .alert("Could Not Delete Data", isPresented: Binding(
+                get: { deletionError != nil },
+                set: { if !$0 { deletionError = nil } }
+            )) {
+                Button("OK", role: .cancel) { deletionError = nil }
+            } message: {
+                Text(deletionError ?? "Please try again.")
             }
         }
     }
@@ -551,21 +563,70 @@ struct SettingsView: View {
     }
     
     private func deleteAllData() {
-        // Delete all intentions
-        let intentionRepo = IntentionRepository(modelContext: modelContext)
-        let allIntentions = intentionRepo.getAll()
-        for intention in allIntentions {
-            try? intentionRepo.delete(intention)
+        do {
+            try LocalUserDataDeletion.delete(from: modelContext)
+
+            // Clear secondary copies only after the database commit succeeds.
+            LocalUserDataDeletion.clearPreferences(
+                standard: .standard,
+                widgets: UserDefaults(suiteName: "group.com.nathanfennel.Attunetion")
+            )
+            let notifications = UNUserNotificationCenter.current()
+            notifications.removeAllPendingNotificationRequests()
+            notifications.removeAllDeliveredNotifications()
+            #if canImport(WidgetKit)
+            WidgetCenter.shared.reloadAllTimelines()
+            #endif
+
+            themeManager.currentTheme = .ocean
+            defaultTheme = nil
+            defaultFont = nil
+            intentionListStyle = .cards
+        } catch {
+            deletionError = "Your local data could not be deleted. Please try again. \(error.localizedDescription)"
         }
-        
-        // Delete user profile
-        let profileRepo = UserProfileRepository(modelContext: modelContext)
-        if let profile = profileRepo.getProfile() {
-            try? profileRepo.delete(profile)
+    }
+
+}
+
+
+/// Keep the deletion in one save so a failure cannot leave a partially erased library.
+@MainActor
+enum LocalUserDataDeletion {
+    static func delete(from sourceContext: ModelContext) throws {
+        // Include pending edits, then isolate failed deletions from the live UI context.
+        if sourceContext.hasChanges { try sourceContext.save() }
+        let context = ModelContext(sourceContext.container)
+        context.autosaveEnabled = false
+        do {
+            let intentions = try context.fetch(FetchDescriptor<Intention>())
+            let profiles = try context.fetch(FetchDescriptor<UserProfile>())
+            let preferences = try context.fetch(FetchDescriptor<UserPreferences>())
+            let feedback = try context.fetch(FetchDescriptor<IntentionFeedback>())
+            let customThemes = try context.fetch(FetchDescriptor<IntentionTheme>(
+                predicate: #Predicate { !$0.isPreset }
+            ))
+
+            for intention in intentions { context.delete(intention) }
+            for profile in profiles { context.delete(profile) }
+            for preference in preferences { context.delete(preference) }
+            for response in feedback { context.delete(response) }
+            for theme in customThemes { context.delete(theme) }
+            try context.save()
+        } catch {
+            context.rollback()
+            throw error
         }
-        
-        // Note: Themes and preferences are not deleted as they may be preset/system settings
-        // Users can delete custom themes individually if needed
+    }
+
+    static func clearPreferences(standard: UserDefaults, widgets: UserDefaults?) {
+        for key in ["hasSeenOnboarding", "intentionListStyle"] {
+            standard.removeObject(forKey: key)
+        }
+        for key in ["currentIntentionData", "currentThemeData", "defaultIntentionFrequency",
+                    "widgetUserState", "widgetThemePreference"] {
+            widgets?.removeObject(forKey: key)
+        }
     }
 }
 

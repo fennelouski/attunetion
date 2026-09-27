@@ -53,7 +53,6 @@ class WidgetDataService {
             return nil
         }
         
-        print("WidgetDataService: Successfully read intention: '\(intentionData.text)'")
         return intentionData
     }
     

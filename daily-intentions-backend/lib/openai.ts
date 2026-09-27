@@ -6,6 +6,8 @@ export const GPT54_MINI = "gpt-5.4-mini";
 
 export const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
+  timeout: 45_000,
+  maxRetries: 0,
 });
 
 /**

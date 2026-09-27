@@ -1,7 +1,8 @@
 /**
  * Simple in-memory rate limiting with sliding window
  * Each request expires after 2 hours
- * For production, use Vercel Edge Config or Upstash Redis
+ * Best-effort instance limit: cold starts and multiple instances have separate stores.
+ * This is not a durable per-account quota or a global provider spending cap.
  */
 
 interface RateLimitEntry {
@@ -16,7 +17,7 @@ const REQUEST_EXPIRY_MS = 2 * 60 * 60 * 1000; // 2 hours per request
 const TIER_1_MAX_REQUESTS = 10; // First 10 requests: use gpt-5.4-mini
 const TIER_2_MAX_REQUESTS = 20; // Next 10 requests: use gpt-5.4-nano for rephrasing
 // TIER_3: After 20 requests, shuffle existing intentions
-const RATE_LIMIT_MAX_REQUESTS = 50; // Hard limit
+const RATE_LIMIT_MAX_REQUESTS = 50; // Per-instance limit
 
 /**
  * Check if request should be rate limited
@@ -30,7 +31,7 @@ export function checkRateLimit(identifier: string): {
   tier: number; // 1 = mini, 2 = nano, 3 = shuffle
 } {
   // Skip rate limiting if disabled
-  if (process.env.RATE_LIMIT_ENABLED !== "true") {
+  if (process.env.RATE_LIMIT_ENABLED === "false") {
     return {
       allowed: true,
       remaining: RATE_LIMIT_MAX_REQUESTS,
@@ -117,18 +118,8 @@ function cleanupExpiredEntries() {
  * Get rate limit identifier from request
  */
 export function getRateLimitIdentifier(request: Request): string {
-  // Use user ID if available, otherwise use IP address
-  const userId = request.headers.get("X-User-Id");
-  if (userId) {
-    return `user:${userId}`;
-  }
-
-  // Fallback to IP address (for Vercel, use CF-Connecting-IP header)
-  const ip = request.headers.get("CF-Connecting-IP") || 
-             request.headers.get("X-Forwarded-For")?.split(",")[0] || 
-             "unknown";
+  // User-provided IDs are not authentication and must not reset a caller's quota.
+  // Vercel supplies X-Forwarded-For; the AWS adapter overwrites it from sourceIp.
+  const ip = request.headers.get("X-Forwarded-For")?.split(",")[0]?.trim() || "unknown";
   return `ip:${ip}`;
 }
-
-
-

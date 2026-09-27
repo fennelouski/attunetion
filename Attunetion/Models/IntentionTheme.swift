@@ -12,15 +12,15 @@ import SwiftUI
 /// Model representing a visual theme for intentions
 @Model
 final class IntentionTheme {
-    var id: UUID
-    var name: String
-    var backgroundColor: String // Hex color string
-    var textColor: String // Hex color string
+    var id: UUID = UUID()
+    var name: String = ""
+    var backgroundColor: String = "#FFFFFF" // Hex color string
+    var textColor: String = "#000000" // Hex color string
     var accentColor: String? // Hex color string, optional
     var fontName: String?
-    var isPreset: Bool
-    var isAIGenerated: Bool
-    var createdAt: Date
+    var isPreset: Bool = false
+    var isAIGenerated: Bool = false
+    var createdAt: Date = Date()
     
     init(
         id: UUID = UUID(),

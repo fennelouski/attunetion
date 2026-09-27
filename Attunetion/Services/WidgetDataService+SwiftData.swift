@@ -94,7 +94,6 @@ extension WidgetDataService {
         }()
         
         if let intention = intention {
-            print("WidgetDataService: ✅ Found current intention: '\(intention.text)' (scope: \(intention.scope.rawValue), date: \(intention.date))")
             let intentionData = IntentionData(
                 id: intention.id,
                 text: intention.text,
@@ -103,7 +102,6 @@ extension WidgetDataService {
                 quote: intention.quote,
                 aiGenerated: intention.aiGenerated
             )
-            print("WidgetDataService: Created IntentionData object: id=\(intentionData.id), text='\(intentionData.text)', scope=\(intentionData.scope)")
             
             // Get theme based on preference
             var themeData: ThemeData? = nil
@@ -174,9 +172,6 @@ extension WidgetDataService {
             print("WidgetDataService: ❌ No current intention found - checking all intentions...")
             let allIntentions = repository.getAll()
             print("WidgetDataService: Total intentions in database: \(allIntentions.count)")
-            for (index, intent) in allIntentions.prefix(5).enumerated() {
-                print("WidgetDataService:   [\(index)] '\(intent.text)' - scope: \(intent.scope.rawValue), date: \(intent.date)")
-            }
             // No current intention - use widget theme preference
             var themeData: ThemeData? = nil
             if let preference = widgetThemePreference {

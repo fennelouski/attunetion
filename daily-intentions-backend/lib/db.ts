@@ -3,7 +3,7 @@
  * In production, replace with Vercel Postgres or similar
  */
 
-import { Intention, CreateIntentionRequest, UpdateIntentionRequest } from "../types";
+import { Intention, CreateIntentionRequest, UpdateIntentionRequest } from "../types/index.js";
 
 // In-memory store (will reset on serverless function restart)
 const intentionsStore = new Map<string, Intention>();

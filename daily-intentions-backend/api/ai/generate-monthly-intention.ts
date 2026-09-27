@@ -1,8 +1,9 @@
-import { generateMonthlyIntention } from "../../lib/openai";
-import { validateApiKey } from "../../lib/auth";
-import { checkRateLimit, getRateLimitIdentifier } from "../../lib/rateLimit";
-import { handleError, ErrorCodes, createErrorResponse } from "../../lib/errors";
-import { GenerateMonthlyIntentionRequest, GenerateMonthlyIntentionResponse } from "../../types";
+import { readJsonObject, validateAIRequest } from "../../lib/validation.js";
+import { generateMonthlyIntention } from "../../lib/openai.js";
+import { validateApiKey } from "../../lib/auth.js";
+import { checkRateLimit, getRateLimitIdentifier } from "../../lib/rateLimit.js";
+import { handleError, ErrorCodes, createErrorResponse } from "../../lib/errors.js";
+import { GenerateMonthlyIntentionRequest, GenerateMonthlyIntentionResponse } from "../../types/index.js";
 
 export default {
   async fetch(request: Request): Promise<Response> {
@@ -34,6 +35,11 @@ export default {
       );
     }
 
+    // Parse request body
+    const rawBody = await readJsonObject(request);
+    validateAIRequest("generate-monthly-intention", rawBody);
+    const body = rawBody as unknown as GenerateMonthlyIntentionRequest;
+
     // Rate limiting
     const identifier = getRateLimitIdentifier(request);
     const rateLimit = checkRateLimit(identifier);
@@ -56,8 +62,7 @@ export default {
       );
     }
 
-    // Parse request body
-    const body = await request.json() as GenerateMonthlyIntentionRequest;
+
     
     if (!body.previousIntentions || !Array.isArray(body.previousIntentions) || body.previousIntentions.length === 0) {
       return Response.json(

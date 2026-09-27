@@ -19,12 +19,11 @@ export default {
   }
 
   try {
-    // In Vercel, public files are served automatically, but we can also serve them via API
-    // For now, redirect to the public file
-    const baseUrl = process.env.VERCEL_URL 
-      ? `https://${process.env.VERCEL_URL}` 
-      : 'http://localhost:3000';
-    
+    if (document === 'privacy-policy') {
+      return Response.redirect('https://nathanfennel.com/attunetion/privacy.html', 302);
+    }
+    const baseUrl = url.origin;
+
     return Response.redirect(`${baseUrl}/legal/${fileName}`, 302);
   } catch (error) {
     return new Response("Error serving document", { status: 500 });

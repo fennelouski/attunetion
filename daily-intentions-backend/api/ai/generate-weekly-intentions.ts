@@ -1,11 +1,12 @@
-import { validateApiKey } from "../../lib/auth";
-import { checkRateLimit, getRateLimitIdentifier } from "../../lib/rateLimit";
-import { handleError, ErrorCodes, createErrorResponse } from "../../lib/errors";
+import { readJsonObject, validateAIRequest } from "../../lib/validation.js";
+import { validateApiKey } from "../../lib/auth.js";
+import { checkRateLimit, getRateLimitIdentifier } from "../../lib/rateLimit.js";
+import { handleError, ErrorCodes, createErrorResponse } from "../../lib/errors.js";
 import {
   createGpt54JsonCompletion,
   GPT54_MINI,
   GPT54_NANO,
-} from "../../lib/openai";
+} from "../../lib/openai.js";
 
 interface GenerateWeeklyIntentionsRequest {
   userInfo: string;
@@ -59,6 +60,11 @@ export default {
       );
     }
 
+    // Parse request body
+    const rawBody = await readJsonObject(request);
+    validateAIRequest("generate-weekly-intentions", rawBody);
+    const body = rawBody as unknown as GenerateWeeklyIntentionsRequest;
+
     // Rate limiting
     const identifier = getRateLimitIdentifier(request);
     const rateLimit = checkRateLimit(identifier);
@@ -92,8 +98,7 @@ export default {
       );
     }
 
-    // Parse request body
-    const body = await request.json() as GenerateWeeklyIntentionsRequest;
+
     
     if (!body.userInfo || typeof body.userInfo !== "string") {
       return Response.json(
@@ -126,16 +131,16 @@ export default {
     
     // Tier 3: Shuffle existing intentions (no API call)
     if (tier === 3) {
-      return handleShuffleMode(body, weekStart, weekEnd, rateLimit);
+      return await handleShuffleMode(body, weekStart, weekEnd, rateLimit);
     }
     
     // Tier 2: Use nano model for rephrasing
     if (tier === 2) {
-      return handleNanoMode(body, weekStart, weekEnd, rateLimit);
+      return await handleNanoMode(body, weekStart, weekEnd, rateLimit);
     }
     
     // Tier 1: Use mini model (default)
-    return handleMiniMode(body, weekStart, weekEnd, rateLimit);
+    return await handleMiniMode(body, weekStart, weekEnd, rateLimit);
   } catch (error) {
     return handleError(error);
   }
@@ -222,7 +227,7 @@ async function handleNanoMode(
 ): Promise<Response> {
   if (!body.previousIntentions || body.previousIntentions.length === 0) {
     // Fallback to shuffle if no previous intentions
-    return handleShuffleMode(body, weekStart, weekEnd, rateLimit);
+    return await handleShuffleMode(body, weekStart, weekEnd, rateLimit);
   }
   
   const systemPrompt = `You are a personal growth advisor. Rephrase the given intentions to make them fresh and relevant for a new week. Remember: intentions are about HOW you want to be or show up, not specific measurable goals. Focus on being/doing rather than achieving/completing. Return ONLY a valid JSON object with this structure:
@@ -256,7 +261,7 @@ async function handleShuffleMode(
   weekEnd: Date,
   rateLimit: { remaining: number; resetAt: number; tier: number }
 ): Promise<Response> {
-  // Shuffle existing intentions to create illusion of new content
+  // Reuse existing intentions; the response explicitly identifies shuffle mode.
   if (!body.previousIntentions || body.previousIntentions.length < 9) {
     // Not enough intentions to shuffle, return error
     return Response.json(
@@ -336,7 +341,7 @@ function processAIResponse(
 
     // Validate each intention
     for (const intention of result.intentions) {
-      if (!intention.date || !intention.text || !intention.scope) {
+      if (!intention || typeof intention.text !== "string" || !intention.text.trim() || intention.text.length > 2000 || typeof intention.date !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(intention.date) || Number.isNaN(Date.parse(intention.date)) || new Date(intention.date).toISOString().slice(0, 10) !== intention.date) {
         throw new Error("Invalid intention structure: missing required fields");
       }
       if (!["day", "week", "month"].includes(intention.scope)) {
@@ -357,6 +362,16 @@ function processAIResponse(
     }
     if (monthlyCount !== 1) {
       throw new Error(`Expected 1 monthly intention, got ${monthlyCount}`);
+    }
+
+    const expectedDays = Array.from({ length: 7 }, (_, index) => {
+      const day = new Date(weekStartDate);
+      day.setUTCDate(day.getUTCDate() + index);
+      return day.toISOString().slice(0, 10);
+    });
+    const actualDays = result.intentions.filter((i: WeeklyIntention) => i.scope === "day").map((i: WeeklyIntention) => i.date);
+    if (new Set(actualDays).size !== 7 || !expectedDays.every(day => actualDays.includes(day))) {
+      throw new Error("Invalid daily intention dates");
     }
 
     const apiResponse: GenerateWeeklyIntentionsResponse = {

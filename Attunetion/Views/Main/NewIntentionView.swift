@@ -28,6 +28,7 @@ struct NewIntentionView: View {
     @State private var showingValidationAlert = false
     @State private var validationMessage = ""
     @State private var isGeneratingAITheme = false
+    @State private var showingAIConsent = false
     @State private var showingGuide = false
     #if os(iOS)
     @FocusState private var isTextEditorFocused: Bool
@@ -272,6 +273,17 @@ struct NewIntentionView: View {
                     .disabled(intentionText.trimmingCharacters(in: .whitespacesAndNewlines).count < 3)
                 }
             }
+            .sheet(isPresented: $showingAIConsent) {
+                LegalConsentView(onAccept: {
+                    do {
+                        try ConsentManager.shared.acceptTerms(modelContext: modelContext)
+                        Task { await generateAITheme() }
+                    } catch {
+                        validationMessage = error.localizedDescription
+                        showingValidationAlert = true
+                    }
+                }, onDecline: {})
+            }
             .alert("Validation Error", isPresented: $showingValidationAlert) {
                 Button("OK", role: .cancel) { }
             } message: {
@@ -338,10 +350,15 @@ struct NewIntentionView: View {
     
     private func generateAITheme() async {
         guard !intentionText.isEmpty else { return }
+        guard ConsentManager.shared.hasAcceptedTerms(modelContext: modelContext) else {
+            showingAIConsent = true
+            return
+        }
         isGeneratingAITheme = true
         
         do {
-            let aiTheme = try await APIClient.shared.generateTheme(intentionText: intentionText)
+            let aiTheme = try await APIClient.shared.generateTheme(intentionText: intentionText, modelContext: modelContext)
+            try ConsentManager.shared.requireConsent(modelContext: modelContext)
             
             // Convert AI theme to IntentionTheme and save to repository
             let theme = IntentionTheme(
@@ -355,17 +372,11 @@ struct NewIntentionView: View {
             
             // Save theme to repository
             let themeRepo = ThemeRepository(modelContext: modelContext)
-            do {
-                try themeRepo.create(theme)
-                selectedTheme = theme
-            } catch {
-                // If save fails, still use the theme (it just won't persist)
-                selectedTheme = theme
-                print("Warning: Failed to save AI theme to repository: \(error)")
-            }
+            try themeRepo.create(theme)
+            selectedTheme = theme
         } catch APIClient.APIError.noBaseURL {
             // Backend not configured - show helpful message
-            validationMessage = "AI theme generation is not available. Backend API URL needs to be configured."
+            validationMessage = "AI themes are currently unavailable. You can still choose a theme on your device."
             showingValidationAlert = true
         } catch APIClient.APIError.rateLimitExceeded(let retryAfter) {
             if let retryAfter = retryAfter {

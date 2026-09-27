@@ -93,7 +93,6 @@ class WidgetDataService {
     
     /// Update widget data with intention and theme data (called from main app)
     func updateWidgetData(intentionData: IntentionData?, themeData: ThemeData?) {
-        print("WidgetDataService: updateWidgetData called - intentionData: \(intentionData != nil ? "'\(intentionData!.text)'" : "nil"), themeData: \(themeData != nil ? "present" : "nil")")
         
         guard let userDefaults = UserDefaults(suiteName: appGroupIdentifier) else {
             print("WidgetDataService: ❌ Failed to access App Group UserDefaults with identifier: \(appGroupIdentifier)")
@@ -101,8 +100,6 @@ class WidgetDataService {
             print("WidgetDataService: App Group identifier: \(appGroupIdentifier)")
             
             // Try to diagnose the issue
-            let standardDefaults = UserDefaults.standard
-            print("WidgetDataService: Standard UserDefaults accessible: \(standardDefaults != nil)")
             
             return
         }
@@ -113,7 +110,6 @@ class WidgetDataService {
             do {
                 let encoded = try JSONEncoder().encode(intentionData)
                 userDefaults.set(encoded, forKey: intentionDataKey)
-                print("WidgetDataService: ✅ Saved intention data to UserDefaults: '\(intentionData.text)' (key: \(intentionDataKey))")
                 
                 // Verify it was saved
                 if let verifyData = userDefaults.data(forKey: intentionDataKey) {

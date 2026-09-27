@@ -11,16 +11,16 @@ import SwiftData
 /// Model representing user profile information for AI-generated intentions
 @Model
 final class UserProfile {
-    var id: UUID
-    var userInfo: String // Free-form text about the user
-    var autoGenerateEnabled: Bool // Whether to auto-generate intentions
+    var id: UUID = UUID()
+    var userInfo: String = "" // Free-form text about the user
+    var autoGenerateEnabled: Bool = false // Whether to auto-generate intentions
     var lastGeneratedWeekStart: Date? // Start date of last generated week
-    var totalGenerations: Int // Total number of generations requested
-    var totalFeedbackGiven: Int // Total number of feedback submissions
-    var hasAcceptedTerms: Bool // Whether user has accepted ToS and EULA for suggestion features
+    var totalGenerations: Int = 0 // Total number of generations requested
+    var totalFeedbackGiven: Int = 0 // Total number of feedback submissions
+    var hasAcceptedTerms: Bool = false // Whether user has accepted ToS and EULA for suggestion features
     var termsAcceptedDate: Date? // Date when terms were accepted
-    var createdAt: Date
-    var updatedAt: Date
+    var createdAt: Date = Date()
+    var updatedAt: Date = Date()
 
     init(
         id: UUID = UUID(),
@@ -46,4 +46,3 @@ final class UserProfile {
         self.updatedAt = updatedAt
     }
 }
-

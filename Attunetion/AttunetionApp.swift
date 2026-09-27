@@ -25,10 +25,13 @@ struct AttunetionApp: App {
             IntentionFeedback.self,
         ])
         
-        // Configure for CloudKit sync
+        // Keep the existing app-private store when enabling the widget app group.
+        // Automatic CloudKit sync requires a registered container in the signed
+        // entitlements; the current profile does not contain one yet.
         let modelConfiguration = ModelConfiguration(
             schema: schema,
             isStoredInMemoryOnly: false,
+            groupContainer: .none,
             cloudKitDatabase: .automatic
         )
 
@@ -49,6 +52,7 @@ struct AttunetionApp: App {
     }()
     
     init() {
+        NotificationHandler.shared.setModelContext(sharedModelContainer.mainContext)
         // Set up notification delegate
         UNUserNotificationCenter.current().delegate = NotificationHandler.shared
         
@@ -103,9 +107,6 @@ struct AttunetionApp: App {
                     // Only show onboarding if not completed AND no existing intentions
                     showOnboarding = !OnboardingManager.shared.hasCompletedOnboarding && !hasIntentions
                     #endif
-                    
-                    // Set model context on notification handler once app is ready
-                    NotificationHandler.shared.setModelContext(sharedModelContainer.mainContext)
                     
                     // Check backend health on app launch
                     Task { @MainActor in
@@ -187,4 +188,3 @@ struct ContentView: View {
         }
     }
 }
-

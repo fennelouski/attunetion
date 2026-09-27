@@ -32,7 +32,7 @@ struct LegalConsentView: View {
                                 .font(.system(size: 28, weight: .light, design: .default))
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
 
-                            Text("Before using suggestion features, please review and accept our terms")
+                            Text("AI features send text to OpenAI through the Attunetion service. Review what is shared before choosing to continue.")
                                 .font(.system(size: 16, weight: .regular, design: .default))
                                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                                 .lineSpacing(4)
@@ -52,26 +52,26 @@ struct LegalConsentView: View {
 
                             infoRow(
                                 icon: "icloud.fill",
-                                title: "Your Content Stays in iCloud",
-                                description: "All your intentions and preferences are stored locally on your device and synced via iCloud. We don't have access to your iCloud data."
+                                title: "Writing Without AI",
+                                description: "You can write and style intentions on your device without using AI or sending the text to our service."
                             )
 
                             infoRow(
                                 icon: "network",
-                                title: "Third-Party Processing",
-                                description: "When you use suggestion features, we send your profile information to third-party services to generate personalized content. This data is not stored on our servers."
+                                title: "What Is Shared",
+                                description: "AI themes send the intention text you are editing. The generator sends the description you enter. Automatic suggestions send your saved profile and up to ten previous intentions, including their dates and scopes. These requests go to OpenAI through our service."
                             )
 
                             infoRow(
                                 icon: "hand.raised.fill",
                                 title: "You're In Control",
-                                description: "You can disable suggestion features at any time in settings. Your consent can be revoked whenever you choose."
+                                description: "Choose Stop Sharing with AI in Settings > Suggested Intentions to block future AI requests and turn off automatic suggestions. This does not recall data already sent."
                             )
 
                             infoRow(
                                 icon: "shield.fill",
                                 title: "Your Privacy Matters",
-                                description: "Data shared with third parties is processed according to their privacy policies and is only used to generate your suggestions."
+                                description: "Our service providers may retain requests and technical logs under their policies. Read the Privacy Policy for provider details before sharing personal or sensitive information."
                             )
                         }
                         .padding(.horizontal, 20)
@@ -94,7 +94,7 @@ struct LegalConsentView: View {
 
                         // Consent Statement
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("By tapping \"I Agree\", you acknowledge that you have read and agree to our Terms of Service, End User License Agreement, and Privacy Policy. You consent to sharing your data with third-party services for the purpose of generating personalized suggestions.")
+                            Text("By tapping \"I Agree\", you acknowledge that you have read and agree to our Terms of Service, End User License Agreement, and Privacy Policy. You consent to sending the text described above to OpenAI through the Attunetion service for AI features.")
                                 .font(.system(size: 14, weight: .regular, design: .default))
                                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                                 .lineSpacing(4)
@@ -187,8 +187,11 @@ struct LegalConsentView: View {
 
     @ViewBuilder
     private func legalLink(title: String, document: String) -> some View {
-        let baseURL = APIClient.shared.baseURL.isEmpty ? "https://your-project.vercel.app" : APIClient.shared.baseURL
-        if let url = URL(string: "\(baseURL)/legal/\(document).html") {
+        let baseURL = APIClient.shared.baseURL
+        let address = document == "privacy-policy"
+            ? "https://nathanfennel.com/attunetion/privacy.html"
+            : "\(baseURL)/legal/\(document).html"
+        if let url = URL(string: address) {
             Link(destination: url) {
                 HStack {
                     Text(title)

@@ -1,7 +1,7 @@
-import { validateApiKey, getUserId } from "../../lib/auth";
-import { handleError, ErrorCodes, createErrorResponse } from "../../lib/errors";
-import { getIntentionsByUserId, createIntention } from "../../lib/db";
-import { CreateIntentionRequest } from "../../types";
+import { validateApiKey, getUserId } from "../../lib/auth.js";
+import { handleError, ErrorCodes, createErrorResponse } from "../../lib/errors.js";
+import { getIntentionsByUserId, createIntention } from "../../lib/db.js";
+import { CreateIntentionRequest } from "../../types/index.js";
 
 export default {
   async fetch(request: Request): Promise<Response> {

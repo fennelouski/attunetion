@@ -1,4 +1,5 @@
-import { ApiError } from "../types";
+import { RequestValidationError } from "./validation.js";
+import { ApiError } from "../types/index.js";
 
 /**
  * Create a standardized API error response
@@ -34,7 +35,11 @@ export const ErrorCodes = {
  * Handle errors and return appropriate response
  */
 export function handleError(error: unknown): Response {
-  console.error("API Error:", error);
+  if (error instanceof RequestValidationError) {
+    return Response.json(createErrorResponse(ErrorCodes.VALIDATION_ERROR, error.message, error.status), { status: error.status });
+  }
+  // Do not log personal intention/profile text or provider request bodies.
+  console.error("API request failed", { kind: error instanceof Error ? error.name : "Unknown" });
 
   if (error instanceof Error) {
     // OpenAI API errors
@@ -49,17 +54,7 @@ export function handleError(error: unknown): Response {
       );
     }
 
-    // Validation errors
-    if (error.message.includes("Invalid") || error.message.includes("Missing")) {
-      return Response.json(
-        createErrorResponse(
-          ErrorCodes.VALIDATION_ERROR,
-          error.message,
-          400
-        ),
-        { status: 400 }
-      );
-    }
+
   }
 
   // Default internal error

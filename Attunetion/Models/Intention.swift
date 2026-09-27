@@ -18,16 +18,16 @@ enum IntentionScope: String, Codable, CaseIterable, Hashable {
 /// Model representing a user's intention for a specific time period
 @Model
 final class Intention {
-    var id: UUID
-    var text: String
-    var scope: IntentionScope
-    var date: Date
-    var createdAt: Date
-    var updatedAt: Date
+    var id: UUID = UUID()
+    var text: String = ""
+    var scope: IntentionScope = IntentionScope.day
+    var date: Date = Date()
+    var createdAt: Date = Date()
+    var updatedAt: Date = Date()
     var themeId: UUID?
     var customFont: String?
-    var aiGenerated: Bool
-    var aiRephrased: Bool
+    var aiGenerated: Bool = false
+    var aiRephrased: Bool = false
     var quote: String?
     
     init(
@@ -56,4 +56,3 @@ final class Intention {
         self.quote = quote
     }
 }
-

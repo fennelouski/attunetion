@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftData
 
 /// API client for Attunetion backend
 @MainActor
@@ -37,11 +38,11 @@ class APIClient {
     
     private let session: URLSession
     
-    private init() {
-        let configuration = URLSessionConfiguration.default
+    init(session: URLSession? = nil) {
+        let configuration = URLSessionConfiguration.ephemeral
         configuration.timeoutIntervalForRequest = 30
         configuration.timeoutIntervalForResource = 60
-        self.session = URLSession(configuration: configuration)
+        self.session = session ?? URLSession(configuration: configuration)
     }
     
     // MARK: - API Errors
@@ -61,7 +62,7 @@ class APIClient {
             case .invalidURL:
                 return "Invalid API URL"
             case .noBaseURL:
-                return "Backend API URL not configured. Please set APIBaseURL in UserDefaults or update APIClient.swift"
+                return "The suggestion service is currently unavailable. Please try again later."
             case .networkError(let error):
                 return "Network error: \(error.localizedDescription)"
             case .invalidResponse:
@@ -81,23 +82,18 @@ class APIClient {
         }
     }
 
-    // MARK: - Consent Checking
-
-    /// Check if user has accepted terms for using AI features
-    /// This should be called before making any AI API requests
-    func checkTermsAcceptance(modelContext: Any) throws {
-        // Import SwiftData here would cause circular dependencies
-        // So we expect the caller to check consent before calling AI endpoints
-        // This is a safety check that can be implemented at the call site
-    }
-    
     // MARK: - Request Helpers
     
     private func makeRequest<T: Decodable>(
         endpoint: String,
         method: String = "POST",
-        body: Encodable? = nil
+        body: Encodable? = nil,
+        modelContext: ModelContext? = nil
     ) async throws -> T {
+        if endpoint.hasPrefix("ai/") {
+            guard let modelContext else { throw ConsentError.termsNotAccepted }
+            try ConsentManager.shared.requireConsent(modelContext: modelContext)
+        }
         guard !baseURL.isEmpty else {
             throw APIError.noBaseURL
         }
@@ -123,6 +119,9 @@ class APIClient {
         
         do {
             let (data, response) = try await session.data(for: request)
+            if let modelContext {
+                try ConsentManager.shared.requireConsent(modelContext: modelContext)
+            }
             
             guard let httpResponse = response as? HTTPURLResponse else {
                 throw APIError.invalidResponse
@@ -150,6 +149,8 @@ class APIClient {
             let decoder = JSONDecoder()
             return try decoder.decode(T.self, from: data)
             
+        } catch let error as ConsentError {
+            throw error
         } catch let error as APIError {
             throw error
         } catch {
@@ -160,7 +161,7 @@ class APIClient {
     // MARK: - AI Endpoints
     
     /// Generate a theme for an intention
-    func generateTheme(intentionText: String) async throws -> AITheme {
+    func generateTheme(intentionText: String, modelContext: ModelContext) async throws -> AITheme {
         struct Request: Encodable {
             let intentionText: String
         }
@@ -171,14 +172,15 @@ class APIClient {
         
         let response: Response = try await makeRequest(
             endpoint: "ai/generate-theme",
-            body: Request(intentionText: intentionText)
+            body: Request(intentionText: intentionText),
+            modelContext: modelContext
         )
         
         return response.theme
     }
     
     /// Generate a quote for an intention
-    func generateQuote(intentionText: String) async throws -> AIQuote {
+    func generateQuote(intentionText: String, modelContext: ModelContext) async throws -> AIQuote {
         struct Request: Encodable {
             let intentionText: String
         }
@@ -191,7 +193,8 @@ class APIClient {
         
         let response: Response = try await makeRequest(
             endpoint: "ai/generate-quote",
-            body: Request(intentionText: intentionText)
+            body: Request(intentionText: intentionText),
+            modelContext: modelContext
         )
         
         return AIQuote(
@@ -202,7 +205,7 @@ class APIClient {
     }
     
     /// Rephrase an intention
-    func rephraseIntention(intentionText: String, previousPhrases: [String] = []) async throws -> String {
+    func rephraseIntention(intentionText: String, previousPhrases: [String] = [], modelContext: ModelContext) async throws -> String {
         struct Request: Encodable {
             let intentionText: String
             let previousPhrases: [String]?
@@ -215,14 +218,15 @@ class APIClient {
         
         let response: Response = try await makeRequest(
             endpoint: "ai/rephrase-intention",
-            body: Request(intentionText: intentionText, previousPhrases: previousPhrases.isEmpty ? nil : previousPhrases)
+            body: Request(intentionText: intentionText, previousPhrases: previousPhrases.isEmpty ? nil : previousPhrases),
+            modelContext: modelContext
         )
         
         return response.rephrasedText
     }
     
     /// Generate a monthly intention based on previous intentions
-    func generateMonthlyIntention(previousIntentions: [PreviousIntention]) async throws -> String {
+    func generateMonthlyIntention(previousIntentions: [PreviousIntention], modelContext: ModelContext) async throws -> String {
         struct Request: Encodable {
             let previousIntentions: [PreviousIntention]
         }
@@ -234,7 +238,8 @@ class APIClient {
         
         let response: Response = try await makeRequest(
             endpoint: "ai/generate-monthly-intention",
-            body: Request(previousIntentions: previousIntentions)
+            body: Request(previousIntentions: previousIntentions),
+            modelContext: modelContext
         )
         
         return response.intention
@@ -261,7 +266,8 @@ class APIClient {
     func generateWeeklyIntentions(
         userInfo: String,
         weekStartDate: Date,
-        previousIntentions: [PreviousIntentionForGeneration] = []
+        previousIntentions: [PreviousIntentionForGeneration] = [],
+        modelContext: ModelContext
     ) async throws -> WeeklyIntentionsResponse {
         struct Request: Encodable {
             let userInfo: String
@@ -271,6 +277,7 @@ class APIClient {
         
         let dateFormatter = ISO8601DateFormatter()
         dateFormatter.formatOptions = [.withFullDate]
+        dateFormatter.timeZone = .current
         
         let response: WeeklyIntentionsResponse = try await makeRequest(
             endpoint: "ai/generate-weekly-intentions",
@@ -278,7 +285,8 @@ class APIClient {
                 userInfo: userInfo,
                 weekStartDate: dateFormatter.string(from: weekStartDate),
                 previousIntentions: previousIntentions.isEmpty ? nil : previousIntentions
-            )
+            ),
+            modelContext: modelContext
         )
         
         return response

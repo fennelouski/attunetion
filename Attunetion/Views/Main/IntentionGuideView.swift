@@ -902,7 +902,7 @@ struct AnimatedWeeklyIcon: View {
                 tertiaryColor
             )
             .font(.system(size: 64, weight: .ultraLight))
-            .symbolEffect(.pulse, options: .repeat(2).speed(animationSpeedManager.currentSpeed.symbolEffectSpeed(for: 0.8)), value: isPulsing)
+            .symbolEffect(.pulse, options: .repeat(2).speed(animationSpeedManager.symbolEffectSpeed(for: 0.8)), value: isPulsing)
             .frame(width: 64, height: 64) // Fixed size to prevent content shift
             .id(iconIndex) // Force view update on icon change
             .onAppear {
@@ -957,7 +957,7 @@ struct AnimatedDailyIcon: View {
                 tertiaryColor
             )
             .font(.system(size: 64, weight: .ultraLight))
-            .symbolEffect(.pulse, options: .repeat(2).speed(animationSpeedManager.currentSpeed.symbolEffectSpeed(for: 0.8)), value: isPulsing)
+            .symbolEffect(.pulse, options: .repeat(2).speed(animationSpeedManager.symbolEffectSpeed(for: 0.8)), value: isPulsing)
             .frame(width: 64, height: 64) // Fixed size to prevent content shift
             .id(iconIndex) // Force view update on icon change
             .onAppear {
@@ -1016,7 +1016,7 @@ struct AnimatedCalendarIcon: View {
                 tertiaryColor
             )
             .font(.system(size: 64, weight: .ultraLight))
-            .symbolEffect(.pulse, options: .repeat(2).speed(animationSpeedManager.currentSpeed.symbolEffectSpeed(for: 0.8)), value: isPulsing)
+            .symbolEffect(.pulse, options: .repeat(2).speed(animationSpeedManager.symbolEffectSpeed(for: 0.8)), value: isPulsing)
             .frame(width: 64, height: 64) // Fixed size to prevent content shift
             .id(iconIndex) // Force view update on icon change
             .onAppear {
@@ -1071,7 +1071,7 @@ struct AnimatedLightbulbIcon: View {
                 tertiaryColor
             )
             .font(.system(size: 64, weight: .ultraLight))
-            .symbolEffect(.pulse, options: .repeat(2).speed(animationSpeedManager.currentSpeed.symbolEffectSpeed(for: 0.8)), value: isPulsing)
+            .symbolEffect(.pulse, options: .repeat(2).speed(animationSpeedManager.symbolEffectSpeed(for: 0.8)), value: isPulsing)
             .frame(width: 64, height: 64) // Fixed size to prevent content shift
             .id(iconIndex) // Force view update on icon change
             .onAppear {
@@ -1093,6 +1093,7 @@ struct AnimatedLightbulbIcon: View {
 }
 
 struct QuickIdeasSection: View {
+    @ObservedObject private var animationSpeedManager = AnimationSpeedManager.shared
     @ObservedObject var themeManager: AppThemeManager
     let colorScheme: ColorScheme
     let scope: IntentionScope
@@ -1266,6 +1267,7 @@ struct QuickIdeasSection: View {
 }
 
 struct InteractiveExampleCard: View {
+    @ObservedObject private var animationSpeedManager = AnimationSpeedManager.shared
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var themeManager: AppThemeManager
     let title: String
@@ -1679,15 +1681,17 @@ struct IntentionSummaryCard: View {
 
 struct AIIntentionGeneratorView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.colorScheme) var colorScheme
     
     let onComplete: (String, String, String) -> Void
     
     @State private var userInfo: String = ""
     @State private var isGenerating = false
-    @State private var generatedMonthly: String = ""
-    @State private var generatedWeekly: String = ""
-    @State private var generatedDaily: String = ""
+    @State private var showingConsent = false
+    @State private var showingError = false
+    @State private var errorMessage = ""
+    @State private var generationTask: Task<Void, Never>?
     @ObservedObject var themeManager: AppThemeManager
     
     var body: some View {
@@ -1750,6 +1754,23 @@ struct AIIntentionGeneratorView: View {
                     .padding(40)
                 }
             }
+            .sheet(isPresented: $showingConsent) {
+                LegalConsentView(onAccept: {
+                    do {
+                        try ConsentManager.shared.acceptTerms(modelContext: modelContext)
+                        generateIntentions()
+                    } catch {
+                        errorMessage = error.localizedDescription
+                        showingError = true
+                    }
+                }, onDecline: {})
+            }
+            .alert("Could Not Generate Intentions", isPresented: $showingError) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text(errorMessage)
+            }
+            .onDisappear { generationTask?.cancel() }
             .navigationTitle(String(localized: "AI Generator"))
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
@@ -1766,38 +1787,34 @@ struct AIIntentionGeneratorView: View {
     }
     
     private func generateIntentions() {
+        guard !isGenerating else { return }
+        guard ConsentManager.shared.hasAcceptedTerms(modelContext: modelContext) else {
+            showingConsent = true
+            return
+        }
         isGenerating = true
-        
-        // TODO: Integrate with actual AI API
-        // For now, create placeholder intentions based on user input
-        Task {
-            try? await Task.sleep(nanoseconds: 1_500_000_000) // Simulate API call
-            
-            await MainActor.run {
-                // Simple placeholder generation
-                let keywords = userInfo.lowercased()
-                
-                if keywords.contains("health") || keywords.contains("fitness") || keywords.contains("wellness") {
-                    generatedMonthly = "Prioritize my physical and mental well-being"
-                    generatedWeekly = "Make time for regular exercise and rest"
-                    generatedDaily = "Take care of my body and mind"
-                } else if keywords.contains("career") || keywords.contains("work") || keywords.contains("professional") {
-                    generatedMonthly = "Focus on professional growth and development"
-                    generatedWeekly = "Show up fully for my work"
-                    generatedDaily = "Work with intention and purpose"
-                } else if keywords.contains("relationship") || keywords.contains("family") || keywords.contains("friend") {
-                    generatedMonthly = "Nurture meaningful relationships"
-                    generatedWeekly = "Connect with friends and family"
-                    generatedDaily = "Show appreciation to someone I care about"
-                } else {
-                    generatedMonthly = "Focus on personal growth and development"
-                    generatedWeekly = "Make time for what matters most"
-                    generatedDaily = "Be intentional with my actions"
+        generationTask = Task { @MainActor in
+            defer { isGenerating = false }
+            do {
+                let response = try await APIClient.shared.generateWeeklyIntentions(
+                    userInfo: userInfo.trimmingCharacters(in: .whitespacesAndNewlines),
+                    weekStartDate: Date(),
+                    modelContext: modelContext
+                )
+                try Task.checkCancellation()
+                try ConsentManager.shared.requireConsent(modelContext: modelContext)
+                guard let month = response.intentions.first(where: { $0.scope == "month" }),
+                      let week = response.intentions.first(where: { $0.scope == "week" }),
+                      let day = response.intentions.first(where: { $0.scope == "day" }),
+                      [month.text, week.text, day.text].allSatisfy({ !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }) else {
+                    throw APIClient.APIError.invalidResponse
                 }
-                
-                isGenerating = false
-                onComplete(generatedMonthly, generatedWeekly, generatedDaily)
+                onComplete(month.text, week.text, day.text)
                 dismiss()
+            } catch {
+                guard !Task.isCancelled else { return }
+                errorMessage = error.localizedDescription
+                showingError = true
             }
         }
     }

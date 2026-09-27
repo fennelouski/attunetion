@@ -63,7 +63,7 @@ struct AboutView: View {
                                 legalLink(title: String(localized: "End User License Agreement"), document: "eula")
                             }
 
-                            Text(String(localized: "All your content stays in iCloud and is synced across your devices. When you use suggestion features, we may share data with third-party services with your consent."))
+                            Text(String(localized: "Your intentions and preferences are saved on this device. iCloud sync is not configured in this release. When you use suggestion features, we may share data with third-party services with your consent."))
                                 .font(.system(size: 14, weight: .regular, design: .default))
                                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                                 .lineSpacing(4)
@@ -107,8 +107,11 @@ struct AboutView: View {
 
     @ViewBuilder
     private func legalLink(title: String, document: String) -> some View {
-        let baseURL = APIClient.shared.baseURL.isEmpty ? "https://your-project.vercel.app" : APIClient.shared.baseURL
-        if let url = URL(string: "\(baseURL)/legal/\(document).html") {
+        let baseURL = APIClient.shared.baseURL
+        let address = document == "privacy-policy"
+            ? "https://nathanfennel.com/attunetion/privacy.html"
+            : "\(baseURL)/legal/\(document).html"
+        if let url = URL(string: address) {
             Link(destination: url) {
                 HStack {
                     Text(title)

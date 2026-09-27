@@ -1,12 +1,12 @@
-import { validateApiKey, getUserId } from "../../lib/auth";
-import { handleError, ErrorCodes, createErrorResponse } from "../../lib/errors";
+import { validateApiKey, getUserId } from "../../lib/auth.js";
+import { handleError, ErrorCodes, createErrorResponse } from "../../lib/errors.js";
 import {
   getIntentionById,
   updateIntention,
   deleteIntention,
   belongsToUser,
-} from "../../lib/db";
-import { UpdateIntentionRequest } from "../../types";
+} from "../../lib/db.js";
+import { UpdateIntentionRequest } from "../../types/index.js";
 
 export default {
   async fetch(request: Request): Promise<Response> {
