@@ -22,6 +22,7 @@ struct FirstIntentionPage: View {
     @State private var intentionText = ""
     @State private var selectedScope: IntentionScope = .day
     @State private var showingSuggestions = true
+    @State private var saveError: String?
     
     private let suggestions = Array(ExampleIntention.examples.prefix(3))
     
@@ -116,6 +117,13 @@ struct FirstIntentionPage: View {
                 .frame(width: geometry.size.width, height: geometry.size.height)
             }
         }
+        .alert("Could Not Save Intention", isPresented: Binding(
+            get: { saveError != nil }, set: { if !$0 { saveError = nil } }
+        )) {
+            Button("OK", role: .cancel) { saveError = nil }
+        } message: {
+            Text(saveError ?? "Please try again.")
+        }
     }
     
     func createFirstIntention() {
@@ -145,12 +153,12 @@ struct FirstIntentionPage: View {
                 }
                 #endif
             } catch {
-                print("Error creating first intention: \(error)")
-                // Continue with onboarding even if intention creation fails
+                saveError = error.localizedDescription
+                return
             }
         }
         
-        // Always complete onboarding, even if no intention was created
+        // An empty entry is an intentional skip; a failed save keeps the draft visible.
         OnboardingManager.shared.completeOnboarding()
         onComplete()
     }
