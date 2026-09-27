@@ -88,7 +88,7 @@ struct DeletionChecks {
             standard.removePersistentDomain(forName: standardName)
             widgets.removePersistentDomain(forName: widgetName)
         }
-        let standardKeys = ["hasSeenOnboarding", "intentionListStyle"]
+        let standardKeys = ["hasSeenOnboarding", "intentionListStyle", "openNewIntentionFromNotification"]
         let widgetKeys = ["currentIntentionData", "currentThemeData", "defaultIntentionFrequency", "widgetUserState", "widgetThemePreference"]
         for key in standardKeys { standard.set("synthetic preference", forKey: key) }
         for key in widgetKeys { widgets.set("synthetic widget value", forKey: key) }

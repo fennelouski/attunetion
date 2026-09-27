@@ -82,10 +82,8 @@ class NotificationHandler: NSObject, UNUserNotificationCenterDelegate {
             break
             
         case UNNotificationDefaultActionIdentifier:
-            // User tapped notification - open app to new intention screen
-            // Note: Deep linking will be handled by UI team, for now just log
-            print("User tapped notification - should open app to new intention screen")
-            await openApp(toScreen: .newIntention)
+            // Persist until the root view consumes it, including on a cold launch.
+            UserDefaults.standard.set(true, forKey: "openNewIntentionFromNotification")
             
         default:
             break
@@ -178,17 +176,4 @@ class NotificationHandler: NSObject, UNUserNotificationCenterDelegate {
         try? await UNUserNotificationCenter.current().add(request)
     }
     
-    /// Open app to specific screen (placeholder for deep linking)
-    private func openApp(toScreen screen: AppScreen) async {
-        // TODO: Coordinate with UI team for deep linking implementation
-        print("Should navigate to: \(screen)")
-    }
 }
-
-/// App screens for deep linking (to be coordinated with UI team)
-enum AppScreen {
-    case newIntention
-    case settings
-    case intentionsList
-}
-

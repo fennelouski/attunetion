@@ -21,8 +21,31 @@ class IntentionRepository {
     
     /// Create a new intention
     func create(_ intention: Intention) throws {
-        modelContext.insert(intention)
-        try modelContext.save()
+        try create([intention])
+    }
+
+    /// Commit the whole guide together; a failed save must not leave a partial set.
+    func create(_ intentions: [Intention]) throws {
+        guard !intentions.isEmpty else { return }
+        if modelContext.hasChanges { try modelContext.save() }
+        let transaction = ModelContext(modelContext.container)
+        transaction.autosaveEnabled = false
+        var existing = try transaction.fetch(FetchDescriptor<Intention>())
+        for intention in intentions {
+            let component: Calendar.Component = intention.scope == .day ? .day : intention.scope == .week ? .weekOfYear : .month
+            if let interval = Calendar.current.dateInterval(of: component, for: intention.date),
+               existing.contains(where: { $0.scope == intention.scope && $0.date >= interval.start && $0.date < interval.end }) {
+                throw IntentionSaveError.alreadyExists(intention.scope)
+            }
+            existing.append(intention)
+        }
+        do {
+            intentions.forEach { transaction.insert($0) }
+            try transaction.save()
+        } catch {
+            transaction.rollback()
+            throw error
+        }
     }
     
     /// Get all intentions
@@ -51,14 +74,8 @@ class IntentionRepository {
     func getIntention(for date: Date, scope: IntentionScope) -> Intention? {
         let calendar = Calendar.current
         
-        // Fetch all intentions for this scope, then filter by date in memory
-        // This avoids Predicate macro limitations with date comparisons
-        let scopePredicate = #Predicate<Intention> { intention in
-            intention.scope == scope
-        }
-        let descriptor = FetchDescriptor<Intention>(predicate: scopePredicate)
-        let allScopeIntentions = (try? modelContext.fetch(descriptor)) ?? []
-        
+        let allScopeIntentions = getIntentions(scope: scope)
+
         // Filter by date range based on scope
         switch scope {
         case .day:
@@ -137,15 +154,9 @@ class IntentionRepository {
     
     /// Get intentions by scope
     func getIntentions(scope: IntentionScope) -> [Intention] {
-        let predicate = #Predicate<Intention> { intention in
-            intention.scope == scope
-        }
-        
-        let descriptor = FetchDescriptor<Intention>(
-            predicate: predicate,
-            sortBy: [SortDescriptor(\.date, order: .reverse)]
-        )
-        return (try? modelContext.fetch(descriptor)) ?? []
+        // SwiftData cannot query this persisted Codable enum reliably.
+        // ponytail: linear scan preserves the store schema; add a primitive scope index if histories become large.
+        return getAll().filter { $0.scope == scope }
     }
     
     /// Get intention by ID
@@ -159,3 +170,14 @@ class IntentionRepository {
     }
 }
 
+
+enum IntentionSaveError: LocalizedError {
+    case alreadyExists(IntentionScope)
+
+    var errorDescription: String? {
+        switch self {
+        case .alreadyExists(let scope):
+            return "An intention already exists for this \(scope.rawValue). Edit it from the home screen, or choose another date."
+        }
+    }
+}

@@ -620,7 +620,7 @@ enum LocalUserDataDeletion {
     }
 
     static func clearPreferences(standard: UserDefaults, widgets: UserDefaults?) {
-        for key in ["hasSeenOnboarding", "intentionListStyle"] {
+        for key in ["hasSeenOnboarding", "intentionListStyle", "openNewIntentionFromNotification"] {
             standard.removeObject(forKey: key)
         }
         for key in ["currentIntentionData", "currentThemeData", "defaultIntentionFrequency",

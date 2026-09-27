@@ -160,6 +160,7 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var themeManager: AppThemeManager
     @State private var pendingURL: URL?
+    @AppStorage("openNewIntentionFromNotification") private var openNewIntentionFromNotification = false
     
     var body: some View {
         #if os(watchOS)
@@ -169,6 +170,8 @@ struct ContentView: View {
             }
         #else
         IntentionsListView(pendingURL: $pendingURL)
+            .onAppear { handleNotificationNavigation() }
+            .onChange(of: openNewIntentionFromNotification) { _, _ in handleNotificationNavigation() }
             .onOpenURL { url in
                 handleURL(url)
             }
@@ -177,14 +180,12 @@ struct ContentView: View {
     
     private func handleURL(_ url: URL) {
         guard url.scheme == "dailyintentions" else { return }
-        
-        if url.host == "new" {
-            // Open new intention view
-            pendingURL = url
-        } else if url.host == "intention" {
-            // Open specific intention (could navigate to detail view)
-            // For now, just open new intention view
-            pendingURL = URL(string: "dailyintentions://new")
-        }
+        pendingURL = url
+    }
+
+    private func handleNotificationNavigation() {
+        guard openNewIntentionFromNotification else { return }
+        pendingURL = URL(string: "dailyintentions://new")
+        openNewIntentionFromNotification = false
     }
 }

@@ -19,6 +19,8 @@ struct IntentionsListView: View {
     @Binding var pendingURL: URL?
     @State private var viewModel: IntentionsViewModel!
     @State private var showingNewIntention = false
+    @State private var navigationPath: [UUID] = []
+    @State private var showingMissingIntention = false
     @State private var showingGuide = false
     @State private var sortOrder: SortOrder = .newestFirst
     @State private var isSearchBarVisible = false
@@ -200,7 +202,7 @@ struct IntentionsListView: View {
     var body: some View {
         Group {
             if viewModel != nil {
-                NavigationStack {
+                NavigationStack(path: $navigationPath) {
                     ZStack {
                         // Custom background
                         AppBackground(themeManager: themeManager)
@@ -471,7 +473,7 @@ struct IntentionsListView: View {
                     .navigationBarTitleDisplayMode(.large)
                     #endif
                     .navigationDestination(for: UUID.self) { id in
-                        if let intention = viewModel.intentions.first(where: { $0.id == id }) {
+                        if let intention = viewModel.intention(byID: id) {
                             IntentionDetailView(intention: intention, viewModel: viewModel)
                         }
                     }
@@ -490,6 +492,7 @@ struct IntentionsListView: View {
                                     }
                                 }) {
                                     Image(systemName: "magnifyingglass")
+                                        .accessibilityLabel("Search Intentions")
                                         .font(.system(size: toolbarButtonFontSize, weight: .medium))
                                         .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                                         .frame(width: toolbarButtonSize, height: toolbarButtonSize)
@@ -507,6 +510,7 @@ struct IntentionsListView: View {
                                     }
                                 }) {
                                     Image(systemName: "magnifyingglass")
+                                        .accessibilityLabel("Search Intentions")
                                         .font(.system(size: toolbarButtonFontSize, weight: .medium))
                                         .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                                         .frame(width: toolbarButtonSize, height: toolbarButtonSize)
@@ -523,6 +527,7 @@ struct IntentionsListView: View {
                                 showingNewIntention = true
                             }) {
                                 Image(systemName: "plus")
+                                    .accessibilityLabel("New Intention")
                                     .font(.system(size: toolbarButtonFontSize, weight: .medium))
                                     .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                                     .frame(width: toolbarButtonSize, height: toolbarButtonSize)
@@ -535,6 +540,7 @@ struct IntentionsListView: View {
                         ToolbarItem(placement: .automatic) {
                             NavigationLink(destination: SettingsView()) {
                                 Image(systemName: "gearshape")
+                                    .accessibilityLabel("Settings")
                                     .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                             }
                             .transaction { transaction in
@@ -563,23 +569,13 @@ struct IntentionsListView: View {
                             }
                         }
                     }
-                    .onChange(of: pendingURL) { oldURL, newURL in
-                        // Handle URL deep link
-                        if newURL != nil {
-                            showingNewIntention = true
-                            pendingURL = nil // Clear after handling
-                        }
+                    .alert("Intention Unavailable", isPresented: $showingMissingIntention) {
+                        Button("OK", role: .cancel) {}
+                    } message: {
+                        Text("This intention may have been deleted. Open another intention or create a new one.")
                     }
-                    .onAppear {
-                        if viewModel == nil {
-                            viewModel = IntentionsViewModel(modelContext: modelContext)
-                        }
-                        // Handle pending URL on appear
-                        if pendingURL != nil {
-                            showingNewIntention = true
-                            pendingURL = nil
-                        }
-                    }
+                    .onChange(of: pendingURL) { _, _ in handlePendingURL() }
+                    .onAppear { handlePendingURL() }
                 }
             } else {
                 ZStack {
@@ -596,6 +592,24 @@ struct IntentionsListView: View {
             if viewModel == nil {
                 viewModel = IntentionsViewModel(modelContext: modelContext)
             }
+        }
+    }
+
+    private func handlePendingURL() {
+        guard let url = pendingURL, let viewModel else { return }
+        pendingURL = nil
+        switch IntentionLink(url: url) {
+        case .new:
+            showingNewIntention = true
+        case .existing(let id):
+            if viewModel.intention(byID: id) != nil {
+                showingNewIntention = false
+                navigationPath = [id]
+            } else {
+                showingMissingIntention = true
+            }
+        case nil:
+            break
         }
     }
 }
@@ -725,4 +739,23 @@ struct ButtonWidthPreferenceKey: PreferenceKey {
     IntentionsListView()
         .modelContainer(container)
         .environmentObject(AppThemeManager())
+}
+
+// Shared route parsing for widget links; malformed links leave navigation unchanged.
+enum IntentionLink: Equatable {
+    case new
+    case existing(UUID)
+
+    init?(url: URL) {
+        guard url.scheme == "dailyintentions", url.user == nil, url.password == nil,
+              url.port == nil, url.query == nil, url.fragment == nil else { return nil }
+        switch url.host {
+        case "new" where url.path.isEmpty || url.path == "/": self = .new
+        case "intention":
+            let parts = url.path.split(separator: "/")
+            guard parts.count == 1, let id = UUID(uuidString: String(parts[0])) else { return nil }
+            self = .existing(id)
+        default: return nil
+        }
+    }
 }

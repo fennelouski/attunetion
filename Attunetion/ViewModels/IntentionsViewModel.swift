@@ -143,6 +143,16 @@ class IntentionsViewModel {
         syncWidgetData(currentIntention: intention)
     }
     
+    func addIntentions(_ intentions: [Intention]) throws {
+        try repository.create(intentions)
+        loadIntentions()
+        syncWidgetData()
+    }
+
+    func intention(byID id: UUID) -> Intention? {
+        repository.getIntention(byId: id)
+    }
+
     func updateIntention(_ intention: Intention) throws {
         try repository.update(intention)
         loadIntentions()

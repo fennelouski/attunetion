@@ -43,6 +43,8 @@ struct IntentionGuideView: View {
     @State private var selectedIntentionPack: IntentionPack? = nil
     @State private var showingAIGenerator = false
     @State private var showingPackPreview: IntentionPack? = nil
+    @State private var saveError: String?
+    @State private var suggestionsWereGenerated = false
     
     // Optional callback when intentions are created through the guide
     var onIntentionsCreated: (() -> Void)? = nil
@@ -121,7 +123,7 @@ struct IntentionGuideView: View {
             ),
             GuideStep(
                 title: String(localized: "You're All Set!"),
-                description: String(localized: "You've created your first intentions! They'll appear on your home screen and help keep you focused. You can always add more or edit existing ones."),
+                description: String(localized: "Your intentions are ready to save. After saving, they will appear on your home screen, where you can edit them anytime."),
                 icon: "checkmark.circle.fill",
                 isComplete: true
             )
@@ -444,11 +446,19 @@ struct IntentionGuideView: View {
                         monthlyIntention = monthly
                         weeklyIntention = weekly
                         dailyIntention = daily
+                        suggestionsWereGenerated = true
                         selectedIntentionPack = nil
                         showingAIGenerator = false
                     },
                     themeManager: themeManager
                 )
+            }
+            .alert("Could Not Save Intentions", isPresented: Binding(
+                get: { saveError != nil }, set: { if !$0 { saveError = nil } }
+            )) {
+                Button("OK", role: .cancel) { saveError = nil }
+            } message: {
+                Text(saveError ?? "Please try again.")
             }
             .sheet(item: $showingPackPreview) { pack in
                 IntentionPackPreviewView(
@@ -461,10 +471,10 @@ struct IntentionGuideView: View {
                     // Animate lightbulb icons with pulse animation
                     // Pulse twice (takes ~1.6 seconds at 0.8 speed), then pause, then change icon
                     // Slowed down by factor of 4: 2.4s * 4 = 9.6s
-                    while currentStep == 0 {
+                    while !Task.isCancelled && currentStep == 0 {
                         // Wait for pulse animation to complete (2 pulses at ~0.8s each = ~1.6s)
                         // Then add a pause before changing
-                        try? await Task.sleep(nanoseconds: 9_600_000_000) // 9.6 seconds total (slowed by 4x)
+                        do { try await Task.sleep(nanoseconds: 9_600_000_000) } catch { return } // 9.6 seconds total (slowed by 4x)
                         if currentStep == 0 {
                             animationSpeedManager.withAnimation(0.3) {
                                 lightbulbIconIndex = (lightbulbIconIndex + 1) % lightbulbIcons.count
@@ -474,8 +484,8 @@ struct IntentionGuideView: View {
                 } else if currentStep == 1 {
                     // Animate calendar icons for monthly step
                     // Slowed down by factor of 4: 2.4s * 4 = 9.6s
-                    while currentStep == 1 {
-                        try? await Task.sleep(nanoseconds: 9_600_000_000) // 9.6 seconds total (slowed by 4x)
+                    while !Task.isCancelled && currentStep == 1 {
+                        do { try await Task.sleep(nanoseconds: 9_600_000_000) } catch { return } // 9.6 seconds total (slowed by 4x)
                         if currentStep == 1 {
                             animationSpeedManager.withAnimation(0.3) {
                                 calendarIconIndex = (calendarIconIndex + 1) % 2
@@ -485,8 +495,8 @@ struct IntentionGuideView: View {
                 } else if currentStep == 2 {
                     // Animate weekly icons (7-based icons)
                     // Slowed down by factor of 4: 2.4s * 4 = 9.6s
-                    while currentStep == 2 {
-                        try? await Task.sleep(nanoseconds: 9_600_000_000) // 9.6 seconds total (slowed by 4x)
+                    while !Task.isCancelled && currentStep == 2 {
+                        do { try await Task.sleep(nanoseconds: 9_600_000_000) } catch { return } // 9.6 seconds total (slowed by 4x)
                         if currentStep == 2 {
                             animationSpeedManager.withAnimation(0.3) {
                                 weeklyIconIndex = (weeklyIconIndex + 1) % weeklyIcons.count
@@ -496,8 +506,8 @@ struct IntentionGuideView: View {
                 } else if currentStep == 3 {
                     // Animate sunrise/sunset icons for daily step
                     // Slowed down by factor of 4: 2.4s * 4 = 9.6s
-                    while currentStep == 3 {
-                        try? await Task.sleep(nanoseconds: 9_600_000_000) // 9.6 seconds total (slowed by 4x)
+                    while !Task.isCancelled && currentStep == 3 {
+                        do { try await Task.sleep(nanoseconds: 9_600_000_000) } catch { return } // 9.6 seconds total (slowed by 4x)
                         if currentStep == 3 {
                             animationSpeedManager.withAnimation(0.3) {
                                 dailyIconIndex = (dailyIconIndex + 1) % 2
@@ -545,97 +555,36 @@ struct IntentionGuideView: View {
     }
     
     private func createAllIntentions() {
-        #if os(iOS)
-        HapticFeedback.success()
-        #endif
-        
         let calendar = Calendar.current
         let today = Date()
-        var createdAnyIntention = false
-        
-        // Create intentions from pack if selected
-        if let pack = selectedIntentionPack {
-            if !pack.monthly.isEmpty {
-                let monthStart = calendar.date(from: calendar.dateComponents([.year, .month], from: today)) ?? today
-                let intention = Intention(
-                    text: pack.monthly,
-                    scope: .month,
-                    date: monthStart,
-                    aiGenerated: false
-                )
-                _ = try? viewModel.addIntention(intention)
-                createdAnyIntention = true
-            }
-            
-            if !pack.weekly.isEmpty {
-                let weekStart = calendar.startOfDay(for: today)
-                let intention = Intention(
-                    text: pack.weekly,
-                    scope: .week,
-                    date: weekStart,
-                    aiGenerated: false
-                )
-                _ = try? viewModel.addIntention(intention)
-                createdAnyIntention = true
-            }
-            
-            if !pack.daily.isEmpty {
-                let intention = Intention(
-                    text: pack.daily,
-                    scope: .day,
-                    date: today,
-                    aiGenerated: false
-                )
-                _ = try? viewModel.addIntention(intention)
-                createdAnyIntention = true
-            }
-        } else {
-            // Create user-entered intentions
-            if !monthlyIntention.isEmpty {
-                let monthStart = calendar.date(from: calendar.dateComponents([.year, .month], from: today)) ?? today
-                let intention = Intention(
-                    text: monthlyIntention.trimmingCharacters(in: .whitespacesAndNewlines),
-                    scope: .month,
-                    date: monthStart,
-                    aiGenerated: false
-                )
-                _ = try? viewModel.addIntention(intention)
-                createdAnyIntention = true
-            }
-            
-            if !weeklyIntention.isEmpty {
-                let weekStart = calendar.startOfDay(for: today)
-                let intention = Intention(
-                    text: weeklyIntention.trimmingCharacters(in: .whitespacesAndNewlines),
-                    scope: .week,
-                    date: weekStart,
-                    aiGenerated: false
-                )
-                _ = try? viewModel.addIntention(intention)
-                createdAnyIntention = true
-            }
-            
-            if !dailyIntention.isEmpty {
-                let intention = Intention(
-                    text: dailyIntention.trimmingCharacters(in: .whitespacesAndNewlines),
-                    scope: .day,
-                    date: today,
-                    aiGenerated: false
-                )
-                _ = try? viewModel.addIntention(intention)
-                createdAnyIntention = true
-            }
+        let entries: [(String, IntentionScope)] = [
+            (selectedIntentionPack?.monthly ?? monthlyIntention, .month),
+            (selectedIntentionPack?.weekly ?? weeklyIntention, .week),
+            (selectedIntentionPack?.daily ?? dailyIntention, .day)
+        ]
+        let intentions = entries.compactMap { text, scope -> Intention? in
+            let text = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard !text.isEmpty else { return nil }
+            let component: Calendar.Component = scope == .month ? .month : scope == .week ? .weekOfYear : .day
+            return Intention(text: text, scope: scope,
+                             date: calendar.dateInterval(of: component, for: today)?.start ?? today,
+                             aiGenerated: selectedIntentionPack == nil && suggestionsWereGenerated)
         }
-        
-        // If intentions were created and we have a callback, call it instead of just dismissing
-        // This allows the parent view (NewIntentionView) to also dismiss
-        if createdAnyIntention, let onIntentionsCreated = onIntentionsCreated {
-            onIntentionsCreated()
-        } else {
-            dismiss()
+        guard !intentions.isEmpty else {
+            saveError = "Enter at least one intention before saving."
+            return
+        }
+        do {
+            try viewModel.addIntentions(intentions)
+            #if os(iOS)
+            HapticFeedback.success()
+            #endif
+            if let onIntentionsCreated { onIntentionsCreated() } else { dismiss() }
+        } catch {
+            saveError = error.localizedDescription
         }
     }
-    
+
     private func bindingForScope(_ scope: IntentionScope) -> Binding<String> {
         switch scope {
         case .month: return $monthlyIntention

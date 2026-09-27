@@ -222,7 +222,7 @@ struct UserProfileView: View {
                         )
                 )
             
-            Text("This information is stored locally on your device and only used when generating suggestions. We don't store it on our servers.")
+            Text("Your profile is saved on this device. If you enable AI suggestions, its text is sent through our service to OpenAI, whose retention rules apply. You can stop future sharing in Suggested Intentions settings.")
                 .font(.caption)
                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                 .padding(.top, 4)
@@ -325,7 +325,7 @@ struct UserProfileView: View {
                     .lineLimit(2...4)
             }
             
-            Text(String(localized: "This information is stored locally on your device and only used when generating suggestions. We don't store it on our servers."))
+            Text(String(localized: "Your profile is saved on this device. If you enable AI suggestions, its text is sent through our service to OpenAI, whose retention rules apply. You can stop future sharing in Suggested Intentions settings."))
                 .font(.caption)
                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                 .padding(.top, 4)
