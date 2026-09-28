@@ -21,25 +21,9 @@ struct OnboardingContainerView: View {
     
     var onComplete: (() -> Void)?
     
-    @State private var showCrossPlatformPage = false
-    
-    // Computed property to determine if cross-platform page should be shown
-    private var shouldShowCrossPlatformPage: Bool {
-        showCrossPlatformPage
-    }
-    
-    // Adjusted current page for indicator (accounts for skipped cross-platform page)
-    private var adjustedCurrentPage: Int {
-        if !shouldShowCrossPlatformPage && currentPage >= 4 {
-            // If we skipped cross-platform page, adjust the indicator
-            return currentPage - 1
-        }
-        return currentPage
-    }
-    
     // Computed property to determine the last page index
     private var lastPageIndex: Int {
-        return 5 // FirstIntentionPage is always the last page
+        return 4 // FirstIntentionPage is always the last page
     }
     
     // Computed property to determine if we're on the first page
@@ -102,19 +86,11 @@ struct OnboardingContainerView: View {
                 .environmentObject(themeManager)
                 .tag(3)
                 
-                // Cross-platform page (shown only if no existing intentions)
-                CrossPlatformPage(
-                    onContinue: nextPage,
-                    onSkip: completeOnboarding
-                )
-                .environmentObject(themeManager)
-                .tag(4)
-                
                 FirstIntentionPage(
                     onComplete: completeOnboarding
                 )
                 .environmentObject(themeManager)
-                .tag(5)
+                .tag(4)
             }
             #if os(iOS) || os(watchOS)
             .tabViewStyle(.page(indexDisplayMode: .never))
@@ -159,14 +135,14 @@ struct OnboardingContainerView: View {
                     Spacer()
                     #if os(macOS)
                     MacOSPageIndicator(
-                        currentPage: adjustedCurrentPage,
-                        pageCount: shouldShowCrossPlatformPage ? 6 : 5,
+                        currentPage: currentPage,
+                        pageCount: 5,
                         themeManager: themeManager
                     )
                     #else
                     OnboardingPageIndicator(
-                        currentPage: adjustedCurrentPage,
-                        pageCount: shouldShowCrossPlatformPage ? 6 : 5,
+                        currentPage: currentPage,
+                        pageCount: 5,
                         themeManager: themeManager
                     )
                     #endif
@@ -180,21 +156,13 @@ struct OnboardingContainerView: View {
             themeManager.userPreferencesRepository = UserPreferencesRepository(modelContext: modelContext)
             themeManager.loadThemePreference()
             
-            // Check if there are existing intentions (indicating data from another device)
-            checkForExistingIntentions()
         }
     }
     
     func nextPage() {
-        var nextPageIndex = currentPage + 1
+        let nextPageIndex = currentPage + 1
         
-        // Skip cross-platform page if we don't want to show it
-        if nextPageIndex == 4 && !shouldShowCrossPlatformPage {
-            nextPageIndex = 5 // Skip to FirstIntentionPage
-        }
-        
-        // Maximum page index is 5 (FirstIntentionPage)
-        if nextPageIndex <= 5 {
+        if nextPageIndex <= lastPageIndex {
             animationSpeedManager.withAnimation(0.3) {
                 currentPage = nextPageIndex
             }
@@ -204,12 +172,7 @@ struct OnboardingContainerView: View {
     }
     
     func previousPage() {
-        var previousPageIndex = currentPage - 1
-        
-        // Skip cross-platform page if we don't want to show it
-        if previousPageIndex == 4 && !shouldShowCrossPlatformPage {
-            previousPageIndex = 3 // Skip back to NotificationPermissionPage
-        }
+        let previousPageIndex = currentPage - 1
         
         // Minimum page index is 0 (WelcomePage)
         if previousPageIndex >= 0 {
@@ -225,26 +188,8 @@ struct OnboardingContainerView: View {
         dismiss()
     }
     
-    /// Check if there are existing intentions in the database
-    /// If there are no intentions, show the cross-platform page (first device)
-    /// If there are intentions, skip it (data has synced from another device)
-    private func checkForExistingIntentions() {
-        let repository = IntentionRepository(modelContext: modelContext)
-        let existingIntentions = repository.getAll()
-        
-        // If there are no intentions, this is likely the first device
-        // Show the cross-platform page to inform user about multi-device sync
-        if existingIntentions.isEmpty {
-            showCrossPlatformPage = true
-        } else {
-            // Intentions exist, likely synced from another device
-            // Skip the cross-platform page
-            showCrossPlatformPage = false
-        }
-    }
 }
 
 #Preview {
     OnboardingContainerView()
 }
-
