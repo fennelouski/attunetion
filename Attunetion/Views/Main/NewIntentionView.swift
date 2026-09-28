@@ -256,11 +256,18 @@ struct NewIntentionView: View {
             #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
+                    #if os(iOS)
+                    Button {
+                        dismiss()
+                    } label: {
+                        Label("Cancel", systemImage: "xmark")
+                    }
+                    .labelStyle(.iconOnly)
+                    #else
                     Button("Cancel") {
                         dismiss()
                     }
-                    .buttonStyle(.bordered)
-                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                    #endif
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {

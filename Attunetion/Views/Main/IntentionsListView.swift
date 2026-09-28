@@ -467,6 +467,8 @@ struct IntentionsListView: View {
                                 #endif
                             }
                         }
+                        .frame(maxWidth: 760)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
                     .navigationTitle(String(localized: "Attunetion"))
                     #if os(iOS)

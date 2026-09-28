@@ -15,6 +15,7 @@ struct AttunetionApp: App {
     // Initialize to true (safe default) - will be set correctly in onAppear
     // This avoids accessing @MainActor OnboardingManager during property initialization
     @State private var showOnboarding = true
+    @State private var onboardingCompletionID = UUID()
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -65,18 +66,21 @@ struct AttunetionApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .id(onboardingCompletionID)
                 .environmentObject(AppThemeManager(modelContext: sharedModelContainer.mainContext))
                 .environmentObject(BackendHealthManager.shared)
                 #if os(watchOS) || os(macOS)
                 .sheet(isPresented: $showOnboarding) {
                     OnboardingContainerView {
                         showOnboarding = false
+                        onboardingCompletionID = UUID()
                     }
                 }
                 #else
                 .fullScreenCover(isPresented: $showOnboarding) {
                     OnboardingContainerView {
                         showOnboarding = false
+                        onboardingCompletionID = UUID()
                     }
                 }
                 #endif
