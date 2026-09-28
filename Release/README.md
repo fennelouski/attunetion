@@ -1,8 +1,8 @@
-# Attunetion 1.0 build 4
+# Attunetion 1.0 build 5
 
 Use `Attunetion.xcodeproj`, scheme `Attunetion`, and source under `Attunetion/`. The separate `Daily Intentions.xcodeproj` is legacy source and is not this release. Registered app identity is `com.nathanfennel.Attunetion`, team `EJLR2RPSV2`, Apple ID `6757886472`.
 
-The release repairs compilation, enforces consent around every AI request, connects the guide's generator to the real service, and allows revocation in Settings. It fixes local data deletion and wires the widget app group while retaining the existing app-private SwiftData store. Models have declaration defaults compatible with future CloudKit configuration. The current signed profile has no CloudKit container. Build 4 removes the onboarding page that falsely promised cross-device sync.
+The release repairs compilation, enforces consent around every AI request, connects the guide's generator to the real service, and allows revocation in Settings. It fixes local data deletion and wires the widget app group while retaining the existing app-private SwiftData store. Models have declaration defaults compatible with future CloudKit configuration. The current signed profile has no CloudKit container. Build 4 removed the onboarding page that falsely promised cross-device sync; build 5 replaces unattributed sample quotes in widget previews with original app copy.
 
 Widget links open the existing intention, notification taps reach the new-intention form, and guided creation commits all entries together with visible errors. Codable-scope queries filter existing records without a storage migration; duplicate periods are rejected. Canceled guide animation tasks exit instead of spinning.
 

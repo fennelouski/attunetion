@@ -122,7 +122,7 @@ struct MockData {
             date: Calendar.current.startOfDay(for: Date()),
             themeId: MockPresetThemes.forest.id,
             aiGenerated: true,
-            quote: "The greatest wealth is health."
+            quote: "Choose a focus, then make space for it."
         ),
         MockIntention(
             text: "Practice gratitude daily",
@@ -149,7 +149,7 @@ struct MockData {
             date: Calendar.current.date(byAdding: .day, value: -2, to: Date()) ?? Date(),
             themeId: MockPresetThemes.ocean.id,
             aiGenerated: true,
-            quote: "Peace comes from within. Do not seek it without."
+            quote: "Pause long enough to notice what matters."
         )
     ]
     
@@ -157,4 +157,3 @@ struct MockData {
         MockPresetThemes.all.first { $0.id == id }
     }
 }
-

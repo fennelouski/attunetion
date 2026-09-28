@@ -67,7 +67,7 @@ struct IntentionData: Codable {
             text: "Be present with family and focus on meaningful connections",
             scope: "day",
             scopeDate: Date(),
-            quote: "The greatest wealth is health.",
+            quote: "Choose a focus, then make space for it.",
             aiGenerated: false
         )
     }
@@ -78,7 +78,7 @@ struct IntentionData: Codable {
             text: "Focus on health and meaningful movement",
             scope: "week",
             scopeDate: Date(),
-            quote: "The greatest wealth is health.",
+            quote: "Small choices can carry a steady intention.",
             aiGenerated: false
         )
     }
@@ -89,7 +89,7 @@ struct IntentionData: Codable {
             text: "Cultivate gratitude and practice mindfulness daily",
             scope: "month",
             scopeDate: Date(),
-            quote: "Gratitude turns what we have into enough.",
+            quote: "Pause long enough to notice what matters.",
             aiGenerated: true
         )
     }
@@ -112,4 +112,3 @@ struct ThemeData: Codable {
         )
     }
 }
-
