@@ -49,6 +49,10 @@ class NotificationManager {
     func scheduleAllNotifications(settings: NotificationSettings) async {
         // Cancel all existing notifications first
         await cancelAllNotifications()
+
+        if settings.frequency != .everyOtherDay {
+            UserDefaults.standard.removeObject(forKey: "everyOtherDayReminderAnchor")
+        }
         
         // If no notification types are enabled, don't schedule anything
         guard !settings.enabledTypes.isEmpty else {
@@ -172,26 +176,44 @@ class NotificationManager {
     }
     
     private func scheduleEveryOtherDayReminders(settings: NotificationSettings) async {
-        // Schedule for every other day starting from today
         let calendar = Calendar.current
         let morningTime = settings.morningTime ?? defaultMorningTime()
-        let components = calendar.dateComponents([.hour, .minute], from: morningTime)
-        
-        // Schedule for even days (2nd, 4th, 6th, etc.)
-        for day in stride(from: 2, through: 28, by: 2) {
-            var dateComponents = DateComponents()
-            dateComponents.day = day
-            dateComponents.hour = components.hour
-            dateComponents.minute = components.minute
-            
+        let time = calendar.dateComponents([.hour, .minute], from: morningTime)
+        let now = Date()
+        let anchorKey = "everyOtherDayReminderAnchor"
+        let defaults = UserDefaults.standard
+        let anchor = (defaults.object(forKey: anchorKey) as? Date)
+            ?? calendar.nextDate(after: now, matching: time, matchingPolicy: .nextTime)
+        guard let anchor else { return }
+        defaults.set(anchor, forKey: anchorKey)
+
+        // ponytail: 48 pending reminders cover 96 days; replenish on app launch or add a background refresh if longer absence matters.
+        for date in Self.everyOtherDayDates(anchor: anchor, after: now, time: time, calendar: calendar, count: 48) {
+            let dateComponents = calendar.dateComponents([.year, .month, .day, .weekday, .hour, .minute], from: date)
             await scheduleNotification(
-                identifier: "every-other-day-reminder-\(day)",
+                identifier: "every-other-day-reminder-\(Int(date.timeIntervalSince1970))",
                 title: getNotificationTitle(for: settings.enabledTypes),
                 body: getNotificationBody(for: settings.enabledTypes, frequency: .everyOtherDay),
                 dateComponents: dateComponents,
-                settings: settings
+                settings: settings,
+                repeats: false
             )
         }
+    }
+
+    static func everyOtherDayDates(
+        anchor: Date, after now: Date, time: DateComponents, calendar: Calendar, count: Int
+    ) -> [Date] {
+        var day = anchor
+        var dates: [Date] = []
+        while dates.count < count {
+            guard let date = calendar.date(bySettingHour: time.hour ?? 8, minute: time.minute ?? 0,
+                                           second: 0, of: day) else { break }
+            if date > now { dates.append(date) }
+            guard let next = calendar.date(byAdding: .day, value: 2, to: day) else { break }
+            day = next
+        }
+        return dates
     }
     
     private func scheduleDailyReminders(settings: NotificationSettings) async {
@@ -254,7 +276,8 @@ class NotificationManager {
         title: String,
         body: String,
         dateComponents: DateComponents,
-        settings: NotificationSettings
+        settings: NotificationSettings,
+        repeats: Bool = true
     ) async {
         // Check if this time falls within blackout period
         if settings.blackoutEnabled {
@@ -280,7 +303,7 @@ class NotificationManager {
             content.categoryIdentifier = "GENERAL_REMINDER"
         }
         
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: repeats)
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         
         do {
