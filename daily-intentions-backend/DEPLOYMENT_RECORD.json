@@ -1,0 +1,51 @@
+{
+  "mode": "parallel",
+  "revision": "c23a731efa23ad17df189b14740fc7b7b9dfdfa2",
+  "deployedAt": "2026-09-30T20:24:01.660221+00:00",
+  "verifiedAt": "2026-09-30T20:24:11.611633+00:00",
+  "status": "verified_parallel",
+  "commands": [
+    "PATH=/Users/nathan/.local/node/bin:$PATH npm run deploy:parallel",
+    "python3 scripts/smoke-parallel.py --aws-url https://pmsxomo7c4d22kf5olronbillq0erqrx.lambda-url.us-west-2.on.aws --vercel-url https://attunetion.vercel.app --revision c23a731efa23ad17df189b14740fc7b7b9dfdfa2 --output /Users/nathan/Documents/GitHub-sync-backup-20260930/deployments/attunetion-c23a731-smoke.json"
+  ],
+  "productionURL": "https://attunetion.vercel.app",
+  "vercelDeployment": "https://attunetion-6dl0r95az-nathan-fennels-projects.vercel.app",
+  "aws": {
+    "functionName": "attunetion-backend-parallel-ApiFunction-cvcnuuwh",
+    "revision": "c23a731efa23ad17df189b14740fc7b7b9dfdfa2",
+    "url": "https://pmsxomo7c4d22kf5olronbillq0erqrx.lambda-url.us-west-2.on.aws/"
+  },
+  "productionRouting": "Vercel",
+  "actualCutoverAt": null,
+  "checks": {
+    "awsUnsignedStatus": 403,
+    "syntheticAIRequests": 4,
+    "hosts": {
+      "aws": {
+        "healthStatus": 200,
+        "healthRevision": "c23a731efa23ad17df189b14740fc7b7b9dfdfa2",
+        "invalidBodyStatus": 400,
+        "overlongInputStatus": 400,
+        "syntheticThemeStatus": 200,
+        "syntheticWeeklyStatus": 200
+      },
+      "vercel": {
+        "healthStatus": 200,
+        "healthRevision": "c23a731efa23ad17df189b14740fc7b7b9dfdfa2",
+        "invalidBodyStatus": 400,
+        "overlongInputStatus": 400,
+        "syntheticThemeStatus": 200,
+        "syntheticWeeklyStatus": 200
+      }
+    },
+    "privacyRedirect": "302 to https://nathanfennel.com/attunetion/privacy.html on both hosts",
+    "privacyStaticSHA256": "7bc83838c5956fd7c3a71fa149a67bc94f1dfcf163e4e04758515a4f97b8c500",
+    "canonicalPrivacyStatus": 200
+  },
+  "evidence": "/Users/nathan/Documents/GitHub-sync-backup-20260930/deployments/attunetion-c23a731-smoke.json",
+  "cutoverLimitations": [
+    "AWS preview is IAM-only; native clients still use Vercel.",
+    "Public access and durable abuse/cost control are not yet verified for AWS cutover.",
+    "Repeat deployment and rollback remain unverified."
+  ]
+}
