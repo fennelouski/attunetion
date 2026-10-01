@@ -23,6 +23,9 @@ struct FirstIntentionPage: View {
     @State private var selectedScope: IntentionScope = .day
     @State private var showingSuggestions = true
     @State private var saveError: String?
+    @State private var defaultThemeId: UUID?
+    @State private var defaultFont: String?
+    @State private var hasLoadedAppearanceDefaults = false
     
     private let suggestions = Array(ExampleIntention.examples.prefix(3))
     
@@ -117,6 +120,14 @@ struct FirstIntentionPage: View {
                 .frame(width: geometry.size.width, height: geometry.size.height)
             }
         }
+        .onAppear {
+            guard !hasLoadedAppearanceDefaults else { return }
+            hasLoadedAppearanceDefaults = true
+            let preferences = UserPreferencesRepository(modelContext: modelContext).getPreferences()
+            let themes = ThemeRepository(modelContext: modelContext)
+            defaultThemeId = preferences?.defaultThemeId.flatMap { themes.getTheme(byId: $0)?.id }
+            defaultFont = preferences?.defaultFont
+        }
         .alert("Could Not Save Intention", isPresented: Binding(
             get: { saveError != nil }, set: { if !$0 { saveError = nil } }
         )) {
@@ -134,7 +145,9 @@ struct FirstIntentionPage: View {
             let intention = Intention(
                 text: trimmedText,
                 scope: selectedScope,
-                date: Date()
+                date: Date(),
+                themeId: defaultThemeId,
+                customFont: defaultFont
             )
             
             do {

@@ -41,6 +41,7 @@ struct NotificationSettingsView: View {
     @State private var blackoutEndHour = 8
     @State private var blackoutEndMinute = 0
     @State private var blackoutDays: Set<Int> = []
+    @ScaledMetric(relativeTo: .body) private var minimumDayWidth = 100.0
     
     // Permission
     @State private var authorizationStatus: UNAuthorizationStatus = .notDetermined
@@ -81,6 +82,7 @@ struct NotificationSettingsView: View {
                 testSection
             }
             .scrollContentBackground(.hidden)
+            .frame(maxWidth: 740)
         }
         .navigationTitle("Reminders")
         #if os(iOS)
@@ -198,6 +200,8 @@ struct NotificationSettingsView: View {
                         step: 1
                     )
                     .tint(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                    .accessibilityLabel("Reminder frequency")
+                    .accessibilityValue(frequency.displayName)
                     
                     Text(frequency.description)
                         .font(.system(size: 12, weight: .regular, design: .default))
@@ -356,7 +360,7 @@ struct NotificationSettingsView: View {
                         .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                         .padding(.top, 8)
                     
-                    LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 8) {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: minimumDayWidth))], spacing: 8) {
                         ForEach(0..<7) { dayIndex in
                             DayToggleButton(
                                 dayIndex: dayIndex,
@@ -559,31 +563,28 @@ struct NotificationTypeToggle: View {
     @ObservedObject var themeManager: AppThemeManager
     
     var body: some View {
-        HStack(spacing: 12) {
-            Image(systemName: icon)
-                .font(.system(size: 18, weight: .medium))
-                .foregroundColor(
-                    isEnabled
-                        ? themeManager.accentColor(for: colorScheme).toSwiftUIColor()
-                        : themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor()
-                )
-                .frame(width: 24)
-            
-            VStack(alignment: .leading, spacing: 4) {
-                Text(title)
-                    .font(.system(size: 15, weight: .medium, design: .default))
-                    .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                Text(description)
-                    .font(.system(size: 13, weight: .regular, design: .default))
-                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+        Toggle(isOn: $isEnabled) {
+            Label {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(title)
+                        .font(.body.weight(.medium))
+                        .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                    Text(description)
+                        .font(.footnote)
+                        .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                }
+            } icon: {
+                Image(systemName: icon)
+                    .foregroundColor(
+                        isEnabled
+                            ? themeManager.accentColor(for: colorScheme).toSwiftUIColor()
+                            : themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor()
+                    )
+                    .fixedSize()
+                    .accessibilityHidden(true)
             }
-            
-            Spacer()
-            
-            Toggle("", isOn: $isEnabled)
-                .labelsHidden()
-                .tint(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
         }
+        .tint(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
         .padding(.vertical, 6)
     }
 }
@@ -596,20 +597,19 @@ struct DayToggleButton: View {
     let action: () -> Void
     
     private var dayName: String {
-        let days = ["S", "M", "T", "W", "T", "F", "S"]
-        return days[dayIndex]
+        Calendar.current.weekdaySymbols[dayIndex]
     }
     
     var body: some View {
         Button(action: action) {
             Text(dayName)
-                .font(.system(size: 13, weight: .semibold, design: .default))
+                .font(.subheadline.weight(.semibold))
                 .foregroundColor(
                     isSelected
                         ? themeManager.buttonTextColor(for: colorScheme).toSwiftUIColor()
                         : themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor()
                 )
-                .frame(width: 36, height: 36)
+                .frame(maxWidth: .infinity, minHeight: 44)
                 .background(
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                         .fill(
@@ -629,5 +629,6 @@ struct DayToggleButton: View {
                 )
         }
         .buttonStyle(.plain)
+        .accessibilityValue(isSelected ? "Selected" : "Not selected")
     }
 }

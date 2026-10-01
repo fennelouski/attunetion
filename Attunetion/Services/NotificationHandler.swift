@@ -117,10 +117,16 @@ class NotificationHandler: NSObject, UNUserNotificationCenterDelegate {
             }
         }()
         
+        let preferences = UserPreferencesRepository(modelContext: modelContext).getPreferences()
+        let themes = ThemeRepository(modelContext: modelContext)
+        let defaultThemeId = preferences?.defaultThemeId.flatMap { themes.getTheme(byId: $0)?.id }
+
         let intention = Intention(
             text: text,
             scope: scope,
-            date: date
+            date: date,
+            themeId: defaultThemeId,
+            customFont: preferences?.defaultFont
         )
         
         do {

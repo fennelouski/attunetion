@@ -22,15 +22,19 @@ struct AppThemePickerView: View {
                         // Theme options
                         VStack(spacing: 16) {
                             ForEach(AppTheme.presetThemes, id: \.id) { theme in
-                                ThemeOptionCard(
-                                    theme: theme,
-                                    isSelected: theme.id == themeManager.currentTheme.id,
-                                    themeManager: themeManager
-                                )
-                                .onTapGesture {
+                                Button {
                                     themeManager.setTheme(theme)
                                     presentationMode.wrappedValue.dismiss()
+                                } label: {
+                                    ThemeOptionCard(
+                                        theme: theme,
+                                        isSelected: theme.id == themeManager.currentTheme.id,
+                                        themeManager: themeManager
+                                    )
                                 }
+                                .buttonStyle(.plain)
+                                .accessibilityLabel(theme.name)
+                                .accessibilityValue(theme.id == themeManager.currentTheme.id ? "Selected" : "")
                             }
                         }
                         .padding(.horizontal, 20)
@@ -38,7 +42,9 @@ struct AppThemePickerView: View {
                     }
                 }
             }
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
@@ -70,7 +76,7 @@ struct ThemeOptionCard: View {
             VStack(spacing: 12) {
                 // Theme name
                 Text(theme.name)
-                    .font(.system(size: 20, weight: .semibold, design: .default))
+                    .font(.title3.weight(.semibold))
                     .foregroundColor(theme.lightPrimaryText.toSwiftUIColor())
 
                 // Color preview circles
@@ -100,11 +106,10 @@ struct ThemeOptionCard: View {
             }
             .padding(20)
         }
-        .frame(height: 120)
+        .frame(minHeight: 120)
     }
 }
 
 #Preview {
     AppThemePickerView(themeManager: AppThemeManager())
 }
-

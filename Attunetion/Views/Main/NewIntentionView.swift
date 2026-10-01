@@ -23,6 +23,7 @@ struct NewIntentionView: View {
     @State private var selectedDate: Date = Date()
     @State private var selectedTheme: IntentionTheme? = nil
     @State private var selectedFont: String? = nil
+    @State private var hasLoadedAppearanceDefaults = false
     @State private var showingThemePicker = false
     @State private var showingFontPicker = false
     @State private var showingValidationAlert = false
@@ -305,6 +306,7 @@ struct NewIntentionView: View {
                 }
             }
             .onAppear {
+                loadAppearanceDefaults()
                 selectedDate = defaultDateForScope
                 #if os(iOS)
                 // Focus the text editor when view appears and text is empty
@@ -319,6 +321,15 @@ struct NewIntentionView: View {
         }
     }
     
+    private func loadAppearanceDefaults() {
+        guard !hasLoadedAppearanceDefaults else { return }
+        hasLoadedAppearanceDefaults = true
+        guard let preferences = UserPreferencesRepository(modelContext: modelContext).getPreferences() else { return }
+        let themeRepository = ThemeRepository(modelContext: modelContext)
+        selectedTheme = preferences.defaultThemeId.flatMap { themeRepository.getTheme(byId: $0) }
+        selectedFont = preferences.defaultFont
+    }
+
     private func saveIntention() {
         let trimmedText = intentionText.trimmingCharacters(in: .whitespacesAndNewlines)
         

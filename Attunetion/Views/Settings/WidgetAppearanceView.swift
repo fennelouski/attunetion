@@ -11,6 +11,7 @@ import WidgetKit
 
 struct WidgetAppearanceView: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var themeManager: AppThemeManager
     @Query private var preferencesQuery: [UserPreferences]
@@ -72,50 +73,26 @@ struct WidgetAppearanceView: View {
                             // Reload widgets
                             WidgetCenter.shared.reloadAllTimelines()
                         }) {
-                            HStack(spacing: 16) {
-                                // Widget preview
-                                if let theme = themeOption.theme {
-                                    WidgetPreviewCard(theme: theme, name: themeOption.name)
-                                        .frame(width: 120, height: 120)
-                                } else {
-                                    // For "Use Intention Theme", show a placeholder
-                                    RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                        .fill(Color.gray.opacity(0.2))
-                                        .frame(width: 120, height: 120)
-                                        .overlay(
-                                            Text(String(localized: "Dynamic"))
-                                                .font(.system(size: 10, weight: .medium))
-                                                .foregroundColor(.secondary)
-                                        )
-                                }
-                                
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(themeOption.name)
-                                        .font(.system(size: 16, weight: .medium))
-                                        .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                                    
-                                    if themeOption.id == nil {
-                                        Text(String(localized: "Widget matches your app theme"))
-                                            .font(.system(size: 13))
-                                            .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                                    } else if themeOption.id == "use_intention" {
-                                        Text(String(localized: "Widget matches your intention's theme"))
-                                            .font(.system(size: 13))
-                                            .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                            Group {
+                                if dynamicTypeSize.isAccessibilitySize {
+                                    VStack(alignment: .leading, spacing: 12) {
+                                        choiceLabel(themeOption)
+                                        choicePreview(themeOption)
                                     }
-                                }
-                                
-                                Spacer()
-                                
-                                if (selectedThemeId == nil && themeOption.id == nil) || selectedThemeId == themeOption.id {
-                                    Image(systemName: "checkmark")
-                                        .font(.system(size: 16, weight: .semibold))
-                                        .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                                } else {
+                                    HStack(spacing: 16) {
+                                        choicePreview(themeOption)
+                                        choiceLabel(themeOption)
+                                    }
                                 }
                             }
                             .padding(.vertical, 4)
                         }
                         .buttonStyle(.plain)
+                        .listRowBackground(Color.clear)
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel(themeOption.name)
+                        .accessibilityValue(selectedThemeId == themeOption.id ? "Selected" : "")
                     }
                 } header: {
                     ThemedSectionHeader(text: "Widget Appearance", themeManager: themeManager)
@@ -123,7 +100,9 @@ struct WidgetAppearanceView: View {
                     ThemedSectionFooter(text: "Choose how your widget looks. Changes apply to all widget sizes.", themeManager: themeManager)
                 }
             }
+            .listStyle(.plain)
             .scrollContentBackground(.hidden)
+            .frame(maxWidth: 740)
         }
         .navigationTitle(String(localized: "Widget Appearance"))
         #if os(iOS)
@@ -140,6 +119,49 @@ struct WidgetAppearanceView: View {
         }
     }
     
+    @ViewBuilder
+    private func choicePreview(_ option: (id: String?, name: String, theme: ThemeData?)) -> some View {
+        Group {
+            if let theme = option.theme {
+                WidgetPreviewCard(theme: theme, name: option.name)
+            } else {
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .fill(Color.gray.opacity(0.2))
+                    .overlay(Text(String(localized: "Dynamic")).font(.caption).foregroundStyle(.secondary))
+            }
+        }
+        .frame(width: 120, height: 120)
+        .accessibilityHidden(true)
+    }
+
+    private func choiceLabel(_ option: (id: String?, name: String, theme: ThemeData?)) -> some View {
+        HStack(alignment: .top, spacing: 12) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(option.name)
+                    .font(.body.weight(.medium))
+                    .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                if option.id == nil {
+                    Text(String(localized: "Widget matches your app theme"))
+                        .font(.footnote)
+                        .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                } else if option.id == "use_intention" {
+                    Text(String(localized: "Widget matches your intention's theme"))
+                        .font(.footnote)
+                        .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                }
+            }
+            .fixedSize(horizontal: false, vertical: true)
+            Spacer(minLength: 0)
+            if selectedThemeId == option.id {
+                Image(systemName: "checkmark")
+                    .font(.body.weight(.semibold))
+                    .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                    .fixedSize()
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
     private func saveWidgetTheme(_ themeId: String?) {
         let prefsRepo = UserPreferencesRepository(modelContext: modelContext)
         let prefs = prefsRepo.getOrCreatePreferences()

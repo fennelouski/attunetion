@@ -20,6 +20,8 @@ struct IntentionGuideView: View {
     @StateObject private var animationSpeedManager = AnimationSpeedManager.shared
     
     @State private var viewModel: IntentionsViewModel
+    @State private var defaultThemeId: UUID?
+    @State private var defaultFont: String?
     
     @State private var currentStep = 0
     @State private var monthlyIntention: String = ""
@@ -51,6 +53,10 @@ struct IntentionGuideView: View {
     
     init(modelContext: ModelContext, onIntentionsCreated: (() -> Void)? = nil) {
         _viewModel = State(initialValue: IntentionsViewModel(modelContext: modelContext))
+        let preferences = UserPreferencesRepository(modelContext: modelContext).getPreferences()
+        let themes = ThemeRepository(modelContext: modelContext)
+        _defaultThemeId = State(initialValue: preferences?.defaultThemeId.flatMap { themes.getTheme(byId: $0)?.id })
+        _defaultFont = State(initialValue: preferences?.defaultFont)
         _quickIdeasPages = State(initialValue: [:])
         _quickIdeasPageIndex = State(initialValue: [.month: 0, .week: 0, .day: 0])
         self.onIntentionsCreated = onIntentionsCreated
@@ -568,6 +574,7 @@ struct IntentionGuideView: View {
             let component: Calendar.Component = scope == .month ? .month : scope == .week ? .weekOfYear : .day
             return Intention(text: text, scope: scope,
                              date: calendar.dateInterval(of: component, for: today)?.start ?? today,
+                             themeId: defaultThemeId, customFont: defaultFont,
                              aiGenerated: selectedIntentionPack == nil && suggestionsWereGenerated)
         }
         guard !intentions.isEmpty else {

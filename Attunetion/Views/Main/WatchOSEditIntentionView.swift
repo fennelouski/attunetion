@@ -23,6 +23,9 @@ struct WatchOSEditIntentionView: View {
     
     @State private var intentionText: String = ""
     @State private var selectedDate: Date = Date()
+    @State private var defaultThemeId: UUID?
+    @State private var defaultFont: String?
+    @State private var hasLoadedAppearanceDefaults = false
     @State private var showingValidationAlert = false
     @State private var validationMessage = ""
     @FocusState private var isTextFieldFocused: Bool
@@ -210,6 +213,13 @@ struct WatchOSEditIntentionView: View {
                 Text(validationMessage)
             }
             .onAppear {
+                if !isEditing && !hasLoadedAppearanceDefaults {
+                    hasLoadedAppearanceDefaults = true
+                    let preferences = UserPreferencesRepository(modelContext: modelContext).getPreferences()
+                    let themes = ThemeRepository(modelContext: modelContext)
+                    defaultThemeId = preferences?.defaultThemeId.flatMap { themes.getTheme(byId: $0)?.id }
+                    defaultFont = preferences?.defaultFont
+                }
                 // Auto-focus text field when view appears
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     isTextFieldFocused = true
@@ -273,6 +283,8 @@ struct WatchOSEditIntentionView: View {
                 text: trimmedText,
                 scope: scope,
                 date: selectedDate,
+                themeId: defaultThemeId,
+                customFont: defaultFont,
                 aiGenerated: false
             )
             

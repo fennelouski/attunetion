@@ -77,6 +77,11 @@ class AutoIntentionService {
         // Deletion or revocation while awaiting the response must not recreate content.
         try ConsentManager.shared.requireConsent(modelContext: modelContext)
 
+        let preferences = UserPreferencesRepository(modelContext: modelContext).getPreferences()
+        let themes = ThemeRepository(modelContext: modelContext)
+        let defaultThemeId = preferences?.defaultThemeId.flatMap { themes.getTheme(byId: $0)?.id }
+        let defaultFont = preferences?.defaultFont
+
         // Parse dates and create Intention objects
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -102,6 +107,8 @@ class AutoIntentionService {
                 text: weeklyIntention.text,
                 scope: scope,
                 date: date,
+                themeId: defaultThemeId,
+                customFont: defaultFont,
                 aiGenerated: true
             )
             
