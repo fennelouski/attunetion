@@ -33,6 +33,8 @@ struct IntentionDetailView: View {
         case .day: return accent.opacity(0.8)
         case .week: return accent.opacity(0.9)
         case .month: return accent
+        case .season: return accent.opacity(0.7)
+        case .year: return accent.opacity(0.6)
         }
     }
     

@@ -11,7 +11,7 @@ import Foundation
 struct IntentionData: Codable {
     let id: UUID
     let text: String
-    let scope: String // "day", "week", "month"
+    let scope: String // IntentionScope raw value
     let scopeDate: Date
     let quote: String?
     let aiGenerated: Bool
@@ -88,8 +88,15 @@ class WidgetDataService {
     private let frequencyKey = "defaultIntentionFrequency"
     private let userStateKey = "widgetUserState"
     private let widgetThemePreferenceKey = "widgetThemePreference"
+    private let recordsKey = "widgetIntentionRecordsV1"
     
     private init() {}
+
+    func saveWidgetRecords(_ records: [IntentionWidgetRecord]) {
+        guard let defaults = UserDefaults(suiteName: appGroupIdentifier),
+              let data = try? JSONEncoder().encode(records) else { return }
+        defaults.set(data, forKey: recordsKey)
+    }
     
     /// Update widget data with intention and theme data (called from main app)
     func updateWidgetData(intentionData: IntentionData?, themeData: ThemeData?) {

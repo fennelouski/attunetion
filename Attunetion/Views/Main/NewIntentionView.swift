@@ -40,15 +40,7 @@ struct NewIntentionView: View {
     }
     
     private var defaultDateForScope: Date {
-        let calendar = Calendar.current
-        switch selectedScope {
-        case .day:
-            return Date()
-        case .week:
-            return calendar.startOfDay(for: Date())
-        case .month:
-            return calendar.date(from: calendar.dateComponents([.year, .month], from: Date())) ?? Date()
-        }
+        selectedScope.interval(containing: Date())?.start ?? Date()
     }
     
     var body: some View {
@@ -127,6 +119,12 @@ struct NewIntentionView: View {
                         #endif
                     }
                     
+                    if selectedScope == .season || selectedScope == .year {
+                        Text(selectedScope.dateRangeLabel(for: selectedDate))
+                            .font(.caption).foregroundStyle(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+
                     // Date picker
                     DatePicker(
                         String(localized: "Date"),

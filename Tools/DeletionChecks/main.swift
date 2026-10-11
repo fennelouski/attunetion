@@ -90,12 +90,27 @@ struct DeletionChecks {
         }
         let standardKeys = ["hasSeenOnboarding", "intentionListStyle", "openNewIntentionFromNotification",
                             "everyOtherDayReminderAnchor"]
-        let widgetKeys = ["currentIntentionData", "currentThemeData", "defaultIntentionFrequency", "widgetUserState", "widgetThemePreference"]
+        let widgetKeys = ["currentIntentionData", "currentThemeData", "defaultIntentionFrequency", "widgetUserState", "widgetThemePreference", "widgetIntentionRecordsV1"]
         for key in standardKeys { standard.set("synthetic preference", forKey: key) }
         for key in widgetKeys { widgets.set("synthetic widget value", forKey: key) }
+        let record = IntentionWidgetRecord(
+            id: UUID(), text: "Synthetic cached season", scope: "season", scopeDate: Date(),
+            quote: nil, aiGenerated: false, backgroundColor: nil, textColor: nil,
+            accentColor: nil, fontName: nil
+        )
+        widgets.set(try JSONEncoder().encode([record]), forKey: "widgetIntentionRecordsV1")
+        let cached = try JSONDecoder().decode([IntentionWidgetRecord].self,
+                                             from: widgets.data(forKey: "widgetIntentionRecordsV1")!)
+        precondition(cached.count == 1 && cached[0].id == record.id && cached[0].text == record.text)
         standard.set("preserved test endpoint", forKey: "APIBaseURL")
         widgets.set("unrelated", forKey: "unrelated")
         LocalUserDataDeletion.clearPreferences(standard: standard, widgets: widgets)
+        guard widgets.data(forKey: "widgetIntentionRecordsV1") == nil else {
+            FileHandle.standardError.write(Data("FAIL: Modern widget intention records remain after deletion\n".utf8))
+            standard.removePersistentDomain(forName: standardName)
+            widgets.removePersistentDomain(forName: widgetName)
+            exit(1)
+        }
         precondition(standardKeys.allSatisfy { standard.object(forKey: $0) == nil })
         precondition(widgetKeys.allSatisfy { widgets.object(forKey: $0) == nil })
         precondition(standard.string(forKey: "APIBaseURL") == "preserved test endpoint")

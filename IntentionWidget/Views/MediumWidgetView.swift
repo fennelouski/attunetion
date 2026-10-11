@@ -157,6 +157,8 @@ struct MediumWidgetView: View {
         case "month":
             formatter.dateFormat = "MMMM yyyy"
             return formatter.string(from: intention.scopeDate)
+        case "season", "year":
+            return (IntentionScope(rawValue: intention.scope) ?? .month).dateRangeLabel(for: intention.scopeDate)
         default:
             return formatter.string(from: intention.scopeDate)
         }

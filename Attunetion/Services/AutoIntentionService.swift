@@ -56,9 +56,11 @@ class AutoIntentionService {
             }
         }
         
-        // Get previous intentions for context (last 10 intentions)
+        // The generation API accepts day, week and month history. Keep the last 10 compatible intentions.
         let allIntentions = intentionRepository.getAll()
-        let previousIntentions = Array(allIntentions.prefix(10)).map { intention in
+        let previousIntentions = Array(allIntentions.filter {
+            [.day, .week, .month].contains($0.scope)
+        }.prefix(10)).map { intention in
             PreviousIntentionForGeneration(
                 text: intention.text,
                 scope: intention.scope.rawValue,
@@ -172,4 +174,3 @@ enum AutoIntentionError: LocalizedError {
         }
     }
 }
-

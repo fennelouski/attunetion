@@ -39,7 +39,7 @@ struct HowItWorksPage: View {
                                 .multilineTextAlignment(.center)
                                 .lineLimit(nil)
                             
-                            Text(String(localized: "day, week, or month"))
+                            Text(String(localized: "day, week, month, season, or year"))
                                 .font(.system(size: 28, weight: .light, design: .default))
                                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                                 .fixedSize(horizontal: false, vertical: true)

@@ -39,15 +39,7 @@ struct WatchOSEditIntentionView: View {
     }
     
     private var defaultDateForScope: Date {
-        let calendar = Calendar.current
-        switch scope {
-        case .day:
-            return Date()
-        case .week:
-            return calendar.startOfDay(for: Date())
-        case .month:
-            return calendar.date(from: calendar.dateComponents([.year, .month], from: Date())) ?? Date()
-        }
+        scope.interval(containing: Date())?.start ?? Date()
     }
     
     init(scope: IntentionScope, intention: Intention?, viewModel: IntentionsViewModel) {
@@ -130,7 +122,6 @@ struct WatchOSEditIntentionView: View {
                                 selection: $selectedDate,
                                 displayedComponents: [.date]
                             )
-                            .datePickerStyle(.compact)
                             .labelsHidden()
                         }
                         .padding(.horizontal, WatchOSSpacing.medium)
@@ -258,13 +249,10 @@ struct WatchOSEditIntentionView: View {
                 return
             }
             
-            existingIntention.text = trimmedText
-            existingIntention.scope = scope
-            existingIntention.date = selectedDate
-            existingIntention.updatedAt = Date()
-            
             do {
-                try viewModel.updateIntention(existingIntention)
+                try viewModel.updateIntention(
+                    existingIntention, text: trimmedText, scope: scope, date: selectedDate
+                )
                 dismiss()
             } catch {
                 validationMessage = "Failed to update intention: \(error.localizedDescription)"

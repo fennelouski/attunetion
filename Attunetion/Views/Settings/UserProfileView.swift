@@ -50,7 +50,9 @@ struct UserProfileView: View {
                             Text(String(localized: "Free-form")).tag(InputMode.freeform)
                             Text(String(localized: "Guided")).tag(InputMode.guided)
                         }
+                        #if !os(watchOS)
                         .pickerStyle(.segmented)
+                        #endif
                         .padding(.vertical, 4)
                         .onChange(of: inputMode) { oldValue, newValue in
                             // Sync data when switching modes
@@ -206,10 +208,16 @@ struct UserProfileView: View {
                 .font(.subheadline)
                 .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
             
-            TextEditor(text: $userInfo)
-                .frame(minHeight: 150)
+            Group {
+                #if os(watchOS)
+                TextField("About you", text: $userInfo)
+                #else
+                TextEditor(text: $userInfo)
+                    .frame(minHeight: 150)
+                    .scrollContentBackground(.hidden)
+                #endif
+            }
                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                .scrollContentBackground(.hidden)
                 .background(
                     RoundedRectangle(cornerRadius: 8)
                         .fill(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.1))

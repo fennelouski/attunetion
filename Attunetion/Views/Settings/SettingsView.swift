@@ -192,7 +192,9 @@ struct SettingsView: View {
                     .accessibilityIdentifier("settings.section.\(section.rawValue)")
             }
         }
+        #if !os(watchOS)
         .listStyle(.sidebar)
+        #endif
         .scrollContentBackground(.hidden)
     }
 
@@ -859,7 +861,7 @@ enum LocalUserDataDeletion {
             standard.removeObject(forKey: key)
         }
         for key in ["currentIntentionData", "currentThemeData", "defaultIntentionFrequency",
-                    "widgetUserState", "widgetThemePreference"] {
+                    "widgetUserState", "widgetThemePreference", "widgetIntentionRecordsV1"] {
             widgets?.removeObject(forKey: key)
         }
     }

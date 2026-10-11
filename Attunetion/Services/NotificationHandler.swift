@@ -103,18 +103,7 @@ class NotificationHandler: NSObject, UNUserNotificationCenterDelegate {
         
         // Determine the appropriate date for this scope
         let date: Date = {
-            let calendar = Calendar.current
-            switch scope {
-            case .day:
-                return Date()
-            case .week:
-                // Use start of current week
-                return calendar.dateInterval(of: .weekOfYear, for: Date())?.start ?? Date()
-            case .month:
-                // Use start of current month
-                let components = calendar.dateComponents([.year, .month], from: Date())
-                return calendar.date(from: components) ?? Date()
-            }
+            scope.interval(containing: Date())?.start ?? Date()
         }()
         
         let preferences = UserPreferencesRepository(modelContext: modelContext).getPreferences()

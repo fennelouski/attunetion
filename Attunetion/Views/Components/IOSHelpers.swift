@@ -60,6 +60,7 @@ struct HapticFeedback {
 }
 
 /// Platform-specific padding helper
+#if !os(watchOS)
 struct PlatformPadding {
     static func horizontal() -> CGFloat {
         #if os(iOS)
@@ -89,4 +90,5 @@ struct PlatformPadding {
         #endif
     }
 }
+#endif
 

@@ -108,10 +108,16 @@ struct IntentionFeedbackView: View {
                                     .font(.subheadline)
                                     .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
                                 
-                                TextEditor(text: $feedbackText)
-                                    .frame(minHeight: 80)
+                                Group {
+                                    #if os(watchOS)
+                                    TextField("Feedback", text: $feedbackText)
+                                    #else
+                                    TextEditor(text: $feedbackText)
+                                        .frame(minHeight: 80)
+                                        .scrollContentBackground(.hidden)
+                                    #endif
+                                }
                                     .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                                    .scrollContentBackground(.hidden)
                                     .background(
                                         RoundedRectangle(cornerRadius: 8)
                                             .fill(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.1))

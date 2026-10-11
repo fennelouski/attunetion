@@ -8,13 +8,6 @@
 import Foundation
 import SwiftData
 
-/// Represents the scope of an intention (day, week, or month)
-enum IntentionScope: String, Codable, CaseIterable, Hashable {
-    case day = "day"
-    case week = "week"
-    case month = "month"
-}
-
 /// Model representing a user's intention for a specific time period
 @Model
 final class Intention {

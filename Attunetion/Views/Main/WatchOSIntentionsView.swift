@@ -23,7 +23,7 @@ struct WatchOSIntentionsView: View {
     @State private var editingScope: IntentionScope = .day
     @State private var editingIntention: Intention?
     
-    private let scopes: [IntentionScope] = [.day, .week, .month]
+    private let scopes = IntentionScope.allCases
     
     var body: some View {
         NavigationStack {
@@ -39,6 +39,7 @@ struct WatchOSIntentionsView: View {
                                 scope: scope,
                                 viewModel: viewModel!,
                                 themeManager: themeManager,
+                                animationSpeedManager: animationSpeedManager,
                                 onEdit: {
                                     editingScope = scope
                                     editingIntention = getCurrentIntention(for: scope)
@@ -120,6 +121,7 @@ struct IntentionCardView: View {
     let scope: IntentionScope
     let viewModel: IntentionsViewModel
     @ObservedObject var themeManager: AppThemeManager
+    @ObservedObject var animationSpeedManager: AnimationSpeedManager
     let onEdit: () -> Void
     
     @State private var currentIntention: Intention?
@@ -141,6 +143,10 @@ struct IntentionCardView: View {
             return themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.85)
         case .month:
             return themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.7)
+        case .season:
+            return themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.65)
+        case .year:
+            return themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.6)
         }
     }
     

@@ -91,7 +91,7 @@ class IntentionsViewModel {
             intentions = intentions.sorted { $0.date < $1.date }
         case .byScope:
             intentions = intentions.sorted { first, second in
-                let scopeOrder: [IntentionScope] = [.day, .week, .month]
+                let scopeOrder = IntentionScope.allCases
                 let firstIndex = scopeOrder.firstIndex(of: first.scope) ?? 0
                 let secondIndex = scopeOrder.firstIndex(of: second.scope) ?? 0
                 if firstIndex == secondIndex {
@@ -130,7 +130,7 @@ class IntentionsViewModel {
         guard uniqueScopes.count > 1 else { return nil }
         
         // Return scopes sorted in order: day, week, month
-        let scopeOrder: [IntentionScope] = [.day, .week, .month]
+        let scopeOrder = IntentionScope.allCases
         return scopeOrder.filter { uniqueScopes.contains($0) }
     }
     
@@ -153,8 +153,14 @@ class IntentionsViewModel {
         repository.getIntention(byId: id)
     }
 
-    func updateIntention(_ intention: Intention) throws {
-        try repository.update(intention)
+    func updateIntention(
+        _ intention: Intention,
+        text: String,
+        scope: IntentionScope,
+        date: Date,
+        appearance: (themeId: UUID?, font: String?)? = nil
+    ) throws {
+        try repository.update(intention, text: text, scope: scope, date: date, appearance: appearance)
         loadIntentions()
         syncWidgetData()
     }

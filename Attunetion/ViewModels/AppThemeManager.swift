@@ -8,6 +8,9 @@
 import SwiftUI
 import SwiftData
 import Combine
+#if canImport(WidgetKit)
+import WidgetKit
+#endif
 
 /// Environment object to manage app-wide theme
 class AppThemeManager: ObservableObject {
@@ -69,6 +72,9 @@ class AppThemeManager: ObservableObject {
             if let prefs = prefsRepo.getPreferences(), prefs.widgetThemeId == nil {
                 // Widget is using app theme, so update it
                 WidgetDataService.shared.updateWidgetDataFromSwiftData(modelContext: context)
+                #if canImport(WidgetKit) && !os(visionOS)
+                WidgetCenter.shared.reloadAllTimelines()
+                #endif
             }
         }
     }

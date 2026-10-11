@@ -75,11 +75,19 @@ struct FirstIntentionPage: View {
                             }
                         }
                         #if !os(watchOS)
-                        .pickerStyle(.segmented)
+                        .pickerStyle(.menu)
                         #endif
                         .padding(.horizontal, 60)
                         .frame(maxWidth: 700)
                         
+                        if selectedScope == .season || selectedScope == .year {
+                            Text(selectedScope.dateRangeLabel(for: Date()))
+                                .font(.caption).foregroundStyle(.secondary)
+                                .multilineTextAlignment(.center)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding(.horizontal, 30)
+                        }
+
                         if showingSuggestions {
                             VStack(alignment: .leading, spacing: 8) {
                                 Text(String(localized: "Or try one of these:"))

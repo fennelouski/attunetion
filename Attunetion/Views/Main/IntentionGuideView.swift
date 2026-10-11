@@ -27,6 +27,8 @@ struct IntentionGuideView: View {
     @State private var monthlyIntention: String = ""
     @State private var weeklyIntention: String = ""
     @State private var dailyIntention: String = ""
+    @State private var seasonalIntention: String = ""
+    @State private var yearlyIntention: String = ""
     @State private var showingNewIntention = false
     @State private var newIntentionScope: IntentionScope = .day
     @State private var newIntentionText: String = ""
@@ -299,6 +301,20 @@ struct IntentionGuideView: View {
                                     colorScheme: colorScheme
                                 )
                                 .padding(.horizontal, 40)
+                                VStack(alignment: .leading, spacing: 12) {
+                                    Label("A longer view · optional", systemImage: "leaf.fill").font(.headline)
+                                    TextField("This season", text: $seasonalIntention, axis: .vertical)
+                                        #if !os(watchOS)
+                                        .textFieldStyle(.roundedBorder)
+                                        #endif
+                                    Text(IntentionScope.season.dateRangeLabel(for: Date()))
+                                        .font(.caption).foregroundStyle(.secondary)
+                                    TextField("This year", text: $yearlyIntention, axis: .vertical)
+                                        #if !os(watchOS)
+                                        .textFieldStyle(.roundedBorder)
+                                        #endif
+                                }
+                                .padding(.horizontal, 40)
                             }
                             
                             Spacer(minLength: 10)
@@ -365,7 +381,7 @@ struct IntentionGuideView: View {
                                 }
                                 
                                 // Dynamic button based on whether intentions were created
-                                let hasIntentions = !monthlyIntention.isEmpty || !weeklyIntention.isEmpty || !dailyIntention.isEmpty
+                                let hasIntentions = !monthlyIntention.isEmpty || !weeklyIntention.isEmpty || !dailyIntention.isEmpty || !seasonalIntention.isEmpty || !yearlyIntention.isEmpty
                                 let hasPack = selectedIntentionPack != nil
                                 
                                 PrimaryButton(
@@ -566,14 +582,15 @@ struct IntentionGuideView: View {
         let entries: [(String, IntentionScope)] = [
             (selectedIntentionPack?.monthly ?? monthlyIntention, .month),
             (selectedIntentionPack?.weekly ?? weeklyIntention, .week),
-            (selectedIntentionPack?.daily ?? dailyIntention, .day)
+            (selectedIntentionPack?.daily ?? dailyIntention, .day),
+            (seasonalIntention, .season),
+            (yearlyIntention, .year)
         ]
         let intentions = entries.compactMap { text, scope -> Intention? in
             let text = text.trimmingCharacters(in: .whitespacesAndNewlines)
             guard !text.isEmpty else { return nil }
-            let component: Calendar.Component = scope == .month ? .month : scope == .week ? .weekOfYear : .day
             return Intention(text: text, scope: scope,
-                             date: calendar.dateInterval(of: component, for: today)?.start ?? today,
+                             date: scope.interval(containing: today, calendar: calendar)?.start ?? today,
                              themeId: defaultThemeId, customFont: defaultFont,
                              aiGenerated: selectedIntentionPack == nil && suggestionsWereGenerated)
         }
@@ -597,6 +614,8 @@ struct IntentionGuideView: View {
         case .month: return $monthlyIntention
         case .week: return $weeklyIntention
         case .day: return $dailyIntention
+        case .season: return $seasonalIntention
+        case .year: return $yearlyIntention
         }
     }
     
@@ -605,6 +624,8 @@ struct IntentionGuideView: View {
         case .month: return monthlyIntention
         case .week: return weeklyIntention
         case .day: return dailyIntention
+        case .season: return seasonalIntention
+        case .year: return yearlyIntention
         }
     }
     
@@ -613,11 +634,17 @@ struct IntentionGuideView: View {
         case .month: monthlyIntention = text
         case .week: weeklyIntention = text
         case .day: dailyIntention = text
+        case .season: seasonalIntention = text
+        case .year: yearlyIntention = text
         }
     }
     
     private func suggestionsForScope(_ scope: IntentionScope) -> [String] {
         switch scope {
+        case .season:
+            return ["Make room for a meaningful project", "Build a routine I can sustain", "Reconnect with the people who matter"]
+        case .year:
+            return ["Live with more curiosity", "Invest in lasting relationships", "Choose work that reflects my values"]
         case .month:
             return [
                 String(localized: "Build healthier habits"),
@@ -1601,6 +1628,8 @@ struct IntentionSummaryCard: View {
         case .month: return "calendar"
         case .week: return "calendar.badge.clock"
         case .day: return "sun.max.fill"
+        case .season: return "leaf.fill"
+        case .year: return "calendar.circle"
         }
     }
     
@@ -1673,8 +1702,14 @@ struct AIIntentionGeneratorView: View {
                             .multilineTextAlignment(.center)
                             .lineSpacing(4)
                         
-                        TextEditor(text: $userInfo)
-                            .frame(minHeight: 120)
+                        Group {
+                            #if os(watchOS)
+                            TextField("Your goals", text: $userInfo)
+                            #else
+                            TextEditor(text: $userInfo)
+                                .frame(minHeight: 120)
+                            #endif
+                        }
                             .padding(8)
                             .background(
                                 RoundedRectangle(cornerRadius: 12, style: .continuous)
@@ -1684,6 +1719,7 @@ struct AIIntentionGeneratorView: View {
                                             : Color.white.opacity(0.6)
                                     )
                             )
+                            #if !os(watchOS)
                             .overlay(
                                 Group {
                                     if userInfo.isEmpty {
@@ -1696,6 +1732,7 @@ struct AIIntentionGeneratorView: View {
                                 },
                                 alignment: .topLeading
                             )
+                            #endif
                         
                         if isGenerating {
                             ProgressView()

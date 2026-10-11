@@ -59,35 +59,40 @@ extension WidgetDataService {
             hasSetMonthlyBefore: hasSetMonthlyBefore
         )
         saveUserState(userState)
+
+        func snapshotTheme(for intention: Intention) -> ThemeData? {
+            switch widgetThemePreference {
+            case "ocean": return WidgetTheme.ocean
+            case "sunset": return WidgetTheme.sunset
+            case "forest": return WidgetTheme.forest
+            case "minimal": return WidgetTheme.minimal
+            case "midnight": return WidgetTheme.midnight
+            case "use_intention":
+                if let id = intention.themeId, let theme = themeRepository.getTheme(byId: id) {
+                    return ThemeData(backgroundColor: theme.backgroundColor, textColor: theme.textColor,
+                                     accentColor: theme.accentColor, fontName: theme.fontName)
+                }
+            default: break
+            }
+            guard let theme = appTheme else { return nil }
+            return ThemeData(backgroundColor: theme.lightBackground.hex ?? "#FAF9F6",
+                             textColor: theme.lightPrimaryText.hex ?? "#1A1A1A",
+                             accentColor: theme.lightAccent.hex, fontName: nil)
+        }
+        // Retain current and scheduled future focuses, not merely the one chosen today.
+        let now = Date()
+        saveWidgetRecords(allIntentions.filter { ($0.scope.interval(containing: $0.date)?.end ?? .distantPast) > now }.map { item in
+            let theme = snapshotTheme(for: item)
+            return IntentionWidgetRecord(id: item.id, text: item.text, scope: item.scope.rawValue,
+                scopeDate: item.date, quote: item.quote, aiGenerated: item.aiGenerated,
+                backgroundColor: theme?.backgroundColor, textColor: theme?.textColor,
+                accentColor: theme?.accentColor, fontName: theme?.fontName)
+        })
         
         // Get current intention - use provided one if it's actually current, otherwise query
         let intention: Intention? = {
             if let provided = currentIntention {
-                // Verify the provided intention is actually current (matches today)
-                let calendar = Calendar.current
-                let today = Date()
-                
-                switch provided.scope {
-                case .day:
-                    let startOfDay = calendar.startOfDay(for: today)
-                    let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
-                    if provided.date >= startOfDay && provided.date < endOfDay {
-                        return provided
-                    }
-                case .week:
-                    let weekStart = calendar.dateInterval(of: .weekOfYear, for: today)?.start ?? today
-                    let weekEnd = calendar.date(byAdding: .day, value: 7, to: weekStart)!
-                    if provided.date >= weekStart && provided.date < weekEnd {
-                        return provided
-                    }
-                case .month:
-                    let components = calendar.dateComponents([.year, .month], from: today)
-                    let monthStart = calendar.date(from: components) ?? today
-                    let monthEnd = calendar.date(byAdding: DateComponents(month: 1), to: monthStart)!
-                    if provided.date >= monthStart && provided.date < monthEnd {
-                        return provided
-                    }
-                }
+                if provided.scope.isCurrent(provided.date) { return provided }
             }
             // Fall back to querying
             return repository.getCurrentDisplayIntention()
@@ -208,6 +213,5 @@ extension WidgetDataService {
         }
     }
 }
-
 
 

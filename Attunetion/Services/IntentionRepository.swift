@@ -32,8 +32,7 @@ class IntentionRepository {
         transaction.autosaveEnabled = false
         var existing = try transaction.fetch(FetchDescriptor<Intention>())
         for intention in intentions {
-            let component: Calendar.Component = intention.scope == .day ? .day : intention.scope == .week ? .weekOfYear : .month
-            if let interval = Calendar.current.dateInterval(of: component, for: intention.date),
+            if let interval = intention.scope.interval(containing: intention.date),
                existing.contains(where: { $0.scope == intention.scope && $0.date >= interval.start && $0.date < interval.end }) {
                 throw IntentionSaveError.alreadyExists(intention.scope)
             }
@@ -56,69 +55,81 @@ class IntentionRepository {
         return (try? modelContext.fetch(descriptor)) ?? []
     }
     
-    /// Update an existing intention
-    func update(_ intention: Intention) throws {
-        intention.updatedAt = Date()
-        try modelContext.save()
+    /// Commit draft values without saving or rolling back other pending edits.
+    func update(
+        _ intention: Intention,
+        text: String,
+        scope: IntentionScope,
+        date: Date,
+        appearance: (themeId: UUID?, font: String?)? = nil
+    ) throws {
+        let transaction = ModelContext(modelContext.container)
+        transaction.autosaveEnabled = false
+        let id = intention.id
+        let descriptor = FetchDescriptor<Intention>(predicate: #Predicate<Intention> { $0.id == id })
+        do {
+            guard let stored = try transaction.fetch(descriptor).first else {
+                throw IntentionSaveError.notFound
+            }
+            stored.text = text
+            stored.scope = scope
+            stored.date = date
+            if let appearance {
+                stored.themeId = appearance.themeId
+                stored.customFont = appearance.font
+            }
+            stored.updatedAt = Date()
+            try transaction.save()
+
+            // Publish only this committed edit to the displayed object.
+            intention.text = stored.text
+            intention.scope = stored.scope
+            intention.date = stored.date
+            if appearance != nil {
+                intention.themeId = stored.themeId
+                intention.customFont = stored.customFont
+            }
+            intention.updatedAt = stored.updatedAt
+        } catch {
+            transaction.rollback()
+            throw error
+        }
     }
     
-    /// Delete an intention
+    /// Delete durably before changing the displayed context.
     func delete(_ intention: Intention) throws {
-        modelContext.delete(intention)
-        try modelContext.save()
+        let transaction = ModelContext(modelContext.container)
+        transaction.autosaveEnabled = false
+        let id = intention.id
+        let descriptor = FetchDescriptor<Intention>(predicate: #Predicate<Intention> { $0.id == id })
+        do {
+            guard let stored = try transaction.fetch(descriptor).first else {
+                throw IntentionSaveError.notFound
+            }
+            transaction.delete(stored)
+            try transaction.save()
+            modelContext.delete(intention)
+        } catch {
+            transaction.rollback()
+            throw error
+        }
     }
     
     // MARK: - Query Methods
     
     /// Get intention for a specific date and scope
     func getIntention(for date: Date, scope: IntentionScope) -> Intention? {
-        let calendar = Calendar.current
-        
         let allScopeIntentions = getIntentions(scope: scope)
-
-        // Filter by date range based on scope
-        switch scope {
-        case .day:
-            let startOfDay = calendar.startOfDay(for: date)
-            let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
-            return allScopeIntentions.first { intention in
-                intention.date >= startOfDay && intention.date < endOfDay
-            }
-            
-        case .week:
-            let weekStart = calendar.dateInterval(of: .weekOfYear, for: date)?.start ?? date
-            let weekEnd = calendar.date(byAdding: .day, value: 7, to: weekStart)!
-            return allScopeIntentions.first { intention in
-                intention.date >= weekStart && intention.date < weekEnd
-            }
-            
-        case .month:
-            let components = calendar.dateComponents([.year, .month], from: date)
-            let monthStart = calendar.date(from: components) ?? date
-            let monthEnd = calendar.date(byAdding: DateComponents(month: 1), to: monthStart)!
-            return allScopeIntentions.first { intention in
-                intention.date >= monthStart && intention.date < monthEnd
-            }
-        }
+        guard let period = scope.interval(containing: date) else { return nil }
+        return allScopeIntentions.first { $0.date >= period.start && $0.date < period.end }
     }
     
-    /// Get the current display intention based on hierarchy (day > week > month)
+    /// Use the closest current focus, falling back through broader time spans.
     func getCurrentDisplayIntention() -> Intention? {
         let today = Date()
         
-        // Check day first
-        if let dayIntention = getIntention(for: today, scope: .day) {
-            return dayIntention
-        }
-        
-        // Check week second
-        if let weekIntention = getIntention(for: today, scope: .week) {
-            return weekIntention
-        }
-        
-        // Check month third
-        if let monthIntention = getIntention(for: today, scope: .month) {
-            return monthIntention
+        for scope in IntentionScope.allCases {
+            if let intention = getIntention(for: today, scope: scope) { return intention }
         }
         
         return nil
@@ -173,11 +184,14 @@ class IntentionRepository {
 
 enum IntentionSaveError: LocalizedError {
     case alreadyExists(IntentionScope)
+    case notFound
 
     var errorDescription: String? {
         switch self {
         case .alreadyExists(let scope):
             return "An intention already exists for this \(scope.rawValue). Edit it from the home screen, or choose another date."
+        case .notFound:
+            return "This intention is no longer saved. Your draft has been kept."
         }
     }
 }

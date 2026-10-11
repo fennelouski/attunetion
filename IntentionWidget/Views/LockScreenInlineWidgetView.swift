@@ -40,6 +40,10 @@ struct LockScreenInlineWidgetView: View {
             return "calendar"
         case "month":
             return "calendar.badge.clock"
+        case "season":
+            return "leaf.fill"
+        case "year":
+            return "calendar.circle"
         default:
             return "sun.max.fill"
         }

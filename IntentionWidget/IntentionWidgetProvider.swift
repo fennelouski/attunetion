@@ -20,9 +20,15 @@ struct IntentionWidgetProvider: TimelineProvider {
     }
     
     func getSnapshot(in context: Context, completion: @escaping (IntentionWidgetEntry) -> Void) {
-        // For preview/gallery, return mock data quickly
-        let entry = IntentionWidgetEntry.mock()
-        completion(entry)
+        if context.isPreview {
+            completion(IntentionWidgetEntry.mock())
+            return
+        }
+        completion(IntentionWidgetEntry(
+            date: Date(),
+            intention: getCurrentIntention(),
+            theme: getCurrentTheme()
+        ))
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<IntentionWidgetEntry>) -> Void) {
@@ -65,6 +71,6 @@ struct IntentionWidgetProvider: TimelineProvider {
     
     /// Calculate the next date when the widget should update
     private func calculateNextUpdateDate(for intention: IntentionData?) -> Date {
-        WidgetRefreshSchedule.nextRefreshDate(scope: intention?.scope, after: Date())
+        WidgetDataService.shared.nextBoundary(after: Date())
     }
 }

@@ -81,6 +81,12 @@ struct EditIntentionView: View {
                         }
                     }
                     
+                    if selectedScope == .season || selectedScope == .year {
+                        Text(selectedScope.dateRangeLabel(for: selectedDate))
+                            .font(.caption).foregroundStyle(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+
                     // Date picker
                     DatePicker(
                         "Date",
@@ -206,11 +212,20 @@ struct EditIntentionView: View {
         #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
+                    #if os(iOS)
+                    Button {
+                        dismiss()
+                    } label: {
+                        Label("Cancel", systemImage: "xmark")
+                    }
+                    .labelStyle(.iconOnly)
+                    #else
                     Button("Cancel") {
                         dismiss()
                     }
                     .buttonStyle(.bordered)
                     .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                    #endif
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
@@ -299,15 +314,11 @@ struct EditIntentionView: View {
             return
         }
         
-        // Update intention
-        intention.text = trimmedText
-        intention.scope = selectedScope
-        intention.date = selectedDate
-        intention.themeId = selectedTheme?.id
-        intention.customFont = selectedFont
-        
         do {
-            try viewModel.updateIntention(intention)
+            try viewModel.updateIntention(
+                intention, text: trimmedText, scope: selectedScope, date: selectedDate,
+                appearance: (themeId: selectedTheme?.id, font: selectedFont)
+            )
             dismiss()
         } catch {
             validationMessage = "Failed to update intention: \(error.localizedDescription)"

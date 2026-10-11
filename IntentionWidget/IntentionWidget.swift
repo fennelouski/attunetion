@@ -42,7 +42,7 @@ struct IntentionWidget: Widget {
             IntentionWidgetView(entry: entry)
         }
         .configurationDisplayName("Daily Intention")
-        .description("Display your current daily, weekly, or monthly intention.")
+        .description("Keep your day, week, month, season or year intention in view.")
         .supportedFamilies(families)
     }
 }
@@ -91,4 +91,3 @@ struct IntentionWidget: Widget {
     IntentionWidgetEntry.empty()
 }
 #endif
-

@@ -33,21 +33,7 @@ struct IntentionRowView: View {
 
     /// Determines if this intention is currently active (today, this week, or this month)
     private var isActiveIntention: Bool {
-        let calendar = Calendar.current
-        let now = Date()
-
-        switch intention.scope {
-        case .day:
-            return calendar.isDate(intention.date, inSameDayAs: now)
-        case .week:
-            guard let intentionWeek = calendar.dateInterval(of: .weekOfYear, for: intention.date),
-                  let currentWeek = calendar.dateInterval(of: .weekOfYear, for: now) else {
-                return false
-            }
-            return intentionWeek.start == currentWeek.start
-        case .month:
-            return calendar.isDate(intention.date, equalTo: now, toGranularity: .month)
-        }
+        intention.scope.isCurrent(intention.date)
     }
     
     var body: some View {
@@ -73,7 +59,7 @@ struct IntentionRowView: View {
                             return AnyView(FastOrbitalBeadAnimation(size: orbitSize, color: scopeColor))
                         case .week:
                             return AnyView(WeeklyOrbitalBeadAnimation(size: orbitSize, color: scopeColor))
-                        case .month:
+                        case .month, .season, .year:
                             return AnyView(SlowOrbitalBeadAnimation(size: orbitSize, color: scopeColor))
                         }
                     }()

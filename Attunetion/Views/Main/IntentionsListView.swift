@@ -631,6 +631,8 @@ struct CurrentIntentionCard: View {
         case .day: return themeManager.accentColor(for: colorScheme).toSwiftUIColor()
         case .week: return themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.8)
         case .month: return themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.6)
+        case .season: return themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.7)
+        case .year: return themeManager.accentColor(for: colorScheme).toSwiftUIColor().opacity(0.65)
         }
     }
     

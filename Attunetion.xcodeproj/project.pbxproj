@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		80A64A532EDF5F0700C98A14 /* IntentionWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 80A64A422EDF5F0700C98A14 /* IntentionWidget.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F06100012F00000000000001 /* IntentionPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06100012F00000000000002 /* IntentionPeriod.swift */; };
+		80A64A532EDF5F0700C98A14 /* IntentionWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 80A64A422EDF5F0700C98A14 /* IntentionWidget.appex */; platformFilters = (ios, macos, xros, ); settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F06100012F00000000000002 /* IntentionPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attunetion/Services/IntentionPeriod.swift; sourceTree = SOURCE_ROOT; };
 		80A64A132EDF5F0600C98A14 /* Attunetion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Attunetion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80A64A242EDF5F0700C98A14 /* AttunetionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AttunetionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		80A64A2E2EDF5F0700C98A14 /* AttunetionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AttunetionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -369,6 +371,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F06100012F00000000000001 /* IntentionPeriod.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +390,7 @@
 		};
 		80A64A542EDF5F0700C98A14 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilters = (ios, macos, xros, );
 			target = 80A64A472EDF5F0700C98A14 /* IntentionWidget */;
 			targetProxy = 80A64A512EDF5F0700C98A14 /* PBXContainerItemProxy */;
 		};

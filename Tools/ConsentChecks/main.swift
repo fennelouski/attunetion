@@ -78,6 +78,33 @@ struct ConsentChecks {
             } catch ConsentError.termsNotAccepted {}
         }
         precondition(RequestProbe.captured.count == 3, "Revoked requests reached the network")
+        // Execute the exact history projection extracted from AutoIntentionService.
+        // New periods appear among the newest records, before older API-compatible ones.
+        let scopes: [IntentionScope] = [.season, .year, .day, .week, .month, .season,
+            .day, .year, .week, .month, .day, .week, .month, .day, .week, .month, .day]
+        let allIntentions = scopes.enumerated().map { index, scope in
+            Intention(text: "Synthetic history \(index)", scope: scope,
+                      date: Date(timeIntervalSince1970: 1_800_000_000 - Double(index * 86_400)))
+        }
+        let expected = Array(allIntentions.filter {
+            $0.scope == .day || $0.scope == .week || $0.scope == .month
+        }.prefix(10))
+        let history = weeklyHistoryForConsentCheck(from: allIntentions)
+        let encoded = try JSONEncoder().encode(history)
+        let rows = try JSONSerialization.jsonObject(with: encoded) as! [[String: String]]
+        guard rows.count == 10,
+              rows.map({ $0["text"] }) == expected.map({ Optional($0.text) }),
+              rows.map({ $0["scope"] }) == expected.map({ Optional($0.scope.rawValue) }),
+              rows.map({ $0["date"] }) == expected.map({ Optional(ISO8601DateFormatter().string(from: $0.date)) }),
+              rows.allSatisfy({ ["day", "week", "month"].contains($0["scope"] ?? "") }) else {
+            FileHandle.standardError.write(Data("FAIL: Weekly history must contain the ten newest API-compatible records in order.\n".utf8))
+            exit(1)
+        }
+        precondition(weeklyHistoryForConsentCheck(from: []).isEmpty)
+        precondition(weeklyHistoryForConsentCheck(from: Array(allIntentions.prefix(2))).isEmpty)
+        let shortHistory = weeklyHistoryForConsentCheck(from: Array(allIntentions.prefix(5)))
+        precondition(shortHistory.map(\.text) == Array(expected.prefix(3)).map(\.text))
         print("PASS: all five AI endpoints deny before consent and after revocation; accepted theme decodes; revocation discards in-flight response; health works without consent. No external requests.")
+        print("PASS: weekly history filters season/year before its ten-record limit; encoded text, scope, date and order match; empty, unsupported-only and short histories stay bounded.")
     }
 }
