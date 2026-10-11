@@ -25,6 +25,8 @@
 		<key>UIImageName</key>
 		<string></string>
 	</dict>
+	<key>UIStatusBarHidden</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -52,5 +54,7 @@
 			<string>Editor</string>
 		</dict>
 	</array>
+	<key>WKRunsIndependentlyOfCompanionApp</key>
+	<false/>
 </dict>
 </plist>

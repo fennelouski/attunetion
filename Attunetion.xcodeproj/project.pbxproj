@@ -42,12 +42,34 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				80A64A532EDF5F0700C98A14 /* IntentionWidget.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		80A64A552EDF5F0700C98A15 /* Embed IntentionWidget for iOS only */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Embed IntentionWidget for iOS only";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${PLATFORM_NAME}\" = \"iphonesimulator\" ] || [ \"${PLATFORM_NAME}\" = \"iphoneos\" ]; then\n  mkdir -p \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/PlugIns\"\n  cp -R \"${BUILT_PRODUCTS_DIR}/IntentionWidget.appex\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/PlugIns/\"\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXFileReference section */
 		F06100012F00000000000002 /* IntentionPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attunetion/Services/IntentionPeriod.swift; sourceTree = SOURCE_ROOT; };
@@ -168,6 +190,7 @@
 				80A64A102EDF5F0600C98A14 /* Frameworks */,
 				80A64A112EDF5F0600C98A14 /* Resources */,
 				80A64A522EDF5F0700C98A14 /* Embed App Extensions */,
+				80A64A552EDF5F0700C98A15 /* Embed IntentionWidget for iOS only */,
 			);
 			buildRules = (
 			);
@@ -412,6 +435,7 @@
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Attunetion/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Intentions;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -426,7 +450,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nathanfennel.Attunetion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -459,6 +483,7 @@
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Attunetion/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Intentions;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -473,7 +498,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nathanfennel.Attunetion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;

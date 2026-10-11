@@ -8,41 +8,5 @@
 import Foundation
 import SwiftData
 
-/// Model representing user profile information for AI-generated intentions
-@Model
-final class UserProfile {
-    var id: UUID = UUID()
-    var userInfo: String = "" // Free-form text about the user
-    var autoGenerateEnabled: Bool = false // Whether to auto-generate intentions
-    var lastGeneratedWeekStart: Date? // Start date of last generated week
-    var totalGenerations: Int = 0 // Total number of generations requested
-    var totalFeedbackGiven: Int = 0 // Total number of feedback submissions
-    var hasAcceptedTerms: Bool = false // Whether user has accepted ToS and EULA for suggestion features
-    var termsAcceptedDate: Date? // Date when terms were accepted
-    var createdAt: Date = Date()
-    var updatedAt: Date = Date()
-
-    init(
-        id: UUID = UUID(),
-        userInfo: String = "",
-        autoGenerateEnabled: Bool = false,
-        lastGeneratedWeekStart: Date? = nil,
-        totalGenerations: Int = 0,
-        totalFeedbackGiven: Int = 0,
-        hasAcceptedTerms: Bool = false,
-        termsAcceptedDate: Date? = nil,
-        createdAt: Date = Date(),
-        updatedAt: Date = Date()
-    ) {
-        self.id = id
-        self.userInfo = userInfo
-        self.autoGenerateEnabled = autoGenerateEnabled
-        self.lastGeneratedWeekStart = lastGeneratedWeekStart
-        self.totalGenerations = totalGenerations
-        self.totalFeedbackGiven = totalFeedbackGiven
-        self.hasAcceptedTerms = hasAcceptedTerms
-        self.termsAcceptedDate = termsAcceptedDate
-        self.createdAt = createdAt
-        self.updatedAt = updatedAt
-    }
-}
+/// Model representing user profile information for AI-generated intentions (versioned schema V1)
+typealias UserProfile = AttunetionSchemaV1.UserProfile

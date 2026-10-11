@@ -21,6 +21,14 @@ final class IntentionTheme {
     var isPreset: Bool
     var isAIGenerated: Bool
     var createdAt: Date
+    var themeDescription: String?
+
+    // Optional Unsplash (or proxy) background image
+    var backgroundImageURL: String?
+    var unsplashPhotoId: String?
+    var unsplashDownloadLocation: String?
+    var attributionText: String?
+    var attributionURL: String?
     
     init(
         id: UUID = UUID(),
@@ -31,7 +39,13 @@ final class IntentionTheme {
         fontName: String? = nil,
         isPreset: Bool = false,
         isAIGenerated: Bool = false,
-        createdAt: Date = Date()
+        createdAt: Date = Date(),
+        themeDescription: String? = nil,
+        backgroundImageURL: String? = nil,
+        unsplashPhotoId: String? = nil,
+        unsplashDownloadLocation: String? = nil,
+        attributionText: String? = nil,
+        attributionURL: String? = nil
     ) {
         self.id = id
         self.name = name
@@ -42,6 +56,12 @@ final class IntentionTheme {
         self.isPreset = isPreset
         self.isAIGenerated = isAIGenerated
         self.createdAt = createdAt
+        self.themeDescription = themeDescription
+        self.backgroundImageURL = backgroundImageURL
+        self.unsplashPhotoId = unsplashPhotoId
+        self.unsplashDownloadLocation = unsplashDownloadLocation
+        self.attributionText = attributionText
+        self.attributionURL = attributionURL
     }
 }
 
@@ -90,6 +110,9 @@ extension IntentionTheme {
         }
         return backgroundColorValue
     }
+
+    /// Whether this theme uses a background image (e.g. Unsplash)
+    var hasBackgroundImage: Bool {
+        (backgroundImageURL ?? "").isEmpty == false
+    }
 }
-
-

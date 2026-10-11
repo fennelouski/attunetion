@@ -13,6 +13,7 @@ end = source.index('\n\nstruct DefaultThemePickerView:', start)
 Path(sys.argv[1]).write_text('import Foundation\nimport SwiftData\n' + source[start:end])
 PY
 xcrun swiftc -parse-as-library -swift-version 5 \
+  Attunetion/AttunetionSchema.swift \
   Attunetion/Services/IntentionPeriod.swift \
   Attunetion/Models/Intention.swift \
   Attunetion/Models/IntentionTheme.swift \

@@ -406,11 +406,7 @@ struct IntentionsListView: View {
                                                     ForEach(viewModel.pastAndFutureIntentions) { intention in
                                                         VStack(spacing: 0) {
                                                             NavigationLink(value: intention.id) {
-                                                                IntentionRowView(
-                                                                    intention: intention,
-                                                                    themeManager: themeManager,
-                                                                    style: intentionListStyle
-                                                                )
+                                                                intentionRow(for: intention)
                                                                 .padding(.horizontal, cardHorizontalPadding)
                                                             }
                                                             .buttonStyle(.plain)
@@ -595,6 +591,15 @@ struct IntentionsListView: View {
                 viewModel = IntentionsViewModel(modelContext: modelContext)
             }
         }
+    }
+
+    private func intentionRow(for intention: Intention) -> IntentionRowView {
+        IntentionRowView(
+            intention: intention,
+            themeManager: themeManager,
+            style: intentionListStyle,
+            intentionTheme: viewModel.getTheme(for: intention)
+        )
     }
 
     private func handlePendingURL() {

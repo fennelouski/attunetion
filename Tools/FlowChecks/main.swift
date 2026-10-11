@@ -12,19 +12,20 @@ struct FlowChecks {
         let context = container.mainContext
         context.autosaveEnabled = false
         let repository = IntentionRepository(modelContext: context)
+        let scopeCount = IntentionScope.allCases.count
         let today = Calendar.current.startOfDay(for: Date())
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
         try repository.create(IntentionScope.allCases.map {
             Intention(text: "Synthetic \($0.rawValue)", scope: $0, date: today)
         })
-        precondition(repository.getAll().count == 3)
-        precondition(repository.search(query: "Synthetic").count == 3)
-        precondition(repository.getIntentions(from: today, to: tomorrow).count == 3)
+        precondition(repository.getAll().count == scopeCount)
+        precondition(repository.search(query: "Synthetic").count == scopeCount)
+        precondition(repository.getIntentions(from: today, to: tomorrow).count == scopeCount)
         for scope in IntentionScope.allCases {
             precondition(repository.getIntention(for: today, scope: scope)?.scope == scope)
             precondition(repository.getIntentions(scope: scope).count == 1)
         }
-        print("PASS: Whole guide persists; date/scope queries and the main context see all three records")
+        print("PASS: Whole guide persists; date/scope queries and the main context see all supported scope records")
         do {
             try repository.create([
                 Intention(text: "Must not partially persist", scope: .day, date: tomorrow),
@@ -32,16 +33,16 @@ struct FlowChecks {
             ])
             fatalError("Duplicate guide unexpectedly saved")
         } catch IntentionSaveError.alreadyExists {
-            precondition(repository.getAll().count == 3)
+            precondition(repository.getAll().count == scopeCount)
             let persistedCount = try ModelContext(container).fetchCount(FetchDescriptor<Intention>())
-            precondition(persistedCount == 3)
+            precondition(persistedCount == scopeCount)
         }
         let existing = repository.getIntention(for: today, scope: .day)!
         existing.text = "Pending edit preserved"
         try repository.create(Intention(text: "Tomorrow", scope: .day, date: tomorrow))
         let checkContext = ModelContext(container)
         let reloaded = try checkContext.fetch(FetchDescriptor<Intention>())
-        precondition(reloaded.count == 4 && reloaded.contains { $0.text == "Pending edit preserved" })
+        precondition(reloaded.count == scopeCount + 1 && reloaded.contains { $0.text == "Pending edit preserved" })
         precondition(repository.getIntention(byId: existing.id)?.id == existing.id)
         print("PASS: Duplicate batch rejected without partial inserts; existing pending edits survive the next save")
 
@@ -58,7 +59,7 @@ struct FlowChecks {
             fatalError("Read-only save unexpectedly succeeded")
         } catch {
             let preservedCount = try readOnlyContext.fetchCount(FetchDescriptor<Intention>())
-            precondition(preservedCount == 4)
+            precondition(preservedCount == scopeCount + 1)
             precondition(!readOnlyContext.hasChanges)
         }
         print("PASS: Actual read-only store failure leaves all prior records and no partial guide")

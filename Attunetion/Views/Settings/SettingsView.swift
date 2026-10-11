@@ -24,6 +24,8 @@ struct SettingsView: View {
     @Query private var preferencesQuery: [UserPreferences]
     @Query private var intentionThemes: [IntentionTheme]
     @State private var preferenceSaveError: String?
+    @State private var unsplashUnlockKeyInput: String = ""
+    @State private var unsplashKeySavedMessage: String? = nil
     @State private var showingAbout = false
     @State private var showingAppThemePicker = false
     @State private var showingOnboarding = false
@@ -247,7 +249,9 @@ struct SettingsView: View {
     private var sectionForm: some View {
         Form {
             switch selectedSection {
-            case .appearance: appearanceSections
+            case .appearance:
+                appearanceSections
+                photoThemesSection
             case .intentions: intentionsSection
             case .reminders:
                 reminderSection
@@ -264,6 +268,39 @@ struct SettingsView: View {
         .tint(colorScheme == .light
               ? themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor()
               : themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+    }
+
+    @ViewBuilder
+    private var photoThemesSection: some View {
+        Section {
+            SecureField("Unsplash unlock key", text: $unsplashUnlockKeyInput)
+                .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                #if os(iOS)
+                .autocapitalization(.none)
+                .autocorrectionDisabled()
+                #endif
+            if let msg = unsplashKeySavedMessage {
+                Text(msg)
+                    .font(.caption)
+                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+            }
+            Button(action: {
+                APIClient.shared.unsplashUnlockKey = unsplashUnlockKeyInput.isEmpty ? nil : unsplashUnlockKeyInput
+                unsplashKeySavedMessage = unsplashUnlockKeyInput.isEmpty ? "Key cleared." : "Key saved. You have unlimited photo themes and can submit stable photos to the shared library."
+                unsplashUnlockKeyInput = ""
+                #if os(iOS)
+                HapticFeedback.light()
+                #endif
+            }) {
+                Text(unsplashUnlockKeyInput.isEmpty ? "Clear saved key" : "Save key")
+                    .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+            }
+            .disabled(unsplashUnlockKeyInput.isEmpty && APIClient.shared.unsplashUnlockKey == nil)
+        } header: {
+            ThemedSectionHeader(text: "Photo themes", themeManager: themeManager)
+        } footer: {
+            ThemedSectionFooter(text: "If you have an unlock key, you get unlimited Unsplash photo themes and can submit photos you've used for 7+ days to the shared library for all users. Leave blank to clear.", themeManager: themeManager)
+        }
     }
 
     @ViewBuilder

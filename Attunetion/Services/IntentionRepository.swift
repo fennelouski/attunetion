@@ -75,6 +75,9 @@ class IntentionRepository {
             stored.scope = scope
             stored.date = date
             if let appearance {
+                if stored.themeId != appearance.themeId {
+                    stored.themeSetAt = appearance.themeId != nil ? Date() : nil
+                }
                 stored.themeId = appearance.themeId
                 stored.customFont = appearance.font
             }
@@ -87,6 +90,7 @@ class IntentionRepository {
             intention.date = stored.date
             if appearance != nil {
                 intention.themeId = stored.themeId
+                intention.themeSetAt = stored.themeSetAt
                 intention.customFont = stored.customFont
             }
             intention.updatedAt = stored.updatedAt

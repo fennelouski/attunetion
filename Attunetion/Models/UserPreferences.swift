@@ -208,41 +208,10 @@ enum IntentionFrequency: String, Codable, CaseIterable {
     }
 }
 
-/// Model representing user preferences (singleton - should only have one instance)
-@Model
-final class UserPreferences {
-    var id: UUID = UUID()
-    var onboardingCompleted: Bool = false
-    var defaultThemeId: UUID?
-    var appThemeId: String? // App-wide UI theme ID (stored as string for CloudKit compatibility)
-    var defaultFont: String?
-    var defaultIntentionFrequency: String = "monthly" // Store as string for CloudKit compatibility (monthly/weekly/daily)
-    var widgetThemeId: String? // Widget appearance theme ID (nil = use intention's theme)
+/// Model representing user preferences (singleton - should only have one instance) (versioned schema V1)
+typealias UserPreferences = AttunetionSchemaV1.UserPreferences
     
-    // Store NotificationSettings as JSON string for CloudKit compatibility
-    @Attribute(.externalStorage) var notificationSettingsData: Data?
-    
-    init(
-        id: UUID = UUID(),
-        onboardingCompleted: Bool = false,
-        defaultThemeId: UUID? = nil,
-        appThemeId: String? = nil,
-        defaultFont: String? = nil,
-        defaultIntentionFrequency: IntentionFrequency = .monthly,
-        widgetThemeId: String? = nil,
-        notificationSettings: NotificationSettings = NotificationSettings()
-    ) {
-        self.id = id
-        self.onboardingCompleted = onboardingCompleted
-        self.defaultThemeId = defaultThemeId
-        self.appThemeId = appThemeId
-        self.defaultFont = defaultFont
-        self.defaultIntentionFrequency = defaultIntentionFrequency.rawValue
-        self.widgetThemeId = widgetThemeId
-        // Encode synchronously - NotificationSettings is a plain struct, so encoding is safe
-        self.notificationSettingsData = Self.encodeNotificationSettings(notificationSettings)
-    }
-    
+extension UserPreferences {
     /// Convenience property to get/set intention frequency
     var intentionFrequency: IntentionFrequency {
         get {
@@ -275,7 +244,7 @@ final class UserPreferences {
     }
     
     /// Nonisolated helper to encode NotificationSettings
-    nonisolated private static func encodeNotificationSettings(_ settings: NotificationSettings) -> Data? {
+    nonisolated static func encodeNotificationSettings(_ settings: NotificationSettings) -> Data? {
         return try? JSONEncoder().encode(settings)
     }
 }

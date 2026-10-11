@@ -101,6 +101,28 @@ struct ThemeData: Codable {
     let textColor: String // Hex color
     let accentColor: String? // Hex color
     let fontName: String?
+    /// Optional background image URL (e.g. from backend proxy)
+    let backgroundImageURL: String?
+    let attributionText: String?
+    let attributionURL: String?
+
+    init(
+        backgroundColor: String,
+        textColor: String,
+        accentColor: String? = nil,
+        fontName: String? = nil,
+        backgroundImageURL: String? = nil,
+        attributionText: String? = nil,
+        attributionURL: String? = nil
+    ) {
+        self.backgroundColor = backgroundColor
+        self.textColor = textColor
+        self.accentColor = accentColor
+        self.fontName = fontName
+        self.backgroundImageURL = backgroundImageURL
+        self.attributionText = attributionText
+        self.attributionURL = attributionURL
+    }
     
     /// Mock theme for development
     static func mock() -> ThemeData {
@@ -110,5 +132,9 @@ struct ThemeData: Codable {
             accentColor: "#60A5FA",
             fontName: nil
         )
+    }
+
+    var hasBackgroundImage: Bool {
+        (backgroundImageURL ?? "").isEmpty == false
     }
 }

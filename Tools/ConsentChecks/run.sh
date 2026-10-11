@@ -15,6 +15,10 @@ body = source[source.index(start):source.index(end)].rstrip()
 Path(sys.argv[2]).write_text('import Foundation\n\n@MainActor\nfunc weeklyHistoryForConsentCheck(from allIntentions: [Intention]) -> [PreviousIntentionForGeneration] {\n' + body + '\n    return previousIntentions\n}\n')
 PY
 xcrun swiftc -parse-as-library -swift-version 5 \
+  Attunetion/AttunetionSchema.swift \
+  Attunetion/Models/IntentionTheme.swift \
+  Attunetion/Models/UserPreferences.swift \
+  Attunetion/Models/IntentionFeedback.swift \
   Attunetion/Services/IntentionPeriod.swift \
   Attunetion/Models/Intention.swift \
   Attunetion/Models/UserProfile.swift \

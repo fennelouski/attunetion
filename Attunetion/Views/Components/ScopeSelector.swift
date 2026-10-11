@@ -73,46 +73,50 @@ struct ScopeSelector: View {
     var body: some View {
         HStack(spacing: buttonSpacing) {
             // "All" button
-            Button(action: {
+            scopeButton(label: "All", isSelected: selectedScope == nil) {
                 selectedScope = nil
-            }) {
-                Text("All")
-                    .font(.system(size: buttonFontSize, weight: selectedScope == nil ? .semibold : .regular, design: fontDesign))
-                    .frame(maxWidth: .infinity)
             }
-            .buttonStyle(.borderedProminent)
-            .accessibilityAddTraits(selectedScope == nil ? .isSelected : [])
-            .controlSize(.regular)
-            .tint(selectedScope == nil 
-                ? themeManager.buttonBackgroundColor(for: colorScheme).toSwiftUIColor()
-                : (colorScheme == .dark
-                    ? themeManager.currentTheme.darkSecondaryButtonBackground.toSwiftUIColor()
-                    : Color.white))
-            .foregroundColor(selectedScope == nil
-                ? themeManager.buttonTextColor(for: colorScheme).toSwiftUIColor()
-                : themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-            
             // Scope buttons (only show available scopes)
             ForEach(availableScopes, id: \.self) { scope in
-                Button(action: {
+                scopeButton(label: scope.rawValue.capitalized, isSelected: selectedScope == scope) {
                     selectedScope = selectedScope == scope ? nil : scope
-                }) {
-                    Text(scope.rawValue.capitalized)
-                        .font(.system(size: buttonFontSize, weight: selectedScope == scope ? .semibold : .regular, design: fontDesign))
-                        .frame(maxWidth: .infinity)
                 }
-                .buttonStyle(.borderedProminent)
-                .accessibilityAddTraits(selectedScope == scope ? .isSelected : [])
-                .controlSize(.regular)
-                .tint(selectedScope == scope
-                    ? themeManager.buttonBackgroundColor(for: colorScheme).toSwiftUIColor()
-                    : (colorScheme == .dark
-                        ? themeManager.currentTheme.darkSecondaryButtonBackground.toSwiftUIColor()
-                        : Color.white))
-                .foregroundColor(selectedScope == scope
-                    ? themeManager.buttonTextColor(for: colorScheme).toSwiftUIColor()
-                    : themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
             }
+        }
+    }
+
+    @ViewBuilder
+    private func scopeButton(label: String, isSelected: Bool, action: @escaping () -> Void) -> some View {
+        let tintColor = isSelected
+            ? themeManager.buttonBackgroundColor(for: colorScheme).toSwiftUIColor()
+            : (colorScheme == .dark
+                ? themeManager.currentTheme.darkSecondaryButtonBackground.toSwiftUIColor()
+                : Color.white)
+        let textColor = isSelected
+            ? themeManager.buttonTextColor(for: colorScheme).toSwiftUIColor()
+            : themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor()
+
+        if isSelected {
+            Button(action: action) {
+                Text(label)
+                    .font(.system(size: buttonFontSize, weight: .semibold, design: fontDesign))
+                    .frame(maxWidth: .infinity)
+            }
+            .accessibilityAddTraits(.isSelected)
+            .buttonStyle(.borderedProminent)
+            .controlSize(.regular)
+            .tint(tintColor)
+            .foregroundColor(textColor)
+        } else {
+            Button(action: action) {
+                Text(label)
+                    .font(.system(size: buttonFontSize, weight: .regular, design: fontDesign))
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.regular)
+            .tint(tintColor)
+            .foregroundColor(textColor)
         }
     }
 }

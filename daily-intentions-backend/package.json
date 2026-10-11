@@ -27,6 +27,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@vercel/blob": "^0.25.1",
     "openai": "^6.39.1"
   },
   "devDependencies": {

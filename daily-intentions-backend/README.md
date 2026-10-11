@@ -398,6 +398,10 @@ Check API health status.
 | `API_SECRET_KEY` | No | API key for authentication (skip for dev) |
 | `RATE_LIMIT_ENABLED` | No | Enable rate limiting (default: true) |
 | `DATABASE_URL` | No | Database URL (if using persistent storage) |
+| `UNSPLASH_ACCESS_KEY` | No | Unsplash API access key (for theme photos). Get from [Unsplash Developers](https://unsplash.com/oauth/applications). |
+| `UNSPLASH_PRIVILEGED_USER_IDS` | No | Comma-separated list of user IDs (X-User-Id) allowed to use Unsplash search. Others only see curated photos. |
+| `UNSPLASH_UNLOCK_KEY` | No | Key that users can enter in the app for unlimited Unsplash themes and ability to submit 7-day-stable photos to the curated library. |
+| `BLOB_READ_WRITE_TOKEN` | No | Vercel Blob token for caching Unsplash images. If unset, proxy redirects to Unsplash directly. |
 
 ### CORS
 

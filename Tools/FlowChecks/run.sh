@@ -10,6 +10,12 @@ source = Path('Attunetion/Views/Main/IntentionsListView.swift').read_text()
 Path(sys.argv[1]).write_text('import Foundation\n' + source[source.index('enum IntentionLink: Equatable {'):])
 PY
 xcrun swiftc -parse-as-library -swift-version 5 \
+  Attunetion/AttunetionSchema.swift \
+  Attunetion/Services/IntentionPeriod.swift \
+  Attunetion/Models/IntentionTheme.swift \
+  Attunetion/Models/UserPreferences.swift \
+  Attunetion/Models/UserProfile.swift \
+  Attunetion/Models/IntentionFeedback.swift \
     Attunetion/Models/Intention.swift Attunetion/Services/IntentionRepository.swift \
     "$check_dir/IntentionLink.swift" Tools/FlowChecks/main.swift -o "$check_dir/check"
 "$check_dir/check" "$check_dir"

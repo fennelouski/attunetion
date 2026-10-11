@@ -18,26 +18,27 @@ struct AttunetionApp: App {
     @State private var onboardingCompletionID = UUID()
     
     var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Intention.self,
-            IntentionTheme.self,
-            UserPreferences.self,
-            UserProfile.self,
-            IntentionFeedback.self,
-        ])
-        
-        // Keep the existing app-private store when enabling the widget app group.
-        // Automatic CloudKit sync requires a registered container in the signed
-        // entitlements; the current profile does not contain one yet.
-        let modelConfiguration = ModelConfiguration(
-            schema: schema,
+        // Versioned schema preserves the existing app-private store.
+        let cloudKitConfig = ModelConfiguration(
             isStoredInMemoryOnly: false,
             groupContainer: .none,
             cloudKitDatabase: .automatic
         )
 
+        func makeContainer(config: ModelConfiguration) throws -> ModelContainer {
+            try ModelContainer(
+                for: AttunetionSchemaV1.Intention.self,
+                AttunetionSchemaV1.IntentionTheme.self,
+                AttunetionSchemaV1.UserPreferences.self,
+                AttunetionSchemaV1.UserProfile.self,
+                AttunetionSchemaV1.IntentionFeedback.self,
+                migrationPlan: AttunetionMigrationPlan.self,
+                configurations: config
+            )
+        }
+
         do {
-            let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
+            let container = try makeContainer(config: cloudKitConfig)
             
             // Populate preset themes on first launch
             Task { @MainActor in
@@ -48,7 +49,23 @@ struct AttunetionApp: App {
             
             return container
         } catch {
-            fatalError("Could not create ModelContainer: \(error)")
+            // Retry with local-only store so migration can run without CloudKit validation
+            do {
+                let localConfig = ModelConfiguration(
+                    isStoredInMemoryOnly: false,
+                    groupContainer: .none,
+                    cloudKitDatabase: .none
+                )
+                let container = try makeContainer(config: localConfig)
+                Task { @MainActor in
+                    let context = container.mainContext
+                    let themeRepo = ThemeRepository(modelContext: context)
+                    try? PresetThemes.populatePresetThemes(in: themeRepo)
+                }
+                return container
+            } catch {
+                fatalError("Could not open persistent ModelContainer: \(error)")
+            }
         }
     }()
     

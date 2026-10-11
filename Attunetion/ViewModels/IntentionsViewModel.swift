@@ -211,4 +211,13 @@ class IntentionsViewModel {
         guard let themeId = intention.themeId else { return nil }
         return themeRepository.getTheme(byId: themeId)
     }
+
+    /// Number of intentions that use a theme with an Unsplash background (for limit enforcement).
+    func unsplashThemeUsageCount() -> Int {
+        intentions.filter { intention in
+            guard let themeId = intention.themeId,
+                  let theme = themeRepository.getTheme(byId: themeId) else { return false }
+            return (theme.unsplashPhotoId ?? "").isEmpty == false
+        }.count
+    }
 }

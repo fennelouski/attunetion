@@ -39,12 +39,14 @@ class IntentionsViewModel {
         modelContext.insert(intention)
         try modelContext.save()
         loadIntentions()
+        WidgetSyncService.syncWidget(modelContext: modelContext, currentIntention: intention)
     }
 
     /// Update an existing intention
     func updateIntention(_ intention: Intention) throws {
         try modelContext.save()
         loadIntentions()
+        WidgetSyncService.syncWidget(modelContext: modelContext, currentIntention: nil)
     }
 
     /// Delete an intention
@@ -52,6 +54,7 @@ class IntentionsViewModel {
         modelContext.delete(intention)
         try modelContext.save()
         loadIntentions()
+        WidgetSyncService.syncWidget(modelContext: modelContext, currentIntention: nil)
     }
 
     /// Check if an intention already exists for a given date and scope

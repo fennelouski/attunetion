@@ -13,15 +13,45 @@ struct IntentionRowView: View {
     let intention: Intention
     @ObservedObject var themeManager: AppThemeManager
     let style: IntentionListStyle
+    let intentionTheme: IntentionTheme?
 
-    init(intention: Intention, themeManager: AppThemeManager, style: IntentionListStyle = .cards) {
+    init(intention: Intention, themeManager: AppThemeManager, style: IntentionListStyle = .cards, intentionTheme: IntentionTheme? = nil) {
         self.intention = intention
         self.themeManager = themeManager
         self.style = style
+        self.intentionTheme = intentionTheme
     }
 
     private var scopeColor: Color {
-        themeManager.accentColor(for: colorScheme).toSwiftUIColor()
+        if let theme = intentionTheme {
+            return theme.accentColorValue
+        }
+        return themeManager.accentColor(for: colorScheme).toSwiftUIColor()
+    }
+
+    private var primaryTextColor: Color {
+        intentionTheme?.textColorValue ?? themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor()
+    }
+
+    private var secondaryTextColor: Color {
+        intentionTheme?.textColorValue.opacity(0.8) ?? themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor()
+    }
+
+    private var rowBackgroundColor: Color {
+        if let theme = intentionTheme {
+            return theme.backgroundColorValue.opacity(0.3)
+        }
+        return colorScheme == .dark
+            ? themeManager.currentTheme.darkSecondaryButtonBackground.toSwiftUIColor().opacity(0.3)
+            : Color.white.opacity(0.5)
+    }
+
+    private var strokeColor: Color {
+        (intentionTheme?.textColorValue ?? themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor()).opacity(0.1)
+    }
+
+    private var accentColor: Color {
+        intentionTheme?.accentColorValue ?? themeManager.accentColor(for: colorScheme).toSwiftUIColor()
     }
 
     private var dateString: String {
@@ -74,13 +104,13 @@ struct IntentionRowView: View {
                 Text(intention.text)
                     .font(.system(size: 16, weight: .regular, design: .default))
                     .lineLimit(nil)
-                    .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                    .foregroundColor(primaryTextColor)
                     .lineSpacing(2)
                     .fixedSize(horizontal: false, vertical: true)
 
                 Text(dateString)
                     .font(.system(size: 13, weight: .regular, design: .default))
-                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                    .foregroundColor(secondaryTextColor)
             }
 
             Spacer()
@@ -89,13 +119,13 @@ struct IntentionRowView: View {
             if intention.aiGenerated {
                 Image(systemName: "target")
                     .font(.system(size: 14, weight: .medium))
-                    .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+                    .foregroundColor(accentColor)
             }
 
             // Chevron
             Image(systemName: "chevron.right")
                 .font(.system(size: 12, weight: .medium))
-                .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.5))
+                .foregroundColor((intentionTheme?.textColorValue ?? themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor()).opacity(0.5))
         }
         .padding(.vertical, 12)
         .padding(.horizontal, 16)
@@ -104,9 +134,7 @@ struct IntentionRowView: View {
                 if style == .cards {
                     RoundedRectangle(cornerRadius: 12, style: .continuous)
                         .fill(
-                            colorScheme == .dark
-                                ? themeManager.currentTheme.darkSecondaryButtonBackground.toSwiftUIColor().opacity(0.3)
-                                : Color.white.opacity(0.5)
+                            rowBackgroundColor
                         )
                 }
             }
@@ -116,7 +144,7 @@ struct IntentionRowView: View {
                 if style == .cards {
                     RoundedRectangle(cornerRadius: 12, style: .continuous)
                         .stroke(
-                            themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.1),
+                            strokeColor,
                             lineWidth: 1
                         )
                 }

@@ -9,41 +9,8 @@ import Foundation
 import SwiftData
 import SwiftUI
 
-/// Model representing a visual theme for intentions
-@Model
-final class IntentionTheme {
-    var id: UUID = UUID()
-    var name: String = ""
-    var backgroundColor: String = "#FFFFFF" // Hex color string
-    var textColor: String = "#000000" // Hex color string
-    var accentColor: String? // Hex color string, optional
-    var fontName: String?
-    var isPreset: Bool = false
-    var isAIGenerated: Bool = false
-    var createdAt: Date = Date()
-    
-    init(
-        id: UUID = UUID(),
-        name: String,
-        backgroundColor: String,
-        textColor: String,
-        accentColor: String? = nil,
-        fontName: String? = nil,
-        isPreset: Bool = false,
-        isAIGenerated: Bool = false,
-        createdAt: Date = Date()
-    ) {
-        self.id = id
-        self.name = name
-        self.backgroundColor = backgroundColor
-        self.textColor = textColor
-        self.accentColor = accentColor
-        self.fontName = fontName
-        self.isPreset = isPreset
-        self.isAIGenerated = isAIGenerated
-        self.createdAt = createdAt
-    }
-}
+/// Model representing a visual theme for intentions (versioned schema V1)
+typealias IntentionTheme = AttunetionSchemaV1.IntentionTheme
 
 // MARK: - SwiftUI Color Conversion
 
@@ -89,5 +56,10 @@ extension IntentionTheme {
             return Self.color(from: accentColor)
         }
         return backgroundColorValue
+    }
+
+    /// Whether this theme uses a background image (e.g. Unsplash)
+    var hasBackgroundImage: Bool {
+        (backgroundImageURL ?? "").isEmpty == false
     }
 }

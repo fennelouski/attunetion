@@ -8,6 +8,13 @@ import weekly from "../api/ai/generate-weekly-intentions.js";
 import health from "../api/health.js";
 import legal from "../api/legal/[document].js";
 
+import imageAccess from "../api/images/access.js";
+import imageSearch from "../api/images/search.js";
+import imageCurated from "../api/images/curated.js";
+import imageStable from "../api/images/curated/from-stable.js";
+import imageProxy from "../api/images/proxy.js";
+import imageDownload from "../api/images/trigger-download.js";
+
 // Lambda URL authorization is AWS_IAM. No anonymous endpoint is provisioned.
 interface FunctionUrlEvent {
   rawPath: string;
@@ -24,6 +31,13 @@ const routes: Record<string, { fetch(request: Request): Promise<Response> }> = {
   "/api/ai/generate-monthly-intention": monthly,
   "/api/ai/generate-weekly-intentions": weekly,
   "/api/health": health,
+  "/api/images/access": imageAccess,
+  "/api/images/search": imageSearch,
+  "/api/images/curated": imageCurated,
+  "/api/images/curated/from-stable": imageStable,
+  "/api/images/proxy": imageProxy,
+  "/api/images/trigger-download": imageDownload,
+
 };
 const mime: Record<string, string> = {
   ".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8",

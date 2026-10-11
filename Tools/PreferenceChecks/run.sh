@@ -57,6 +57,8 @@ import SwiftData
 ''' + deletion)
 PY
 xcrun swiftc -parse-as-library -swift-version 5 -default-isolation MainActor \
+  Attunetion/AttunetionSchema.swift \
+  Attunetion/Services/IntentionPeriod.swift \
   Attunetion/Models/Intention.swift \
   Attunetion/Models/IntentionTheme.swift \
   Attunetion/Models/PresetThemes.swift \
