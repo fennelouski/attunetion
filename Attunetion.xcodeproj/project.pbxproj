@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F06100012F00000000000001 /* IntentionPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06100012F00000000000002 /* IntentionPeriod.swift */; };
-		80A64A532EDF5F0700C98A14 /* IntentionWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 80A64A422EDF5F0700C98A14 /* IntentionWidget.appex */; platformFilters = (ios, macos, xros, ); settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		80A64A532EDF5F0700C98A14 /* IntentionWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 80A64A422EDF5F0700C98A14 /* IntentionWidget.appex */; platformFilters = (ios, ); settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,34 +42,12 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				80A64A532EDF5F0700C98A14 /* IntentionWidget.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		80A64A552EDF5F0700C98A15 /* Embed IntentionWidget for iOS only */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Embed IntentionWidget for iOS only";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"${PLATFORM_NAME}\" = \"iphonesimulator\" ] || [ \"${PLATFORM_NAME}\" = \"iphoneos\" ]; then\n  mkdir -p \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/PlugIns\"\n  cp -R \"${BUILT_PRODUCTS_DIR}/IntentionWidget.appex\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/PlugIns/\"\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXFileReference section */
 		F06100012F00000000000002 /* IntentionPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attunetion/Services/IntentionPeriod.swift; sourceTree = SOURCE_ROOT; };
@@ -190,7 +168,6 @@
 				80A64A102EDF5F0600C98A14 /* Frameworks */,
 				80A64A112EDF5F0600C98A14 /* Resources */,
 				80A64A522EDF5F0700C98A14 /* Embed App Extensions */,
-				80A64A552EDF5F0700C98A15 /* Embed IntentionWidget for iOS only */,
 			);
 			buildRules = (
 			);
