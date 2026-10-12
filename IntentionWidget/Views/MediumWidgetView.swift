@@ -84,7 +84,7 @@ struct MediumWidgetView: View {
                         .font(.system(size: 18, weight: .semibold, design: .rounded))
                         .foregroundColor(.white.opacity(0.9))
                         .multilineTextAlignment(.center)
-                        .lineLimit(2)
+                        .fixedSize(horizontal: false, vertical: true)
                         .padding(.horizontal, 16)
                     
                     Text(String(localized: "Tap to create one"))
