@@ -20,6 +20,7 @@ struct ThemePickerView: View {
     var currentUnsplashThemeCount: Int = 0
     
     @State private var presetThemes: [IntentionTheme] = []
+    @State private var photoSaveError: String?
     @State private var curatedPhotos: [CuratedPhoto] = []
     
     init(
@@ -155,6 +156,9 @@ struct ThemePickerView: View {
                 .font(.system(size: 15, weight: .semibold, design: .default))
                 .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
 
+            if let photoSaveError {
+                Text(photoSaveError).font(.caption)
+            }
             if !canAddUnsplashTheme {
                 Text("You've reached the limit of \(maxUnsplashThemes) photo themes. Change or remove one to add another.")
                     .font(.system(size: 13, weight: .regular, design: .default))
@@ -220,6 +224,7 @@ struct ThemePickerView: View {
             attributionURL: photo.attribution_url
         )
 
+        photoSaveError = nil
         let repo = ThemeRepository(modelContext: modelContext)
         do {
             try repo.create(theme)
@@ -231,7 +236,7 @@ struct ThemePickerView: View {
             }
             selectedTheme = theme
         } catch {
-            photoLoadError = error.localizedDescription
+            photoSaveError = error.localizedDescription
         }
     }
 }
