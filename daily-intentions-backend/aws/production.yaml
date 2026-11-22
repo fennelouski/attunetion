@@ -1,0 +1,69 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  CodeKey: { Type: String }
+  Revision: { Type: String }
+  SecretVersion: { Type: String }
+Resources:
+  Quota:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions: [{AttributeName: period, AttributeType: S}]
+      KeySchema: [{AttributeName: period, KeyType: HASH}]
+      TimeToLiveSpecification: {AttributeName: expiresAt, Enabled: true}
+  Role:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement: [{Effect: Allow, Principal: {Service: lambda.amazonaws.com}, Action: 'sts:AssumeRole'}]
+      Policies:
+        - PolicyName: QuotaAndLogs
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - {Effect: Allow, Action: 'dynamodb:UpdateItem', Resource: !GetAtt Quota.Arn}
+              - {Effect: Allow, Action: ['logs:CreateLogStream','logs:PutLogEvents'], Resource: !GetAtt Logs.Arn}
+  Logs:
+    Type: AWS::Logs::LogGroup
+    Properties: {LogGroupName: /aws/lambda/attunetion-production-api, RetentionInDays: 7}
+  ApiFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: attunetion-production-api
+      Runtime: nodejs24.x
+      Handler: index.handler
+      Role: !GetAtt Role.Arn
+      Timeout: 30
+      MemorySize: 512
+      Code: {S3Bucket: nfbucketforstuff, S3Key: !Ref CodeKey}
+      Environment:
+        Variables:
+          OPENAI_API_KEY: !Sub '{{resolve:secretsmanager:attunetion/website-openai:SecretString:::${SecretVersion}}}'
+          QUOTA_TABLE: !Ref Quota
+          DAILY_REQUEST_LIMIT: '100'
+          SOURCE_COMMIT: !Ref Revision
+  Api:
+    Type: AWS::ApiGatewayV2::Api
+    Properties: {Name: attunetion-production-api, ProtocolType: HTTP}
+  Integration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties: {ApiId: !Ref Api, IntegrationType: AWS_PROXY, IntegrationUri: !GetAtt ApiFunction.Arn, PayloadFormatVersion: '2.0', TimeoutInMillis: 30000}
+  Route:
+    Type: AWS::ApiGatewayV2::Route
+    Properties: {ApiId: !Ref Api, RouteKey: '$default', Target: !Join ['/', [integrations, !Ref Integration]]}
+  Stage:
+    Type: AWS::ApiGatewayV2::Stage
+    Properties:
+      ApiId: !Ref Api
+      StageName: '$default'
+      AutoDeploy: true
+      DefaultRouteSettings: {ThrottlingRateLimit: 5, ThrottlingBurstLimit: 10}
+  Permission:
+    Type: AWS::Lambda::Permission
+    Properties: {FunctionName: !Ref ApiFunction, Action: 'lambda:InvokeFunction', Principal: apigateway.amazonaws.com, SourceArn: !Sub 'arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${Api}/*'}
+Outputs:
+  ApiUrl: {Value: !GetAtt Api.ApiEndpoint}
+  QuotaTable: {Value: !Ref Quota}
