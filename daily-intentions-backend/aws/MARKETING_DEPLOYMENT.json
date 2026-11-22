@@ -1,0 +1,31 @@
+{
+  "mode": "isolated-aws-website",
+  "repository": "fennelouski/nathanfennel.com",
+  "revision": "8ae6c88e4808271f51db7e134d1a119ca6ff2617",
+  "appSourceRevision": "5827acc9f8f5ff9c6b2f02421ce960f15ec8b3a7",
+  "command": "npm run deploy:attunetion",
+  "verifiedAt": "2026-11-22T17:26:52+00:00",
+  "host": "https://attunetion.nathanfennel.com",
+  "cloudFront": "https://d3ati6b0yhgngf.cloudfront.net",
+  "distribution": "E3670PFDVNL4Q",
+  "stack": "attunetion-public-site",
+  "region": "us-east-1",
+  "verifiedPages": [
+    "/",
+    "/index.html",
+    "/support.html",
+    "/legal/privacy-policy.html",
+    "/legal/eula.html",
+    "/legal/terms-of-service.html"
+  ],
+  "checks": [
+    "Branded TLS using authoritative DNS addresses and byte comparison of committed content",
+    "Distribution TLS and committed content",
+    "Responsive browser widths 198, 320, 390, 820, 1280 and 1440",
+    "Both authoritative name servers and public recursive DNS return CloudFront",
+    "System DNS converged. Ordinary HTTPS on the branded root and all five named pages returned byte-identical committed content."
+  ],
+  "actualAPICutoverAt": null,
+  "websiteRouting": "First publication on AWS. No previous dedicated site.",
+  "rollback": "Run the website deployment command in a clean worktree at a previous verified website revision. Rollback not exercised."
+}

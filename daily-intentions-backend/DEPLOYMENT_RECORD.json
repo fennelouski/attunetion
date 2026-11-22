@@ -47,5 +47,22 @@
     "AWS preview is IAM-only; native clients still use Vercel.",
     "Public access and durable abuse/cost control are not yet verified for AWS cutover.",
     "Repeat deployment and rollback remain unverified."
-  ]
+  ],
+  "latestAudit": {
+    "verifiedAt": "2026-11-22T17:23:56+00:00",
+    "status": "post-cutoff exception; working Vercel API preserved",
+    "liveRevision": "afa1a117f415aa1a7e6522748ce74764d9765a96",
+    "syntheticChecks": {
+      "theme": 200,
+      "weekly": 200,
+      "monthly": 200,
+      "quote": 200,
+      "rephrase": 200
+    },
+    "remotePhotoCatalog": 404,
+    "reviewedModelsLive": false,
+    "websiteCredentialVerified": false,
+    "actualCutoverAt": null,
+    "websiteDeployment": "aws/MARKETING_DEPLOYMENT.json"
+  }
 }
