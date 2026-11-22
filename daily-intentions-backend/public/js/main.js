@@ -6,6 +6,18 @@
 
     // Smooth scroll for anchor links (enhancement for browsers that need it)
     document.addEventListener('DOMContentLoaded', function() {
+        const storeLink = document.querySelector('.cta-button[href*="apps.apple.com"]');
+        if (storeLink) {
+            const agent = navigator.userAgent;
+            const tablet = /iPad/.test(agent) || (/Macintosh/.test(agent) && navigator.maxTouchPoints > 1);
+            const platform = /Vision|RealityDevice/.test(agent) ? 'appleVision' :
+                /Watch/.test(agent) ? 'appleWatch' : tablet ? 'ipad' :
+                /Macintosh/.test(agent) ? 'mac' : 'iphone';
+            const url = new URL(storeLink.href);
+            url.searchParams.set('platform', platform);
+            storeLink.href = url.href;
+        }
+
         // Handle smooth scrolling for anchor links
         const anchorLinks = document.querySelectorAll('a[href^="#"]');
         
