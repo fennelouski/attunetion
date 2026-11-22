@@ -3,9 +3,9 @@ import { validateApiKey } from "../../lib/auth.js";
 import { checkRateLimit, getRateLimitIdentifier } from "../../lib/rateLimit.js";
 import { handleError, ErrorCodes, createErrorResponse } from "../../lib/errors.js";
 import {
-  createGpt54JsonCompletion,
-  GPT54_MINI,
-  GPT54_NANO,
+  createJsonCompletion,
+  WEEKLY_MODEL,
+  FOCUSED_MODEL,
 } from "../../lib/openai.js";
 
 interface GenerateWeeklyIntentionsRequest {
@@ -206,8 +206,8 @@ Rules:
     
     userPrompt += `Generate 7 daily intentions (one for each day), 1 weekly intention, and 1 monthly intention.`;
 
-    const response = await createGpt54JsonCompletion({
-      model: GPT54_MINI,
+    const response = await createJsonCompletion({
+      model: WEEKLY_MODEL,
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt },
@@ -242,8 +242,8 @@ async function handleNanoMode(
   const selectedIntentions = body.previousIntentions.slice(0, 9); // Mix of daily/weekly/monthly
   const userPrompt = `Rephrase these intentions for the week starting ${body.weekStartDate}:\n${selectedIntentions.map(i => `- ${i.scope}: ${i.text}`).join('\n')}\n\nGenerate 7 daily intentions, 1 weekly, and 1 monthly.`;
 
-  const response = await createGpt54JsonCompletion({
-    model: GPT54_NANO,
+  const response = await createJsonCompletion({
+    model: FOCUSED_MODEL,
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: userPrompt },

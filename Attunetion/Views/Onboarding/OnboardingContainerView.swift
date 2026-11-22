@@ -14,6 +14,9 @@ import AppKit
 /// Main coordinator for the onboarding flow
 struct OnboardingContainerView: View {
     @Environment(\.modelContext) private var modelContext
+    #if os(watchOS)
+    @State private var watchSaveError: String?
+    #endif
     @State private var currentPage = 0
     @Environment(\.dismiss) private var dismiss
     @StateObject private var themeManager: AppThemeManager
@@ -23,7 +26,11 @@ struct OnboardingContainerView: View {
     
     // Computed property to determine the last page index
     private var lastPageIndex: Int {
-        return 4 // FirstIntentionPage is always the last page
+        #if os(iOS)
+        return 4
+        #else
+        return 3
+        #endif
     }
     
     // Computed property to determine if we're on the first page
@@ -52,6 +59,35 @@ struct OnboardingContainerView: View {
     }
     
     var body: some View {
+        #if os(watchOS)
+        NavigationStack {
+            List {
+                Section("Set your first intention") {
+                    ForEach(ExampleIntention.examples.prefix(3), id: \.text) { example in
+                        Button(example.text) {
+                            do {
+                                try IntentionRepository(modelContext: modelContext).create(
+                                    Intention(text: example.text, scope: example.scope, date: Date())
+                                )
+                                completeOnboarding()
+                            } catch {
+                                watchSaveError = error.localizedDescription
+                            }
+                        }
+                    }
+                }
+                Button("Skip", action: completeOnboarding)
+            }
+            .navigationTitle("Welcome to Attunetion")
+            .alert("Could Not Save Intention", isPresented: Binding(
+                get: { watchSaveError != nil }, set: { if !$0 { watchSaveError = nil } }
+            )) {
+                Button("OK") { watchSaveError = nil }
+            } message: {
+                Text(watchSaveError ?? "")
+            }
+        }
+        #else
         ZStack {
             // Custom background using theme
             AppBackground(themeManager: themeManager)
@@ -72,25 +108,27 @@ struct OnboardingContainerView: View {
                 .environmentObject(themeManager)
                 .tag(1)
                 
+                #if os(iOS)
                 WidgetSetupPage(
                     onContinue: nextPage,
                     onSkip: completeOnboarding
                 )
                 .environmentObject(themeManager)
                 .tag(2)
+                #endif
                 
                 NotificationPermissionPage(
                     onContinue: nextPage,
                     onSkip: completeOnboarding
                 )
                 .environmentObject(themeManager)
-                .tag(3)
+                .tag(lastPageIndex - 1)
                 
                 FirstIntentionPage(
                     onComplete: completeOnboarding
                 )
                 .environmentObject(themeManager)
-                .tag(4)
+                .tag(lastPageIndex)
             }
             #if os(iOS) || os(watchOS)
             .tabViewStyle(.page(indexDisplayMode: .never))
@@ -102,30 +140,7 @@ struct OnboardingContainerView: View {
             .tabViewStyle(.page)
             #endif
             .animation(animationSpeedManager.easeInOut(duration: 0.3), value: currentPage)
-            #if os(iOS) || os(watchOS)
-            .highPriorityGesture(
-                DragGesture(minimumDistance: 30)
-                    .onEnded { value in
-                        let horizontalTranslation = value.translation.width
-                        let swipeThreshold: CGFloat = 50
-                        
-                        // Swipe right (positive translation) = go backward
-                        if horizontalTranslation > swipeThreshold {
-                            // Only allow backward swipe if not on first page
-                            if !isFirstPage {
-                                previousPage()
-                            }
-                        }
-                        // Swipe left (negative translation) = go forward
-                        else if horizontalTranslation < -swipeThreshold {
-                            // Only allow forward swipe if not on last page
-                            if !isLastPage {
-                                nextPage()
-                            }
-                        }
-                    }
-            )
-            #endif
+
             
             // Page indicator overlay - positioned at bottom center
             // macOS uses a different, more desktop-appropriate indicator
@@ -136,13 +151,13 @@ struct OnboardingContainerView: View {
                     #if os(macOS)
                     MacOSPageIndicator(
                         currentPage: currentPage,
-                        pageCount: 5,
+                        pageCount: lastPageIndex + 1,
                         themeManager: themeManager
                     )
                     #else
                     OnboardingPageIndicator(
                         currentPage: currentPage,
-                        pageCount: 5,
+                        pageCount: lastPageIndex + 1,
                         themeManager: themeManager
                     )
                     #endif
@@ -157,6 +172,7 @@ struct OnboardingContainerView: View {
             themeManager.loadThemePreference()
             
         }
+        #endif
     }
     
     func nextPage() {

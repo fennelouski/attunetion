@@ -16,6 +16,7 @@ struct IntentionsListView: View {
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var themeManager: AppThemeManager
     @StateObject private var animationSpeedManager = AnimationSpeedManager.shared
+    @Query(sort: \Intention.id) private var storedIntentions: [Intention]
     @Binding var pendingURL: URL?
     @State private var viewModel: IntentionsViewModel!
     @State private var showingNewIntention = false
@@ -585,6 +586,10 @@ struct IntentionsListView: View {
                     viewModel = IntentionsViewModel(modelContext: modelContext)
                 }
             }
+        }
+        .onChange(of: storedIntentions.map(\.updatedAt)) {
+            viewModel?.loadIntentions()
+            WidgetDataService.shared.updateWidgetDataFromSwiftData(modelContext: modelContext)
         }
         .onAppear {
             if viewModel == nil {

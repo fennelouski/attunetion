@@ -18,6 +18,7 @@ struct WatchOSIntentionsView: View {
     @StateObject private var animationSpeedManager = AnimationSpeedManager.shared
     
     @State private var viewModel: IntentionsViewModel!
+    @Query(sort: \Intention.id) private var storedIntentions: [Intention]
     @State private var selectedTab: Int = 0
     @State private var showingEditView = false
     @State private var editingScope: IntentionScope = .day
@@ -86,6 +87,7 @@ struct WatchOSIntentionsView: View {
                     viewModel: viewModel
                 )
             }
+            .onChange(of: storedIntentions.map(\.updatedAt)) { viewModel?.loadIntentions() }
             .onChange(of: showingEditView) { _, isShowing in
                 // Refresh when edit view dismisses
                 if !isShowing {

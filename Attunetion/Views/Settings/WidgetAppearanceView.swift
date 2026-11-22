@@ -71,7 +71,9 @@ struct WidgetAppearanceView: View {
                             selectedThemeId = themeOption.id
                             saveWidgetTheme(themeOption.id)
                             // Reload widgets
+                            #if os(iOS)
                             WidgetCenter.shared.reloadAllTimelines()
+                            #endif
                         }) {
                             Group {
                                 if dynamicTypeSize.isAccessibilitySize {

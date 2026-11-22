@@ -42,11 +42,8 @@ struct ThemePickerView: View {
         self.currentUnsplashThemeCount = currentUnsplashThemeCount
     }
 
-    /// When true (unlock key valid), user can add unlimited Unsplash themes.
-    @State private var unlimitedUnsplashThemes: Bool = false
-
     private var canAddUnsplashTheme: Bool {
-        unlimitedUnsplashThemes || currentUnsplashThemeCount < maxUnsplashThemes
+        currentUnsplashThemeCount < maxUnsplashThemes
     }
 
     /// First curated photo whose suggested_theme_name matches the preset (e.g. "Serene").
@@ -150,7 +147,6 @@ struct ThemePickerView: View {
         .onAppear {
             loadPresetThemes()
             loadCuratedPhotos()
-            loadImagesAccess()
         }
     }
 
@@ -229,50 +225,6 @@ struct ThemePickerView: View {
                 curatedPhotos = []
             }
             isLoadingPhotos = false
-        }
-    }
-
-    private func loadImagesAccess() {
-        Task { @MainActor in
-            guard BackendHealthManager.shared.isBackendAvailable else { return }
-            if let access = try? await APIClient.shared.fetchImagesAccess() {
-                unlimitedUnsplashThemes = access.unlimitedThemes
-                if access.unlimitedThemes {
-                    submitStablePhotosIfEligible()
-                }
-            }
-        }
-    }
-
-    /// If user has unlock key, find intentions with Unsplash theme unchanged 7+ days and submit for curation.
-    private func submitStablePhotosIfEligible() {
-        Task { @MainActor in
-            let intentionRepo = IntentionRepository(modelContext: modelContext)
-            let themeRepo = ThemeRepository(modelContext: modelContext)
-            let all = intentionRepo.getAll()
-            let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date()
-            var items: [FromStablePhotoItem] = []
-            for intention in all {
-                guard let themeId = intention.themeId,
-                      let setAt = intention.themeSetAt,
-                      setAt <= sevenDaysAgo,
-                      let theme = themeRepo.getTheme(byId: themeId),
-                      let pid = theme.unsplashPhotoId, !pid.isEmpty,
-                      let attText = theme.attributionText,
-                      let attURL = theme.attributionURL,
-                      let downloadLoc = theme.unsplashDownloadLocation,
-                      let imageURL = theme.backgroundImageURL else { continue }
-                items.append(FromStablePhotoItem(
-                    unsplash_photo_id: pid,
-                    image_url: imageURL,
-                    attribution_text: attText,
-                    attribution_url: attURL,
-                    download_location: downloadLoc,
-                    color: nil
-                ))
-            }
-            guard !items.isEmpty else { return }
-            try? await APIClient.shared.submitStablePhotosForCuration(items)
         }
     }
 

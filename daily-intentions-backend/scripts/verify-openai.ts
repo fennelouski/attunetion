@@ -1,20 +1,20 @@
 /**
- * Smoke-test GPT-5.4 Chat Completions (requires OPENAI_API_KEY).
+ * Smoke-test the configured Chat Completions models (requires OPENAI_API_KEY).
  * Run: npm run verify-openai
  */
 async function main() {
   if (!process.env.OPENAI_API_KEY) {
-    console.log("SKIP: OPENAI_API_KEY is not set");
-    process.exit(0);
+    console.log("OPENAI_API_KEY is not set");
+    process.exit(1);
   }
 
-  const { createGpt54JsonCompletion, generateQuote, GPT54_NANO } = await import(
+  const { createJsonCompletion, generateQuote, FOCUSED_MODEL } = await import(
     "../lib/openai"
   );
 
-  console.log("1. createGpt54JsonCompletion (nano, json_object)...");
-  const ping = await createGpt54JsonCompletion({
-    model: GPT54_NANO,
+  console.log("1. createJsonCompletion (focused model, json_object)...");
+  const ping = await createJsonCompletion({
+    model: FOCUSED_MODEL,
     messages: [
       {
         role: "system",

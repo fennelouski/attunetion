@@ -15,10 +15,12 @@ class APIClient {
     
     // Configuration - update these when backend is deployed
     var baseURL: String {
+        #if DEBUG
         // Check for custom URL in UserDefaults (for testing)
         if let customURL = UserDefaults.standard.string(forKey: "APIBaseURL"), !customURL.isEmpty {
             return customURL
         }
+        #endif
         // Production URL
         return "https://attunetion.vercel.app"
     }
@@ -95,12 +97,6 @@ class APIClient {
         return newId
     }
 
-    /// Unsplash unlock key (entered in Settings). When valid, user gets unlimited Unsplash access and can submit stable photos to curated.
-    var unsplashUnlockKey: String? {
-        get { UserDefaults.standard.string(forKey: "UnsplashUnlockKey") }
-        set { UserDefaults.standard.set(newValue, forKey: "UnsplashUnlockKey") }
-    }
-
     private func makeRequest<T: Decodable>(
         endpoint: String,
         method: String = "POST",
@@ -139,10 +135,6 @@ class APIClient {
         if includeUserId {
             request.setValue(userId, forHTTPHeaderField: "X-User-Id")
         }
-        if let key = unsplashUnlockKey, !key.isEmpty {
-            request.setValue(key, forHTTPHeaderField: "X-Unsplash-Unlock-Key")
-        }
-        
         // Add request body if provided (skip for GET)
         if method != "GET", let body = body {
             let encoder = JSONEncoder()

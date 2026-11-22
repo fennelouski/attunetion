@@ -1,8 +1,8 @@
 import OpenAI from "openai";
 
-/** GPT-5.4 models for Chat Completions (see https://developers.openai.com/api/docs/models/) */
-export const GPT54_NANO = "gpt-5.4-nano";
-export const GPT54_MINI = "gpt-5.4-mini";
+/** Text models for Chat Completions (see https://developers.openai.com/api/docs/models/) */
+export const FOCUSED_MODEL = "gpt-6-luna";
+export const WEEKLY_MODEL = "gpt-6.2-sol";
 
 export const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -11,10 +11,10 @@ export const openai = new OpenAI({
 });
 
 /**
- * Chat Completions for GPT-5.4 reasoning models.
+ * Chat Completions for reasoning models.
  * Uses max_completion_tokens (not max_tokens) and omits temperature (unsupported).
  */
-export function createGpt54JsonCompletion(options: {
+export function createJsonCompletion(options: {
   model: string;
   messages: OpenAI.Chat.ChatCompletionMessageParam[];
   maxCompletionTokens: number;
@@ -43,8 +43,8 @@ export async function generateTheme(intentionText: string): Promise<{
 
   const userPrompt = `Generate a color theme for this intention: "${intentionText}"`;
 
-  const response = await createGpt54JsonCompletion({
-    model: GPT54_NANO,
+  const response = await createJsonCompletion({
+    model: FOCUSED_MODEL,
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: userPrompt },
@@ -83,8 +83,8 @@ export async function generateQuote(intentionText: string): Promise<{
 
   const userPrompt = `Find or generate a relevant quote for this intention: "${intentionText}"`;
 
-  const response = await createGpt54JsonCompletion({
-    model: GPT54_NANO,
+  const response = await createJsonCompletion({
+    model: FOCUSED_MODEL,
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: userPrompt },
@@ -129,8 +129,8 @@ export async function rephraseIntention(
     userPrompt += `\n\nAvoid repeating these previous phrasings: ${previousPhrases.join(", ")}`;
   }
 
-  const response = await createGpt54JsonCompletion({
-    model: GPT54_NANO,
+  const response = await createJsonCompletion({
+    model: FOCUSED_MODEL,
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: userPrompt },
@@ -174,8 +174,8 @@ export async function generateMonthlyIntention(
 
   const userPrompt = `Based on these previous monthly intentions:\n${intentionsList}\n\nGenerate a new monthly intention that builds on these themes.`;
 
-  const response = await createGpt54JsonCompletion({
-    model: GPT54_NANO,
+  const response = await createJsonCompletion({
+    model: FOCUSED_MODEL,
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: userPrompt },

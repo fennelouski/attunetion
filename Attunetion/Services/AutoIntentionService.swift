@@ -127,7 +127,7 @@ class AutoIntentionService {
     func shouldGenerateIntentions() -> Bool {
         let profile = userProfileRepository.getOrCreateProfile()
         
-        guard profile.autoGenerateEnabled, profile.hasAcceptedTerms else {
+        guard profile.autoGenerateEnabled, ConsentManager.shared.hasAcceptedTerms(modelContext: modelContext) else {
             return false
         }
         

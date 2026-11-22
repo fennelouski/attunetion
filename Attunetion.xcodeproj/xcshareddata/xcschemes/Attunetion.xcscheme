@@ -29,6 +29,10 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
+      <Testables>
+         <TestableReference skipped="NO"><BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="80A64A232EDF5F0700C98A14" BuildableName="AttunetionTests.xctest" BlueprintName="AttunetionTests" ReferencedContainer="container:Attunetion.xcodeproj"/></TestableReference>
+         <TestableReference skipped="NO"><BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="80A64A2D2EDF5F0700C98A14" BuildableName="AttunetionUITests.xctest" BlueprintName="AttunetionUITests" ReferencedContainer="container:Attunetion.xcodeproj"/></TestableReference>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"

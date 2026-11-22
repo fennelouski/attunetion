@@ -187,10 +187,7 @@ struct LegalConsentView: View {
 
     @ViewBuilder
     private func legalLink(title: String, document: String) -> some View {
-        let baseURL = APIClient.shared.baseURL
-        let address = document == "privacy-policy"
-            ? "https://nathanfennel.com/attunetion/privacy.html"
-            : "\(baseURL)/legal/\(document).html"
+        let address = "https://attunetion.nathanfennel.com/legal/\(document).html"
         if let url = URL(string: address) {
             Link(destination: url) {
                 HStack {

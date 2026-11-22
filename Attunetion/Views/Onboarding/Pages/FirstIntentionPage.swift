@@ -35,97 +35,100 @@ struct FirstIntentionPage: View {
                 // Custom background
                 AppBackground(themeManager: themeManager)
                 
-                VStack(spacing: 0) {
-                    Spacer()
-                    
-                    // Main content area
-                    VStack(spacing: 24) {
-                        Text(String(localized: "Set your first intention"))
-                            .font(.system(size: 28, weight: .light, design: .default))
-                            .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                            .fixedSize(horizontal: false, vertical: true)
-                            .multilineTextAlignment(.center)
-                            .lineLimit(nil)
-                        
-                        VStack(alignment: .leading, spacing: 12) {
-                            Text(String(localized: "What do you want to focus on?"))
-                                .font(.system(size: 15, weight: .light, design: .default))
-                                .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                                .fixedSize(horizontal: false, vertical: true)
-                                .lineLimit(nil)
-                                .opacity(0.75)
-                            
-                            TextField(String(localized: "Enter your intention..."), text: $intentionText, axis: .vertical)
-                                #if !os(watchOS)
-                                .textFieldStyle(.roundedBorder)
-                                #endif
-                                .lineLimit(3...5)
-                                .multilineTextAlignment(.leading)
-                                .onChange(of: intentionText) { oldValue, newValue in
-                                    showingSuggestions = newValue.isEmpty
-                                }
-                        }
-                        .padding(.horizontal, 60)
-                        .frame(maxWidth: 700)
-                        
-                        // Scope selector
-                        Picker("Scope", selection: $selectedScope) {
-                            ForEach(IntentionScope.allCases, id: \.self) { scope in
-                                Text(scope.rawValue.capitalized).tag(scope)
-                            }
-                        }
-                        #if !os(watchOS)
-                        .pickerStyle(.menu)
-                        #endif
-                        .padding(.horizontal, 60)
-                        .frame(maxWidth: 700)
-                        
-                        if selectedScope == .season || selectedScope == .year {
-                            Text(selectedScope.dateRangeLabel(for: Date()))
-                                .font(.caption).foregroundStyle(.secondary)
-                                .multilineTextAlignment(.center)
-                                .fixedSize(horizontal: false, vertical: true)
-                                .padding(.horizontal, 30)
-                        }
+                ScrollView {
+                    VStack(spacing: 0) {
+                        Spacer()
 
-                        if showingSuggestions {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text(String(localized: "Or try one of these:"))
+                        // Main content area
+                        VStack(spacing: 24) {
+                            Text(String(localized: "Set your first intention"))
+                                .font(.system(size: 28, weight: .light, design: .default))
+                                .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                                .fixedSize(horizontal: false, vertical: true)
+                                .multilineTextAlignment(.center)
+                                .lineLimit(nil)
+
+                            VStack(alignment: .leading, spacing: 12) {
+                                Text(String(localized: "What do you want to focus on?"))
                                     .font(.system(size: 15, weight: .light, design: .default))
                                     .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
                                     .fixedSize(horizontal: false, vertical: true)
                                     .lineLimit(nil)
                                     .opacity(0.75)
-                                    .padding(.horizontal, 60)
-                                
-                                ForEach(suggestions.indices, id: \.self) { index in
-                                    ExampleIntentionCard(
-                                        intention: suggestions[index],
-                                        themeManager: themeManager
-                                    ) {
-                                        intentionText = suggestions[index].text
-                                        selectedScope = suggestions[index].scope
-                                        showingSuggestions = false
+
+                                TextField(String(localized: "Enter your intention..."), text: $intentionText, axis: .vertical)
+                                    #if !os(watchOS)
+                                    .textFieldStyle(.roundedBorder)
+                                    #endif
+                                    .lineLimit(3...5)
+                                    .multilineTextAlignment(.leading)
+                                    .onChange(of: intentionText) { oldValue, newValue in
+                                        showingSuggestions = newValue.isEmpty
                                     }
-                                    .padding(.horizontal, 60)
+                            }
+                            .padding(.horizontal, 60)
+                            .frame(maxWidth: 700)
+
+                            // Scope selector
+                            Picker("Scope", selection: $selectedScope) {
+                                ForEach(IntentionScope.allCases, id: \.self) { scope in
+                                    Text(scope.rawValue.capitalized).tag(scope)
                                 }
                             }
+                            #if !os(watchOS)
+                            .pickerStyle(.menu)
+                            #endif
+                            .padding(.horizontal, 60)
                             .frame(maxWidth: 700)
+
+                            if selectedScope == .season || selectedScope == .year {
+                                Text(selectedScope.dateRangeLabel(for: Date()))
+                                    .font(.caption).foregroundStyle(.secondary)
+                                    .multilineTextAlignment(.center)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .padding(.horizontal, 30)
+                            }
+
+                            if showingSuggestions {
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text(String(localized: "Or try one of these:"))
+                                        .font(.system(size: 15, weight: .light, design: .default))
+                                        .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                                        .fixedSize(horizontal: false, vertical: true)
+                                        .lineLimit(nil)
+                                        .opacity(0.75)
+                                        .padding(.horizontal, 60)
+
+                                    ForEach(suggestions.indices, id: \.self) { index in
+                                        ExampleIntentionCard(
+                                            intention: suggestions[index],
+                                            themeManager: themeManager
+                                        ) {
+                                            intentionText = suggestions[index].text
+                                            selectedScope = suggestions[index].scope
+                                            showingSuggestions = false
+                                        }
+                                        .padding(.horizontal, 60)
+                                    }
+                                }
+                                .frame(maxWidth: 700)
+                            }
                         }
-                    }
-                    
-                    Spacer()
-                    
-                    // Action button - always enabled
-                    VStack(spacing: 20) {
-                        PrimaryButton("Get Started", themeManager: themeManager) {
-                            createFirstIntention()
+
+                        Spacer()
+
+                        // Action button - always enabled
+                        VStack(spacing: 20) {
+                            PrimaryButton("Get Started", themeManager: themeManager) {
+                                createFirstIntention()
+                            }
                         }
+                        .padding(.horizontal, 40)
+                        .padding(.bottom, 80)
                     }
-                    .padding(.horizontal, 40)
-                    .padding(.bottom, 80)
+                    .frame(maxWidth: .infinity, minHeight: geometry.size.height)
                 }
-                .frame(width: geometry.size.width, height: geometry.size.height)
+                .scrollBounceBehavior(.basedOnSize)
             }
         }
         .onAppear {

@@ -55,6 +55,10 @@ struct ConsentChecks {
             } catch ConsentError.termsNotAccepted {}
         }
         precondition(RequestProbe.captured.isEmpty, "Denied requests reached the network")
+        // A profile imported from iCloud cannot opt this device into AI.
+        profile.hasAcceptedTerms = true
+        precondition(!ConsentManager.shared.hasAcceptedTerms(modelContext: context))
+        profile.hasAcceptedTerms = false
         let healthy = try await client.checkHealth()
         precondition(healthy && RequestProbe.captured.count == 1)
         try ConsentManager.shared.acceptTerms(modelContext: context)

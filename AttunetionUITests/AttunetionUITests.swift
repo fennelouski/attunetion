@@ -23,12 +23,42 @@ final class AttunetionUITests: XCTestCase {
     }
 
     @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testOnboardingAndRelaunch() throws {
         let app = XCUIApplication()
         app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        #if os(watchOS)
+        let sample = "Practice gratitude daily"
+        let choice = app.buttons[sample]
+        XCTAssertTrue(choice.waitForExistence(timeout: 15), app.debugDescription)
+        choice.tap()
+        XCTAssertTrue(app.staticTexts[sample].waitForExistence(timeout: 15), app.debugDescription)
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(app.staticTexts[sample].waitForExistence(timeout: 15), app.debugDescription)
+        #elseif os(macOS)
+        XCTAssertTrue(app.buttons["New Intention"].waitForExistence(timeout: 15))
+        #else
+        func advance(_ label: String) {
+            let button = app.buttons[label].firstMatch
+            XCTAssertTrue(button.waitForExistence(timeout: 15), app.debugDescription)
+            for _ in 0..<6 where !button.isHittable {
+                app.swipeUp()
+            }
+            XCTAssertTrue(button.isHittable, app.debugDescription)
+            button.tap()
+        }
+        advance("Get Started")
+        advance("Continue")
+        #if os(iOS)
+        advance("Continue")
+        #endif
+        advance("Maybe Later")
+        advance("Get Started")
+        XCTAssertTrue(app.buttons["New Intention"].waitForExistence(timeout: 15), app.debugDescription)
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(app.buttons["New Intention"].waitForExistence(timeout: 15), app.debugDescription)
+        #endif
     }
 
     @MainActor

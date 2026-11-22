@@ -31,7 +31,7 @@ class UserProfileRepository {
     
     /// Get current user profile
     func getProfile() -> UserProfile? {
-        let descriptor = FetchDescriptor<UserProfile>()
+        let descriptor = FetchDescriptor<UserProfile>(sortBy: [SortDescriptor(\.updatedAt, order: .reverse), SortDescriptor(\.id)])
         return try? modelContext.fetch(descriptor).first
     }
     

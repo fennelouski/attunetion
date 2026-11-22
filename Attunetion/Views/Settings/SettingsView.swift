@@ -24,8 +24,6 @@ struct SettingsView: View {
     @Query private var preferencesQuery: [UserPreferences]
     @Query private var intentionThemes: [IntentionTheme]
     @State private var preferenceSaveError: String?
-    @State private var unsplashUnlockKeyInput: String = ""
-    @State private var unsplashKeySavedMessage: String? = nil
     @State private var showingAbout = false
     @State private var showingAppThemePicker = false
     @State private var showingOnboarding = false
@@ -156,7 +154,7 @@ struct SettingsView: View {
                     deleteAllData()
                 }
             } message: {
-                Text("This permanently deletes your intentions, custom themes, profile, feedback, and preferences from this device, and clears its widgets and reminders. Bundled themes remain. This cannot be undone and does not delete copies on other devices or information previously sent to the suggestion service.")
+                Text("This permanently deletes your intentions, custom themes, profile, feedback, and preferences. With iCloud sync enabled, deletion also affects your other devices. It clears widgets and reminders on this device. Information previously shared with service providers follows their retention policies.")
             }
             .alert("Could Not Save Preference", isPresented: visiblePresentation(Binding(
                 get: { preferenceSaveError != nil },
@@ -251,7 +249,6 @@ struct SettingsView: View {
             switch selectedSection {
             case .appearance:
                 appearanceSections
-                photoThemesSection
             case .intentions: intentionsSection
             case .reminders:
                 reminderSection
@@ -268,39 +265,6 @@ struct SettingsView: View {
         .tint(colorScheme == .light
               ? themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor()
               : themeManager.accentColor(for: colorScheme).toSwiftUIColor())
-    }
-
-    @ViewBuilder
-    private var photoThemesSection: some View {
-        Section {
-            SecureField("Unsplash unlock key", text: $unsplashUnlockKeyInput)
-                .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                #if os(iOS)
-                .autocapitalization(.none)
-                .autocorrectionDisabled()
-                #endif
-            if let msg = unsplashKeySavedMessage {
-                Text(msg)
-                    .font(.caption)
-                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-            }
-            Button(action: {
-                APIClient.shared.unsplashUnlockKey = unsplashUnlockKeyInput.isEmpty ? nil : unsplashUnlockKeyInput
-                unsplashKeySavedMessage = unsplashUnlockKeyInput.isEmpty ? "Key cleared." : "Key saved. You have unlimited photo themes and can submit stable photos to the shared library."
-                unsplashUnlockKeyInput = ""
-                #if os(iOS)
-                HapticFeedback.light()
-                #endif
-            }) {
-                Text(unsplashUnlockKeyInput.isEmpty ? "Clear saved key" : "Save key")
-                    .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
-            }
-            .disabled(unsplashUnlockKeyInput.isEmpty && APIClient.shared.unsplashUnlockKey == nil)
-        } header: {
-            ThemedSectionHeader(text: "Photo themes", themeManager: themeManager)
-        } footer: {
-            ThemedSectionFooter(text: "If you have an unlock key, you get unlimited Unsplash photo themes and can submit photos you've used for 7+ days to the shared library for all users. Leave blank to clear.", themeManager: themeManager)
-        }
     }
 
     @ViewBuilder
@@ -360,6 +324,7 @@ struct SettingsView: View {
         } header: {
             ThemedSectionHeader(text: "Appearance", themeManager: themeManager)
         }
+        #if os(iOS)
         Section {
             // Widget appearance
             NavigationLink(destination: WidgetAppearanceView()) {
@@ -376,6 +341,7 @@ struct SettingsView: View {
         } header: {
             ThemedSectionHeader(text: "Widget", themeManager: themeManager)
         }
+        #endif
     }
 
     @ViewBuilder
@@ -531,7 +497,7 @@ struct SettingsView: View {
             // Legal documents
             let baseURL = APIClient.shared.baseURL
 
-            if let privacyURL = URL(string: "https://nathanfennel.com/attunetion/privacy.html") {
+            if let privacyURL = URL(string: "https://attunetion.nathanfennel.com/legal/privacy-policy.html") {
                 Link(destination: privacyURL) {
                     HStack {
                         Text("Privacy Policy")
@@ -814,7 +780,7 @@ struct SettingsView: View {
             let notifications = UNUserNotificationCenter.current()
             notifications.removeAllPendingNotificationRequests()
             notifications.removeAllDeliveredNotifications()
-            #if canImport(WidgetKit)
+            #if os(iOS)
             WidgetCenter.shared.reloadAllTimelines()
             #endif
 
@@ -894,7 +860,7 @@ enum LocalUserDataDeletion {
 
     static func clearPreferences(standard: UserDefaults, widgets: UserDefaults?) {
         for key in ["hasSeenOnboarding", "intentionListStyle", "openNewIntentionFromNotification",
-                    "everyOtherDayReminderAnchor"] {
+                    "everyOtherDayReminderAnchor", "OpenAISharingConsent.v1", "APIClientUserId", "UnsplashUnlockKey"] {
             standard.removeObject(forKey: key)
         }
         for key in ["currentIntentionData", "currentThemeData", "defaultIntentionFrequency",

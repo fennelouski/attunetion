@@ -83,7 +83,7 @@ struct UserProfileView: View {
                         Toggle(isOn: Binding(
                             get: { autoGenerateEnabled },
                             set: { newValue in
-                                if newValue && !profile.hasAcceptedTerms {
+                                if newValue && !ConsentManager.shared.hasAcceptedTerms(modelContext: modelContext) {
                                     // Show consent dialog
                                     showConsentDialog = true
                                 } else {
@@ -101,7 +101,7 @@ struct UserProfileView: View {
                         }
                         .tint(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
 
-                        if profile.hasAcceptedTerms {
+                        if ConsentManager.shared.hasAcceptedTerms(modelContext: modelContext) {
                             Button("Stop Sharing with AI", role: .destructive) {
                                 autoGenerateEnabled = false
                                 do {
@@ -113,7 +113,7 @@ struct UserProfileView: View {
                             }
                         }
 
-                        if !profile.hasAcceptedTerms {
+                        if !ConsentManager.shared.hasAcceptedTerms(modelContext: modelContext) {
                             HStack {
                                 Image(systemName: "info.circle")
                                     .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
@@ -343,7 +343,7 @@ struct UserProfileView: View {
     
     private func loadProfile() {
         userInfo = profile.userInfo
-        autoGenerateEnabled = profile.autoGenerateEnabled
+        autoGenerateEnabled = profile.autoGenerateEnabled && ConsentManager.shared.hasAcceptedTerms(modelContext: modelContext)
         
         // Parse structured data if it exists in userInfo
         parseStructuredData()

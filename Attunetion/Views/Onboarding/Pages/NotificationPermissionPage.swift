@@ -23,50 +23,53 @@ struct NotificationPermissionPage: View {
                 // Custom background
                 AppBackground(themeManager: themeManager)
                 
-                VStack(spacing: 0) {
-                    Spacer()
-                    
-                    // Main content area
-                    VStack(spacing: 32) {
-                        Image(systemName: "bell.fill")
-                            .font(.system(size: 80, weight: .ultraLight))
-                            .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
-                        
-                        VStack(spacing: 16) {
-                            Text(String(localized: "Stay on track with reminders"))
-                                .font(.system(size: 28, weight: .light, design: .default))
-                                .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
-                                .fixedSize(horizontal: false, vertical: true)
-                                .multilineTextAlignment(.center)
-                                .lineLimit(nil)
-                            
-                            Text(String(localized: "Get gentle reminders to set your daily, weekly, or monthly intentions"))
-                                .font(.system(size: 17, weight: .light, design: .default))
-                                .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                                .fixedSize(horizontal: false, vertical: true)
-                                .multilineTextAlignment(.center)
-                                .lineLimit(nil)
-                                .opacity(0.75)
-                                .padding(.horizontal, 60)
-                                .frame(maxWidth: 700)
+                ScrollView {
+                    VStack(spacing: 0) {
+                        Spacer()
+
+                        // Main content area
+                        VStack(spacing: 32) {
+                            Image(systemName: "bell.fill")
+                                .font(.system(size: 80, weight: .ultraLight))
+                                .foregroundColor(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
+
+                            VStack(spacing: 16) {
+                                Text(String(localized: "Stay on track with reminders"))
+                                    .font(.system(size: 28, weight: .light, design: .default))
+                                    .foregroundColor(themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor())
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .multilineTextAlignment(.center)
+                                    .lineLimit(nil)
+
+                                Text(String(localized: "Get gentle reminders to set your daily, weekly, or monthly intentions"))
+                                    .font(.system(size: 17, weight: .light, design: .default))
+                                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .multilineTextAlignment(.center)
+                                    .lineLimit(nil)
+                                    .opacity(0.75)
+                                    .padding(.horizontal, 60)
+                                    .frame(maxWidth: 700)
+                            }
                         }
-                    }
-                    
-                    Spacer()
-                    
-                    // Action buttons
-                    VStack(spacing: 20) {
-                        PrimaryButton("Enable Notifications", themeManager: themeManager) {
-                            requestNotificationPermission()
+
+                        Spacer()
+
+                        // Action buttons
+                        VStack(spacing: 20) {
+                            PrimaryButton("Enable Notifications", themeManager: themeManager) {
+                                requestNotificationPermission()
+                            }
+
+                            TextButton("Maybe Later", themeManager: themeManager, action: onContinue)
+                                .padding(.top, 4)
                         }
-                        
-                        TextButton("Maybe Later", themeManager: themeManager, action: onContinue)
-                            .padding(.top, 4)
+                        .padding(.horizontal, 40)
+                        .padding(.bottom, 80)
                     }
-                    .padding(.horizontal, 40)
-                    .padding(.bottom, 80)
+                    .frame(maxWidth: .infinity, minHeight: geometry.size.height)
                 }
-                .frame(width: geometry.size.width, height: geometry.size.height)
+                .scrollBounceBehavior(.basedOnSize)
             }
         }
     }

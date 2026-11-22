@@ -13,13 +13,15 @@ import SwiftData
 class ConsentManager {
     static let shared = ConsentManager()
 
+    private let localConsentKey = "OpenAISharingConsent.v1"
+
     private init() {}
 
     /// Check if user has accepted terms for using AI/suggestion features
     /// Returns true if accepted, false otherwise
     func hasAcceptedTerms(modelContext: ModelContext) -> Bool {
         let repository = UserProfileRepository(modelContext: modelContext)
-        return repository.getProfile()?.hasAcceptedTerms == true
+        return UserDefaults.standard.bool(forKey: localConsentKey) && repository.getProfile()?.hasAcceptedTerms == true
     }
 
     /// Mark that user has accepted terms
@@ -32,6 +34,7 @@ class ConsentManager {
         profile.termsAcceptedDate = Date()
         do {
             try repository.update(profile)
+            UserDefaults.standard.set(true, forKey: localConsentKey)
         } catch {
             profile.hasAcceptedTerms = previousConsent
             profile.termsAcceptedDate = previousDate
@@ -41,6 +44,7 @@ class ConsentManager {
 
     /// Revoke user consent (when they disable AI features)
     func revokeConsent(modelContext: ModelContext) throws {
+        UserDefaults.standard.removeObject(forKey: localConsentKey)
         let repository = UserProfileRepository(modelContext: modelContext)
         let profile = repository.getOrCreateProfile()
         profile.hasAcceptedTerms = false
