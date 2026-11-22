@@ -8,6 +8,16 @@ trap 'rm -rf "$stage"' EXIT
 cd "$root"
 git archive "$revision" daily-intentions-backend/public daily-intentions-backend/aws/marketing.yaml | tar -x -C "$stage"
 site="$stage/daily-intentions-backend/public"
+# Reveal the download control once the product exists in the release storefront.
+python3 - "$site/index.html" "${STORE_COUNTRY:-us}" <<'PYTHON'
+import json, pathlib, sys, urllib.parse, urllib.request
+page = pathlib.Path(sys.argv[1])
+query = urllib.parse.urlencode({"id": "6757886472", "country": sys.argv[2]})
+with urllib.request.urlopen("https://itunes.apple.com/lookup?" + query, timeout=20) as response:
+    listed = any(item.get("trackId") == 6757886472 for item in json.load(response)["results"])
+if listed:
+    page.write_text(page.read_text().replace('class="cta-button" hidden', 'class="cta-button"'))
+PYTHON
 stack=attunetion-public-site
 aws cloudformation deploy --region us-east-1 --stack-name "$stack" \
   --template-file "$stage/daily-intentions-backend/aws/marketing.yaml" \

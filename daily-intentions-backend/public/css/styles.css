@@ -678,3 +678,15 @@ button:focus {
   top: 0;
 }
 
+
+@media (max-width: 420px) {
+  header { position: static; padding: 1rem 0; }
+  nav, .nav-links, .footer-links { flex-wrap: wrap; gap: .5rem 1rem; }
+  .container { padding-inline: 1rem; }
+  .features, .how-it-works { grid-template-columns: minmax(0, 1fr); }
+  .feature-card, .step { padding: 1rem; min-width: 0; }
+  h1, h2, h3, p, a { overflow-wrap: anywhere; }
+  img { max-width: 100%; height: auto; }
+}
+
+.cta-button[hidden] { display: none; }
