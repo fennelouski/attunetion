@@ -22,7 +22,7 @@ class APIClient {
         }
         #endif
         // Production URL
-        return "https://attunetion.vercel.app"
+        return "https://attunetion.nathanfennel.com"
     }
     
     private var apiKey: String? {
