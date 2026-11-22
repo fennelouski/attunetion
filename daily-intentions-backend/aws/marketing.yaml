@@ -1,0 +1,80 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Attunetion marketing, support and policies at attunetion.nathanfennel.com.
+Metadata:
+  AWSToolsMetrics: { AWSAgentToolkit: aws-cloudformation@3 }
+Parameters:
+  CertificateArn: { Type: String }
+Resources:
+  Site:
+    Type: AWS::S3::Bucket
+    Metadata:
+      com.aws.cloudformation.Context: { why: Versioned release files, must: Keep objects private }
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault: { SSEAlgorithm: AES256 }
+      VersioningConfiguration: { Status: Enabled }
+      OwnershipControls:
+        Rules: [{ ObjectOwnership: BucketOwnerEnforced }]
+      PublicAccessBlockConfiguration: { BlockPublicAcls: true, BlockPublicPolicy: true, IgnorePublicAcls: true, RestrictPublicBuckets: true }
+  Access:
+    Type: AWS::CloudFront::OriginAccessControl
+    Metadata:
+      com.aws.cloudformation.Context: { why: Authenticate CloudFront reads, must: Sign every request }
+    Properties:
+      OriginAccessControlConfig:
+        Name: !Sub '${AWS::StackName}-origin'
+        OriginAccessControlOriginType: s3
+        SigningBehavior: always
+        SigningProtocol: sigv4
+  Distribution:
+    Type: AWS::CloudFront::Distribution
+    Metadata:
+      com.aws.cloudformation.Context: { why: Publish the app website, must: Serve static resources only }
+    Properties:
+      DistributionConfig:
+        Enabled: true
+        DefaultRootObject: index.html
+        Aliases: [attunetion.nathanfennel.com]
+        ViewerCertificate:
+          AcmCertificateArn: !Ref CertificateArn
+          SslSupportMethod: sni-only
+          MinimumProtocolVersion: TLSv1.2_2021
+        Origins:
+          - Id: site
+            DomainName: !GetAtt Site.RegionalDomainName
+            OriginAccessControlId: !Ref Access
+            S3OriginConfig: { OriginAccessIdentity: '' }
+        DefaultCacheBehavior:
+          TargetOriginId: site
+          AllowedMethods: [GET, HEAD]
+          ViewerProtocolPolicy: redirect-to-https
+          Compress: true
+          CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+  ReadPolicy:
+    Type: AWS::S3::BucketPolicy
+    Metadata:
+      com.aws.cloudformation.Context: { why: Restrict anonymous and insecure reads, must: Limit access to this distribution }
+    Properties:
+      Bucket: !Ref Site
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: { Service: cloudfront.amazonaws.com }
+            Action: s3:GetObject
+            Resource: !Sub '${Site.Arn}/*'
+            Condition:
+              StringEquals: { 'AWS:SourceArn': !Sub 'arn:${AWS::Partition}:cloudfront::${AWS::AccountId}:distribution/${Distribution}' }
+          - Effect: Deny
+            Principal: '*'
+            Action: s3:*
+            Resource: [!GetAtt Site.Arn, !Sub '${Site.Arn}/*']
+            Condition:
+              Bool: { 'aws:SecureTransport': 'false' }
+Outputs:
+  BucketName: { Value: !Ref Site }
+  DistributionId: { Value: !Ref Distribution }
+  DomainName: { Value: !GetAtt Distribution.DomainName }
