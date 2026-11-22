@@ -1,68 +1,87 @@
 {
-  "mode": "parallel",
-  "revision": "c23a731efa23ad17df189b14740fc7b7b9dfdfa2",
-  "deployedAt": "2026-09-30T20:24:01.660221+00:00",
-  "verifiedAt": "2026-09-30T20:24:11.611633+00:00",
-  "status": "verified_parallel",
-  "commands": [
-    "PATH=/Users/nathan/.local/node/bin:$PATH npm run deploy:parallel",
-    "python3 scripts/smoke-parallel.py --aws-url https://pmsxomo7c4d22kf5olronbillq0erqrx.lambda-url.us-west-2.on.aws --vercel-url https://attunetion.vercel.app --revision c23a731efa23ad17df189b14740fc7b7b9dfdfa2 --output /Users/nathan/Documents/GitHub-sync-backup-20260930/deployments/attunetion-c23a731-smoke.json"
+  "mode": "aws-only",
+  "productionURL": "https://attunetion.nathanfennel.com",
+  "regionalURL": "https://n63ibq90bl.execute-api.us-west-2.amazonaws.com",
+  "revision": "e85dc2bca56099681d0141a0cdf0fb29ef809323",
+  "actualCutoverAt": "2026-11-22T19:28:44.876Z",
+  "cutoverTimeBasis": "CloudFront production distribution configuration update. All five routes confirmed on the branded hostname by 19:30:09Z.",
+  "verifiedAt": "2026-11-22T19:56:44+00:00",
+  "command": "bash daily-intentions-backend/scripts/deploy-production.sh",
+  "checks": [
+    "All five branded and regional AI requests returned 200 with expected structured data. Invalid input returned 400.",
+    "Repeated deployment from the same revision and verified regional health.",
+    "Rolled forward to 31f573200a3d9ce20306ede1b369c85714352285 then deployed the recorded production revision again and verified health.",
+    "Exercised the deployed DynamoDB quota expression on an isolated synthetic key. The 100th call was admitted and the 101st refused. Removed the test key.",
+    "Disconnected only the Attunetion Vercel Git project, verified absent link and zero hooks. No repository Vercel release workflow. Legacy URL still returns HTTP 200."
   ],
-  "productionURL": "https://attunetion.vercel.app",
-  "vercelDeployment": "https://attunetion-6dl0r95az-nathan-fennels-projects.vercel.app",
-  "aws": {
-    "functionName": "attunetion-backend-parallel-ApiFunction-cvcnuuwh",
+  "legacyURL": "https://attunetion.vercel.app",
+  "migrationTiming": "Late cutover. Continuous two-week production-equivalent parallel testing was not evidenced.",
+  "historicalParallelDeployment": {
+    "mode": "parallel",
     "revision": "c23a731efa23ad17df189b14740fc7b7b9dfdfa2",
-    "url": "https://pmsxomo7c4d22kf5olronbillq0erqrx.lambda-url.us-west-2.on.aws/"
-  },
-  "productionRouting": "Vercel",
-  "actualCutoverAt": null,
-  "checks": {
-    "awsUnsignedStatus": 403,
-    "syntheticAIRequests": 4,
-    "hosts": {
-      "aws": {
-        "healthStatus": 200,
-        "healthRevision": "c23a731efa23ad17df189b14740fc7b7b9dfdfa2",
-        "invalidBodyStatus": 400,
-        "overlongInputStatus": 400,
-        "syntheticThemeStatus": 200,
-        "syntheticWeeklyStatus": 200
-      },
-      "vercel": {
-        "healthStatus": 200,
-        "healthRevision": "c23a731efa23ad17df189b14740fc7b7b9dfdfa2",
-        "invalidBodyStatus": 400,
-        "overlongInputStatus": 400,
-        "syntheticThemeStatus": 200,
-        "syntheticWeeklyStatus": 200
-      }
+    "deployedAt": "2026-09-30T20:24:01.660221+00:00",
+    "verifiedAt": "2026-09-30T20:24:11.611633+00:00",
+    "status": "verified_parallel",
+    "commands": [
+      "PATH=/Users/nathan/.local/node/bin:$PATH npm run deploy:parallel",
+      "python3 scripts/smoke-parallel.py --aws-url https://pmsxomo7c4d22kf5olronbillq0erqrx.lambda-url.us-west-2.on.aws --vercel-url https://attunetion.vercel.app --revision c23a731efa23ad17df189b14740fc7b7b9dfdfa2 --output /Users/nathan/Documents/GitHub-sync-backup-20260930/deployments/attunetion-c23a731-smoke.json"
+    ],
+    "productionURL": "https://attunetion.vercel.app",
+    "vercelDeployment": "https://attunetion-6dl0r95az-nathan-fennels-projects.vercel.app",
+    "aws": {
+      "functionName": "attunetion-backend-parallel-ApiFunction-cvcnuuwh",
+      "revision": "c23a731efa23ad17df189b14740fc7b7b9dfdfa2",
+      "url": "https://pmsxomo7c4d22kf5olronbillq0erqrx.lambda-url.us-west-2.on.aws/"
     },
-    "privacyRedirect": "302 to https://nathanfennel.com/attunetion/privacy.html on both hosts",
-    "privacyStaticSHA256": "7bc83838c5956fd7c3a71fa149a67bc94f1dfcf163e4e04758515a4f97b8c500",
-    "canonicalPrivacyStatus": 200
-  },
-  "evidence": "/Users/nathan/Documents/GitHub-sync-backup-20260930/deployments/attunetion-c23a731-smoke.json",
-  "cutoverLimitations": [
-    "AWS preview is IAM-only; native clients still use Vercel.",
-    "Public access and durable abuse/cost control are not yet verified for AWS cutover.",
-    "Repeat deployment and rollback remain unverified."
-  ],
-  "latestAudit": {
-    "verifiedAt": "2026-11-22T17:23:56+00:00",
-    "status": "post-cutoff exception; working Vercel API preserved",
-    "liveRevision": "afa1a117f415aa1a7e6522748ce74764d9765a96",
-    "syntheticChecks": {
-      "theme": 200,
-      "weekly": 200,
-      "monthly": 200,
-      "quote": 200,
-      "rephrase": 200
-    },
-    "remotePhotoCatalog": 404,
-    "reviewedModelsLive": false,
-    "websiteCredentialVerified": false,
+    "productionRouting": "Vercel",
     "actualCutoverAt": null,
-    "websiteDeployment": "aws/MARKETING_DEPLOYMENT.json"
+    "checks": {
+      "awsUnsignedStatus": 403,
+      "syntheticAIRequests": 4,
+      "hosts": {
+        "aws": {
+          "healthStatus": 200,
+          "healthRevision": "c23a731efa23ad17df189b14740fc7b7b9dfdfa2",
+          "invalidBodyStatus": 400,
+          "overlongInputStatus": 400,
+          "syntheticThemeStatus": 200,
+          "syntheticWeeklyStatus": 200
+        },
+        "vercel": {
+          "healthStatus": 200,
+          "healthRevision": "c23a731efa23ad17df189b14740fc7b7b9dfdfa2",
+          "invalidBodyStatus": 400,
+          "overlongInputStatus": 400,
+          "syntheticThemeStatus": 200,
+          "syntheticWeeklyStatus": 200
+        }
+      },
+      "privacyRedirect": "302 to https://nathanfennel.com/attunetion/privacy.html on both hosts",
+      "privacyStaticSHA256": "7bc83838c5956fd7c3a71fa149a67bc94f1dfcf163e4e04758515a4f97b8c500",
+      "canonicalPrivacyStatus": 200
+    },
+    "evidence": "/Users/nathan/Documents/GitHub-sync-backup-20260930/deployments/attunetion-c23a731-smoke.json",
+    "cutoverLimitations": [
+      "AWS preview is IAM-only; native clients still use Vercel.",
+      "Public access and durable abuse/cost control are not yet verified for AWS cutover.",
+      "Repeat deployment and rollback remain unverified."
+    ],
+    "latestAudit": {
+      "verifiedAt": "2026-11-22T17:23:56+00:00",
+      "status": "post-cutoff exception; working Vercel API preserved",
+      "liveRevision": "afa1a117f415aa1a7e6522748ce74764d9765a96",
+      "syntheticChecks": {
+        "theme": 200,
+        "weekly": 200,
+        "monthly": 200,
+        "quote": 200,
+        "rephrase": 200
+      },
+      "remotePhotoCatalog": 404,
+      "reviewedModelsLive": false,
+      "websiteCredentialVerified": false,
+      "actualCutoverAt": null,
+      "websiteDeployment": "aws/MARKETING_DEPLOYMENT.json"
+    }
   }
 }

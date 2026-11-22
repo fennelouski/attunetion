@@ -1,10 +1,10 @@
 {
-  "mode": "isolated-aws-website",
+  "mode": "aws-only-branded-site-and-api",
   "repository": "fennelouski/nathanfennel.com",
-  "revision": "8ae6c88e4808271f51db7e134d1a119ca6ff2617",
+  "revision": "00847258320275c0d39297a5c75da7f96ff8c283",
   "appSourceRevision": "5827acc9f8f5ff9c6b2f02421ce960f15ec8b3a7",
   "command": "npm run deploy:attunetion",
-  "verifiedAt": "2026-11-22T17:26:52+00:00",
+  "verifiedAt": "2026-11-22T19:57:07+00:00",
   "host": "https://attunetion.nathanfennel.com",
   "cloudFront": "https://d3ati6b0yhgngf.cloudfront.net",
   "distribution": "E3670PFDVNL4Q",
@@ -23,9 +23,14 @@
     "Distribution TLS and committed content",
     "Responsive browser widths 198, 320, 390, 820, 1280 and 1440",
     "Both authoritative name servers and public recursive DNS return CloudFront",
-    "System DNS converged. Ordinary HTTPS on the branded root and all five named pages returned byte-identical committed content."
+    "System DNS converged. Ordinary HTTPS on the branded root and all five named pages returned byte-identical committed content.",
+    "Website release verified branded API health against the regional API revision after backend rollback. Branded licensing page matches the Apple standard license selection."
   ],
-  "actualAPICutoverAt": null,
-  "websiteRouting": "First publication on AWS. No previous dedicated site.",
-  "rollback": "Run the website deployment command in a clean worktree at a previous verified website revision. Rollback not exercised."
+  "actualAPICutoverAt": "2026-11-22T19:28:44.876Z",
+  "websiteRouting": "AWS S3 website and uncached API Gateway routes behind CloudFront. The parent website retains its own deployment process.",
+  "rollback": "Run the website deployment command in a clean worktree at a previous verified website revision. Rollback not exercised.",
+  "apiRevision": "e85dc2bca56099681d0141a0cdf0fb29ef809323",
+  "apiRegion": "us-west-2",
+  "apiOrigin": "https://n63ibq90bl.execute-api.us-west-2.amazonaws.com",
+  "cutoverEvidence": "CloudFront configuration update time. All five branded AI requests completed by 19:30:09Z."
 }

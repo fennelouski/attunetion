@@ -1,4 +1,12 @@
-# Attunetion backend parallel deployment
+# Attunetion production deployment
+
+Build 11 uses https://attunetion.nathanfennel.com/api. The website repository owns the CloudFront distribution and marketing pages. Its uncached /api/* route forwards to API Gateway, backed by the attunetion-production-api CloudFormation stack in us-west-2. Published older binaries retain the existing Vercel endpoint.
+
+From the app repository root, run `bash daily-intentions-backend/scripts/deploy-production.sh` with Node 24, AWS CLI and the deployment account. The command builds the committed backend, tests it and checks its deployed revision. Roll back by running the same command from a checkout of the previously verified revision. The website credential is stored in the app-scoped AWS secret attunetion/website-openai. When the website rotates its credential, refresh that secret, wait for replication and redeploy. Keep all credential values out of source and logs.
+
+See DEPLOYMENT_RECORD.json for current URLs, verification and rollback. New releases go to AWS only. The following section preserves the September parallel setup for historical context.
+
+## Historical parallel deployment (retired)
 
 Production remains on Vercel. The AWS service is an IAM-protected Lambda Function URL for signed parity checks only. Native clients continue using the existing Vercel URL. Do not change native routing to the AWS URL: clients do not hold AWS credentials.
 

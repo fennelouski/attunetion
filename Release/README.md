@@ -1,5 +1,30 @@
 # Attunetion App Store release audit
 
+**November 22, 2026 · 1.0.1 (11) · Hold submission.** Apple processed the three signed builds and each platform draft has build 11 selected. The iOS archive includes Watch and supports iPhone, iPhone Duo and iPad. The shared Apple ID is 6757886472. No submission or review reply was sent.
+
+| Draft | Processed build ID | Signed export SHA-256 |
+| --- | --- | --- |
+| iOS | 2fc5405a-91bd-485d-9a3f-3275f29c7c11 | c670f6db7e4f00999fceb4d1da87001ecd82a81f5fc122972e47c1232321b3e4 |
+| macOS | ea4f7388-4ad2-426e-a938-c1890bf4fc81 | 74dda08a8f3cc33b7f2f4adeb55c34d32874f80348bf76e07ca1fb5a6f245cb1 |
+| visionOS | 83959f83-8521-4c47-9e40-c5d59be6ba70 | f454dd59900aa6f87f95f167037664930edb9fa9ac46762172030a4aed916202 |
+
+The native commit is afdb3ed0b2048ca65cf2d3e6e93bf98436af7e1e. It updates the endpoint and build number from the platform-tested candidate below. Xcode showed automatic signing for the app, Watch and widget. Organizer uploaded iOS. Signed artifacts and screenshots are in `~/Documents/Attunetion Release/1.0.1-11/`. The 13-inch iPad passed onboarding, manual save and relaunch on build 11. The iPhone onboarding and relaunch test also passed in dark mode at maximum Dynamic Type. Device Hub showed the same saved intention after opening the Duo. Both Duo screenshot postures were accepted, alongside iPhone, Watch, Mac and Vision screenshots. The existing ten iPad screenshots were retained.
+
+## Before review
+
+1. **Previous rejection.** Apple cited 4.3 and 4.2.6. Complete the nine requested answers using the publisher’s actual beta experience, portfolio comparisons and asset provenance. See [the private response worksheet](APP_REVIEW_RESPONSE.md). Resolve the original correspondence before resubmission if disputing the finding.
+2. **iCloud.** Xcode signed all participating apps for the shared container. CloudKit Console showed only Users in production. Initialized the five SwiftData types in development and previewed the additive deployment. Production schema approval and a successful create, edit and delete across two signed-in TestFlight devices remain outstanding. The independent-store development probe timed out with macOS logging failed background export task scheduling. A local persistence test cannot establish cloud sync.
+3. **Storefront compliance.** Mainland China is included in availability. App Store Connect surfaced security-assessment and generative-AI filing notices. Confirm applicable documentation or authorize excluding that storefront. The existing availability selection was preserved. The updated questionnaire calculated 9+ in most storefronts. App Privacy was published with the app-specific device identifier, and all three platform listings use branded URLs.
+4. **Device checks.** Physical notification delivery and tap, widget refresh and deep linking, VoiceOver, and distribution-build AI consent revocation and re-enable still need device evidence. Apple review and region-specific compliance remain open.
+
+## Production service
+
+All five AI features passed using synthetic data through the branded AWS host and regional API. Four focused operations use gpt-6-luna with no reasoning. Weekly generation uses gpt-6.2-sol at low reasoning. The credential comes from the website’s production configuration and is held server-side in AWS Secrets Manager. The website publishes the standard App Store license link, service terms, privacy and AI sharing disclosures. Manual entry requires no AI consent. See the [backend deployment record](../daily-intentions-backend/DEPLOYMENT_RECORD.json).
+
+## Historical build 10 audit
+
+The following was recorded before build 11. Its pending hosting, provider, and store-login items have since been resolved as described above.
+
 **November 22, 2026 · Version 1.0.1 (10) · Hold submission.** The signed release candidate covers all six requested devices. The outstanding release gates are production iCloud round-trip testing, the production AI credential and model rollout, and completion of the authenticated App Store listing.
 
 Use `Attunetion.xcodeproj`, scheme `Attunetion`, team `EJLR2RPSV2`, bundle `com.nathanfennel.Attunetion`, and Apple ID `6757886472`. The similarly named Daily Intentions project is legacy. Final native source revision is `f0e49c0ba2d0763e79a65f5dc2c98c93c124bcba`. The remote tag `attunetion-1.0.1-build10-candidate` identifies those sources. Later commits cover the website and release evidence. The release was built locally using Xcode 27.1. Archives, exports and test summaries are under `~/Documents/Attunetion Release/1.0.1-10/Reviewed/`.
