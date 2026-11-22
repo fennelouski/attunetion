@@ -21,8 +21,6 @@ struct ThemePickerView: View {
     
     @State private var presetThemes: [IntentionTheme] = []
     @State private var curatedPhotos: [CuratedPhoto] = []
-    @State private var isLoadingPhotos = false
-    @State private var photoLoadError: String?
     
     init(
         selectedTheme: Binding<IntentionTheme?>,
@@ -106,7 +104,7 @@ struct ThemePickerView: View {
             }
 
             // Photos (curated Unsplash) section - only when backend available
-            if BackendHealthManager.shared.isBackendAvailable {
+            if !curatedPhotos.isEmpty {
                 photosSection
             }
             
@@ -161,25 +159,6 @@ struct ThemePickerView: View {
                 Text("You've reached the limit of \(maxUnsplashThemes) photo themes. Change or remove one to add another.")
                     .font(.system(size: 13, weight: .regular, design: .default))
                     .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-            } else if isLoadingPhotos {
-                HStack {
-                    ProgressView()
-                        .scaleEffect(0.9)
-                        .tint(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
-                    Text(String(localized: "Loading photos…"))
-                        .font(.system(size: 13, weight: .regular, design: .default))
-                        .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
-            } else if let error = photoLoadError {
-                Text(error)
-                    .font(.system(size: 13, weight: .regular, design: .default))
-                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
-            } else if curatedPhotos.isEmpty {
-                Text(String(localized: "No photos available right now."))
-                    .font(.system(size: 13, weight: .regular, design: .default))
-                    .foregroundColor(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor())
             } else {
                 LazyVGrid(columns: [
                     GridItem(.flexible()),
@@ -214,17 +193,9 @@ struct ThemePickerView: View {
 
     private func loadCuratedPhotos() {
         guard canAddUnsplashTheme || curatedPhotos.isEmpty else { return }
-        isLoadingPhotos = true
-        photoLoadError = nil
         Task { @MainActor in
-            do {
-                let response = try await APIClient.shared.fetchCuratedPhotos(page: 1, perPage: 30)
-                curatedPhotos = response.photos
-            } catch {
-                photoLoadError = error.localizedDescription
-                curatedPhotos = []
-            }
-            isLoadingPhotos = false
+            // The optional catalog can be unavailable independently of the AI service.
+            curatedPhotos = (try? await APIClient.shared.fetchCuratedPhotos(page: 1, perPage: 30))?.photos ?? []
         }
     }
 

@@ -61,6 +61,36 @@ final class AttunetionUITests: XCTestCase {
         #endif
     }
 
+    #if os(iOS) || os(visionOS)
+    @MainActor
+    func testManualCreationPersists() throws {
+        let app = XCUIApplication()
+        app.launch()
+        if app.buttons["Skip"].firstMatch.waitForExistence(timeout: 3) {
+            app.buttons["Skip"].firstMatch.tap()
+        }
+        let create = app.buttons["New Intention"].firstMatch
+        XCTAssertTrue(create.waitForExistence(timeout: 15), app.debugDescription)
+        create.tap()
+        let editor = app.textViews.firstMatch
+        XCTAssertTrue(editor.waitForExistence(timeout: 10), app.debugDescription)
+        editor.tap()
+        let intention = "Take time to listen"
+        editor.typeText(intention)
+        app.buttons["Save"].tap()
+        app.terminate()
+        app.launch()
+        let saved = app.descendants(matching: .any).matching(
+            NSPredicate(format: "label CONTAINS %@", intention)
+        ).firstMatch
+        XCTAssertTrue(saved.waitForExistence(timeout: 15), app.debugDescription)
+        let image = XCTAttachment(screenshot: app.screenshot())
+        image.name = "Saved intention"
+        image.lifetime = .keepAlways
+        add(image)
+    }
+    #endif
+
     @MainActor
     func testLaunchPerformance() throws {
         // This measures how long it takes to launch your application.
