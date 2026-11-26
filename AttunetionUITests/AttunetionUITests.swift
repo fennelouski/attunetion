@@ -84,6 +84,12 @@ final class AttunetionUITests: XCTestCase {
         XCTAssertTrue(containsValue("Connect with friends and family"))
         app.buttons["Continue"].tap()
         XCTAssertTrue(containsValue("Show appreciation to someone I care about"))
+        app.buttons["Continue"].tap()
+        let seasonalIdeas = app.buttons["Quick ideas"].firstMatch
+        for _ in 0..<5 where !seasonalIdeas.isHittable { app.swipeUp() }
+        seasonalIdeas.tap()
+        app.buttons["Build a routine I can sustain"].tap()
+        XCTAssertTrue(containsValue("Build a routine I can sustain"))
     }
 
     @MainActor
