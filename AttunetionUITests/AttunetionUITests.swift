@@ -63,6 +63,30 @@ final class AttunetionUITests: XCTestCase {
 
     #if os(iOS) || os(visionOS)
     @MainActor
+    func testGuideFocusCarriesThroughWeekAndDay() throws {
+        let app = XCUIApplication()
+        app.launch()
+        if app.buttons["Skip"].firstMatch.waitForExistence(timeout: 2) {
+            app.buttons["Skip"].firstMatch.tap()
+        }
+        let guide = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] %@", "how to create")).firstMatch
+        XCTAssertTrue(guide.waitForExistence(timeout: 10))
+        guide.tap()
+        app.buttons["Get Started"].tap()
+        app.buttons["Need Some Ideas?"].tap()
+        app.buttons["Connection & Relationships"].tap()
+        func containsValue(_ value: String) -> Bool {
+            app.descendants(matching: .any).matching(NSPredicate(format: "value == %@", value))
+                .firstMatch.waitForExistence(timeout: 5)
+        }
+        XCTAssertTrue(containsValue("Nurture meaningful relationships"))
+        app.buttons["Continue"].tap()
+        XCTAssertTrue(containsValue("Connect with friends and family"))
+        app.buttons["Continue"].tap()
+        XCTAssertTrue(containsValue("Show appreciation to someone I care about"))
+    }
+
+    @MainActor
     func testManualCreationPersists() throws {
         let app = XCUIApplication()
         app.launch()

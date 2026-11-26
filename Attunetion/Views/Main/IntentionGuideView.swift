@@ -48,7 +48,8 @@ struct IntentionGuideView: View {
     @State private var showingAIGenerator = false
     @State private var showingPackPreview: IntentionPack? = nil
     @State private var saveError: String?
-    @State private var suggestionsWereGenerated = false
+    @State private var generatedScopes: Set<IntentionScope> = []
+    @ObservedObject private var backendHealth = BackendHealthManager.shared
     
     // Optional callback when intentions are created through the guide
     var onIntentionsCreated: (() -> Void)? = nil
@@ -264,6 +265,25 @@ struct IntentionGuideView: View {
                                     .tint(themeManager.accentColor(for: colorScheme).toSwiftUIColor())
                                     .padding(.horizontal, 40)
                                     
+                                    #if !os(watchOS)
+                                    if scope == .month && [.month, .week, .day].contains(where: { textForScope($0).trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }) {
+                                        Menu {
+                                            ForEach(IntentionPack.packs, id: \.name) { pack in
+                                                Button(pack.name) {
+                                                    fillEmptyDrafts(month: pack.monthly, week: pack.weekly, day: pack.daily)
+                                                }
+                                            }
+                                            if backendHealth.isBackendAvailable {
+                                                Button(String(localized: "Generate Personalized Intentions")) {
+                                                    showingAIGenerator = true
+                                                }
+                                            }
+                                        } label: {
+                                            Label(String(localized: "Need Some Ideas?"), systemImage: "lightbulb")
+                                        }
+                                    }
+
+                                    #endif
                                     // Quick suggestions (always visible)
                                     QuickIdeasSection(
                                         themeManager: themeManager,
@@ -278,6 +298,7 @@ struct IntentionGuideView: View {
                                             set: { quickIdeasPages[scope] = $0 }
                                         ),
                                         onSelect: { suggestion in
+                                            generatedScopes.remove(scope)
                                             setTextForScope(scope, suggestion)
 #if os(iOS)
                                             HapticFeedback.light()
@@ -307,6 +328,15 @@ struct IntentionGuideView: View {
                                         #if !os(watchOS)
                                         .textFieldStyle(.roundedBorder)
                                         #endif
+                                    #if !os(watchOS)
+                                    Menu {
+                                        ForEach(suggestionsForScope(.season), id: \.self) { idea in
+                                            Button(idea) { seasonalIntention = idea }
+                                        }
+                                    } label: {
+                                        Label(String(localized: "Quick ideas"), systemImage: "leaf")
+                                    }
+                                    #endif
                                     Text(IntentionScope.season.dateRangeLabel(for: Date()))
                                         .font(.caption).foregroundStyle(.secondary)
                                     TextField("This year", text: $yearlyIntention, axis: .vertical)
@@ -465,10 +495,7 @@ struct IntentionGuideView: View {
             .sheet(isPresented: $showingAIGenerator) {
                 AIIntentionGeneratorView(
                     onComplete: { monthly, weekly, daily in
-                        monthlyIntention = monthly
-                        weeklyIntention = weekly
-                        dailyIntention = daily
-                        suggestionsWereGenerated = true
+                        fillEmptyDrafts(month: monthly, week: weekly, day: daily, generated: true)
                         selectedIntentionPack = nil
                         showingAIGenerator = false
                     },
@@ -569,6 +596,10 @@ struct IntentionGuideView: View {
         HapticFeedback.light()
         #endif
         
+        if let pack = selectedIntentionPack {
+            fillEmptyDrafts(month: pack.monthly, week: pack.weekly, day: pack.daily)
+            selectedIntentionPack = nil
+        }
         if currentStep > 0 {
             animationSpeedManager.withSpringAnimation(response: 0.3, dampingFraction: 0.8) {
                 currentStep -= 1
@@ -576,6 +607,14 @@ struct IntentionGuideView: View {
         }
     }
     
+    private func fillEmptyDrafts(month: String, week: String, day: String, generated: Bool = false) {
+        let ideas: [(IntentionScope, String)] = [(.month, month), (.week, week), (.day, day)]
+        for (scope, idea) in ideas where textForScope(scope).trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            setTextForScope(scope, idea)
+            if generated { generatedScopes.insert(scope) } else { generatedScopes.remove(scope) }
+        }
+    }
+
     private func createAllIntentions() {
         let calendar = Calendar.current
         let today = Date()
@@ -592,7 +631,7 @@ struct IntentionGuideView: View {
             return Intention(text: text, scope: scope,
                              date: scope.interval(containing: today, calendar: calendar)?.start ?? today,
                              themeId: defaultThemeId, customFont: defaultFont,
-                             aiGenerated: selectedIntentionPack == nil && suggestionsWereGenerated)
+                             aiGenerated: selectedIntentionPack == nil && generatedScopes.contains(scope))
         }
         guard !intentions.isEmpty else {
             saveError = "Enter at least one intention before saving."
