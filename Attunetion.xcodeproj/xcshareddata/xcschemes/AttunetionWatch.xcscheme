@@ -30,7 +30,16 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
       <Testables>
-         <TestableReference skipped="NO"><BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="80A64A2D2EDF5F0700C98A14" BuildableName="AttunetionUITests.xctest" BlueprintName="AttunetionUITests" ReferencedContainer="container:Attunetion.xcodeproj"/></TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "80A64A2D2EDF5F0700C98A14"
+               BuildableName = "AttunetionUITests.xctest"
+               BlueprintName = "AttunetionUITests"
+               ReferencedContainer = "container:Attunetion.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -49,7 +58,6 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A77000000000000000000007"
             BuildableName = "AttunetionWatch.app"
-            BlueprintName = "AttunetionWatch"
             ReferencedContainer = "container:Attunetion.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -66,7 +74,6 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A77000000000000000000007"
             BuildableName = "AttunetionWatch.app"
-            BlueprintName = "AttunetionWatch"
             ReferencedContainer = "container:Attunetion.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -706,37 +706,53 @@ struct CurrentIntentionCard: View {
         }
         .padding(24)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
+        .background {
+            let shape = RoundedRectangle(cornerRadius: 22, style: .continuous)
             Group {
-                if let theme = theme {
-                    LinearGradient(
-                        gradient: Gradient(colors: [theme.backgroundColorValue, theme.accentColorValue]),
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
+                if let theme {
+                    CurrentIntentionGradient(
+                        shape: shape,
+                        colors: [theme.backgroundColorValue, theme.accentColorValue]
                     )
                 } else {
-                    RoundedRectangle(cornerRadius: 20, style: .continuous)
-                        .fill(
-                            colorScheme == .dark
-                                ? themeManager.currentTheme.darkSecondaryButtonBackground.toSwiftUIColor().opacity(0.4)
-                                : Color.white.opacity(0.6)
-                        )
+                    shape.fill(
+                        colorScheme == .dark
+                            ? themeManager.currentTheme.darkSecondaryButtonBackground.toSwiftUIColor().opacity(0.4)
+                            : Color.white.opacity(0.6)
+                    )
+                    .overlay {
+                        shape.strokeBorder(themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.1))
+                    }
                 }
             }
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .stroke(
-                    themeManager.secondaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.1),
-                    lineWidth: 1
-                )
-        )
-        .shadow(
-            color: themeManager.primaryTextColor(for: colorScheme).toSwiftUIColor().opacity(0.08),
-            radius: 12,
-            x: 0,
-            y: 4
-        )
+            .shadow(color: .black.opacity(0.07), radius: 8, y: 3)
+        }
+    }
+}
+
+private struct CurrentIntentionGradient: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.scenePhase) private var scenePhase
+    let shape: RoundedRectangle
+    let colors: [Color]
+
+    var body: some View {
+        if reduceMotion || scenePhase != .active {
+            fill(offset: 0)
+        } else {
+            TimelineView(.animation(minimumInterval: 1.0 / 12.0)) { timeline in
+                let seconds = timeline.date.timeIntervalSinceReferenceDate.truncatingRemainder(dividingBy: 24)
+                fill(offset: 0.075 * sin(seconds * 2 * .pi / 24))
+            }
+        }
+    }
+
+    private func fill(offset: CGFloat) -> some View {
+        shape.fill(LinearGradient(
+            colors: colors,
+            startPoint: UnitPoint(x: offset, y: 0),
+            endPoint: UnitPoint(x: 1 + offset, y: 1)
+        ))
     }
 }
 

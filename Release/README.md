@@ -1,6 +1,10 @@
 # Attunetion App Store release audit
 
-**November 22, 2026 · 1.0.1 (11) · Hold submission.** Apple processed the three signed builds and each platform draft has build 11 selected. The iOS archive includes Watch and supports iPhone, iPhone Duo and iPad. The shared Apple ID is 6757886472. No submission or review reply was sent.
+Track remaining work in the [shared project task list](../TASKS.md).
+
+**November 27, 2026 · TestFlight 1.0.1 (13).** Xcode confirmed successful uploads and the start of Apple processing for iOS with its Watch companion, macOS and visionOS. This build adds the rounded, animated intention card. Tester availability still needs confirmation in App Store Connect.
+
+**November 22, 2026 · 1.0.1 (11) · Hold submission.** Apple processed the three signed builds and each platform draft has build 11 selected. The iOS archive includes Watch and supports iPhone, iPhone Duo and iPad. The shared Apple ID is 6757886472. The nine answers were sent in the original App Review thread. Build 11 awaits Apple’s response before resubmission.
 
 | Draft | Processed build ID | Signed export SHA-256 |
 | --- | --- | --- |
@@ -10,11 +14,15 @@
 
 The native commit is afdb3ed0b2048ca65cf2d3e6e93bf98436af7e1e. It updates the endpoint and build number from the platform-tested candidate below. Xcode showed automatic signing for the app, Watch and widget. Organizer uploaded iOS. Signed artifacts and screenshots are in `~/Documents/Attunetion Release/1.0.1-11/`. The 13-inch iPad passed onboarding, manual save and relaunch on build 11. The iPhone onboarding and relaunch test also passed in dark mode at maximum Dynamic Type. Device Hub showed the same saved intention after opening the Duo. Both Duo screenshot postures were accepted, alongside iPhone, Watch, Mac and Vision screenshots. The existing ten iPad screenshots were retained.
 
+## November 26 TestFlight
+
+Build 12 (1.0.1) uploaded successfully for iOS with its Watch companion, macOS and visionOS. The App Store drafts still use build 11. Commit cc112c142b63b1c3396ed169b2f8a21c7b7d1a53 adds focus packs on the monthly writing step, editable weekly and daily drafts, earlier access to consent-based personalized ideas, and an optional seasonal idea picker. The guide UI test passed on iPhone and 13-inch iPad, including the relationship pack across all three writing steps and selecting a seasonal intention. All three platform builds processed. Testing notes were saved for each. iOS build 12 lists Daily Intentions Testers as an internal group. The new external group Attunetion Beta has zero builds and zero testers pending external review contact information and the tester’s invitation address.
+
 ## Before review
 
-1. **Previous rejection.** Apple cited 4.3 and 4.2.6. Complete the nine requested answers using the publisher’s actual beta experience, portfolio comparisons and asset provenance. See [the private response worksheet](APP_REVIEW_RESPONSE.md). Resolve the original correspondence before resubmission if disputing the finding.
+1. **Previous rejection.** Apple cited 4.3 and 4.2.6. Apple instructed the publisher to reply instead of resubmitting when disputing the finding. The [nine answers](APP_REVIEW_RESPONSE.md) were posted and verified in App Store Connect. Await the reviewer’s response.
 2. **iCloud.** Xcode signed all participating apps for the shared container. CloudKit Console showed only Users in production. Initialized the five SwiftData types in development and previewed the additive deployment. Production schema approval and a successful create, edit and delete across two signed-in TestFlight devices remain outstanding. A signed development probe completed a private CloudKit round trip using two separate SQLite stores on the same Mac. The reader imported a synthetic intention and edited it. The writer imported that edit and deleted it. The reader confirmed the deletion on a subsequent launch. Continuous concurrent probes timed out and the first deletion check needed a later relaunch. Prompt delivery while both apps stay open, physical cross-platform behavior and production remain unverified.
-3. **Storefront compliance.** Mainland China is included in availability. App Store Connect surfaced security-assessment and generative-AI filing notices. Confirm applicable documentation or authorize excluding that storefront. The existing availability selection was preserved. The updated questionnaire calculated 9+ in most storefronts. App Privacy was published with the app-specific device identifier, and all three platform listings use branded URLs.
+3. **Storefront availability.** On November 26 App Store Connect confirmed mainland China is Not Available. Only mainland China was deselected. The updated questionnaire calculated 9+ in most storefronts. App Privacy was published with the app-specific device identifier, and all three platform listings use branded URLs.
 4. **Device checks.** Physical notification delivery and tap, widget refresh and deep linking, VoiceOver, and distribution-build AI consent revocation and re-enable still need device evidence. Apple review and region-specific compliance remain open.
 
 ## Production service
